@@ -42,6 +42,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     id: 0,
     name: '',
     fullbuyout: false,
+    pricerating: null,
     venueimage_set: [
       {
         imageurl: '',

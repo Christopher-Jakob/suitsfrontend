@@ -9,6 +9,8 @@ import {UserAuthorizationService} from "../../services/userservice/userauthoriza
 export class SuitsnavigationComponent implements OnInit, OnDestroy {
   userservicesubscription;
   user = {
+    pk: 1,
+    userphoto: null,
     issuitsviewer: false,
     issuitsadministrator: false,
     issuitssuperuser: false
