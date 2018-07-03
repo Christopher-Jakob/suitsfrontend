@@ -49,6 +49,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
       },
 
     ],
+    venuesamplemenu_set: [],
     cuisine1: '',
     cuisine2: '',
     description: '',

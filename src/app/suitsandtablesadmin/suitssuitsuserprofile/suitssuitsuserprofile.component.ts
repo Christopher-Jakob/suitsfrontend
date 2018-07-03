@@ -28,6 +28,7 @@ export class SuitssuitsuserprofileComponent implements OnInit {
     issuitsadministrator: false,
     issuitssuperuser: false,
     issuitsviewer: false,
+    userphoto: null,
     role: 'System Architect',
     image: 'https://www.careerpoint.co.ke/wp-content/uploads/2016/03/Administrator-900x599.png'
   };
