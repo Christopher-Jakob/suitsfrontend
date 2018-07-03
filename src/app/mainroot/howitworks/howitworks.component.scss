@@ -1,0 +1,47 @@
+.introdiv {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('http://suitsandtables.com/assets/item8-45411322696feaa47a0345b3e4bdd5de1b2cff8243c534b84a83a8d4d732ec0d.png');
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  padding-top: 100px;
+  color: white;
+}
+
+h2 {
+  padding-bottom: 20px;
+}
+
+
+.middiv {
+  padding: 14px 0 20px 0;
+  margin-left: 20px;
+}
+
+ul li {
+  color: #00b3ee;
+  font-size: 40px;
+  padding-bottom: 15px;
+}
+
+li p {
+  color: black;
+  font-size: 24px;
+}
+
+.lastdiv {
+  background-color: #f2f2f2;
+  padding: 24px 0 24px 0;
+}
+
+.lastdiv div {
+  padding-bottom: 30px;
+}
+
+a {
+  background-color: white;
+  border: 2px solid #00b3ee;
+  color: #00b3ee;
+  font-size: 18px;
+  padding: 5px 15px 5px 15px;
+}

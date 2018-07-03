@@ -1,0 +1,93 @@
+
+<div class="col-sm-12 STnopadding">
+  <!--
+  <div class="row  totalthing STnopadding row-eq-height">
+    <a routerLink="/admin">
+      <div class="col-sm-12 navheight STnopadding">
+        <div class="col-sm-9">
+          Dashboard
+        </div>
+
+      </div>
+    </a>
+  </div>
+
+  <div class="row STnopadding totalthing row-eq-height">
+    <a routerLink="/admin/new-leads">
+      <div class=" row navheight STnopadding">
+        <div class="col-sm-9 ghostborder">
+          New Leads
+        </div>
+        <div id="newleadsnotification" class="col-sm-3 notificationdiv">
+            4
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="row STnopadding totalthing row-eq-height">
+    <a routerLink="/admin/outstanding-proposals">
+      <div class="col-sm-12 navheight STnopadding">
+        <div class="col-sm-9 ghostborder">
+          Outstanding Proposals
+        </div>
+        <div class="col-sm-3 notificationdiv">
+          4
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="row STnopadding totalthing row-eq-height">
+    <a routerLink="/admin/booked-events">
+      <div class="col-sm-12 navheight STnopadding">
+        <div class="col-sm-9 ghostborder">
+          Booked Events
+        </div>
+        <div class="col-sm-3 notificationdiv">
+          4
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="row STnopadding totalthing row-eq-height">
+    <a routerLink="/admin/past-events">
+      <div class="col-sm-12 navheight STnopadding">
+        <div class="col-sm-9 ghostborder">
+          Past Events
+        </div>
+        <div id="pasteventsnotificationdiv" class="col-sm-3 notificationdiv">
+          4
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="row STnopadding totalthing row-eq-height">
+    <a routerLink="/admin/archived-proposals">
+      <div class="col-sm-12 navheight STnopadding">
+        <div class="col-sm-12 ghostborder">
+          Archived Proposals
+        </div>
+
+      </div>
+    </a>
+  </div>
+  -->
+  <a routerLink="/admin/venue/venue-list">
+    <div class="nav nav-pills"> <!-- total thing-->
+      <div class="nav-item">
+        Venue Admin
+      </div>
+
+    </div> <!-- end total thing-->
+  </a>
+  <a [routerLink]="['/admin','venue','user-profile', user.pk]">
+    <div class="nav nav-pills"> <!-- total thing-->
+      <div class="nav-item">
+        Profile
+      </div>
+    </div> <!-- end total thing-->
+  </a>
+

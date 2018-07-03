@@ -1,0 +1,23 @@
+#title{
+  margin-top: 20px;
+  border-bottom: solid black;
+}
+
+table{
+  margin-top: 100px;
+}
+
+tr{
+  marign-bottom: 30px;
+  height: 40px;
+}
+
+
+tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+a{
+  text-decoration: underline;
+  color: #00b3ee;
+}

@@ -1,0 +1,130 @@
+<div class="container-fluid"> <!--rootcontainer-->
+  <div class="row"> <!--welcome message-->
+    <div class="col-12">
+      <h4 *ngIf="venueadminpermission"><strong>Welcome {{userobject.name}}!</strong></h4>
+      <h4 *ngIf="suitsadminpermission"><strong> {{userobject.name}}'s Venue Admin Profile</strong></h4>
+    </div>
+  </div> <!--welcome message-->
+  <div class="row"> <!-- profile picture and form-->
+    <div class="col-4"> <!--profile picture div-->
+      <div *ngIf="userobject.userphoto != null" class="picturecontainer" [ngStyle]="{'background-image': 'url(' + userobject.userphoto + ')'}"> <!--picturecontainer div-->
+      </div> <!--picturecontainer div-->
+      <div *ngIf="userobject.userphoto == null && !uploadphotoform" class="text-center">
+        <h4>Profile Picture</h4>
+        <br>
+        <a style="cursor: pointer" (click)="showuploadphotoform()">Add Photo</a>
+      </div>
+      <a *ngIf="userobject.userphoto !== null && !uploadphotoform" (click)="showuploadphotoform()" id="photouploadlink" style="cursor: pointer">+ Upload New Photo</a>
+      <div *ngIf="uploadphotoform">
+        <input (change)="uploadphoto($event)" type="file"
+               id="photoupload"
+               name="photoupload"
+               accept=".jpg, .jpeg, .png">
+        <button class="btn btn-outline-danger" (click)="unshowuploadphotoform()">Cancel</button>
+      </div>
+    </div> <!--profile picture div-->
+
+    <div class="col-5"> <!--form div-->
+      <div class="row">
+        <div class="col-auto">
+          <h4 *ngIf="!editform && !passwordform">Personal Information</h4>
+          <h4 *ngIf="editform && !passwordform">Edit Personal Information</h4>
+          <h4 *ngIf="passwordform">Change Password</h4>
+        </div>
+        <div class="col-1">
+          <a *ngIf="!editform" (click)="showeditform()" class="STnormallink" style="cursor: pointer">Edit</a>
+        </div>
+      </div>
+
+      <form (ngSubmit)="editpersonalinfo()" #personalinfoform="ngForm">
+        <div *ngIf="editform && !passwordform" class="row"> <!--real form div-->
+          <div class="col-12">
+            <label for="nameinput">Name</label>
+            <br>
+            <input type="text"
+                   placeholder="First and Last Name"
+                   id="nameinput"
+                   name="nameinput"
+                   [ngModel]="userobject.name">
+            <br>
+          </div>
+          <div class="col-12">
+            <label for="emailinput">Email</label>
+            <br>
+            <input type="email"
+                   placeholder="Email Address"
+                   id="emailinput"
+                   name="emailinput"
+                   [ngModel]="userobject.email">
+            <br>
+          </div>
+          <div class="col-12">
+            <label for="phoneinput">Phone</label>
+            <br>
+            <input type="text"
+                   placeholder="Primary Phone"
+                   id="phoneinput"
+                   name="phoneinput"
+                   [ngModel]="userobject.phone">
+            <br>
+          </div>
+          <div class="col-12">
+            <br>
+            <button class="btn btn-danger" (click)="unshoweditform()">Cancel</button> &nbsp;
+
+            <button class="btn btn-primary" type="submit">Apply Edits</button>
+          </div>
+        </div>
+      </form>
+        <div *ngIf="!editform && !passwordform" class="col-12">
+          <label>User ID:</label> &nbsp; {{userobject.pk}}
+          <br>
+          <label>Name:</label> &nbsp;{{userobject.name}}
+          <br>
+          <label>Email:</label> &nbsp;{{userobject.email}}
+          <br>
+          <label>Phone:</label> &nbsp; {{userobject.phone}}
+          <br>
+          <a *ngIf="venueadminpermission && userisself && !passwordform" (click)="showpasswordform()"  style="cursor: pointer">Change Password</a>
+        </div>
+
+      <div *ngIf="passwordform">
+        <form (ngSubmit)="savepassword()" #passwordinputform="ngForm">
+          <span *ngIf="passwordincorrect">Password error, Changes not saved. Is your current password correct?<span (click)="passwordtextoff()" style="cursor: pointer">&times;</span></span>
+          <span *ngIf="passwordchangedsucess">Password sucessfully updated<span (click)="passwordtextoff()" style="cursor: pointer">&times;</span></span>
+          <br>
+          <label for="currentpasswordinput">Current Password</label>
+          <br>
+          <input class="passwordinput"
+                 type="password"
+                 id="currentpasswordinput"
+                 name="currentpasswordinput"
+                 ngModel>
+          <br>
+          <label for="newpassword1">New Password</label>
+          <br>
+          <input class="passwordinput"
+                 type="password"
+                 id="newpassword1"
+                 name="newpassword1"
+                 ngModel>
+          <br>
+          <label for="newpassword2">Password Again</label>
+          <br>
+          <input class="passwordinput"
+                 type="password"
+                 id="newpassword2"
+                 name="newpassword2"
+                 ngModel>
+          <br>
+          <br>
+          <button class="btn btn-danger" (click)="unshowpasswordform()">Cancel</button> &nbsp;
+          <button class="btn btn-primary" type="submit">Update Password</button>
+        </form>
+      </div>
+    </div>
+
+
+      </div> <!-- real form div-->
+    </div> <!--form div-->
+

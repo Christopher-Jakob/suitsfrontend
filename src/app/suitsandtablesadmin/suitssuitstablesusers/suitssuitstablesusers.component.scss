@@ -1,0 +1,24 @@
+
+tr{
+  height: 30px;
+}
+
+tr:nth-child(even){
+  background-color: lightgray;
+}
+
+a{
+  text-decoration: underline;
+  color: #00b3ee;
+}
+
+.createmodal{
+  top: 100px;
+  left: 20%;
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  border: solid 2px black;
+  border-radius: 2%;
+
+}

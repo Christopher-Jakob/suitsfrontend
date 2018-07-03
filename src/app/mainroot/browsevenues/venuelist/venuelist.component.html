@@ -1,0 +1,38 @@
+<div class="row pb-3" id="VenueList">
+  <div class="col-sm-12 col-md-6 col-lg-4 pb-4" *ngFor="let card of venuelist; let i= index">
+    <div class="card-container">
+      <slideshow class="card-container-img"
+                 [showArrows]="true"
+                 [imageUrls]="card.venueimage_set"
+                 [height]="slideshowparams.height">
+
+      </slideshow>
+      <div class="venue-location col-12">
+        {{ card.searchneighborhood }}
+      </div>
+      <div (click)="navigatetovenue(i)" class="card-container-information">
+        <div>
+          {{ card.name }}
+        </div>
+        <div>
+          <div *ngIf="card.cuisine1 != null">
+            <span>{{card.cuisine1}}</span>
+            <span *ngIf="card.cuisine2 != null"> | {{ card.cuisine2 }}</span>
+          </div>
+          <div>
+            <span *ngIf="card.experientialtype != null">{{ card.experientialtype }} | </span>
+            <span>
+              <span *ngIf="card.pricerating == 1">$ 30 and under</span>
+              <span *ngIf="card.pricerating == 2">$ 31 to $ 50</span>
+              <span *ngIf="card.pricerating == 3"> $ 51 and over</span>
+            </span>
+          </div>
+          <div>
+            <span>{{card.room_set.privateroom}} Private Rooms</span>
+            <span> | {{card.room_set.semiprivate}} Semi-Private </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

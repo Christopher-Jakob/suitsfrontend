@@ -1,0 +1,36 @@
+
+$color-primary: rgb(83,139,197);
+
+.card-container {
+  backface-visibility: hidden;
+  position: relative;
+  overflow: hidden;
+  height: 25rem;
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 4rem rgba(0,0,0, 0.2);
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(3px);
+  }
+
+  .venue-location{
+    display: inline-block;
+    position: absolute;
+    bottom: 40%;
+    color: white;
+    background : linear-gradient(rgba(0,0,0,.7), rgba(190,190,190,.7));
+    font-size: 1.2rem;
+  }
+
+  .card-container-information{
+    cursor: pointer;
+    position: relative;
+    left: 1%;
+    color: black;
+  }
+  .card-container-information{
+    font-size: 1.3rem;
+  }
+}
+

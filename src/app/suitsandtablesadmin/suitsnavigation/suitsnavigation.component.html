@@ -1,0 +1,58 @@
+<div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+  <a [routerLink]="['/suitsadmin','suits-users', user.pk]" class="nav-link" role="tab" data-toggle="pill" aria-selected="true">Profile</a>
+  <a routerLink="/suitsadmin" *ngIf="user.issuitsadministrator || user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">New Venue Applications</a>
+  <a routerLink="/suitsadmin/declined-venues" *ngIf="user.issuitsadministrator || user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">Declined Venue Applications</a>
+  <a routerLink="/suitsadmin/venues" *ngIf="user.issuitsadministrator || user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">Venues</a>
+  <a routerLink="/suitsadmin/client-users" *ngIf="user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">Client Users</a>
+  <a routerLink="/suitsadmin/venue-users" *ngIf="user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">Venue Users</a>
+  <a routerLink="/suitsadmin/suits-users" *ngIf="user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">S + T Users</a>
+  <a routerLink="/suitsadmin/settings" *ngIf="user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">Attributes</a>
+</div>
+
+<!--need to change the routerLink to a programatic route getting pk from users service -->
+
+<!--
+<a class="STnopadding" routerLink="/suitsadmin/rfp-tracking">
+  <div class="navchoice col-md-12 STnopadding">
+    <h5>RFP Tracking</h5>
+  </div>
+</a>
+
+<a class="STnopadding" routerLink="/suitsadmin/rfp-tracking">
+  <div class="navchoice col-md-12 STnopadding">
+    <h5>Past Events</h5>
+  </div>
+</a>
+
+<a class="STnopadding" routerLink="/suitsadmin/proposals">
+  <div class="navchoice col-md-12 STnopadding">
+    <h5>Proposals</h5>
+  </div>
+</a>
+
+<a class="STnopadding" routerLink="/suitsadmin/booked-events">
+  <div class="navchoice col-md-12 STnopadding">
+    <h5>Booked Events</h5>
+  </div>
+</a>
+
+<a class="STnopadding" routerLink="/suitsadmin/receipts-due-uploaded">
+  <div class="navchoice col-md-12 STnopadding">
+    <h5>Past Events</h5>
+  </div>
+</a>
+
+<a class="STnopadding" routerLink="/suitsadmin/groups-and-venues">
+  <div class="navchoice col-md-12 STnopadding">
+    <h5> Groups & Venues</h5>
+  </div>
+</a>
+-->
+<!--
+
+<a class="STnopadding" routerLink="/suitsadmin/archived-proposals">
+  <div class="navchoice col-md-12 STnopadding">
+    <h5>Archived Proposals</h5>
+  </div>
+</a>
+-->

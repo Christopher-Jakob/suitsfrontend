@@ -1,0 +1,152 @@
+<!-- <app-carousal>
+</app-carousal> -->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <slideshow
+        class="card-container-img"
+        [showArrows]="true"
+        [imageUrls]="room.roomimage_set"
+        [height]="roomheight">
+      </slideshow>
+    </div>
+  </div>
+  <div id="RoomMain" class="Section">
+    <div class="SecHeadunderline">
+      {{ venue.name }}
+    </div>
+    <div class="FirstHead">
+      <div class="span-style">
+        {{ roomname }}
+      </div>
+      <div class="span-style" *ngIf= "room.privateroom == true">
+        Private
+      </div>
+
+      <div class="span-style" *ngIf= "room.semiprivateroom == true">
+        Semi-Private
+      </div>
+    </div>
+
+    <div class="SecHead">
+      <div>
+        <div id="Seat" class="span-style"> {{ room.seatedcapacity }} seated </div>
+        <div id="Stand" class="span-style">{{ room.standingcapacity }} standing </div>
+      </div>
+      <a class="button button__primary float-right" (click)="open(createProp)">Add RFP</a>
+    </div>
+  </div>
+
+  <div id="RoomDes" class="Section">
+    <div class="SecHead">Description</div>
+    <p>{{ venue.description }}</p>
+  </div>
+
+  <div id="AmentityInfo" class="Section">
+    <div class="SecHead">Amenities</div>
+    <div class="row">
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.surroundsoundamenity === true ? 'black': 'gray' }">Surround Sound</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.classroomamenity === true ? 'black': 'gray' }">Classroom</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.stageamenity === true ? 'black': 'gray' }">Stage</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.televisionamenity === true ? 'black': 'gray' }">Television</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.screenprojectoramenity === true ? 'black': 'gray' }">Screen + Projector</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.naturallightamenity === true ? 'black': 'gray' }">Natural Light</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.wifiamenity === true ? 'black': 'gray' }">WiFi</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.wheelchairamenity === true ? 'black': 'gray' }">Accessible</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="CapacityInfo" class="Section">
+    <div class="SecHead">Capacities</div>
+    <div class="row">
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.cocktailstandingseatingoption === true ? 'black': 'gray' }">Cocktail / Standing</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.classroomseatingoption === true ? 'black': 'gray' }">Classroom</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.ushapeseatingoption === true ? 'black': 'gray' }">U-Shape</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.sixtyroundseatingoption === true ? 'black': 'gray' }">60' Rounds</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.seventy2roundseatingoption === true ? 'black': 'gray' }">72' Rounds</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.boardroomseatingoption === true ? 'black': 'gray' }">Boardroom</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.theaterseatingoption === true ? 'black': 'gray' }">Theater</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p [ngStyle]="{'color' : room.hallowsquareseatingoption === true ? 'black': 'gray' }">Hallow Square</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="OtherRooms" class="Section">
+    <div class="SecHead">View More Rooms</div>
+    <div class="row" *ngIf = "venue.room_set.length > 0">
+      <div class="col-sm-12 col-md-6 col-lg-4 pb-4" *ngFor="let r of venue.room_set">
+        <div *ngIf="r.pk != room.pk " class="card-container">
+          <div class="card-container-img">
+            <slideshow
+              [showArrows]="true"
+              [imageUrls]="r.roomimage_set">
+            </slideshow>
+          </div>
+
+          <div class="card-container-information">
+            <div class="card-container-information__main">
+              {{ r.name }}
+            </div>
+
+            <p class="card-container-information__sub">
+              <span *ngIf="r.privateroom == true" class="card-container-information__sub--food">Private</span>
+              <span *ngIf="r.semiprivateroom == true" class="card-container-information__sub--food">Semi-Private</span>
+
+              <span id="seat-number" class="card-container-information__sub--price">{{ r.seatedcapacity }} Seated</span>
+              <span id="stand-number" class="card-container-information__sub--room">{{ r.standingcapacity }} Standing</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #createProp let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Request For Proposal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary">Create a new event</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

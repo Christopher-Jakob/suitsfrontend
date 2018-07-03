@@ -1,0 +1,64 @@
+$bg-gray:rgb(245,245,245);
+$bg-white: white;
+
+#filter {
+  background-color: $bg-gray;
+
+  .container {
+    position: relative;
+    background-color: $bg-white;
+
+    .filter-option {
+      display: inline-block;
+      position: absolute;
+      right: 2%;
+      bottom: 2%;
+      font-size: 8px;
+
+    }
+
+    .firstline {
+      @media (min-width:992px) {
+        padding-top: 50px;
+      }
+    }
+  }
+}
+
+#seatingdropdown{
+  position: relative;
+  top: 7px;
+}
+
+#searchinput, #searchbutton{
+  position: relative;
+  top: 7px;
+}
+
+.capacitygroup{
+  position: relative;
+  bottom: 2rem;
+}
+
+.capacitynumberinput{
+  position: relative;
+  top: .5rem;
+  margin-left: 6%;
+
+
+}
+
+#venue-search {
+  border-bottom: rgb(189,189,189) solid 5px;
+}
+
+.input-gray {
+  border-radius: 5px;
+  border: rgb(189,189,189) solid 1px;
+}
+
+.btn-light-blue {
+  border-radius: 5px;
+  border: rgb(68,147,192) solid 1px;
+  color: rgb(68,147,192);
+}

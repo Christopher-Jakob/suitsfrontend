@@ -1,0 +1,7 @@
+tr{
+  height: 35px;
+}
+
+tr:nth-child(even){
+  background-color: lightgray;
+}

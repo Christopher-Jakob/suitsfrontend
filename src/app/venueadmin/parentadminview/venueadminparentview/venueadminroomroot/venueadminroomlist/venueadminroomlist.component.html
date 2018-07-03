@@ -1,0 +1,128 @@
+<div class="container"> <!-- root row-->
+  <div class="row">
+    <div class="col-12">
+      <br>
+      <h3><strong>Room List</strong></h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <hr>
+    <div class="col-md-4">
+      <p *ngIf="venuerooms.length > 0  || venueobject.fullbuyout" style="">(Click on a room to view its details)</p>
+    </div>
+    <div class="col-md-4">
+      <button *ngIf="!roomadded" class="btn btn-outline-primary" (click)="addroom()">+ Add Room</button>
+      <h4 *ngIf="roomadded">Room Added Below</h4>
+    </div>
+    <div *ngIf="!venueobject.fullbuyout" class="col-md-4">
+      <a (click)="fullbuyouttoggle()">Offer Full Buyout</a>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <!--full buy out div-->
+    <div class="col-md-4 roomdiv" *ngIf="venueobject.fullbuyout">
+      <div>
+        <div (click)="navigatetofullbuyout()" style="cursor: pointer" class="text-center">
+          <br>
+          <h4>Full Buyout</h4>
+          <hr>
+        </div>
+        <div *ngIf="venueobject.venueimage_set.length > 0" (click)="navigatetofullbuyout()" style="cursor: pointer" class="imagecontainer"
+             [ngStyle]="{'background-image': 'url(' + venueobject.venueimage_set[0].imageurl +')'}">
+        </div> <!--imagecontainer-->
+        <div *ngIf="venueobject.venueimage_set.length < 1" (click)="navigatetofullbuyout()" style="cursor: pointer" class="imagecontainer">
+          <br>
+          <h4 class="text-center">No Photo Uploaded</h4>
+        </div>
+        <div>
+          <div class="text-center">
+            <br>
+            <div>
+              <strong>Status:</strong>
+            </div>
+            <div *ngIf="!venueobject.fullbuyoutonline" >
+              <strong style="color: white; background-color: red; border: solid 1px red">Offline</strong>
+            </div>
+            <div *ngIf="venueobject.fullbuyoutonline" >
+              <strong style="color: white; background-color: green; border: solid 1px green">Online</strong>
+            </div>
+          </div>
+          <hr>
+          <div *ngIf="!showfullbuyoutdeleteconfrim" class="text-center">
+            <button class="btn-danger" (click)="fullbuyoutdeleteconfrim()">Delete</button>
+          </div>
+          <div *ngIf="showfullbuyoutdeleteconfrim" class="text-center">
+            <h4>Are you sure you want to remove this venues full buyout option?</h4>
+            <br>
+            <button (click)="cancelfullbuyoutdelete()" class="STButton">Cancel</button>
+            <button (click)="fullbuyouttoggle()" class="btn-danger">Remove</button>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div> <!--full buy out div-->
+
+
+    <div class="text-center" *ngIf="venuerooms.length < 1 && !venueobject.fullbuyout">
+      <h3 style="color: #00b3ee">This Venue Has No Rooms. Click Add Room To Get Started</h3>
+    </div>
+    <!--room div-->
+    <div class="col-md-4 roomdiv" *ngFor="let room of venuerooms; let i=index" >
+      <div class="">
+        <br>
+        <div (click)="navigatetoroom(i)" style="cursor: pointer" class="text-center">
+          <h4 *ngIf="room.name == null">Unnamed Room</h4>
+          <h4 *ngIf="room.name != null">{{room.name}}</h4>
+          <hr>
+        </div>
+        <div (click)="navigatetoroom(i)" style="cursor: pointer" *ngIf="room.roomimage_set.length > 0" class="imagecontainer"
+             [ngStyle]="{'background-image': 'url(' + room.roomimage_set[0].imageurl +')'}">
+        </div> <!--imagecontainer-->
+        <div (click)="navigatetoroom(i)" style="cursor: pointer" *ngIf="room.roomimage_set.length < 1" class="imagecontainer">
+          <br>
+          <h4 class="text-center">No Photo Uploaded</h4>
+        </div>
+        <div>
+          <div class="text-center">
+            <br>
+            <div>
+              <strong>Status:</strong>
+            </div>
+            <div *ngIf="!room.online" class="">
+              <strong style="color: white; background-color: red; border: solid 1px red">Offline</strong>
+            </div>
+            <div *ngIf="room.online" class="">
+              <strong style="color: white; background-color: green; border: solid 1px green">Online</strong>
+            </div>
+          </div>
+          <hr>
+          <div *ngIf="roomactiveindex != i" class="text-center">
+            <button class="btn-danger" (click)="deleteroomconfirm(i)" >Delete</button>
+          </div>
+          <div *ngIf="roomactiveindex === i" class="text-center">
+            <h4>Sure you want to delete this room?</h4>
+            <br>
+            <button (click)="canceldelete()" class="STButton">Cancel</button>
+            <button (click)="deleteroom(i)"  class="btn-danger">Delete</button>
+          </div>
+          <br>
+
+        </div>
+      </div>
+    </div> <!--room div-->
+
+  </div> <!--row-->
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,127 @@
+@media (min-width: 768px) {
+  .height-half{
+    height: 95vh
+  }
+}
+
+@media (min-width: 992px) {
+  .height-half{
+    height: 47vh
+  }
+}
+
+
+.header {
+  text-align: center;
+  font-size: 52px;
+  font-weight: 100;
+  margin: 25px;
+  font-family: "Helvetica";
+  letter-spacing: 2px;
+}
+
+.statement {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 100;
+  padding: 0 35px 35px 35px;
+}
+
+.background-blue {
+  background-color: rgb(68,147,192);
+  color: white;
+}
+
+.card {
+  height: 25rem;
+  margin: 2rem 0;
+  &__img {
+    height: 20rem;
+    background-size: cover;
+    background-position: center;
+    clip-path: circle();
+  }
+
+  &__info {
+    text-align: center;
+    &--header {
+      margin: 1rem 0;
+      font-size: 1.5rem;
+      font-weight: 100;
+    }
+
+    &--sub {
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
+  }
+
+}
+
+//.ourstory{
+//  position:relative;
+//  height: 42vh;
+//  padding: 3rem;
+//  background-color: #00b3ee;
+//  color: white;
+//}
+//.missonstatement .header h1{
+//  font-size: 45px;
+//}
+//
+//.missonstatement .statement{
+//
+//  width: 70%;
+//  margin-left: 14%;
+//}
+//
+//.missonstatement .statement h3{
+//  font-size: 22px;
+//  margin-top: 55px;
+//  line-height: 27px;
+//}
+//
+//.missonstatement a{
+//  text-decoration: underline;
+//  color: #00b3ee;
+//}
+//
+//.ourstory .header{
+//  margin-top: 30px;
+//}
+//
+//.ourstory .header h1{
+//  font-size: 45px;
+//}
+//
+//.ourstory .statement{
+//  margin-top: 20px;
+//  margin-bottom: 20px;
+//  width: 70%;
+//  margin-left: 14%;
+//
+//}
+//
+//.team{
+//  margin-top: 40px;
+//}
+//
+//.team .header h1{
+//  font-size: 45px;
+//  color: #00b3ee;
+//}
+//
+//
+//.teamitem{
+//  /* display: inline-block; */
+//  /* margin-left: 7.5%; */
+//  /* margin-right: 7.5%; */
+//  margin-bottom: 30px;
+//  /* margin-top: 40px; */
+//}
+//
+///* .teamphoto{
+//  height: 250px;
+//  width: 250px;
+//  border-radius: 100%;
+//} */

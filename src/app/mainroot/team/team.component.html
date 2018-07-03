@@ -1,0 +1,45 @@
+<div id="About-Us" class="container-fluid">
+  <div class="row">
+    <div class="col-12 height-half">
+      <div class="header">
+        Mission Statement
+      </div>
+      <div class="statement">
+        Suits + Tables aims to streamline the process of booking a private space by putting professionals directly in touch with one another. We continue to work with both sides of our platform to integrate new tools that will enchance relationships between planner and host - leading to better outcomes for all parties (pun intended). Suits + Tables will also be working with our parent company <a href="http://www.211hospitality.com" target="_blank">211 Hospitality Inc.</a> to provide meaningful insights to our restaurant partners and shape relationships. By highlighting areas for operational improvement, we aim to provide longevity to our partners so they can thrive in a tech-enabled environment. Over time, we hope to impact the food supply chain and reduce food waste in  America.
+      </div>
+    </div>
+
+    <div class="col-12 background-blue height-half">
+      <div class="header">
+        Our Story
+      </div>
+      <div class="statement">
+        Suits + Tables was developed during a graduate class at Northwestern. While booking a private event, our founder experienced many of the frustrations event planners face in an overall inefficient process. Feedback from several focus groups with executive assistants and event planners confirmed the need for tech solution. Ultimately, the desire to reach restaurants faster while protecting personal relationships resulted in the lanuch of Suits + Tables.
+        <br>
+        <br>
+        As we Carry forward, we are committed to upholding two core beliefs: (1) Tech is only a tool-enhanced hospitality comes from the connection built between our users. (2) Our users are our inspiration and will continue to influence our product growth and direction.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="team-member" class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-3" *ngFor="let member of TeamList">
+      <div class="card">
+        <div class="card__img" [ngStyle]="{'background-image': 'url('+ member.selfie + ')'}">
+        </div>
+        <div class="card__info">
+          <div class="card__info--header">
+            {{ member.name}}
+          </div>
+
+          <div class="card__info--sub">
+            {{member.title}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

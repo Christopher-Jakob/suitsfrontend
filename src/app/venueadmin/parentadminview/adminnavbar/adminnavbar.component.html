@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10">
+      <div class="float-left">
+        <h4 routerLink="" id="label" style="cursor: pointer; color: #000000;"> Suits <span class="STBlue">+</span> Tables</h4>
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="float-right">
+        <div *ngIf="!confrimlogout">
+          <a> Welcome {{user.name}} </a> | <a style="cursor: pointer" (click)="logoutconfrim()">Log Out</a>
+        </div>
+        <div *ngIf="confrimlogout">
+          <p>Are you sure you want to log out?</p>
+          <button (click)="logoutconfrim()" class="btn-danger">Cancel</button>
+          <button class="STButton" (click)="logout()">Log Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="row"> <!--root row-->
+  <div class="col-12">
+    <h3 *ngIf="userisself">Welcome {{userobject.name}}</h3>
+    <h3 *ngIf="!userisself">{{userobject.name}}'s Profile</h3>
+  </div>
+  <div class="col-3  text-center">
+    <div *ngIf="userobject.userphoto !== null && !uploadphotoformshow" class="imagecontainer" [ngStyle]="{'background-image': 'url(' + userobject.userphoto + ')'}">
+    </div>
+    <div *ngIf="uploadphotoformshow">
+      <h4>Upload Photo</h4>
+      <br>
+      <input (change)="uploadphoto($event)" type="file"
+             id="photoupload"
+             name="photoupload"
+             accept=".jpg , .jpeg , .png">
+      <br>
+      <button class="btn-danger" (click)="unshowuploadphotoform()">Cancel</button>
+    </div>
+    <div>
+      <a style="cursor: pointer" *ngIf="!uploadphotoformshow && userobject.userphoto !== null" (click)="showuploadphotoform()">Edit Photo</a>
+    </div>
+    <div *ngIf="userobject.userphoto === null && !uploadphotoformshow ">
+      <h5>Profile Picture</h5>
+      <a (click)="showuploadphotoform()" style="cursor: pointer">Add Photo</a>
+    </div>
+  </div>
+
+  <div class="col-5">
+    <div class="row row-eq-height">
+      <div class="col-8">
+        <h4 *ngIf="!editprofileshow && !passwordchangeshow">Profile Information</h4>
+        <h4 *ngIf="editprofileshow">Edit profile Information</h4>
+        <h4 *ngIf="passwordchangeshow">Change Password</h4>
+      </div>
+      <div class="col-2" *ngIf="!editprofileshow && !passwordchangeshow">
+        <div id="editdiv">
+          <a style="cursor: pointer"  (click)="showeditprofile()">Edit</a>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div *ngIf="!editprofileshow && !passwordchangeshow"> <!-- display info logic-->
+      <label>Name:</label>&nbsp;
+      {{userobject.name}}
+      <br>
+      <label>Role:</label>&nbsp;
+      {{userobject.jobtitle}}
+      <br>
+      <label>Permission:</label>&nbsp;
+      <p *ngIf="userobject.issuitsadministrator">Administrator</p>
+      <p *ngIf="userobject.issuitssuperuser">Super User</p>
+      <p *ngIf="userobject.issuitsviewer">Viewer</p>
+      <label>Email:</label>&nbsp;
+      {{userobject.email}}
+      <br>
+      <label>Phone:</label>&nbsp;
+      {{userobject.phone}}
+    </div> <!-- end display info logic -->
+    <div *ngIf="editprofileshow"> <!-- edit display info logic-->
+      <form (ngSubmit)="editprofileinformation()" #editprofileinformationform ="ngForm">
+        <label>Name:</label>&nbsp;
+        <input type="text"
+               placeholder="First and Last Name"
+               id="profilenameinput"
+               name="profilenameinput"
+               [ngModel]="userobject.name">
+        <br>
+        <div *ngIf="userobject.issuitssuperuser">
+          <label>Role:</label>&nbsp;
+          <input type="text"
+                 placeholder="Enter A Role"
+                 id="profileroleinput"
+                 name="profileroleinput"
+                 [ngModel]="userobject.jobtitle">
+          <br>
+          <label>Permission:</label>&nbsp;
+          <select id="profilepermissionselect"
+                  name="profilepermissionselect"
+                  [ngModel]="currentpermission">
+            <option value="viewer">Viewer</option>
+            <option value="admin">Administrator</option>
+            <option value="superuser">Super User</option>
+          </select>
+        </div>
+        <label>Email:</label>&nbsp;
+        <input type="email"
+               id="profileemailinput"
+               name="profileemailinput"
+               [ngModel]="userobject.email">
+        <br>
+        <label>Phone:</label>&nbsp;
+        <input type="text"
+               id="profilephoneinput"
+               name="profilephoneinput"
+               [ngModel]="userobject.phone">
+        <br>
+        <br>
+        <a *ngIf="userisself" (click)="showpasswordchange()" style="cursor: pointer">Change Password</a>
+        <button (click)="unshoweditprofile()" class="btn-danger" id="cancel">Cancel</button>
+        <button class="STButton" id="commit" type="submit">Commit Changes</button>
+      </form>
+    </div> <!-- end display info logic -->
+    <div *ngIf="passwordchangeshow"> <!-- change password logic-->
+      <span *ngIf="passworderror">Password change error, is your current password correct?<span style="cursor: pointer" (click)="passworderrorresolve()">&times;</span></span>
+      <span *ngIf="passwordchangesucess">Password sucessfully updated<span style="cursor: pointer" (click)=" passwordsucessresolve()">&times;</span></span>
+      <form (ngSubmit)="changepassword()" #changepasswordform ="ngForm">
+        <label>Current Password:</label>
+        <input type="password"
+               id="currentpasswordinput"
+               name="currentpasswordinput"
+               ngModel>
+        <br>
+        <label>New Password:</label>
+        <input (change)="newpasswordmatch()"
+               type="password"
+               id="newpassword1input"
+               name="newpassword1input"
+               ngModel>
+        <br>
+        <label>New Password Again:</label>
+        <input (change)="newpasswordmatch()" type="password"
+               id="newpassword2input"
+               name="newpassword2input"
+               ngModel>
+        <br>
+        <span style="color: red" *ngIf="nopasswordmatch">Both New Password Fields Much Match</span>
+        <br>
+        <br>
+        <button (click)="unshowpasswordchange()" id="cancelpassword" class="btn-danger">Cancel</button>
+        <button type="submit" id="changepassword" class="STButton">Change Password</button>
+      </form>
+
+    </div> <!-- end change password logic-->
+  </div>
+
+
+
+</div> <!-- root row-->

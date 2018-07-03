@@ -1,0 +1,60 @@
+.changesalert{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1 !important;
+}
+
+#titlerow{
+  border-bottom: solid 2px black;
+  padding-top: 20px;
+}
+
+.venuetitleedit{
+  display: inline-block;
+  padding-top: 10px;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+
+}
+
+#navtabrow{
+  padding-top: 4%;
+  margin-left: 1px;
+}
+
+.navtab{
+  padding-left: 1%;
+  padding-right: 1%;
+  border-top: solid 1px black;
+  border-right: solid 1px black;
+  border-left: solid 1px black;
+  border-radius: 6%;
+  display: inline-block;
+  margin-right: 5px;
+  background-color: lightgray;
+}
+
+
+#previewbutton{
+  padding-right: 10%;
+  background-color: purple;
+  border: solid purple 1px;
+  color: white;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 4%;
+}
+
+#deactivatebutton {
+  background-color: #ffbd59;
+  color: black;
+  border-color: #ffbd59;
+}
+
+a{
+  text-decoration: underline;
+  color: #00b3ee;
+  cursor: pointer;
+}

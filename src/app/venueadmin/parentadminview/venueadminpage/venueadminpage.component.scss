@@ -1,0 +1,28 @@
+.root{
+  position: relative;
+}
+
+.imgcontainer{
+  height:250px;
+  background-size: cover;
+}
+
+.statusdiv{
+  position: relative;
+  left: 35%;
+}
+
+#addvenue{
+  text-decoration: underline;
+  color: #00b3ee;
+  cursor: pointer;
+}
+
+.venuemodal{
+  position: absolute;
+  background-color: white;
+  border: solid 2px #00b3ee;
+  border-radius: 2%;
+  left: 20%;
+
+}

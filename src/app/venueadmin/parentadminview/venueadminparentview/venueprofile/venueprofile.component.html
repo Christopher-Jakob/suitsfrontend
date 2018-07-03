@@ -1,0 +1,230 @@
+<div class="container">
+  <div class="row align-items-start"> <!--toprow-->
+    <div id="venuephotosdiv" class="col-3">
+      <h5><strong>Venue Photos</strong></h5>
+    </div>
+    <div id="resnote" class="col-9">
+      Images should be no larger than 12MB and at least 1500 X 700 pixels in resolution.
+    </div>
+  </div> <!--top row-->
+
+  <div class="row align-items-start">
+    <div *ngIf="choicesload" class="col-12 text-center mt-5">
+      <div class="spinner-container">
+        <div class="spinner"></div>
+      </div>
+    </div>
+    <div *ngIf="showphotoupload && !choicesload" class="suitsphotoupload">
+      <form (change)="addvenuephotos($event)" #venuephotoform="ngForm">
+        <label for="venuephotoinput">Add Venue Photo</label>
+        <br>
+        <input class="form-control"
+               type="file"
+               id="venuephotoinput"
+               name="venuephotoinput"
+               ngModel
+               accept=".png, .jpg, .jpeg">
+      </form>
+      <br>
+      <button (click)="canceladdphoto()" class="btn-danger">Cancel</button>
+    </div>
+  </div>
+
+  <br>
+
+  <div *ngIf="showphotos" >
+    <app-venueshowphotos></app-venueshowphotos>
+  </div>
+
+</div> <!--photorows-->
+<div class="row justify-content-center">
+  <div>
+    <button *ngIf="!showphotoupload" (click)="venuephotodisplaytoggle()" id="venuephotoadd">Add Venue Photo</button>
+    <button *ngIf="!showphotos && !showphotoupload" (click)="venuephotoshowtoggle()" id="venuephotoshow" class="btn-success">Display Photos</button>
+  </div>
+</div> <!--addvenuebuttonrow-->
+<hr>
+<div class="row justify-content-start "> <!--venuedescriptionrow-->
+  <h5><strong>Venue Description</strong></h5>
+  <div class="col-12">
+    <form  #descriptioninputform="ngForm">
+              <textarea class="form-control"
+                        id="descriptioninput"
+                        name="descriptioninput"
+                        (change)="updatevenue()"
+                        [ngModel]="venueobject.description">
+
+              </textarea>
+    </form>
+  </div>
+</div> <!--venuedescriptionrow-->
+<br>
+<hr>
+<div class="row justify-content-start"> <!--sample menu pdf row-->
+  <h5><strong>Sample Menus:</strong></h5>
+  <div class="col-2" id="menulogohelpertext">
+    must be in pdf form
+  </div>
+  <div *ngIf="!showsamplemenuupload" class="col-2">
+    <button (click)="activatesamplemenuupload()" class="linkbutton">+Upload</button>
+  </div>
+  <div *ngIf="showsamplemenuupload" class="col-4">
+    <form (change)="samplemenuupload($event)" #samplemenuform="ngForm">
+      <label>Display Label:</label>
+      <input (click)="showsamplemenuinput()"
+             type="text"
+             id="pdfnameinput"
+             name="pdfnameinput"
+             ngModel>
+      <br>
+      <input *ngIf="samplemenuinputshow"
+             type="file"
+             id="samplemenuinput"
+             name="samplemenuinput"
+             accept="application/pdf"
+             ngModel>
+    </form>
+  </div>
+</div> <!--sample menu pdf row-->
+<div class="row row-eq-height">
+  <div *ngFor="let menu of venueobject.venuesamplemenu_set; let i=index" class="col-md-3">
+    <span><a id="samplemenuname" target="_blank" [href]="menu.menupdfuri">{{menu.name}} </a>| <a id="samplemenudelete" (click)="deletesamplemenu(i)">Delete</a></span>
+  </div>
+</div>
+<br>
+<hr>
+<div class="row justify-content-start">
+  <h5><strong>Parking Options</strong></h5>
+</div>
+<form  #updateparkingform="ngForm">
+  <div class="row justify-content-start">
+    <div class="col-2">
+      <input type="checkbox"
+             (change)="updatevenue()"
+             id="valetparkingcheckbox"
+             name="valetparkingcheckbox"
+             [ngModel]="venueobject.valetparking"> Valet Parking
+    </div>
+    <div class="col-3">
+      <input class="form-control"
+             type="text"
+             (change)="updatevenue()"
+             id="valetprice"
+             name="valetprice"
+             [ngModel]="venueobject.valetparkingamount"
+             placeholder="valet parking price">
+    </div>
+    <div class="col-2">
+      <input type="checkbox"
+             (change)="updatevenue()"
+             id="onsitecheckbox"
+             name="onsitecheckbox"
+             [ngModel]="venueobject.onsiteparking"> On Site parking
+    </div>
+  </div>
+</form>
+<br>
+<hr>
+<div class="row justify-content-start">
+  <h5><strong>Venue Attributes</strong></h5>
+</div>
+<div class="row justify-content-start">
+  <form  #venueattributeform="ngForm">
+    <div class="row">
+      <div *ngIf="permission === 'suits'" class="col-4">
+        <div class="col-6 text-center">
+          Experiential Venue
+          <br>
+          <input (click)="experientialclick()"
+                 type="checkbox"
+                 id="experientialcheckbox"
+                 name="experientialcheckbox"
+                 [ngModel]="venueobject.isexperiential">
+        </div>
+        <div class="col-6 text-center">
+          Restaurant
+          <br>
+          <input (click)="restaurantclick()"
+                 type="checkbox"
+                 id="restaurantcheckbox"
+                 name="restaurantcheckbox"
+                 [ngModel]="venueobject.isrestaurant">
+
+        </div>
+      </div>
+      <div class="text-center col-6" *ngIf="cuisineshow">
+        <strong>Select at least one Cuisine</strong>
+        <div class="row">
+          <div class="col-6">
+            <strong>Cuisine</strong>
+            <br>
+            <select (click)="activatecuisine2()"
+                    (change)="updatevenue()"
+                    class="form-control"
+                    id="cuisineselect1"
+                    name="cuisineselect1"
+                    [ngModel]="venueobject.cuisine1">
+              <option selected value="">Select Cuisine</option>
+              <option *ngFor="let cuisine of venueattributes.cuisine" [value]="cuisine.pk">{{cuisine.name}}</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <strong>Cuisine</strong>
+            <div *ngIf="!showcuisine2">
+              <h5>Select a primary cuisine first</h5>
+            </div>
+            <div *ngIf="showcuisine2">
+              <select (change)="updatevenue()"
+                      class="form-control"
+                      id="cuisineselect2"
+                      name="cuisineselect2"
+                      [ngModel]="venueobject.cuisine2">
+                <option selected value="">Select Cuisine</option>
+                <option *ngFor="let cuisine of venueattributes.cuisine" [value]="cuisine.pk">{{cuisine.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- using multi select for menu style-->
+      </div>
+      <div *ngIf="experientialshow" class="col-4">
+        <strong>Experiential Type</strong>
+        <select (change)="updatevenue()"
+                class="form-control"
+                id="experientialtypeselect"
+                name="experientialtypeselect"
+                [ngModel]="venueobject.experientialtype">
+          <option selected value="">Select Experiential Type</option>
+          <option *ngFor="let type of venueattributes.experientialtype" [value]="type.pk">{{type.type}}</option>
+
+        </select>
+      </div>
+      <div class="col-4">
+        <strong>Venue Type</strong>
+        <br>
+        <select id="venuetypeselect"
+                class="form-control"
+                name="venuetypeselect"
+                (change)="updatevenue()"
+                [ngModel]="venueobject.venuetype">
+          <option selected value="">Select Venue Type</option>
+          <option *ngFor="let type of venueattributes.venuetype" [value]="type.pk">{{type.type}}</option>
+        </select>
+        <div>
+          <strong>Price Rating</strong>
+          <br>
+          <select id="pricerating"
+                  class="form-control"
+                  name="pricerating"
+                  (change)="updatevenue()"
+                  [ngModel]="venueobject.pricerating">
+            <option selected value="">Select a price rating</option>
+            <option value="1">$ 30 and under</option>
+            <option value="2">$ 31 to $ 50</option>
+            <option value="3">$ 51 and over</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> <!--venue attributes row 1-->

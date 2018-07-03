@@ -1,0 +1,138 @@
+<div *ngIf="suitsdeleted" class="row">
+  <div class="col-md-12 text-center align-middle">
+    <h2>This profile has been successfully deleted</h2>
+    <br>
+    <button (click)="navigatetosuitsclientusers()">Return to Client Users</button>
+    <button (click)="navigatetosuitsadminhome()">Return to Admin Home</button>
+  </div>
+
+</div>
+
+<div *ngIf="!suitsdeleted" class="row"> <!--root row-->
+  <div class="col-md-3 STnopadding text-center">
+    <h4>Client Photo</h4>
+    <div  *ngIf="clientobject.photo !== null && !changephotoout" class="imagecontainer imagefullheight STnopadding profileimage "
+          [ngStyle]="{'background-image': 'url(' + clientobject.photo + ')'}">
+    </div>
+    <div *ngIf="changephotoout">
+      <form>
+        <label for="photouploadform">Profile Photo Form</label>
+        <br>
+        <input (change)="uploadphoto($event)"
+               type="file"
+               multiple
+               id="photouploadform"
+               accept=".jpg, .jpeg, .png">
+      </form>
+    </div>
+    <div>
+      <a *ngIf="clientobject.photo === null && !changephotoout" style="cursor: pointer" (click)="showprofilephotoform()">Add Photo</a>
+    </div>
+    <div>
+      <a *ngIf="clientobject.photo !== null && !changephotoout" style="cursor: pointer" (click)="showprofilephotoform()">Change Photo</a>
+      <a (click)="unshowprofilephotoform()" *ngIf="changephotoout" style="cursor: pointer">Cancel</a>
+
+    </div>
+
+  </div> <!--col-md-2-->
+  <div *ngIf="!editprofileshow && !passwordform" class="col-md-6 clientinfo">
+    <label>Name:</label> &nbsp;<span id="namespan">{{clientobject.name}}</span>
+    <br>
+    <label>Company Name:</label> &nbsp;{{clientobject.companyname}}
+    <br>
+    <label>Job Title:</label> &nbsp;<span id="jobtitlespan">{{clientobject.jobtitle}}</span>
+    <br>
+    <label>Email:</label> &nbsp;<span id="emailspan">{{clientobject.email}}</span>
+    <br>
+    <label>Phone:</label> &nbsp;<span id="phonespan">{{clientobject.phone}}</span>
+    <br>
+    <a style="cursor: pointer;" (click)=" showeditprofile()"> Edit Profile</a>
+  </div>
+  <div>
+    <div *ngIf="editprofileshow" class="col-md-6 forminput">
+      <form (ngSubmit)="updateprofile()" #updateprofileform="ngForm">
+        <label for="clientnameinput">Name:</label>
+        <input type="text"
+               id="clientnameinput"
+               name="clientnameinput"
+               [ngModel]="clientobject.name">
+        <br>
+        <label  for="companynameinput">Company Name:</label>
+        <input type="text"
+               id="companynameinput"
+               name="companynameinput"
+               [ngModel]="clientobject.companyname">
+        <br>
+        <label for="jobtitleinput">Job Title:</label>
+        <input  type="text"
+                id="jobtitleinput"
+                name="jobtitleinput"
+                [ngModel]="clientobject.jobtitle">
+        <br>
+        <label for="emailinput">Email:</label>
+        <input type="email"
+               id="emailinput"
+               name="emailinput"
+               [ngModel]="clientobject.email">
+        <br>
+        <label for="phoneinput">Phone:</label>
+        <input type="text"
+               id="phoneinput"
+               name="phoneinput"
+               [ngModel]="clientobject.phone">
+        <br>
+        <a *ngIf="clientpermission" (click)="showpasswordform()" style="cursor: pointer">Change Password</a>
+        <br>
+        <div class="btn-group">
+          <button (click)="unshoweditprofile()" class="btn btn-danger" id="cancel">Cancel</button>
+          <button class="btn btn-primary" id="editprofile">Edit Profile</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="passwordform" class="col-md-6 forminput">
+      <h4 class="text-center">Change Password</h4>
+      <br>
+      <form (ngSubmit)="editpassword()" #editpasswordform="ngForm">
+        <label for="currentpasswordinput">Current Password:</label>
+        <input type="password"
+               id="currentpasswordinput"
+               name="currentpasswordinput"
+               ngModel>
+        <br>
+        <label for="newpassword1">New Password:</label>
+        <input type="password"
+               id="newpassword1"
+               name="newpassword1"
+               ngModel>
+        <br>
+        <label for="newpassword2">New Password Again:</label>
+        <input type="password"
+               id="newpassword2"
+               name="newpassword2"
+               ngModel>
+
+        <br>
+        <div class="btn-group changepass text-center">
+          <button (click)="unshowpasswordform()" class="btn btn-danger" id="cancelbutton">Cancel</button>
+
+          <button class="btn btn-primary" id="changepasswordbutton">Change Password</button>
+        </div>
+      </form>
+      <span *ngIf="passwordchangesucess">Password sucessfully updated<span (click)="passwordchangesucessoff()" style="cursor: pointer">&times;</span></span>
+      <span *ngIf="passwordchangefail">Error updating password. Did you correctly enter your current password?<span style="cursor: pointer" (click)="passwordchangefailoff()">&times;</span></span>
+      <br>
+      <br>
+
+    </div>
+  </div>
+
+  <div class="col-md-3 text-right bottom">
+    <button (click)="showdeleteconfrim()" *ngIf="!deleteconfrim && suitpermission" class="btn-danger">Delete Profile</button>
+    <div *ngIf="deleteconfrim" class="text-center">
+      Are you sure you want to delete your profile? You will not be able to recover it!
+      <br>
+      <button class="STButton" (click)="unshowdeleteconfrim()">Cancel</button>
+      <button class="btn-danger" (click)="profiledelete()">Yes I am sure</button>
+    </div>
+  </div>
+</div> <!--root row-->

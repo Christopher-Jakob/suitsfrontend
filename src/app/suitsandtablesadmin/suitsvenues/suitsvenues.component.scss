@@ -1,0 +1,34 @@
+#toprow{
+  border-bottom: solid black;
+}
+
+a{
+  color: #00b3ee;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+tr{
+  height: 30px;
+}
+
+tr:nth-child(even){
+  background-color: lightgray;
+}
+
+#createbutton{
+  position: relative;
+  left: 50px;
+  height: 30px;
+  color: white;
+  background-color: #00b3ee;
+  border: solid #00b3ee;
+  border-radius: 7%;
+}
+
+#deactivatebutton{
+  background-color: #ffbd59;
+  color: black;
+  border-color: #ffbd59;
+
+}

@@ -1,0 +1,50 @@
+<div id="title" class="col-md-12">
+  <h4>
+    <strong>New Venue Applications</strong>
+  </h4>
+</div>
+
+<div *ngIf="choicesload" class="col-md-12 text-center mt-5">
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<table width="100%">
+  <tr>
+    <th>
+      Venue Name
+    </th>
+    <th>
+      City
+    </th>
+    <th>
+      Contact Name
+    </th>
+    <th>
+      Email Address
+    </th>
+    <th>
+      Phone Number
+    </th>
+  </tr>
+
+  <tr *ngFor="let venue of newvenueapplications">
+    <td>
+      <a [routerLink]="['/suitsadmin','venueapplication',venue.id]">{{venue.name}}</a>
+    </td>
+    <td>
+      {{venue.city}}
+    </td>
+    <td>
+      {{venue.venuecontactname}}
+    </td>
+    <td>
+      {{venue.venuecontactemail}}
+    </td>
+    <td>
+      {{venue.phonenumber}}
+    </td>
+  </tr>
+
+</table>

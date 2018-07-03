@@ -1,0 +1,27 @@
+.totalthing{
+  border: solid black 2px;
+  min-width: 80px;
+}
+
+.ghostborder{
+  border: solid white;
+}
+.navheight{
+  min-height: 40px;
+}
+.notificationdiv{
+  border-radius: 20%;
+  border: solid 3px #00b3ee;
+  background-color: #00b3ee;
+  color: white;
+}
+
+#newleadsnotification{
+  position: relative;
+  left: 15px;
+}
+
+#pasteventsnotificationdiv{
+  position: relative;
+  left: 12px;
+}

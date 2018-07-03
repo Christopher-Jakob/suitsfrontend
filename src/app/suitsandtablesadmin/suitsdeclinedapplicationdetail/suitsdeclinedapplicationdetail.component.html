@@ -1,0 +1,110 @@
+<div *ngIf="!restoresucess" class="row row-eq-height">
+  <div class="col-md-4">
+    <h3>{{declinedvenue.name}}</h3>
+  </div>
+  <div class="col-md-6">
+    <a routerLink="/suitsadmin/declined-venues"  class="pull-right" >Declined Venues List</a>
+  </div>
+  <div class="col-md-2">
+    <button (click)="restorevenue()" class="STBlue">Restore Venue</button>
+  </div>
+</div>
+<hr>
+
+<div *ngIf="!restoresucess" class="row">
+  <div class="col-md-offset-2 col-6">
+    <div class="col-12">
+      <h4>{{declinedvenue.name}} Contact Information</h4>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-6">
+        <strong>Street Address:</strong>
+      </div>
+      <div class="col-6">
+        {{declinedvenue.streetaddress1}}
+      </div>
+    </div>
+    <div *ngIf="street2show" class="row">
+      <div class="col-6">
+        <strong>Street Address:</strong>
+      </div>
+      <div  class="col-6">
+        {{declinedvenue.streetaddress2}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>City:</strong>
+      </div>
+      <div class="col-6">
+        {{declinedvenue.city}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>State:</strong>
+      </div>
+      <div class="col-6">
+        {{declinedvenue.state}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>Zip Code:</strong>
+      </div>
+      <div class="col-6">
+        {{declinedvenue.zipcode}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>Phone Number:</strong>
+      </div>
+      <div class="col-6">
+        {{declinedvenue.phonenumber}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>Contact:</strong>
+      </div>
+      <div class="col-6">
+        {{declinedvenue.venuecontactname}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>Job Title</strong>
+      </div>
+      <div class="col-6">
+        {{declinedvenue.venuecontactjobtitle}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>Email:</strong>
+      </div>
+      <div class="col-6">
+        {{declinedvenue.venuecontactemail}}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div>
+        <strong>Decline Reason Detail</strong>
+      </div>
+      <br>
+      <div class="col-12">
+        <p>{{declinedvenue.declinetext}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="restoresucess" class="row">
+  <div class=" col-md-offset-2 col-md-6 text-center">
+    <h4>{{declinedvenue.name}} has been restored to the new venue application list.</h4>
+    <button (click)="navigatetovenuelist()">Head To New Venue Applications</button>
+  </div>
+</div>

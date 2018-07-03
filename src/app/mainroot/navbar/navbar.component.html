@@ -1,0 +1,495 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">S U I T S
+    <span style="color: #00b3ee"> + </span> T A B L E S</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li *ngIf="!showbrowse" class="nav-item">
+        <button id="listvenuebutton" class="dropdown-item" data-toggle="modal" data-target="#Venue-SignUp">List Your Venue</button>
+        <span class="sr-only">(current)</span>
+      </li>
+      <li *ngIf="showbrowse" class="nav-item">
+        <div class="auto d-inline-block">
+          <label class="nav-link">Browse</label>
+        </div>
+        <div class="auto d-inline-block">
+          <select (change)="sendcity()"
+                  id="cityselect"
+                  name="cityselect"
+                  [(ngModel)]="selectedcity">
+            <option value="">Select A City</option>
+            <option *ngFor="let city of cities" [value]="city.city">{{city.city}}</option>
+          </select>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav">
+      <li *ngIf="signedin" class="nav-item">
+        <a class="nav-item nav-link" (click)="navigatetopermission()" *ngIf="user.isclient">Dashboard </a>
+        <a class="nav-item nav-link" (click)="navigatetopermission()" *ngIf="user.issuitsadministrator || user.issuitssuperuser || user.issuitsviewer">Suits Admin </a>
+        <a class="nav-item nav-link" (click)="navigatetopermission()" *ngIf="user.isvenueuser">Venue Admin </a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="!signedin" class="nav-item nav-link" data-toggle="modal" data-target="#signinModal">Log In</a>
+        <p *ngIf="signedin" class="nav-item nav-link"> Welcome {{user.name}} </p>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="signedin" class="nav-item nav-link" (click)="signout()">Sign Out</a>
+      </li>
+      <li *ngIf="!signedin" class="nav-item">
+        <a data-toggle="modal" class="nav-item nav-link" data-target="#Client-SignUp">Sign Up</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Sign in Modal-->
+<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="signinModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 *ngIf="!showpasswordreset && !emailsent" class="modal-title">Sign In</h4>
+        <h4 *ngIf="showpasswordreset || emailsent" class="modal-title">Forgotten Password</h4>
+        <button type="button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="emailsent" class="modal-body text-center">
+        <h3>An email has been sent to you with reset instructions</h3>
+      </div>
+      <div *ngIf="showpasswordreset && !emailsent" class="modal-body text-center">
+        <div class="text-center">
+          <p>Enter your email and instructions on reseting your password will be sent to you.</p>
+        </div>
+        <form (ngSubmit)="forgotpassword(passwordreset)" #passwordreset="ngForm">
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="passwordresetemail" name="passwordresetemail" ngModel placeholder="Email">
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-outline-dark" (click)="togglepassword()">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="!showpasswordreset" class="modal-body">
+        <form (ngSubmit)="signin(signinform)" #signinform="ngForm">
+          <div class="form-group row">
+            <label for="signinemail" class="col-sm-2 col-form-label">Email:</label>
+            <div class="col-sm-10">
+              <input (click)="signinerrorreset()" type="email" class="form-control" id="signinemail" name="signinemail" ngModel placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="signinpassword" class="col-sm-2 col-form-label">Password:</label>
+            <div class="col-sm-10">
+              <input (click)="signinerrorreset()" type="password" class="form-control" id="signinpassword" name="signinpassword" ngModel
+                     placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input ml-0" type="checkbox" id="gridCheck" name="remembercheckbox" ngModel>
+              <label class="form-check-label" for="gridCheck">
+                &nbsp; &nbsp; Remember Me
+              </label>
+            </div>
+            <small style="cursor: pointer" (click)="togglepassword()" class="form-text text-muted">Forget Password?</small>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Sign In</button>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal" #closeModal>Close</button>
+          </div>
+          <span style="color: red" *ngIf="showsigninerror" class="help-block">Email or password incorrect</span>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Client SignUp Modal -->
+<div class="modal fade" id="Client-SignUp" tabindex="-1" role="dialog" aria-labelledby="Client-SignUp" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Client Sign Up</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div *ngIf="clientsignupconfrim" class="modal-body text-center">
+        <h3>Please check your email to complete the sign up process</h3>
+
+      </div>
+      <div *ngIf="!clientsignupconfrim" class="modal-body">
+        <form (ngSubmit)="clientsignup(clientsignupform)" #clientsignupform="ngForm">
+          <div class="row">
+            <div class="col">
+              <label for="FN" class="col-form-label">First Name:</label>
+              <input type="text"
+                     id="FN"
+                     name="clientfirstname"
+                     class="form-control"
+                     ngModel
+                     placeholder="First name"
+                     required>
+            </div>
+            <div class="col">
+              <label for="LN" class="col-form-label">Last Name:</label>
+              <input type="text"
+                     id="LN"
+                     name="clientlastname"
+                     class="form-control"
+                     ngModel
+                     placeholder="Last name"
+                     required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="C-inputEmail4" class="col-form-label">Email:</label>
+              <input (change)="checkemail(clientsignupform)"
+                     type="email"
+                     class="form-control"
+                     id="C-inputEmail4"
+                     name="clientemail"
+                     ngModel
+                     placeholder="Email"
+                     required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="C-inputconfirmEmail4" class="col-form-label">Confirm Email:</label>
+              <input (change)="checkemail(clientsignupform)"
+                     type="email"
+                     class="form-control"
+                     id="C-inputconfirmEmail4"
+                     ngModel
+                     name="clientemailconfrim"
+                     placeholder="Email"
+                     required>
+              <span style="color: red" class="help-block" *ngIf="emailmismatch">Emails do not match</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="C-inputPassword4" class="col-form-label">Password:</label>
+              <input (change)="checkpassword(clientsignupform)"
+                     type="password"
+                     class="form-control"
+                     id="C-inputPassword4"
+                     ngModel
+                     name="clientpassword"
+                     placeholder="Password"
+                     required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="C-inputvalidatePassword4" class="col-form-label">Confirm Password:</label>
+              <input (change)="checkpassword(clientsignupform)"
+                     type="password"
+                     class="form-control"
+                     name="clientconfrimpassword"
+                     ngModel
+                     id="C-inputvalidatePassword4"
+                     placeholder="Password"
+                     required>
+              <span style="color: red" *ngIf="passwordmismatch" class="help-block">Passwords do not match</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="C-inputAddress" class="col-form-label">Company Name:</label>
+            <input type="text"
+                   class="form-control"
+                   id="C-inputAddress"
+                   name="clientcompany"
+                   ngModel
+                   placeholder="Optional">
+          </div>
+          <div class="form-group">
+            <label for="P_phone" class="col-form-label">Primary phone number (Digits Only):</label>
+            <input type="number"
+                   class="form-control"
+                   id="P_phone"
+                   name="P_phone"
+                   pattern="([0-9]{10})"
+                   ngModel
+                   #P_PhoneCSS = "ngModel"
+                   placeholder="Optional"
+            >
+            <span *ngIf="P_PhoneCSS.touched && !P_PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
+
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="C-inputCity" class="col-form-label">City:</label>
+              <input type="text" class="form-control" name="clientcity" ngModel id="C-inputCity">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="C-inputState" class="col-form-label">State:</label>
+              <select id="C-inputState" class="form-control" ngModel name="clientstate">
+                <option value="">Choose</option>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="How-to-find-1" class="col-form-label">How did you hear about us?:</label>
+            <textarea rows="4" cols="50" type="text" class="form-control" id="How-to-find-1" name="How-to-find" ngModel></textarea>
+          </div>
+
+          <div *ngIf="!clientsignupconfrim" class="modal-footer">
+            <button [disabled]="!clientsignupform.valid" type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Venue SignUp Modal -->
+<div class="modal fade" id="Venue-SignUp" tabindex="-1" role="dialog" aria-labelledby="Venue-SignUp" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="signupcompelete" class="modal-body">
+        <h3>Your Venue application has been received we will be in touch</h3>
+      </div>
+      <div *ngIf="!signupcompelete" class="modal-body">
+        <form (ngSubmit)="createvenue(createvenueform)" #createvenueform="ngForm">
+          <div class="form-group">
+            <label for="inputVenueName" class="col-form-label">Venue Name:</label>
+            <input type="text"
+                   class="form-control"
+                   id="inputVenueName"
+                   name="venuename"
+                   ngModel
+                   required
+            >
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputAddress" class="col-form-label">Address 1:</label>
+              <input type="text"
+                     class="form-control"
+                     name="venueaddress1"
+                     ngModel
+                     id="inputAddress"
+                     required>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="inputAddress2" class="col-form-label">Address 2:</label>
+              <input type="text"
+                     class="form-control"
+                     name="venueaddress2"
+                     ngModel
+                     id="inputAddress2">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputCity" class="col-form-label">City:</label>
+              <input type="text"
+                     name="city"
+                     ngModel
+                     class="form-control"
+                     id="inputCity"
+                     required
+              >
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="inputState" class="col-form-label">State:</label>
+              <select id="inputState"
+                      class="form-control"
+                      name="venuestateselect"
+                      required
+                      ngModel>
+                <option value="">Choose</option>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputContactName" class="col-form-label">Contact Name:</label>
+              <input type="text"
+                     class="form-control"
+                     name="venuecontactname"
+                     ngModel
+                     id="inputContactName"
+                     required>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="inputPhone" class="col-form-label">Phone Number (Digits Only):</label>
+              <input type="number"
+                     class="form-control"
+                     id="inputPhone"
+                     name="venuephone"
+                     pattern="([0-9]{10})"
+                     ngModel
+                     #PhoneCSS = "ngModel"
+                     required
+              >
+              <span *ngIf="PhoneCSS.touched && !PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputJobTitle" class="col-form-label">Job Title:</label>
+              <input type="text"
+                     class="form-control"
+                     name="venuejobtitle"
+                     ngModel
+                     id="inputJobTitle">
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="inputEmail" class="col-form-label">Contact Email:</label>
+              <input type="email"
+                     class="form-control"
+                     id="inputEmail"
+                     name="venueemail"
+                     ngModel
+                     required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label for="hearaboutus" class="col-form-label">How Did You Hear About Us?</label>
+              <textarea type="text"
+                        class="form-control"
+                        name="aboutus"
+                        id="hearaboutus"
+                        ngModel
+                        rows="4"
+                        cols="50">
+              </textarea>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button [disabled]="!createvenueform.valid" type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

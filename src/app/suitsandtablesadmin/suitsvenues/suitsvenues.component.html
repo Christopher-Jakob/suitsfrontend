@@ -1,0 +1,88 @@
+<div id="toprow" class="row">
+  <div class="col-md-3 STautowidth">
+    <h4>
+      <strong>Venues</strong>
+    </h4>
+  </div>
+  <div class="col-md-3 STautowidth">
+    <P>{{venues.length}} Venues</P>
+  </div>
+  <div class="col-md-3  col-md-offset-6">
+    <button (click)="navigatetovenueapplication()" id="createbutton">Create New Venue</button>
+  </div>
+</div>
+
+<div class="col-md-12 text-center">
+  <h3>Venues</h3>
+  <hr>
+</div>
+<div *ngIf="choicesload" class="col-12 text-center mt-5">
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<table *ngIf="!choicesload" width="100%">
+  <tr>
+    <th>
+      Venue ID
+    </th>
+    <th>
+      Venue Name
+    </th>
+    <th>
+      City
+    </th>
+    <th>
+      Contact Name
+    </th>
+    <th>
+      Email Address
+    </th>
+    <th>
+      Phone Number
+    </th>
+    <th>
+      Status
+    </th>
+    <th>
+    </th>
+  </tr>
+  <tr *ngFor=" let venue of venues; let i=index">
+    <td>
+      <a (click)="navipush(i)">{{venue.id}}</a>
+    </td>
+    <td>
+      {{venue.name}}
+    </td>
+    <td>
+      {{venue.city}}
+    </td>
+    <td>
+      {{venue.venuecontactname}}
+    </td>
+    <td>
+      {{venue.venuecontactemail}}
+    </td>
+    <td>
+      {{venue.phonenumber}}
+    </td>
+    <td *ngIf="!deleteconfrimshow && activeindex !== i">
+      <h5 *ngIf="venue.online" style="color: green">Public</h5>
+      <h5 *ngIf="!venue.online" style="color: red"> Hidden</h5>
+    </td>
+    <td *ngIf="!deleteconfrimshow && activeindex !== i">
+      <button (click)="deactivatevenue(i)" *ngIf="venue.online" id="deactivatebutton">Hide Venue</button>
+      <button (click)="activatevenue(i)" *ngIf="!venue.online" class="btn-success">Push Public</button>
+    </td>
+    <td>
+      <button (click)="showdeleteconfrim(i)" *ngIf="activeindex !== i" class="btn-danger">Delete</button>
+    </td>
+    <td *ngIf="deleteconfrimshow && activeindex === i" class="text-center">
+      Are you sure you want to delete this Venue?
+      <br>
+      <button (click)="unshowdeleteconfrim()" class="STButton">Cancel</button>
+      <button (click)="deletevenue(i)" class="btn-danger">Delete</button>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,20 @@
+<div *ngIf="venueadmin">
+  <app-adminnavbar></app-adminnavbar>
+</div>
+<div *ngIf="suitsadmin">
+  <app-suitsnavbar></app-suitsnavbar>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <app-adminnavigation *ngIf="venueadmin"></app-adminnavigation>
+      <app-suitsnavigation *ngIf="suitsadmin"></app-suitsnavigation>
+    </div>
+
+    <div class="col-sm-10 STnopadding">
+      <router-outlet></router-outlet>
+
+    </div>
+  </div>
+</div>

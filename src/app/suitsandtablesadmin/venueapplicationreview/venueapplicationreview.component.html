@@ -1,0 +1,373 @@
+<h2 *ngIf="!createvenue">Venue Application</h2>
+<h2 *ngIf="createvenue">Venue Information</h2>
+<br>
+
+<div *ngIf="!addsucess" class="row">
+  <div class="col-6">
+    <div class="text-center">
+      <h2 *ngIf="!createvenue">Venue Application</h2>
+      <h2 *ngIf="createvenue">Venue Information</h2>
+    </div>
+    <div class="col-md-12 formdiv">
+      <form  #venueinputedform="ngForm">
+        <div class="row">
+          <div class="label">
+            <label for="venuenameinput">Venue Name</label>
+          </div>
+          <div id="venuename" class="input">
+            <input type="text"
+                   id="venuenameinput"
+                   name="venuenameinput"
+                   placeholder="Required"
+                   [ngModel]="venueapplicationobject.name"
+                   required
+                   #nameinputcss="ngModel">
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">
+            <label for="streetaddress1input">Street Address <span *ngIf="coordinatesfail" style="color: #00b3ee"> *</span></label>
+          </div>
+          <div id="streetaddress1" class="input">
+            <input (change)="getcoordinates()" type="text"
+                   id="streetaddress1input"
+                   name="streetaddress1input"
+                   [ngModel]="venueapplicationobject.streetaddress1"
+                   placeholder="Required"
+                   required
+                   #streetaddress1css="ngModel">
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">
+            <label for="streetaddress2input">Street Address</label>
+          </div>
+          <div id="streetaddress2" class="input">
+            <input type="text"
+                   id="streetaddress2input"
+                   name="streetaddress2input"
+                   [ngModel]="venueapplicationobject.streetaddress2">
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">
+            <label for="cityinput">City<span *ngIf="coordinatesfail" style="color: #00b3ee"> *</span></label>
+          </div>
+          <div id="city" class="input">
+            <input (change)="getcoordinates()"
+                   type="text"
+                   id="cityinput"
+                   name="cityinput"
+                   [ngModel]="venueapplicationobject.city"
+                   placeholder="Required"
+                   required
+                   #cityinputcss="ngModel">
+          </div>
+          <div *ngIf="!cityinputcss.valid && cityinputcss.touched" class="help-block text-center">Each Word In A City Name Must Start With A Capital</div>
+        </div>
+        <div class="row">
+          <div class="label">
+            <label for="stateinput">State<span *ngIf="coordinatesfail" style="color: #00b3ee"> *</span></label>
+          </div>
+          <div id="state" class="input">
+            <input (change)="getcoordinates()"
+                   type="text"
+                   id="stateinput"
+                   name="stateinput"
+                   [ngModel]="venueapplicationobject.state"
+                   pattern="[A-Z]{2}"
+                   required
+                   placeholder="Required"
+                   #stateinputcss="ngModel">
+          </div>
+          <div *ngIf="!stateinputcss.valid && stateinputcss.touched" class="help-block text-center">
+            Enter The Two Letter Appreviation For The State
+          </div>
+
+          <div id="zipcodelabel" class="label">
+            <label for="zipcodeinput">Zip Code</label>
+          </div>
+          <div id="zipcode" class="input">
+            <input (change)="getcoordinates()"
+                   type="number"
+                   id="zipcodeinput"
+                   name="zipcodeinput"
+                   placeholder="Required"
+                   [ngModel]="venueapplicationobject.zipcode"
+                   pattern="[0-9]{5}"
+                   required
+                   #zipcodeinputcss="ngModel">
+          </div>
+          <div class="help-block text-center" *ngIf="!zipcodeinputcss.valid && zipcodeinputcss.touched">
+            Enter The Five Digit Zipcode With No Dashes
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">
+            <label for="phonenumberinput">Phone Number</label>
+          </div>
+          <div id="phonenumber" class="input">
+            <input type="number"
+                   id="phonenumberinput"
+                   name="phonenumberinput"
+                   placeholder="Required"
+                   [ngModel]="venueapplicationobject.phonenumber"
+                   pattern="([0-9]{10})"
+                   required
+                   #phonenumbercss="ngModel">
+          </div>
+          <div class="text-center help-block" *ngIf="!phonenumbercss.valid && phonenumbercss.touched">
+            Enter The Ten Digit Phone Number With No Parentheses Dashes Or Spaces
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">
+            <label for="contactnameinput">Contact Name</label>
+          </div>
+          <div id="contactname" class="input">
+            <input type="text"
+                   id="contactnameinput"
+                   name="contactnameinput"
+                   [ngModel]="venueapplicationobject.venuecontactname"
+                   placeholder="Required"
+                   required
+                   #contactnamecss="ngModel">
+          </div>
+          <div class="help-block text-center" *ngIf="!contactnamecss.valid && contactnamecss.touched">
+            Each Word In A Contact Name Must Start With A Captial
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">
+            <label for="titleinput">Job Title</label>
+          </div>
+          <div id="title" class="input">
+            <input type="text"
+                   id="titleinput"
+                   name="titleinput"
+                   [ngModel]="venueapplicationobject.venuecontactjobtitle"
+                   #titleinputcss="ngModel">
+          </div>
+          <div class="text-center help-block" *ngIf="!titleinputcss.valid && titleinputcss.touched"> Each Word In A Title Must Be Captialized </div>
+        </div>
+        <div class="row">
+          <div class="label">
+            <label for="emailinput">Contact Email</label>
+          </div>
+          <div id="contactemail" class="input">
+            <input type="email"
+                   id="emailinput"
+                   name="emailinput"
+                   placeholder="Required"
+                   [ngModel]="venueapplicationobject.venuecontactemail"
+                   required
+                   #emailinputcss="ngModel">
+          </div>
+          <div class="text-center help-block" *ngIf="!emailinputcss.valid && emailinputcss.touched">
+            Must Be A Valid Email Address
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="info">
+            <h5>Is this an Experiential Venue, a Restaurant, both?</h5>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="labelandradio">
+            <label for="experientialvenuecheckbox">Experiential Venue</label>
+            <input (click)="experientialcheckboxclick()"
+                   type="checkbox"
+                   id="experientialvenuecheckbox"
+                   name="experientialvenuecheckbox"
+                   [ngModel]="venueapplicationobject.isexperiential">
+          </div>
+          <div class="labelandradio">
+            <label for="restaurantvenuecheckbox">Restaurant</label>
+            <input (click)="restaurantcheckboxclick()"
+                   type="checkbox"
+                   id="restaurantvenuecheckbox"
+                   name="restaurantvenuecheckbox"
+                   [ngModel]="venueapplicationobject.isrestaurant">
+          </div>
+        </div>
+        <div *ngIf="showexperientialtypeselect" class="row text-center">
+          <label for="experientialtypeselect">Select Experiential Type</label>
+          <br>
+          <select id="experientialtypeselect"
+                  name="experientialtypeselect"
+                  [ngModel]="venueapplicationobject.experientialtype">
+            <option value="">Select Experiential type</option>
+            <option *ngFor="let type of experientialtypes" [value]="type.pk">{{type.type}}</option>
+          </select>
+        </div>
+        <div *ngIf="showcuisinetypeselect" class="row text-center">
+          <div class="info">
+            <h5><strong>Select at least one Cuisine </strong></h5>
+          </div>
+          <div class="row">
+            <div class="text-center col-6">
+              <label>Cuisine</label>
+              <br>
+              <select (change)="checkcuisineonefiled()"
+                      id="cuisine1select"
+                      name="cuisine1select"
+                      [ngModel]="venueapplicationobject.cuisine1">
+                <option value="">Select a cuisine</option>
+                <option *ngFor="let c of cuisines" [value]="c.pk">{{c.name}}</option>
+              </select>
+            </div>
+            <div class="text-center col-6">
+              <div *ngIf="!showcuisine2">
+                Please choose a primary cuisine first.
+              </div>
+              <div *ngIf="showcuisine2">
+                <label>Cuisine</label>
+                <br>
+                <select id="cuisine2select"
+                        name="cuisine2select"
+                        [ngModel]="venueapplicationobject.cuisine2">
+                  <option value="">Select a cuisine</option>
+                  <option *ngFor="let c of cuisines" [value]="c.pk">{{c.name}}</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <div  id="declinebuttonrow" class="col-12 text-center">
+        <button *ngIf="!createvenue" (click)="activatedeclinemodal()" id="declinebutton">Decline</button>
+      </div>
+    </div>
+  </div>  <!--col-md-6-->
+  <div class="col-6">
+    <h2 class="text-center">S+T Inputs</h2>
+    <form  #stinputsform="ngForm">
+      <label for="websiteinput">Website</label>
+      <input class="input"
+             type="text"
+             id="websiteinput"
+             name="websiteinput"
+             ngModel
+             placeholder="Optional">
+      <br>
+      <label for="googleratinginput">Google Rating</label>
+      <input class="input"
+             type="text"
+             id="googleratinginput"
+             name="googleratinginput"
+             ngModel
+             placeholder="Optional">
+      <br>
+      <label for="yelpratinginput">Yelp Rating</label>
+      <input class="input"
+             type="text"
+             id="yelpratinginput"
+             name="yelpratinginput"
+             ngModel
+             placeholder="Optional">
+      <br>
+      <label for="searchcityselect">Search City</label>
+      <select  (change)="populateneighborhoodlist()"
+               id="searchcityselect"
+               name="searchcityselect"
+               ngModel
+               required>
+        <option value="">Select a search city</option>
+        <option *ngFor="let city of searchcities" [value]="city.pk">{{city.city}}</option>
+      </select>
+      <br>
+      <div *ngIf="searchneighborhoods.length > 0">
+        <label for="searchneighborhoodselect">Search Neighborhood</label>
+        <select id="searchneighborhoodselect"
+                name="searchneighborhoodselect"
+                ngModel
+                required>
+          <option value="">Select a search neighborhood</option>
+          <option *ngFor="let n of searchneighborhoods" [value]="n.pk">{{n.neighborhood}}</option>
+        </select>
+      </div>
+      <br>
+      <label>Longitude</label> <span *ngIf="!coordinatesfail">{{receivedlongnitude}}</span> <span *ngIf="coordinatesfail" style="color: #00b3ee;">*Error getting coordinates, please adjust venue address*</span>
+      <br>
+      <label>Latitude</label> <span *ngIf="!coordinatesfail">{{receivedlatitude}}</span> <span *ngIf="coordinatesfail" style="color: #00b3ee;">*Error getting coordinates, please adjust venue address*</span>
+      <br>
+      <label  *ngIf="venueapplicationobject.eventplannerstaff && !createvenue">Venue <span style="color: green"> Has</span>  Event Planners On Staff</label>
+      <label *ngIf="!venueapplicationobject.eventplannerstaff && !createvenue">Venue<span style="color:red"> Does Not Have</span>  Event Planners On Staff</label>
+      <br>
+      <div class="row">
+        <div *ngIf="createvenue" class="justify-content-center">
+          <button (click)="navigatetovenuelist()" class="btn-danger">Cancel</button>
+          <button [disabled]="!venueinputedform.valid || !stinputsform.valid || coordinatesfail" (click)="addvenue()">Create New Account</button>
+        </div>
+        <div *ngIf="!createvenue" class="justify-content-center">
+          <button [disabled]="!venueinputedform.valid || !stinputsform.valid || coordinatesfail" (click)="addvenue()">Approve Application</button>
+        </div>
+      </div>
+    </form>
+  </div> <!--col-md-6-->
+</div> <!--row-->
+
+<div *ngIf="displaydeclinemodal" class="col-md-7" id="declinemodal">
+  <div *ngIf="!declinesucess" class="deletework">
+    <div class="text-center">
+      <h4>Are You Sure You Wish To Decline?</h4>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <form (ngSubmit)="declinevenue()" #declinevenueform="ngForm">
+        <div>
+          <select id="declinechoice"
+                  name="declinechoice"
+                  ngModel
+                  required>
+            <option value="">Why are you declining this venue?</option>
+            <option *ngFor="let reason of venuedeclinereasons" [value]="reason.reason">{{reason.reason}}</option>
+          </select>
+        </div>
+        <br>
+        <textarea id="declinetext"
+                  name="declinetext"
+                  ngModel
+                  placeholder="Expand on your decline decision here.">
+
+        </textarea>
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <button class="STButton" (click)="deactivatedeclinedmodal()">Go Back</button>
+          </div>
+          <div class="col-md-6 text-center">
+            <button class="btn-danger" [disabled]="!declinevenueform.valid" *ngIf="!createvenue" type="submit">Decline</button>
+          </div>
+        </div> <!--row-->
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="declinesucess" class="declinesucess text-center">
+    <h4>Venue application declined. Moved to declined venues </h4>
+    <br>
+    <button (click)="returntovenueapplications()">Go To Venue Applications</button>
+    <button (click)="navigatetodeclinedvenueslist()">Go To Declined Venue Applications</button>
+
+  </div>
+
+
+</div>
+
+
+<div *ngIf="addsucess" class="text-center">
+  <h4 *ngIf="!createvenue">Venue sucessfully created, user notified via email of approval.</h4>
+  <h4 *ngIf="createvenue">Venue sucessfully created, user notified via email of creation.</h4>
+  <br>
+  <button *ngIf="!createvenue" (click)="returntovenueapplications()">Return To Venue Applications</button>
+  <button (click)="navigatetovenuelist()">Head To Venue List</button>
+
+</div>
+
+
+
+

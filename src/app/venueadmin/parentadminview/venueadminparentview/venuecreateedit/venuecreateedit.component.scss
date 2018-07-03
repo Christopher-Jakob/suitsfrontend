@@ -1,0 +1,155 @@
+.profile{
+  border:solid 1px black;
+  margin-bottom: 30px;
+}
+
+input{
+  border: solid black 1px;
+}
+
+input.ng-touched.ng-invalid{
+  border: solid red 1px;
+}
+::placeholder{
+  color: black;
+}
+
+a#logoupload{
+  display: inline-block;
+  color: blue;
+  text-decoration: underline;
+}
+
+.groupimagecontainer{
+  height: 150px;
+  margin-top: 32px;
+  width: 75%;
+  border: solid black 1px;
+  background-size: cover;
+}
+
+.logotext{
+  margin-top: 15px;
+  color: gray;
+}
+
+.restaurantprofiletext{
+  margin-top: 20px;
+}
+
+.formdiv{
+  position: relative;
+  left: -13px;
+}
+#resturantprofile input{
+  width: 100%;
+  margin-top: 9px;
+  margin-bottom: 9px;
+}
+
+.halflength{
+  max-width: 45%;
+}
+
+#zipinput{
+  margin-left: 9%;
+}
+
+#tophalfrow{
+  margin-top: 20px;
+}
+.righttopdivbutton{
+  margin-left: 150px;
+}
+
+#previewbutton{
+  padding-right: 6%;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-top: 10px;
+  color: white;
+  border-radius: 6%;
+  border: solid #8B008B;
+  background-color: #8B008B;
+}
+
+#submitchanges{
+  margin-top: 10px;
+  color: white;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 4%;
+  background-color: #00b3ee;
+  border-radius: 6%;
+  border: solid 1px #00b3ee;
+}
+
+
+#masterrfpcontactrow{
+  margin-top: 25px;
+}
+#masterrfptext{
+  font-size: 15px;
+  color: gray;
+  margin-top: 8px;
+  margin-left: -45px;
+}
+
+#emailmasterrfp{
+  width: 80%;
+  margin-top: 15px;
+}
+
+.users{
+  margin-top: 15px;
+}
+#useredit{
+  display: inline-block;
+  padding-top: 10px;
+  color: blue;
+  text-decoration: underline;
+}
+#tablerow{
+  height: 200px;
+  width: 100%;
+  overflow-y: scroll;
+  font-size: 14px;
+  position: relative;
+  left: 2%;
+  border: solid black 1px;
+  margin-bottom: 30px;
+}
+
+th{
+  padding-bottom: 10px;
+  border-bottom: solid black 1px;
+}
+
+.checkboxtd{
+  padding-left: 15px;
+}
+
+input[type="checkbox"]{
+  width: 15px;
+  height: 15px;
+}
+
+
+
+td{
+  color: gray;
+}
+
+.inputwidth80{
+  width: 80%;
+}
+
+.userphoto{
+  background-size: cover;
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+

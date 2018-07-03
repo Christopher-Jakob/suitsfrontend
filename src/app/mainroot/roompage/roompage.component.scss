@@ -1,0 +1,121 @@
+$color-gray: rgb(236,236,236);
+.Section {
+  border-bottom: $color-gray solid 3px;
+  padding: 3rem 0;
+  margin-bottom: 1rem;
+}
+
+.FirstHead {
+  font-size: 2.0rem;
+  font-weight: 100;
+  padding: 0.5rem 0;
+}
+
+.SecHeadunderline {
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.SecHead{
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+
+}
+
+.span-style {
+  display: inline-block;
+  &:not(:last-child){
+    border-right: black solid 2px;
+    padding-right: 1rem;
+  }
+  &__mid {
+    padding-right: 5rem;
+  }
+  &__lg {
+    padding-right: 10rem;
+  }
+}
+
+p {
+  padding: 1rem 0;
+  margin: 0;
+}
+
+.link-style{
+  color: gray;
+  text-decoration: underline $color-gray;
+}
+
+.button {
+  color: #00aced;
+  padding: 0.5rem 3rem;
+
+  &__primary {
+    color: #00aced;
+    border: #00aced solid 2px;
+  }
+}
+
+$color-primary: rgb(83,139,197);
+
+.card-container {
+  backface-visibility: hidden;
+  overflow: hidden;
+  height: 25rem;
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 4rem rgba(0,0,0, 0.2);
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(3px);
+  }
+
+  .card-container-img {
+    position: relative;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    height: 14rem;
+    //background-image: url("/assets/images/venuelist/venuelist.jpg");
+    .venue-location {
+      padding-left: 1rem;
+      color: white;
+      position: absolute;
+      bottom: 2px;
+      font-size: 1.5rem;
+    }
+  }
+
+  .card-container-information {
+    padding-top: 2rem;
+
+    .card-container-information__main {
+      padding-left: 1rem;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+      font-weight: 100;
+      color: $color-primary;
+    }
+
+    .card-container-information__sub {
+      padding-left: 1rem;
+      color: $color-primary;
+      .card-container-information__sub--food {
+        padding-right: 1rem;
+        border-right: 1px solid $color-primary;
+      }
+
+      .card-container-information__sub--price{
+        padding: 0rem 1rem;
+        border-right: 1px solid $color-primary;
+      }
+
+      .card-container-information__sub--room {
+        padding-left: 1rem;
+      }
+    }
+  }
+}

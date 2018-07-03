@@ -1,0 +1,171 @@
+<div class="container my-5 p-md-5">
+  <div>
+    <h4 class="text-center">Client Sign Up</h4>
+  </div>
+  <div *ngIf="clientsignupconfrim" class="modal-body text-center">
+    <h3>An Email has been sent to you to finish your signup</h3>
+
+  </div>
+  <div *ngIf="!clientsignupconfrim" class="modal-body">
+    <form (ngSubmit)="clientsignup(clientsignupform)" #clientsignupform="ngForm">
+      <div class="row">
+        <div class="col">
+          <label for="FN" class="col-form-label">First Name:</label>
+          <input type="text"
+                 id="FN"
+                 name="clientfirstname"
+                 class="form-control"
+                 ngModel
+                 placeholder="First name">
+        </div>
+        <div class="col">
+          <label for="LN" class="col-form-label">Last Name:</label>
+          <input type="text"
+                 id="LN"
+                 name="clientlastname"
+                 class="form-control"
+                 ngModel
+                 placeholder="Last name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="C-inputEmail4" class="col-form-label">Email:</label>
+          <input (change)="checkemail(clientsignupform)"
+                 type="email"
+                 class="form-control"
+                 id="C-inputEmail4"
+                 name="clientemail"
+                 ngModel
+                 placeholder="Email">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="C-inputconfirmEmail4" class="col-form-label">Confirm Email:</label>
+          <input (change)="checkemail(clientsignupform)"
+                 type="email"
+                 class="form-control"
+                 id="C-inputconfirmEmail4"
+                 ngModel
+                 name="clientemailconfrim"
+                 placeholder="Email">
+        </div>
+        <span style="color: red" class="help-block" *ngIf="emailmismatch">Emails do not match</span>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="C-inputPassword4" class="col-form-label">Password:</label>
+          <input (change)="checkpassword(clientsignupform)"
+                 type="password"
+                 class="form-control"
+                 id="C-inputPassword4"
+                 ngModel
+                 name="clientpassword"
+                 placeholder="Password">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="C-inputvalidatePassword4" class="col-form-label">Confirm Password:</label>
+          <input (change)="checkpassword(clientsignupform)"
+                 type="password"
+                 class="form-control"
+                 name="clientconfrimpassword"
+                 ngModel
+                 id="C-inputvalidatePassword4"
+                 placeholder="Password">
+        </div>
+        <span style="color: red" *ngIf="passwordmismatch" class="help-block">Passwords do not match</span>
+      </div>
+
+      <div class="form-group">
+        <label for="C-inputAddress" class="col-form-label">Company Name:</label>
+        <input type="text"
+               class="form-control"
+               id="C-inputAddress"
+               name="clientcompany"
+               ngModel
+               placeholder="S+T">
+      </div>
+      <div class="form-group">
+        <label for="C-inputAddress2" class="col-form-label">Primary phone number:</label>
+        <input type="text"
+               class="form-control"
+               id="C-inputAddress2"
+               name="clientphonenumber"
+               ngModel
+               placeholder="123-456-7890">
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="C-inputCity" class="col-form-label">City:</label>
+          <input type="text"
+                 class="form-control"
+                 name="clientcity"
+                 ngModel
+                 id="C-inputCity">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="C-inputState" class="col-form-label">State:</label>
+          <select id="C-inputState"
+                  class="form-control"
+                  ngModel
+                  name="clientstate">
+            <option value="">Choose</option>
+            <option value="AL">AL</option>
+            <option value="AK">AK</option>
+            <option value="AZ">AZ</option>
+            <option value="AR">AR</option>
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option value="CT">CT</option>
+            <option value="DE">DE</option>
+            <option value="FL">FL</option>
+            <option value="GA">GA</option>
+            <option value="HI">HI</option>
+            <option value="ID">ID</option>
+            <option value="IL">IL</option>
+            <option value="IN">IN</option>
+            <option value="IA">IA</option>
+            <option value="KS">KS</option>
+            <option value="KY">KY</option>
+            <option value="LA">LA</option>
+            <option value="ME">ME</option>
+            <option value="MD">MD</option>
+            <option value="MA">MA</option>
+            <option value="MI">MI</option>
+            <option value="MN">MN</option>
+            <option value="MS">MS</option>
+            <option value="MO">MO</option>
+            <option value="MT">MT</option>
+            <option value="NE">NE</option>
+            <option value="NV">NV</option>
+            <option value="NH">NH</option>
+            <option value="NJ">NJ</option>
+            <option value="NM">NM</option>
+            <option value="NY">NY</option>
+            <option value="NC">NC</option>
+            <option value="ND">ND</option>
+            <option value="OH">OH</option>
+            <option value="OK">OK</option>
+            <option value="OR">OR</option>
+            <option value="PA">PA</option>
+            <option value="RI">RI</option>
+            <option value="SC">SC</option>
+            <option value="SD">SD</option>
+            <option value="TN">TN</option>
+            <option value="TX">TX</option>
+            <option value="UT">UT</option>
+            <option value="VT">VT</option>
+            <option value="VA">VA</option>
+            <option value="WA">WA</option>
+            <option value="WV">WV</option>
+            <option value="WI">WI</option>
+            <option value="WY">WY</option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="!clientsignupconfrim" class="modal-footer">
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</div>

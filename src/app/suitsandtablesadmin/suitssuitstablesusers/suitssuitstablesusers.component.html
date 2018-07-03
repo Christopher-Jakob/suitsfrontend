@@ -1,0 +1,129 @@
+<div id="toprow" class="row">
+  <div class="col-md-3 STautowidth">
+    <h4><strong>Suits + Tables Users</strong></h4>
+  </div>
+  <div class="col-md-3 STautowidth">
+    <p>{{suitsusers.length}} Users</p>
+  </div>
+  <div class="col-md-6 pull-right">
+    <button (click)="createusertoggle()" class="STButton">Create New User</button>
+  </div>
+</div>
+
+<div class="row">
+  <div *ngIf="choicesload" class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<table width="100%">
+  <tr>
+    <th>
+
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Role
+    </th>
+    <th>
+      Permissions
+    </th>
+    <th>
+      Verified
+    </th>
+    <th>
+
+    </th>
+
+  </tr>
+
+  <tr *ngFor="let user of suitsusers; let i=index">
+    <td>
+      <a (click)="navigatetoprofile(i)" style="cursor: pointer">View Profile</a>
+    </td>
+    <td>
+      {{user.name}}
+    </td>
+    <td>
+      {{user.jobtitle}}
+    </td>
+    <td>
+      <p *ngIf="user.issuitsviewer">Viewer</p>
+      <p *ngIf="user.issuitsadministrator">Administrator</p>
+      <p *ngIf="user.issuitssuperuser">Super User</p>
+    </td>
+    <td *ngIf="user.is_active">
+      <p style="color: green">Verified</p>
+    </td>
+    <td *ngIf="!user.is_active">
+      <p style="color: red">Not Verified</p>
+    </td>
+    <td *ngIf="deleteindex === i">
+      <!-- placeholder space to keep line up-->
+    </td>
+    <td *ngIf="deleteindex !== i">
+      <button (click)="deleteconfrimtoggle(i)"  class="btn-danger">Delete</button>
+    </td>
+    <td *ngIf="deleteindex === i">
+      <button (click)="deleteconfrimtoggle(i)" class="STButton">Cancel</button>
+      <button class="btn-danger">Delete</button>
+    </td>
+  </tr>
+</table>
+
+<div *ngIf="showcreateuser" class="col-md-6 createmodal text-center">
+  <h3>Create A Suits + Tables User</h3>
+  <br>
+  <form (ngSubmit)="createsuitsuser()" #createsuitsuserform="ngForm">
+    <label>Email:</label>
+    <input type="email"
+           id="email"
+           name="email"
+           ngModel
+           required>
+    <br>
+    <label>Name:</label>
+    <input type="text"
+           id="name"
+           name="name"
+           ngModel
+           required>
+    <br>
+    <label>Phone:</label>
+    <input type="text"
+           id="phone"
+           name="phone"
+           ngModel>
+    <br>
+    <br>
+    <label>Role:</label>
+    <input type="text"
+           id="role"
+           name="role"
+           ngModel>
+    <br>
+    <br>
+
+    <select id="permission"
+            name="permission"
+            ngModel
+            required>
+      <option value="">Select A Permission</option>
+      <option value="viewer">Viewer</option>
+      <option value="admin">Administrator</option>
+      <option value="superuser">Super User</option>
+    </select>
+    <br>
+    <br>
+    <button (click)="createusertoggle()" class="btn-danger">Cancel</button>
+    <button type="submit" class="STButton">Create User</button>
+    <br>
+    <br>
+    <p style="color: red">{{errormessage}}</p>
+    <br>
+    <br>
+  </form>
+
+</div>

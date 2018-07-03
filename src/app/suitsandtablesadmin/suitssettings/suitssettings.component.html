@@ -1,0 +1,419 @@
+<h2>Suits + Tables Attributes </h2>
+
+<div class="row">
+  <!--city and neighborhood row-->
+  <div class="col-md-5">
+    <!-- state-->
+    <h3>State</h3>
+    <br>
+    <form *ngIf="activestateindex == null" (ngSubmit)="addstate()" #stateform="ngForm">
+      <span *ngIf="!addstateinputcss.valid && addstateinputcss.touched"> Use the two letter Capitalization for states</span>
+      <input type="text" placeholder="Capital two letter abbrev" id="addstateinput" name="addstateinput" ngModel pattern="[A-Z]{2}"
+             #addstateinputcss="ngModel">
+      <button *ngIf="addstateinputcss.valid && addstateinputcss.touched" type="submit">Add State</button>
+    </form>
+    <div>
+      <!--city display wrapper-->
+      <div *ngFor="let s of states; let i=index">
+        <div *ngIf="activestateindex !==i">
+          <a (click)="selectstatecity(i)" class="cityselectlink">{{s.name}}</a>
+          <a (click)="activateeditstate(i)" class="settingslink">Edit</a>
+          <a (click)="activatedeletestate(i)" class="settingslink">Delete</a>
+        </div>
+
+        <div *ngIf="activestateindex === i">
+          <!--edit state wrapper-->
+          <h4>Edit State</h4>
+          <span *ngIf="!editstateinputcss.valid && editstateinputcss.touched" class="text-center">Enter the capital two letter state appreviation</span>
+          <form (ngSubmit)="editstate(i)" #editstateform="ngForm">
+            <input type="text" id="editstateinput" name="editstateinput" [ngModel]="states[i].name" pattern="[A-Z]{2}" #editstateinputcss="ngModel">
+            <button (click)="deactivateeditstate()">Cancel</button>
+            <button *ngIf="editstateinputcss.valid && editstateinputcss.touched" type="submit">Commit Changes</button>
+          </form>
+        </div>
+        <!--edit state wrapper-->
+        <div *ngIf="showdeletestate && activestateindex === i">
+          <!-- city delete-->
+          Are you sure you want to delete {{s.state}}? If this State is being used anywhere Suits + Tables wide, deleting it will break
+          the site.
+          <br>
+          <button (click)="deactivatedeletestate()">Cancel</button>
+          <button (click)="deletestate(i)">Proceed</button>
+          <br>
+          <br>
+        </div>
+        <!-- end state delete-->
+      </div>
+      <!-- end for loop-->
+    </div>
+    <!-- end display wrapper end-->
+  </div>
+  <!--state-->
+
+  <div class="col-md-5">
+    <!--city-->
+    <h3>{{selectedstate}} Cities</h3>
+    <br>
+    <div *ngIf="!statecitiesactive">
+      Select a state to see it's cities
+    </div>
+    <div *ngIf="statecitiesactive">
+      <!--state cities show not show-->
+      <form (ngSubmit)="addcity()" #addcityform="ngForm">
+        <span *ngIf="!addcityinputcss.valid && addcityinputcss.touched"> Each word in a city name must be capitalized with a space between words</span>
+        <input type="text" placeholder="add a city" id="addcityinput" name="addcityinput" ngModel #addcityinputcss="ngModel">
+        <label for="onlinecheckbox">Online</label>
+        <input type="checkbox" id="onlinecheckbox" name="onlinecheckbox" ngModel>
+        <button *ngIf="addcityinputcss.valid && addcityinputcss.touched" type="submit">Add City</button>
+
+      </form>
+
+      <div>
+        <!--city display wrapper-->
+        <div *ngFor="let c of cities; let i=index">
+          <div *ngIf="activecityindex !== i">
+            <a (click)="selectcityneighborhood(i)" class="cityselectlink"> {{c.city}}</a>
+            <label *ngIf="c.online">Online</label>
+            <label *ngIf="!c.online">Offline</label>
+            <a (click)="activateeditcity(i)" class="settingslink">Edit</a>
+            <a (click)="activatedeletecity(i)" class="settingslink">Delete</a>
+          </div>
+
+          <div *ngIf="showeditcity && activecityindex === i">
+            <!--edit city wrapper-->
+            <h4>Edit City</h4>
+            <span class="text-center" *ngIf="!editcityinputcss.valid && editcityinputcss.touched">Each word in a city name must be capitalized with a space between words </span>
+            <br>
+            <form (ngSubmit)="editcity(i)" #editcityform="ngForm">
+              <input type="text" id="editcityinput" name="editcityinput" [ngModel]="cities[i].city" #editcityinputcss="ngModel">
+              <label for="onlinecheckbox">Online</label>
+              <input type="checkbox" id="onlineeditcheckbox" name="onlineeditcheckbox" [ngModel]="cities[i].online">
+              <br>
+
+              <button (click)="deactivateeditcity()">Cancel</button>
+              <button *ngIf="editcityinputcss.valid" type="submit">Commit Changes</button>
+            </form>
+
+          </div>
+          <!-- end edit city wrapper-->
+          <div *ngIf="showdeletecity && activecityindex === i">
+            <!--city delete-->
+
+            Are you sure you want to delete {{c.city}}? If this city is being used anywhere Suits + Tables wide, deleting this city will
+            break the site.
+            <br>
+            <button (click)="deactivatedeletecity()">No</button>
+            <button (click)="deletecity(i)">Yes</button>
+            <br>
+            <br>
+
+
+
+          </div>
+          <!-- end city delete-->
+
+        </div>
+        <!--end for loop-->
+
+
+      </div>
+      <!--city display wrapper end-->
+
+    </div>
+    <!--city-->
+  </div>
+  <!--show not show cities based on states-->
+
+  <div class="col-md-5">
+    <!--neighboorhoods-->
+    <h3>{{selectedcityname}} Neighborhoods</h3>
+    <br>
+    <span *ngIf="!neighborhoodsactivated">Select a city to see it's neighborhoods</span>
+
+    <div *ngIf="neighborhoodsactivated">
+      <form (ngSubmit)="addneighborhood()" #addneighborhoodform="ngForm">
+        <span *ngIf="!addneighborhoodcss.valid && addneighborhoodcss.touched">Each word in a neighborhood name must start with a capital letter with a space between words</span>
+
+        <span *ngIf="neighborhoodaddsucess">{{addedneighborhood}} sucessfully added to database!</span>
+        <br>
+
+        <input type="text" placeholder="add a neighborhood" id="addneighborhoodinput" name="addneighborhoodinput" ngModel #addneighborhoodcss="ngModel">
+        <button type="submit" *ngIf="addneighborhoodcss.valid && addneighborhoodcss.touched">Add Neighborhood</button>
+      </form>
+
+
+      <div *ngFor="let neighborhoods of selectedcityneighborhoods; let i =index">
+        <div>
+          {{neighborhoods.neighborhood}}
+          <a (click)="activateeditneighborhood(i)" class="settingslink">Edit</a>
+          <a (click)="activatedeleteneighborhood(i)" class="settingslink">Delete</a>
+        </div>
+
+        <div *ngIf="showeditneighborhood && activeneighborhoodindex === i">
+          <!-- edit neighborhood-->
+          <form (ngSubmit)="editneighborhood(i)" #editneighborhoodform="ngForm">
+
+            <span *ngIf="!editneighborhoodcss.valid && editneighborhoodcss.touched">Each word in a neighborhood name must start with a capital letter with a space between words</span>
+            <br>
+
+            <label for="editneighborhoodinput">Edit Neighborhood</label>
+            <br>
+            <input type="text" id="editneighborhoodinput" name="editneighborhoodinput" [ngModel]="selectedcityneighborhoods[i].neighborhood"
+                   #editneighborhoodcss="ngModel">
+            <br>
+            <button (click)=" deactivateeditneighborhood()">Cancel</button>
+            <button (click)="editneighborhood()">Commit Changes</button>
+          </form>
+        </div>
+
+        <div *ngIf="showdeleteneighborhood && activeneighborhoodindex === i ">
+          Are you sure you want to delete {{selecteddeleteneighborhood}}? If this neighborhood is used anywhere Suits + Tables wide,
+          you will break the site.
+          <br>
+          <button (click)="deactivatedeleteneighborhood()">Cancel</button>
+          <button (click)="deleteneighborhood(i)">Yes</button>
+          <br>
+        </div>
+      </div>
+    </div>
+    <!--end for loop-->
+  </div>
+  <!-- end neighborhoods-->
+</div>
+<!-- city and neighborhood row-->
+
+<div class="row">
+  <!-- venuetype and cuisines row-->
+  <div class="col-md-5">
+    <h3>Venue Types</h3>
+    <form (ngSubmit)="addvenuetype()" #venuetypeaddform="ngForm">
+      <span *ngIf="!venuetypeaddinputcss.valid && venuetypeaddinputcss.touched">Each word in a venue name must start with a capitial and a space between words.</span>
+      <br>
+      <input type="text" id="addvenuetypeinput" name="addvenuetypeinput" ngModel placeholder="add a venue type" #venuetypeaddinputcss="ngModel">
+      <button *ngIf="venuetypeaddinputcss.valid && venuetypeaddinputcss.touched">Add Venue Types</button>
+    </form>
+
+    <div *ngFor="let types of venuetypes; let i=index">
+
+
+      <div *ngIf="activevenuetypeindex !== i ">
+        {{types.type}}
+        <a (click)="activatevenuetypeedit(i)" class="settingslink">Edit</a>
+        <a (click)="activatevenuetypedelete(i)" class="settingslink">Delete</a>
+      </div>
+
+      <div *ngIf="activevenuetypeedit && activevenuetypeindex === i ">
+        <form (ngSubmit)="editvenuetype(i)" #editvenuetypeform="ngForm">
+          <label for="editvenuetypeinput">Edit Venue Type</label>
+          <br>
+          <input type="text" id="editvenuetypeinput" name="editvenuetypeinput" [ngModel]="venuetypes[i].type" placeholder="Edit Venue Type"
+                 #venuetypeeditinputcss="ngModel">
+          <br>
+          <button (click)="deactivatevenuetypeedit()">Cancel</button>
+          <button type="submit">Commit Changes</button>
+        </form>
+      </div>
+
+      <div *ngIf="activevenuetypedelete && activevenuetypeindex === i">
+        Are you sure you want to delete {{types.type}}? If this venue type is used anywhere Suits + Tables wide, you will break the
+        site.
+        <br>
+        <button (click)="deactivatevenuetypedelete()">Cancel</button>
+        <button (click)="deletevenuetype(i)">Proceed</button>
+        <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <h3>Cuisines</h3>
+
+    <form (ngSubmit)="addcuisine()" #addcuisineform="ngForm">
+      <span *ngIf="!cuisineaddinputcss.valid && cuisineaddinputcss.touched">Each word in a cuisine name must be capitalized with a space between words.</span>
+      <br>
+      <input type="text" placeholder="add a cuisine" id="addcuisineinput" name="addcuisineinput" ngModel #cuisineaddinputcss="ngModel">
+      <button *ngIf="cuisineaddinputcss.valid && cuisineaddinputcss.touched" type="submit">Add Cuisine</button>
+    </form>
+    <!-- this is test to see if tracking is working -->
+    <div *ngFor="let c of cuisines; let i=index">
+      <div *ngIf="activecuisineindex !== i">
+        {{c.name}}
+        <a (click)="activatecuisineedit(i)" class="settingslink">Edit</a>
+        <a (click)="activatecuisinedelete(i)" class="settingslink">Delete</a>
+      </div>
+
+      <div *ngIf="showeditcuisine && activecuisineindex === i ">
+        <span *ngIf="!cuisineeditinputcss.valid && cuisineeditinputcss.touched">Each word in a cuisine must start with a capital letter with a space between words.</span>
+
+        <form (ngSubmit)="editcuisine(i)" #cuisineeditform="ngForm">
+          <label for="editcuisineinput">Edit Cuisine</label>
+          <br>
+          <input type="text" id="editcuisineinput" name="editcuisineinput" [ngModel]="cuisines[i].name" #cuisineeditinputcss="ngModel">
+          <br>
+          <button (click)="deactivateeditcuisine()">Cancel</button>
+          <button *ngIf="cuisineeditinputcss.touched && cuisineeditinputcss.valid" type="submit">Commit Changes</button>
+        </form>
+      </div>
+
+      <div *ngIf="showdeletecuisine && activecuisineindex === i">
+        Are you sure you want to delete {{selecteddeletecuisine}}? If this cuisine is used anywhere Suits + Tables wide, you will
+        break the site.
+        <br>
+        <button (click)="deactivatecuisinedelete()">Cancel</button>
+        <button (click)="deletecuisine(i)">Proceed</button>
+        <br>
+
+      </div>
+
+    </div>
+    <!--end for loop-->
+  </div>
+  <!--end cuisines-->
+
+</div>
+<!-- venuetype and cuisines row -->
+
+<div class="row">
+  <!--menustyles and venueamenities row-->
+  <div class="col-md-5">
+    <!--experiential types-->
+    <h3>Experiential Types</h3>
+    <form (ngSubmit)="addexperientialtype()" #experientialtypeaddform="ngForm">
+      <span *ngIf="!experientialaddtypes.valid && experientialaddtypes.touched">Each word in an experiential type must start with a capital and a space between words.</span>
+      <br>
+      <input type="text" placeholder="add a experiential type" id="experientialtypeaddinput" name="experientialtypeaddinput" ngModel
+             #experientialaddtypes="ngModel">
+      <button type="submit" *ngIf="experientialaddtypes.valid && experientialaddtypes.touched">Add Experiential Type</button>
+    </form>
+
+    <div *ngFor="let t of experientialtypes; let i=index">
+      <div *ngIf="activeexperientialtypeindex !== i">
+        {{t.type}}
+        <a (click)="activateeditexperientialtype(i)" class="settingslink">Edit</a>
+        <a (click)="activatedeleteexperientialtype(i)" class="settingslink">Delete</a>
+      </div>
+
+      <div *ngIf="showeditexperientialtype && activeexperientialtypeindex === i">
+        <form (ngSubmit)="editexperientialtype(i)" #editexperientialtypeform="ngForm">
+          <label>Edit Experiential Type</label>
+          <br>
+          <span *ngIf="!experientialtypeseditcss.valid && experientialtypeseditcss.touched">Each word in an experiential type must start with a captial and a space between words!</span>
+          <br>
+          <input type="text" id="experientialtypeeditinput" name="experientialtypeeditinput" [ngModel]="experientialtypes[i].type"
+                 #experientialtypeseditcss="ngModel">
+          <button (click)="deactivateediteexperientialtype()">Cancel</button>
+          <button type="submit" *ngIf="experientialtypeseditcss.touched && experientialtypeseditcss.valid">Commit Changes</button>
+        </form>
+      </div>
+
+      <div *ngIf="showdeleteexperientialtype && activeexperientialtypeindex === i ">
+        Are you sure you want to delete {{selecteddeleteexperientialtype}}? If this experiential type is used anywhere Suits + Tables
+        wide, you will break the site.
+        <br>
+        <button (click)="deactivatedeleteexperientialtype()">Cancel</button>
+        <button (click)="deleteexperientialtype(i)">Proceed</button>
+        <br>
+      </div>
+    </div>
+    <!--end for loop-->
+
+  </div>
+  <!-- experiential types-->
+
+  <div class="col-md-5">
+    <!--experiential types-->
+    <h3>Event Purpose</h3>
+    <form (ngSubmit)="addEventPurpose()" #eventpurposeaddform="ngForm">
+      <span *ngIf="!eventpurposeaddtypes.valid && eventpurposeaddtypes.touched">Each word in an experiential type must start with a capital and a space between words.</span>
+      <br>
+      <input type="text" placeholder="add a event purpose" id="eventpurposeaddinput" name="eventpurposeaddinput" ngModel #eventpurposeaddtypes="ngModel">
+      <button type="submit" *ngIf="eventpurposeaddtypes.valid && eventpurposeaddtypes.touched">Add Event Purpose</button>
+    </form>
+
+    <div *ngFor="let type of eventpurpose; let i=index">
+      <div *ngIf="activatedeventpurposeindex !== i">
+        {{type.purpose}}
+        <a (click)="activateediteventpurpose(i)" class="settingslink">Edit</a>
+        <a (click)="activatedeleteeventpurpose(i)" class="settingslink">Delete</a>
+      </div>
+
+      <div *ngIf="showediteventpurpose && activatedeventpurposeindex === i">
+        <form (ngSubmit)="editeventpurpose(i)" #editeventpurposeform="ngForm">
+          <label>Edit Event Purpose</label>
+          <br>
+          <span *ngIf="!eventpurposeeditcss.valid && eventpurposeeditcss.touched">Each word in an experiential type must start with a captial and a space between words!</span>
+          <br>
+          <input type="text" id="eventpurposeeditinput" name="eventpurposeeditinput" [ngModel]="eventpurpose[i].purpose" #eventpurposeeditcss="ngModel">
+          <button (click)="cancelediteventpurpose()">Cancel</button>
+          <button type="submit" *ngIf="eventpurposeeditcss.touched && eventpurposeeditcss.valid">Commit Changes</button>
+        </form>
+      </div>
+
+      <div *ngIf="showdeleteeventpurpose && activatedeventpurposeindex === i ">
+        Are you sure you want to delete {{selecteddeleteeventpurpose}}? If this event purpose is used anywhere Suits + Tables wide,
+        you will break the site.
+        <br>
+        <button (click)="deactivatedeleteeventpurpose()">Cancel</button>
+        <button (click)="deleteeventpurpose(i)">Proceed</button>
+        <br>
+      </div>
+    </div>
+    <!--end for loop-->
+
+  </div>
+  <!-- experiential types-->
+
+</div>
+<!-- experiential types and setup styles row-->
+
+<div class="row">
+  <div class="col-md-10">
+    <h3>Venue Application Decline Reasons</h3>
+    <form (ngSubmit)="addvadr()" #addvadrform="ngForm">
+      <span *ngIf="addsucessvadr">{{addedvadr}} sucessfully added to the database
+        <span (click)="deactivateaddvadrsucess()" style="cursor: pointer">&times;</span>
+      </span>
+      <br>
+      <input type="text" id="addvadr" name="addvadr" placeholder="add a venue application decline reason" ngModel>
+      <button type="submit">Add Venue App Decline Reason</button>
+    </form>
+    <br>
+    <div *ngFor="let vadr of venueapplicationdeclinereasons; let i=index;">
+
+      <div *ngIf="activevadrindex !== i">
+        {{vadr.reason}}
+        <a (click)="activateshoweditvadr(i)" class="settingslink">Edit</a>
+        <a (click)="activateshowdeletevadr(i)" class="settingslink">Delete</a>
+      </div>
+
+      <div *ngIf="showeditvadr && activevadrindex === i">
+        <h4>Edit Venue Decline Application Reason</h4>
+        <br>
+        <form (ngSubmit)="editvadr(i)" #editvadrform="ngForm">
+          <input type="text" id="editvadr" name="editvadr" [ngModel]="venueapplicationdeclinereasons[i].reason">
+          <br>
+          <button (click)="deactivateshoweditvadr()">Cancel</button>
+          <button type="submit">Commit Changes</button>
+        </form>
+      </div>
+
+      <div *ngIf="showdeletevadr && activevadrindex === i">
+        Are you sure you want to delete Venue Application Decline Reason:
+        <strong>{{venueapplicationdeclinereasons[i].reason}}</strong>? If this venue application decline reason is used anywhere
+        Suits + Tables wide, deletion will cause you to break the site.
+        <br>
+        <br>
+        <button (click)="deactivateshowdeletevadr()">Cancel</button>
+        <button (click)="deletevadr(i)">Proceed</button>
+        <br>
+      </div>
+
+
+    </div>
+    <!-- for loop-->
+
+
+  </div>
+
+</div>
+<!-- venue application decline reason and empty row-->

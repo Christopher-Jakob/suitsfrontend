@@ -1,0 +1,350 @@
+<div class="container-fluid">
+  <div class="col-md-12 profile">
+    <div id="tophalfrow" class="row row-eq-height"> <!--tophalf-->
+
+      <div class="col-sm-3"> <!-- leftdiv logo div-->
+        <div class="row"> <!-- logo upload row-->
+          <div *ngIf="!showgroupphotoeditform" class="col-md-4">
+            <strong>Logo</strong>
+          </div>
+          <div class="col-md-6 text-center">
+            <a *ngIf="!showgroupphotoeditform && venueobject.venuelogo != null" (click)="showgroupeditform()" id="logoupload" style="cursor: pointer">Edit</a>
+          </div>
+          <div *ngIf="showgroupphotoeditform"> <!-- group add form-->
+            <br>
+            <form (change)="addgroupphoto($event)">
+              <label *ngIf="venueobject.venuelogo != null" for="groupphotoinput">Edit Group Logo</label>
+              <label *ngIf="venueobject.venuelogo == null" for="groupphotoinput">Add Group Logo</label>
+              <div *ngIf="choicesload" class="col-12 text-center mt-5">
+                <div class="spinner-container">
+                  <div class="spinner"></div>
+                </div>
+              </div>
+              <input *ngIf="!choicesload" type="file"
+                     id="groupphotoinput"
+                     name="groupphotoinput"
+                     accept=".png, .jpg, .jpeg"
+                     ngModel>
+              <br>
+              <button (click)="unshowgroupphotoeditform()">Cancel</button>
+            </form>
+          </div> <!-- group add form-->
+
+          <div *ngIf="venueobject.venuelogo == null && !showgroupphotoeditform">
+            <br>
+            <br>
+            <button (click)="showgroupeditform()">Add Group Logo</button>
+          </div>
+          <div *ngIf="venueobject.venuelogo != null && !showgroupphotoeditform"  class="groupimagecontainer imagefullheight img-responsive"
+               [ngStyle]="{'background-image': 'url(' + venueobject.venuelogo +')'}">
+
+          </div> <!-- groupimagecontainer-->
+
+          <div *ngIf="venueobject.venuelogo == null" class="col-md-12 logotext">
+            Upload your venue or group logo here.
+          </div>
+
+        </div> <!-- logo upload row-->
+
+
+      </div> <!-- leftdiv logo div-->
+
+      <div class="col-6 STnopadding"> <!--middlediv -->
+        <div *ngIf="!suitspermission">
+          <h4><strong>Venue Address</strong></h4>
+          <div class="row">
+            <div class="col-12">
+              <div class="text-left">
+                <h5>{{venueobject.streetaddress1}}</h5>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-left">
+                <h5>{{venueobject.streetaddress2}}</h5>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="text-left">
+                <h5>{{venueobject.city}}</h5>
+              </div>
+            </div>
+            <div class="col-1">
+              <div class="text-left">
+                <h5>{{venueobject.state}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="suitspermission">
+          <div class="restaurantprofiletext STnopadding">
+            <h4><strong>Venue Profile <span *ngIf="profileupdatesucess" style="color: green"> Updated Sucessfully</span></strong></h4>
+          </div>
+          <div class="col-12 formdiv">
+            <form (click)="activatevenueprofilesubmitbutton()"
+                  (ngSubmit)="editvenueprofile()"
+                  #venueprofileform ="ngForm"
+                  id="resturantprofile">
+              <input type="text"
+                     id="streetaddress1input"
+                     name="streetaddress1input"
+                     placeholder="Street address"
+                     required
+                     [ngModel]="venueobject.streetaddress1">
+              <br>
+              <input type="text"
+                     id="streetaddress2input"
+                     name="streetaddress2input"
+                     placeholder="Street address 2 (optional)"
+                     [ngModel]="venueobject.streetaddress2">
+              <br>
+              <input type="text"
+                     id="phonenumberinput"
+                     name="phonenumberinput"
+                     placeholder="Phone Number"
+                     required
+                     pattern="[0-9]{10}"
+                     [ngModel]="venueobject.phonenumber"
+                     #phonenumberinputcss="ngModel">
+              <span class="help-block" *ngIf="!phonenumberinputcss.valid && phonenumberinputcss.touched">Phone numbers must consist of 10 numbers. Numbers only</span>
+
+              <br>
+              <input type="text"
+                     id="cityinput"
+                     name="cityinput"
+                     placeholder="City"
+                     required
+                     pattern="([A-Z][a-z]+(\s[A-Z][a-z]+)*)"
+                     [ngModel]="venueobject.city"
+                     #cityinputcss="ngModel">
+              <span class="help-block" *ngIf="!cityinputcss.valid && cityinputcss.touched">Each word in a city name must start with a capital with a space between words, and must only contain letters. </span>
+              <br>
+              <input class="halflength"
+                     type="text"
+                     placeholder="State"
+                     id="stateinput"
+                     name="stateinput"
+                     pattern="[A-Z]{2}"
+                     required
+                     [ngModel]="venueobject.state"
+                     #stateinputcss="ngModel">
+              <div *ngIf="stateinputcss.touched && !stateinputcss.valid">A state name must the 2 capital letter abbreviation</div>
+
+              <input id="zipinput"
+                     name="zipinput"
+                     class="halflength"
+                     type="text"
+                     required
+                     placeholder="Zip"
+                     pattern="[0-9]{5}"
+                     [ngModel]="venueobject.zipcode"
+                     #zipinputcss="ngModel">
+              <span *ngIf="zipinputcss.touched && !zipinputcss.valid">A zipcode must only contain 5 numbers</span>
+              <br>
+              <div class="row">
+                <div class="col-6">
+                  <label>Search City</label>
+                  <br>
+                  <select id="selectcity"
+                          name="selectcity"
+                          (change)="changesearchcity()"
+                          [ngModel]="venueobject.searchcity">
+                    <option *ngFor="let city of searchcitylist" [value]="city.pk">{{city.city}}</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <label>Search Neighborhood</label>
+                  <br>
+                  <select id="searchneighborhood"
+                          name="searchneighborhood"
+                          [ngModel]="venueobject.searchneighborhood">
+                    <option *ngFor="let n of searchneighborhoodlist" [value]="n.pk">{{n.neighborhood}}</option>
+                  </select>
+                </div>
+              </div>
+              <button *ngIf="showvenueprofilesubmitbutton && venueprofileform.valid  " type="submit">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </div> <!--middlediv-->
+
+      <div class="col-md-4"> <!--rightdiv-->
+        <!-- just a space holder -->
+      </div> <!--rightdiv-->
+
+    </div> <!--tophalf-->
+    <div class="row row-eq-height users"> <!-- users-->
+      <div class="col-md-3">
+        <h4><strong>Users</strong></h4>
+        <br>
+      </div>
+      <div class="col-8">
+        <strong>Add Venue User</strong>
+        <br>
+        <button (click)="addexistinguser()" *ngIf="existingbutton" class="STButton">Add Existing User</button>
+        <button (click)="createnewuser()" *ngIf="newbutton" class="STButton">Create New User</button>
+        <br>
+        <form (ngSubmit)="addnewuser()" #addnewuserform="ngForm" *ngIf="showform">
+          <div>
+            <p style="color: red">All fields with a * required</p>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="newuseremailinput">Email: </label>
+              <br>
+              <input type="email"
+                     id="newuseremailinput"
+                     required
+                     name="newuseremailinput"
+                     ngModel
+                     #newuseremailcss="ngModel">
+              <span class="STredstar"> &nbsp; *</span>
+              <br>
+              <span *ngIf="newuseremailcss.touched && !newuseremailcss.valid" class="help-block">Must be a valid email addresss</span>
+              <br>
+            </div>
+            <div class="col-6" *ngIf="newusercreate">
+              <label for="newusernameinput">Name: </label>
+              <br>
+              <input type="text"
+                     required
+                     id="newusernameinput"
+                     name="newusernameinput"
+                     ngModel
+                     #newusernameinputcss="ngModel">
+              <span class="STredstar"> &nbsp; *</span>
+              <br>
+              <span *ngIf="!newusernameinputcss.valid && newusernameinputcss.touched">Each word must start with a capital letter and have a space between words</span>
+              <br>
+            </div>
+            <div class="col-6" *ngIf="newusercreate">
+              <label for=newuserjobtitle>Job Title: </label>
+              <br>
+              <input type="text"
+                     required
+                     id="newuserjobtitle"
+                     name="newuserjobtitle"
+                     ngModel
+                     #newuserjobtitlecss="ngModel">
+              <span class="STredstar"> &nbsp; *</span>
+              <br>
+              <span *ngIf="! newuserjobtitlecss.valid && newuserjobtitlecss.touched">A job title is required</span>
+              <br>
+            </div>
+            <div class="col-6" *ngIf="newusercreate">
+              <label for="newuserphoneinput">Phone: </label>
+              <br>
+              <input type="text"
+                     pattern="[0-9]{10}"
+                     id="newuserphoneinput"
+                     name="newuserphoneinput"
+                     ngModel
+                     #newuserphoneinputcss="ngModel">
+              <br>
+              <span *ngIf="newuserphoneinputcss.touched && !newuserphoneinputcss.valid">A phone number must consist of 10 digits with no spaces or dashes</span>
+              <br>
+            </div>
+            <div class="col-6">
+              <label for="newuserroleselect">Role: </label>
+              <br>
+              <select id="newuserroleselect"
+                      required
+                      name="newuserroleselect"
+                      ngModel
+                      #newuserroleselectcss="ngModel">
+                <option selected value="">Select Role</option>
+                <option value="viewer">Viewer</option>
+                <option value="event planner">Event Planner</option>
+                <option value="administrator">Administrator</option>
+              </select>
+              <span class="STredstar"> &nbsp; *</span>
+              <br>
+              <span *ngIf="!newuserroleselectcss.valid && newuserroleselectcss.touched" style="color: red;">You must select a role</span>
+              <br>
+            </div>
+            <div class="col-6">
+              <br>
+              <label>Receive RFP Emails &nbsp;</label>
+              <input type="checkbox"
+                     id="rfpreceiveemail"
+                     name="rfpreceiveemail"
+                     ngModel>
+              <br>
+            </div>
+          </div> <!-- row end -->
+          <br>
+          <button (click)="cancelbutton()" *ngIf="showcancel" class="btn-danger">Cancel</button>
+          <button [disabled]="!addnewuserform.valid" type="submit"><span *ngIf="newusercreate">Create User</span><span *ngIf="!newusercreate">Add User</span></button>
+
+        </form>
+      </div>
+    </div> <!--users-->
+    <br>
+    <div class="row" id="tablerow"> <!--tablerow-->
+      <table width="100%">
+        <tr>
+
+          <th>
+            <button style="font-weight: normal" (click)="commitdeleteuser()" *ngIf="deleteuserpklist.length > 0">Delete {{deleteuserpklist.length}} from Venue<span *ngIf="deleteuserpklist.length > 1">s</span></button>
+            <p *ngIf="deleteuserpklist.length < 1">Delete <br>from Venue</p>
+          </th>
+          <th>
+
+          </th>
+          <th>
+            Receive<br>
+            RFP Emails
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Account Role
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Phone
+          </th>
+        </tr>
+
+        <tr *ngFor="let user of venueusers; let i =index">
+          <td>
+            <input (change)="deleteUser(user.id)" type="checkbox"
+                   id="deletecheckbox">
+          </td>
+          <td>
+            <div class="col-md-1 userphoto" [ngStyle]="{'background-image': 'url(' + user.userphoto + ')'}">
+
+            </div>
+          </td>
+          <td>
+            <input (click)=changerfpemail(i)
+                   type="checkbox"
+                   id="changerfpemail"
+                   name="changerfpemail"
+                   [ngModel]="user.venuepermissions_set.receiverfp">
+          </td>
+          <td>
+            {{user.name}}
+          </td>
+          <td>
+            <span *ngIf="user.venuepermissions_set.isvenueadministrator">Administrator</span>
+            <span *ngIf="user.venuepermissions_set.isvenueeventplanner">Event Planner</span>
+            <span *ngIf="user.venuepermissions_set.isvenueviewer">Viewer</span>
+          </td>
+          <td>
+            {{user.email}}
+          </td>
+          <td>
+            {{user.phone}}
+          </td>
+        </tr>
+      </table>
+    </div> <!--tablerow-->
+
+
+
+  </div> <!-- profile-->
+
+</div> <!--root container-->

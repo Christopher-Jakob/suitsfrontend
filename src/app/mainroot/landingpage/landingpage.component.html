@@ -1,0 +1,70 @@
+<div id="first-pane" class="container-fluid topimage d-flex align-items-stretch justify-content-center">
+  <div class="container-fluid d-flex flex-column justify-content-center">
+    <div class="row flex-column justify-content-center align-items-center py-5 p-xs-5 mb-xs-5">
+      <div class=" col-lg-6 text-center">
+        <div class="d-flex flex-column justify-content-center align-items-center pushshim">
+          <h1 class="main-text-line col-lg-7 text-center text-white mb-5 font-weight-bold">Browse and book the best venues in the city</h1>
+          <h4 class="sub-text-line col-lg-10 text-center text-white mb-5">Time is precious. Don't waste any more of yours searching for the right venue for your corporate event when it's only a few clicks away.</h4>
+          <form #selectform="ngForm">
+            <select
+              id="cityselect"
+              class="mt-3 text-white"
+              autofocus
+              (change)="browse()"
+              name="cityselect"
+              ng-init="city[0]"
+              ngModel>
+              <option value="">Select Your City</option>
+              <option *ngFor="let city of cities"
+                      [value]="city.city">{{city.city}}</option>>Select Your City
+            </select>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!--root container-->
+
+<div id="second-pane" class="container-fluid d-flex align-items-stretch">
+  <div class="row justify-content-around" id="leading-pane">
+    <div id="step1" class="col-lg-4 pr-0 d-flex flex-column justify-content-center">
+      <div class=" mb-5 text-center">
+        <i class="fa fa-map-marker fa-5x"></i>
+      </div>
+      <h3 class="text-center step-header">Browse Venues</h3>
+      <p class="text-center step-sub">Filter by unique event needs to find the perfect host</p>
+    </div>
+
+    <div class="col-lg-4 text-center p-0 clipshadow">
+      <div class="d-flex flex-column justify-content-center" id="step2" style="height: 100%">
+        <div class=" mb-5 text-center">
+          <i class="fa fa-pencil-square fa-5x"></i>
+        </div>
+        <h3 class="text-center step-header">Send RFPs</h3>
+        <p class="text-center step-sub">Create + send multiple RFPs and avoid endless phone tag or browsing</p>
+      </div>
+    </div>
+
+    <div id="step3" class="col-lg-4 pl-0 d-flex flex-column justify-content-center">
+      <div class=" mb-5 text-center">
+        <i class="fa fa-first-order fa-5x"></i>
+      </div>
+      <h3 class="text-center step-header">Communicate + Book!</h3>
+      <p class="text-center step-sub">No middleman. Speak directly with your host(s) + get your event booked!</p>
+    </div>
+  </div>
+</div>
+<div id="user-signup-pane">
+  <div class="signup-container">
+    <div class="col-12 title text-white">Join Now + Stay in the Loop!</div>
+    <div class="col-12 sub-info text-white">Not ready to book your first event? Sign up now and we'll keep you up to date on new city launches or feature releases to help streamline your event needs. Still need more information, check out our "How It Works" page <a routerLink="/how-it-works" style="color: #00b3ee; text-decoration: underline;">here</a>.</div>
+    <div class="col-12 btn-container d-flex justify-content-center"><a href="#" data-toggle="modal" data-target="#Client-SignUp" class="button btn-gray text-white">Join Now</a></div>
+  </div>
+</div>
+<div id="venu-signup-pane">
+  <div class="signup-container">
+    <div class="col-12 title">Are you a Venue?</div>
+    <div class="col-12 sub-info">Looking to partner with Suits + Tables? Complete our simple, sign up form and a representative from Suits + Tables will reach out to you to discuss listing your venue on the platform. If you have additional questions, please check our our partner details <a routerLink="/partner" class="link-style" style="color: #00b3ee; text-decoration: underline;">click here</a></div>
+    <div class="col-12 btn-container d-flex justify-content-center"><a href="#" data-toggle="modal" data-target="#Venue-SignUp" class="button">Sign Up</a></div>
+  </div>
+</div>

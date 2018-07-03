@@ -1,0 +1,53 @@
+<div id="toprow" class="row">
+  <div class="col-md-3 STautowidth">
+    <h4><strong>Venue Users</strong></h4>
+  </div>
+
+  <div class="col-md-3 STautowidth">
+    <p>{{userobjects.length}} users</p>
+  </div>
+</div>
+
+<div *ngIf="choicesload" class="row">
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<table width="100%">
+  <tr class="text-center">
+    <th>
+      Name
+    </th>
+    <th>
+      Authorized Venues
+    </th>
+    <th>
+      Email Address
+    </th>
+    <th>
+      Phone Number
+    </th>
+  </tr>
+
+  <tr *ngFor="let object of userobjects; let i =index">
+    <td>
+      <a style="cursor: pointer" (click)="navigatetouser(i)">{{object.name}}</a>
+    </td>
+    <td>
+      <div class="authorizedvenueslength text-center row">
+        <p class="venuecontainer" *ngFor="let venue of object.venuepermissions_set; let j =index"> &nbsp;
+          <span class="venueroute" (click)="navtovenueadmin(i, j)"
+                [ngStyle]="{'color' : venue.signupvaildatestring === null ? 'green': 'red' }">{{venue.venue.name}}</span> | <span *ngIf="venue.isvenueadministrator">Admin</span>
+          <span *ngIf="venue.isvenueeventplanner">Event Planner</span>
+          <span *ngIf="venue.isvenueviewer">Viewer</span> &nbsp;</p>
+      </div>
+    </td>
+    <td>
+      {{object.email}}
+    </td>
+    <td>
+      {{object.phone}}
+    </td>
+  </tr>
+</table>

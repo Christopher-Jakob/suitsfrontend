@@ -1,0 +1,65 @@
+<div id="toprow" class="row row-eq-height">
+  <div class="col-md-3 STautowidth">
+    <h4>
+      <strong>Declined Venues</strong>
+    </h4>
+  </div>
+  <div class="col-md-3 STautowidth">
+    <p>{{declinedvenues.length}} venues declined</p>
+  </div>
+  <div class="col-md-6 STautowidth STBlue">
+    Venues are automatically deleted six months after they where declined
+  </div>
+</div>
+
+<div *ngIf="choicesload" class="row mt-5">
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<table width="100%">
+  <tr>
+    <th>
+      Venue Name
+    </th>
+    <th>
+      Reason for Decline
+    </th>
+    <th>
+      Date of Decline
+    </th>
+    <th>
+
+    </th>
+    <th>
+
+    </th>
+  </tr>
+
+  <tr *ngFor="let venue of declinedvenues; let i=index">
+    <td>
+      {{venue.name}}
+    </td>
+    <td>
+      {{venue.declinereason}}
+    </td>
+    <td>
+      {{venue.declineddatestring}}
+    </td>
+    <td>
+      <a style="cursor: pointer" class="STBlue" (click)="navigatetodetail(venue.id)">Detail</a>
+    </td>
+    <td>
+      <div *ngIf="activedeleteindex !== i">
+        <button (click)="activatedelete(i)" class="btn-danger">Delete</button>
+      </div>
+
+      <div *ngIf="activedeleteindex === i">
+        Are you sure you want to delete this declined application?
+        <button (click)="deactivatedelete()" class="STBlue">Cancel</button>
+        <button (click)="deletedeclinedvenue(i)" class="btn-danger">Delete</button>
+      </div>
+    </td>
+  </tr>
+</table>

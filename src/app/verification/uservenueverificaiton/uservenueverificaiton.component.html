@@ -1,0 +1,42 @@
+<div class="col-md-12 text-center">
+  <h2>User Verification</h2>
+  <div *ngIf="!notfound">
+    <div *ngIf="!validateonly" class="col-md-5 col-md-offset-3 text-center">
+      <div *ngIf="!validated">
+        <h4>Set Your Password</h4>
+        <form (ngSubmit)="updatepassword()" #passwordform="ngForm">
+          <input (click)="resetpasswordmismatch()"
+                 type="password"
+                 id="password1"
+                 name="password1"
+                 ngModel
+                 placeholder="Enter a password">
+          <br>
+          <input (click)="resetpasswordmismatch()"
+                 type="password"
+                 id="password2"
+                 name="password2"
+                 ngModel
+                 placeholder="Enter password again">
+          <br>
+          <span  *ngIf="passwordmismatch">Your passwords do not match</span>
+          <button class="STButton" type="submit">Submit</button>
+        </form>
+      </div>
+      <h2 *ngIf="validated">Your password has been set!</h2>
+    </div>
+    <div *ngIf="validateonly" class="col-md-5 col-md-offset-3 text-center">
+      <h2 *ngIf="!validated">Validating...</h2>
+      <h2 *ngIf="validated">Your Account Has been validated!</h2>
+    </div>
+    <div *ngIf="validated">
+      <div class="col-md-12">
+        <button class="STButton" (click)="navhomepage()">Navigate To Home Page</button>
+      </div>
+
+    </div>
+  </div>
+  <div *ngIf="notfound">
+    <h3>This Verification Link Has Expired</h3>
+  </div>
+</div>

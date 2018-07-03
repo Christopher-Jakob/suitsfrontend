@@ -1,0 +1,22 @@
+.borderdiv{
+  border: solid 2px gray;
+}
+
+.cityselectlink{
+  color: black;
+  text-decoration: underline;
+}
+.settingslink{
+  color: #00b3ee;
+  text-decoration: underline;
+}
+
+.cityselectlink, .settingslink{
+  display: inline-block;
+  cursor: pointer;
+
+}
+
+form{
+  margin-bottom: 15px;
+}

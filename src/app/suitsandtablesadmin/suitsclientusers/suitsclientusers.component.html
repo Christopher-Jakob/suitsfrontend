@@ -1,0 +1,63 @@
+<div id="toprow" class="row row-eq-height">
+  <div class="col-md-3 STautowidth">
+    <h4>
+      <strong>Client Users</strong>
+    </h4>
+  </div>
+
+  <div class="col-md-3  STautowidth">
+    <p> {{clientobjects.length}} Users</p>
+  </div>
+
+</div>
+
+<div *ngIf="choicesload" class="row mt-5">
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<table width="100%">
+  <tr>
+    <th>
+      Client ID
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Company Name
+    </th>
+    <th>
+      Job Title
+    </th>
+    <th>
+      Email Address
+    </th>
+    <th>
+      Phone Number
+    </th>
+
+  </tr>
+  <tr *ngFor="let client of clientobjects; let i =index">
+    <td>
+      {{client.pk}}
+    </td>
+    <td>
+      <a style="cursor: pointer" (click)="navigatetoclientuser(i)">{{client.name}}</a>
+    </td>
+    <td>
+      {{client.companyname}}
+    </td>
+    <td>
+      {{client.jobtitle}}
+    </td>
+    <td>
+      {{client.email}}
+    </td>
+    <td>
+      {{client.phone}}
+    </td>
+  </tr>
+
+</table>

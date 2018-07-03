@@ -1,0 +1,29 @@
+tr{
+  height: 40px;
+}
+
+.authorizedvenueslength{
+  width: 70%;
+}
+.venuecontainer{
+  width: auto;
+  display: inline-block;
+}
+
+tr:nth-child(even){
+  background-color: lightgray;
+}
+
+a{
+  text-decoration: underline;
+}
+
+a{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.venueroute{
+  cursor: pointer;
+  text-decoration: underline;
+}

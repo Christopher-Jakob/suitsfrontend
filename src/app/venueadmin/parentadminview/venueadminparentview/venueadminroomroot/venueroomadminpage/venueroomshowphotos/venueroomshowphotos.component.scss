@@ -1,0 +1,20 @@
+.roomimage{
+  height: 200px;
+  background-size: cover;
+}
+
+.box {
+  border: 1px solid black;
+  padding: 10px 10px 10px 10px;
+  display: inline-block;
+
+  &.dragging {
+    background: coral;
+  }
+
+  &.sortable.dragging {
+    background: lightgray;
+    border: 1px dashed black;
+    color: transparent;
+  }
+}

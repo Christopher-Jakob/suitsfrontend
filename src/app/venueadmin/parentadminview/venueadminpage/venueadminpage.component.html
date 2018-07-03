@@ -1,0 +1,192 @@
+<div class="container">
+  <div class="row">
+    <div class='col-2 float-right'>
+      <a (click)="showaddvenue()" id="addvenue"><h5>+Add Venue</h5></a>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div *ngFor="let venue of venues; let i=index" class="col-4 text-center"> <!--venue container-->
+      <a style="cursor: pointer" (click)="navipush(i)">
+        <div class="STnopadding">
+          <h4>{{venue.venue.name}}</h4>
+          <div *ngIf="venue.venue.venueimage_set.length > 0" class="imagefullheight img-responsive imgcontainer"
+               [ngStyle]="{'background-image': 'url(' + venue.venue.venueimage_set[0].imageurl + ')'}">
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-auto">
+            <h5>Status:</h5>
+          </div>
+          <div class="col-auto">
+            <h5 *ngIf="venue.venue.active" style="font-style: italic; color: green">Public</h5>
+            <h5 *ngIf="!venue.venue.active" style="font-style: italic; color:red"><strong>Hidden</strong></h5>
+          </div>
+        </div>
+      </a>
+    </div> <!--venue contatiner-->
+
+    <div *ngIf="addvenueshow" class="col-md-6 venuemodal text-center">
+      <div *ngIf="!addrequestsucess">
+        <h4>New Venue Application</h4>
+        <form (ngSubmit)="addvenue()" #addvenueform="ngForm">
+          <div>
+            <label>Venue Name</label>
+            <input type="text"
+                   id="venuenameinput"
+                   name="venuenameinput"
+                   ngModel>
+          </div>
+          <div>
+            <label>Street Address</label>
+            <input type="text"
+                   id="streetaddress1input"
+                   name="streetaddress1input"
+                   ngModel>
+          </div>
+          <div>
+            <label>Street Address</label>
+            <input type="text"
+                   id="streetaddress2input"
+                   name="streetaddress2input"
+                   ngModel>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>City</label>
+              <input type="text"
+                     id="cityinput"
+                     name="cityinput"
+                     ngModel>
+            </div>
+            <div class="col-md-6">
+              <label>State</label>
+              <input type="text"
+                     id="stateinput"
+                     name="stateinput"
+                     ngModel>
+            </div>
+          </div>
+
+          <div>
+            <label>Zip Code</label>
+            <input type="text"
+                   id="zipcodeinput"
+                   name="zipcodeinput"
+                   ngModel>
+          </div>
+          <div>
+            <label>Phone Number</label>
+            <input type="text"
+                   id="phonenumberinput"
+                   name="phonenumberinput"
+                   ngModel>
+          </div>
+          <div>
+            <label>Contact Name</label>
+            <input type="text"
+                   id="contactnameinput"
+                   name="contactnameinput"
+                   ngModel>
+          </div>
+          <div>
+            <label>Job Title</label>
+            <input type="text"
+                   id="jobtitleinput"
+                   name="jobtitleinput"
+                   ngModel>
+          </div>
+          <div>
+            <label>Contact Email</label>
+            <input type="email"
+                   id="emailinput"
+                   name="emailinput"
+                   ngModel>
+          </div>
+          <div class="row text-center">
+            <strong>Is this an Experiential Venue or Eatery?</strong>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-6">
+              <label>Experiential Venue</label>
+              <br>
+              <input (change)="experientialorcuisinechoose()"
+                     type="radio"
+                     id="experientialtyperadio"
+                     name="venuetype"
+                     value="experiential"
+                     ngModel>
+            </div>
+            <div class="col-md-6">
+              <label>Eatery</label>
+              <br>
+              <input (change)="experientialorcuisinechoose()"
+                     type="radio"
+                     id="eaterytyperadio"
+                     name="venuetype"
+                     value="eatery"
+                     ngModel>
+            </div>
+            <div *ngIf="showexperiential" class="row">
+              <label>Select Experiential Type</label>
+              <br>
+              <select id="experientialtypeselect"
+                      name="experientialtypeselect"
+                      ngModel>
+                <option value="">It goes here</option>
+              </select>
+            </div>
+            <div *ngIf="showcuisine" class="row">
+              <div class="col-md-12">
+                <strong>Select At Least One Cuisine</strong>
+              </div>
+              <div class="col-md-6">
+                <label>Cuisine</label>
+                <br>
+                <select (click)="cuisinechange()"
+                        id="cuisine1select"
+                        name="cuisine1select"
+                        ngModel>
+                  <option value="">Popcorn</option>
+                  <option value="2">Its working</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label>Cuisine</label>
+                <br>
+                <div>
+                  <h5 *ngIf="!showsecondcuisine">Select a primary cuisine first.</h5>
+                </div>
+                <div *ngIf="showsecondcuisine">
+                  <select id="cuisine2select"
+                          name="cuisine2select"
+                          ngModel>
+                    <option value="">Popcorn</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <br>
+              <div>
+                <button (click)="closeaddvenue()" class="btn-danger">Cancel</button>
+                <button type="submit"  class="STButton">Add Venue</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="addrequestsucess" class="col-md-12 text-center">
+        <h4>Your venue add request has been received.<br>
+          We will be in contact shortly</h4>
+        <button (click)="closeaddvenue()" class="STButton">Got It</button>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>

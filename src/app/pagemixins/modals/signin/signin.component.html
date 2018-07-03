@@ -1,0 +1,62 @@
+<div class="root">
+  <div *ngIf="!forgetpassword">
+    <h3> Sign In</h3>
+    <form (ngSubmit)="signin()" #signinform="ngForm">
+      <div class="form-group">
+        <label for="email"><strong>Email:</strong></label>
+        <br>
+        <input (click)="resetsigninerror()"
+               type="email"
+               class="form-control"
+               id="email"
+               required
+               placeholder="Enter email"
+               name="email"
+               ngModel>
+      </div>
+      <div class="form-group">
+        <label for="pwd"><strong>Password:</strong></label>
+        <br>
+        <input (click)="resetsigninerror()"
+               type="password"
+               class="form-control"
+               id="pwd"
+               required
+               placeholder="Enter password"
+               name="pwd"
+               ngModel>
+      </div>
+      <div class="form-group">
+        <input type="checkbox"
+               name="remember"
+               id="remember"
+               ngModel> Remember me on this computer
+        <br>
+        <a (click)="toggleforgetpassword()" style="cursor: pointer">Forgot Password</a>
+      </div>
+      <button [disabled]="!signinform.valid" type=submit class="STBlue STButton">Sign In</button>
+      <br>
+      <span *ngIf="signinerror" style="color: red">Incorrect email or password, please try again.</span>
+    </form>
+  </div>
+
+  <div *ngIf="forgetpassword && !passwordresetconfrim" class="text-center">
+    <h3>Forget Your Password?</h3>
+    <br>
+    <h5>Enter your email and we'll send you a link to reset your password</h5>
+    <form (ngSubmit)="passwordreset()" #resetpassword="ngForm">
+      <input type="text"
+             id="forgotemail"
+             name="forgotemail"
+             required
+             ngModel>
+      <br>
+      <button (click)="toggleforgetpassword()" class="btn-danger">Cancel</button>
+      <button class="STButton" type="submit">Reset password</button>
+    </form>
+  </div>
+  <div class="text-center" *ngIf="passwordresetconfrim">
+    <h4>A email has been sent to you with instructions on how to reset your password</h4>
+  </div>
+</div>
+
