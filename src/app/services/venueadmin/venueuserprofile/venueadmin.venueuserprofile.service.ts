@@ -21,6 +21,6 @@ export class VenueUserProfileService{
   }
 
   changeuserpassword(payload){
-    return this.http.post(changepassword, payload, {observe:'response'});
+    return this.http.post(changepassword, payload);
   }
 }

@@ -7,4 +7,4 @@ import {rooturl} from '../rooturl';
 
 // root suits settings url
 
-export const venueadminsurl =  rooturl + '/venueadmin';
+export const venueadminsurl =  rooturl + 'venueadmin';

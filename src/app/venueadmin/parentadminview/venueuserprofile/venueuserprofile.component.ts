@@ -23,7 +23,7 @@ export class VenueuserprofileComponent implements OnInit {
   namelinkready;
   venuepk;
 
-  constructor(private userprofileservice: VenueUserProfileService, private profileservice: VenueAdminProfileService, private route: ActivatedRoute, private parentvenueadminservice: VenueAdminParentAdminService, private router: Router,private userservice: VenueUserService, private awsservice: AwsService, private userauthservice: UserAuthorizationService ) { }
+  constructor(private userprofileservice: VenueUserProfileService, private profileservice: VenueAdminProfileService, private route: ActivatedRoute, private parentvenueadminservice: VenueAdminParentAdminService, private router: Router, private userservice: VenueUserService, private awsservice: AwsService, private userauthservice: UserAuthorizationService ) { }
 
   userobject = {
     pk: 3,
@@ -112,7 +112,7 @@ export class VenueuserprofileComponent implements OnInit {
   }
 
   // password code
-  passwordchangedsucess = false;
+  passwordupdatesucess = false;
   passwordincorrect = false;
   passwordform = false;
   showpasswordform(){
@@ -123,31 +123,36 @@ export class VenueuserprofileComponent implements OnInit {
     this.editform = false;
   }
 
+  passwordsmatch = true;
+  checkpassword(){
+    const password = this.passwordinputform.form.value.newpassword1;
+    const password2 = this.passwordinputform.form.value.newpassword2;
+    if(password !== password2){
+      this.passwordsmatch = false;
+    }else{
+      this.passwordsmatch = true;
+    }
+  }
+
   @ViewChild('passwordinputform') passwordinputform: NgForm;
   savepassword(){
     const payload ={
-      pk: this.userobject.pk,
-      currentpassword: this.passwordinputform.form.value.currentpasswordinput,
-      newpassword1: this.passwordinputform.form.value.newpassword1,
-      newpassword2: this.passwordinputform.form.value.newpassword2
+      password: this.passwordinputform.form.value.newpassword1
     };
-    this.userprofileservice.changeuserpassword(payload)
+    this.userservice.changepassword(this.userobject.pk, payload)
       .subscribe(
-        (req:any)=>{
-          if(req.status === 200){
-            this.passwordchangedsucess = true;
-          }
-          if(req.status === 400){
-            this.passwordincorrect = true;
-          }
+        (req: any)=>{
+          this.passwordupdatesucess = true;
+          this.passwordform = false;
+          setTimeout(()=>{
+            this.passwordupdatesucess = false;
+            this.editform = false;
+          }, 2500);
         }
       );
+
   }
 
-  passwordtextoff(){
-    this.passwordchangedsucess = false;
-    this.passwordincorrect = false;
-  }
   userisself = false;
   userauthservicevar;
   authuserobject;

@@ -10,3 +10,5 @@ export const venueuserlist = venueroot + 'list';
 export const venuepermission = venueroot + 'venuepermissions/';
 
 export const venuelistbyuser = venueroot + 'venuelistbyuser';
+
+export const changepassword = venueroot + 'changepassword/';

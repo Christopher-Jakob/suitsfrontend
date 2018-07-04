@@ -88,22 +88,13 @@
           <a *ngIf="venueadminpermission && userisself && !passwordform" (click)="showpasswordform()"  style="cursor: pointer">Change Password</a>
         </div>
 
-      <div *ngIf="passwordform">
+      <div *ngIf="passwordform && !passwordupdatesucess">
         <form (ngSubmit)="savepassword()" #passwordinputform="ngForm">
-          <span *ngIf="passwordincorrect">Password error, Changes not saved. Is your current password correct?<span (click)="passwordtextoff()" style="cursor: pointer">&times;</span></span>
-          <span *ngIf="passwordchangedsucess">Password sucessfully updated<span (click)="passwordtextoff()" style="cursor: pointer">&times;</span></span>
-          <br>
-          <label for="currentpasswordinput">Current Password</label>
-          <br>
-          <input class="passwordinput"
-                 type="password"
-                 id="currentpasswordinput"
-                 name="currentpasswordinput"
-                 ngModel>
           <br>
           <label for="newpassword1">New Password</label>
           <br>
-          <input class="passwordinput"
+          <input (change)="checkpassword()"
+                 class="passwordinput"
                  type="password"
                  id="newpassword1"
                  name="newpassword1"
@@ -111,17 +102,22 @@
           <br>
           <label for="newpassword2">Password Again</label>
           <br>
-          <input class="passwordinput"
+          <input (change)="checkpassword()"
+                 class="passwordinput"
                  type="password"
                  id="newpassword2"
                  name="newpassword2"
                  ngModel>
           <br>
           <br>
+          <span style="color: red" *ngIf="!passwordsmatch">Passwords do not match</span>
+          <br>
+          <br>
           <button class="btn btn-danger" (click)="unshowpasswordform()">Cancel</button> &nbsp;
-          <button class="btn btn-primary" type="submit">Update Password</button>
+          <button [disabled]="!passwordsmatch" class="btn btn-primary" type="submit">Update Password</button>
         </form>
       </div>
+      <span *ngIf="passwordupdatesucess"><h4>Password Updated</h4></span>
     </div>
 
 

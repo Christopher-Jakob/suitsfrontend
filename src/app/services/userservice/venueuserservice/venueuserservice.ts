@@ -4,7 +4,7 @@
 
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {venuelistbyuser, venuepermission, venueroot, venueuserlist} from "../../../urls/user/venueuser/venueuser";
+import {venuelistbyuser, changepassword, venuepermission, venueroot, venueuserlist} from "../../../urls/user/venueuser/venueuser";
 import {profilephotoinit, userroot} from "../../../urls/user/rootuserurl";
 
 
@@ -58,4 +58,10 @@ export class VenueUserService{
     const url = profilephotoinit + String(pk);
     return this.http.get(url);
   }
+
+  changepassword(pk, payload){
+    const url = changepassword + String(pk);
+    return this.http.put(url, payload);
+  }
+
 }
