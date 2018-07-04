@@ -7,23 +7,25 @@
   </div> <!--welcome message-->
   <div class="row"> <!-- profile picture and form-->
     <div class="col-4"> <!--profile picture div-->
-      <div *ngIf="userobject.userphoto != null" class="picturecontainer" [ngStyle]="{'background-image': 'url(' + userobject.userphoto + ')'}"> <!--picturecontainer div-->
-      </div> <!--picturecontainer div-->
-      <div *ngIf="userobject.userphoto == null && !uploadphotoform" class="text-center">
-        <h4>Profile Picture</h4>
+      <div *ngIf="userobject.userphoto != null" class="picturecontainer" [ngStyle]="{'background-image': 'url(' + userobject.userphoto + ')'}">
+      </div>
+      <div *ngIf=" userobject.userphoto == null && !uploadphotoform" class="text-center">
+        <div class="picturecontainer pictureplaceholder"> <!--picturecontainer div-->
+        </div> <!--picturecontainer div-->
+      </div>
+      <div class="text-left">
         <br>
-        <a style="cursor: pointer" (click)="showuploadphotoform()">Add Photo</a>
+        <button *ngIf="userobject.userphoto == null && !uploadphotoform"  class="btn btn-outline-primary" (click)="showuploadphotoform()">Add Photo</button>
+        <button *ngIf="userobject.userphoto !== null && !uploadphotoform" (click)="showuploadphotoform()" class="btn btn-outline-primary">+ Upload New Photo</button>
+        <div *ngIf="uploadphotoform">
+          <input (change)="uploadphoto($event)" type="file"
+                 id="photoupload"
+                 name="photoupload"
+                 accept=".jpg, .jpeg, .png">
+          <button class="btn btn-outline-danger" (click)="unshowuploadphotoform()">Cancel</button>
+        </div>
       </div>
-      <a *ngIf="userobject.userphoto !== null && !uploadphotoform" (click)="showuploadphotoform()" id="photouploadlink" style="cursor: pointer">+ Upload New Photo</a>
-      <div *ngIf="uploadphotoform">
-        <input (change)="uploadphoto($event)" type="file"
-               id="photoupload"
-               name="photoupload"
-               accept=".jpg, .jpeg, .png">
-        <button class="btn btn-outline-danger" (click)="unshowuploadphotoform()">Cancel</button>
-      </div>
-    </div> <!--profile picture div-->
-
+    </div>
     <div class="col-5"> <!--form div-->
       <div class="row">
         <div class="col-auto">
@@ -32,7 +34,7 @@
           <h4 *ngIf="passwordform">Change Password</h4>
         </div>
         <div class="col-1">
-          <a *ngIf="!editform" (click)="showeditform()" class="STnormallink" style="cursor: pointer">Edit</a>
+          <a *ngIf="!editform" (click)="showeditform()" class="STnormallink" style="cursor: pointer; text-decoration: underline">Edit</a>
         </div>
       </div>
 
@@ -85,7 +87,7 @@
           <br>
           <label>Phone:</label> &nbsp; {{userobject.phone}}
           <br>
-          <a *ngIf="venueadminpermission && userisself && !passwordform" (click)="showpasswordform()"  style="cursor: pointer">Change Password</a>
+          <a *ngIf="venueadminpermission && userisself && !passwordform" (click)="showpasswordform()"  style="cursor: pointer; text-decoration: underline;">Change Password</a>
         </div>
 
       <div *ngIf="passwordform && !passwordupdatesucess && !passwordupdatesucess">
@@ -119,8 +121,6 @@
       </div>
       <span *ngIf="passwordupdatesucess"><h4>Password Updated</h4></span>
     </div>
+</div> <!-- real form div-->
 
-
-      </div> <!-- real form div-->
-    </div> <!--form div-->
 
