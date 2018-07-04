@@ -88,7 +88,7 @@
           <a *ngIf="venueadminpermission && userisself && !passwordform" (click)="showpasswordform()"  style="cursor: pointer">Change Password</a>
         </div>
 
-      <div *ngIf="passwordform && !passwordupdatesucess">
+      <div *ngIf="passwordform && !passwordupdatesucess && !passwordupdatesucess">
         <form (ngSubmit)="savepassword()" #passwordinputform="ngForm">
           <br>
           <label for="newpassword1">New Password</label>
