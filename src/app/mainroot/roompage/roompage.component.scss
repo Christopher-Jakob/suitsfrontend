@@ -29,12 +29,15 @@ $color-gray: rgb(236,236,236);
   &:not(:last-child){
     border-right: black solid 2px;
     padding-right: 1rem;
+    padding-left: 3rem;
   }
   &__mid {
-    padding-right: 5rem;
+    padding-right: 3rem;
+    padding-left: 3rem
   }
   &__lg {
     padding-right: 10rem;
+    padding-left: 3rem;
   }
 }
 

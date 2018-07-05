@@ -126,6 +126,8 @@ export class RoompageComponent implements OnInit, OnDestroy {
     this.route.params
       .subscribe(
         (params: Params)=>{
+          this.fullbuyoutroomactive = false;
+          this.otherrooms = [];
           this.venuename = params['name'];
           this.roomname = params['room'];
           this.linkvenuename = this.venuename;
@@ -172,6 +174,8 @@ export class RoompageComponent implements OnInit, OnDestroy {
                     this.otherrooms.push(workingroom);
                   }
                 }
+                console.log('this is the other rooms');
+                console.log(this.otherrooms);
               });
         });
   }
