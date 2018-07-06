@@ -11,6 +11,7 @@ export class TeamComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.TeamList = [
       {
         selfie: "assets/images/team/bobby.jpg",
@@ -18,25 +19,26 @@ export class TeamComponent implements OnInit {
         title:"Founder and CEO"
       },
       {
+        selfie: "assets/images/team/bobby.jpg",
+        name: "Bobby Corsentino",
+        title:"Founder and CEO"
+      },
+      {
+        selfie: "assets/images/team/brandon.jpg",
+        name: "Brandon Pearlman",
+        title: "COO"
+      },
+      {
         selfie: "assets/images/team/christopher.jpg",
         name: "Christopher Jakob",
         title:"Lead Software Engineer"
-      },
-      {
-        selfie: "assets/images/team/jen.jpg",
-        name: "Jen Stanton",
-        title:"Director of Marketing"
       },
       {
         selfie: "assets/images/team/kathy.jpg",
         name: "Kathy Pirogova",
         title:"Director of Venue Relations"
       },
-      {
-        selfie: "assets/images/team/lena.png",
-        name: "Lena Jung",
-        title:"Marketing Intern"
-      }];
+     ];
   }
 
 }

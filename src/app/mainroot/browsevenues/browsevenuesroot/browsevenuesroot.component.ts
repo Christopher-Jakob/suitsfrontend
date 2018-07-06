@@ -365,6 +365,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.browsevenuescommservice.sendstate('show');
 
     // grab the inputed city from the route params then grab the neighbhorhoods for that particular city.

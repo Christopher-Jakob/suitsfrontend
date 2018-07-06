@@ -122,6 +122,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.browsevenuescommservice.sendstate('show');
     this.route.params
       .subscribe(

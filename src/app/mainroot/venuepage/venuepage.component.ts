@@ -317,6 +317,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.browsevenuescommservice.sendstate('show');
     let cuisine;
     let experiential;

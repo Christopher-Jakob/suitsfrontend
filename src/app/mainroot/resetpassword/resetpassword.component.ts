@@ -41,6 +41,7 @@ export class ResetpasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.route.params
       .subscribe(
         (params: Params)=>{

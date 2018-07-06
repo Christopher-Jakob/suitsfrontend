@@ -17,11 +17,9 @@ import {AwsService} from "../../../../../services/amazonwebservice services/aws.
 })
 export class VenueroomadminpageComponent implements OnInit, OnDestroy {
   volleyservicevar;
-  inceptionservicevar;
   permission;
   venueid;
   capacitytype;
-  roomindex;
   fullbuyoutedit = false;
 
   constructor(private volleyservice: VenueAdminVolleyService, private route: ActivatedRoute, private router: Router, private roomdetailservice: VenueAdminVenueRoomDetailService, private profileservice: VenueAdminProfileService, private permissionservice: VenueAdminParentAdminService, private inceptionservice: VenueAdminInceptionService, private awsservice: AwsService) {

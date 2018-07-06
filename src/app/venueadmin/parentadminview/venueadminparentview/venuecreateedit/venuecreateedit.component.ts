@@ -259,7 +259,7 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
       payload = {
         venuepk: this.venueobject.id,
         email: this.addnewuserform.form.value.newuseremailinput,
-        permission: this.addnewuserform.form.value.newusesrroleselect,
+        permission: this.addnewuserform.form.value.newuserroleselect,
         rfpemail: this.addnewuserform.form.value.rfpreceiveemail,
       };
     }

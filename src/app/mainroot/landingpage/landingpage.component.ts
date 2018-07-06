@@ -36,6 +36,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.navcomm.sendstate('unshow');
     this.landingpageservice.getsearchcitylist()
       .subscribe(
