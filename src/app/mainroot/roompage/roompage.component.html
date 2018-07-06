@@ -62,8 +62,8 @@
         <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutsurrondsoundamenity === true ? 'black': 'gray' }">Surround Sound</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.classroomamenity === true ? 'black': 'gray' }">Classroom</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.classroomamenity === true ? 'black': 'gray' }">Classroom</p>
+        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.microphoneamenity === true ? 'black': 'gray' }">Microphone</p>
+        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutmicrophoneamenity === true ? 'black': 'gray' }">Microphone</p>
       </div>
       <div class="col-md-3 col-6">
         <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.stageamenity === true ? 'black': 'gray' }">Stage</p>
@@ -86,7 +86,7 @@
         <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutwifiamenity === true ? 'black': 'gray' }">WiFi</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.wheelchairamenity === true ? 'black': 'gray' }"> Wheelchair Accessible</p>
+        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.wheelchairaccessibleamenity=== true ? 'black': 'gray' }"> Wheelchair Accessible</p>
         <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutwheelchairaccessibleamenity === true ? 'black': 'gray' }"> Wheelchair Accessible</p>
       </div>
     </div>

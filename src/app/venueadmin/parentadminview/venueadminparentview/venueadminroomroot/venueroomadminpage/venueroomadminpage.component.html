@@ -146,6 +146,13 @@
       <div class="col-auto">
         <input (change)="fullbuyoutsave()"
                type="checkbox"
+               id="microphonefullbuyout"
+               name="microphonefullbuyout"
+               [ngModel]="venueobject.fullbuyoutmicrophoneamenity"> <strong>Microphone</strong>
+      </div>
+      <div class="col-auto">
+        <input (change)="fullbuyoutsave()"
+               type="checkbox"
                id="naturallightcheckboxfullbuyout"
                name="naturallightcheckboxfullbuyout"
                [ngModel]="venueobject.fullbuyoutnaturallightamenity"> <strong>Natural Light</strong>
@@ -412,6 +419,13 @@
                  id="screenprojectorcheckbox"
                  name="screenprojectorcheckbox"
                  [ngModel]="roomobject.screenprojectoramenity"> <strong>Screen + Projector</strong>
+        </div>
+        <div class="col-auto">
+          <input (change)="savevenueroom()"
+                 type="checkbox"
+                 id="microphoneamenitycheckbox"
+                 name="microphoneamenitycheckbox"
+                 [ngModel]="roomobject.microphoneamenity"> <strong>Microphone</strong>
         </div>
         <div class="col-auto">
           <input (change)="savevenueroom()"
