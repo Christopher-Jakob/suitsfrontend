@@ -41,7 +41,7 @@
       <h5>Please email or call us to change the status of your venue</h5>
     </div>
     <div class="col-3">
-      <button *ngIf="!deleteconfrimshow && !deleterequestshow" (click)="navigatetovenuepage()" class="previewsubmitbuttons" id="previewbutton">Preview Profile</button>
+      <a style="cursor: pointer" [href]="domain" target="_blank"><button *ngIf="!deleteconfrimshow && !deleterequestshow" class="previewsubmitbuttons" id="previewbutton">Preview Venue</button></a>
     </div>
     <div *ngIf="suitsadmin" class="col-2">
       <button (click)="showdeleteconfrim()" *ngIf="!deleteconfrimshow && suitsadmin" class="btn-danger">Delete Venue</button>

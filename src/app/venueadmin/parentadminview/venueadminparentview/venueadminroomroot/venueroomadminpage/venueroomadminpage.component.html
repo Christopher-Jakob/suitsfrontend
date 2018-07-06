@@ -8,35 +8,35 @@
     <div *ngIf="deleteconfrimshow" class="col-auto">
       <strong>Are you sure you want to remove the full buyout option?</strong>
       <br>
-      <button (click)="unshowdeleteroomconfrim()" class="STButton" >Cancel</button>
+      <button  (click)="unshowdeleteroomconfrim()" class=" btn STButton" >Cancel</button>
       <button (click)="deleteroom()" class="btn-danger">Delete Room</button>
     </div>
     <div *ngIf="!deleteconfrimshow" class="col-auto STnopadding text-center">
       <div class="col-auto STnopadding">
         <div  *ngIf="venueobject.fullbuyoutonline" class="onlinestatus STnopadding">
-          Online
+          Public
         </div>
       </div>
       <div class="col-auto STnopadding">
         <div *ngIf="!venueobject.fullbuyoutonline" class="offlinestatus STnopadding">
-          Offline
+          Hidden
         </div>
       </div>
     </div>
     <div class="col-auto">
       <div class="col-auto">
-        <button (click)="roomonline()" *ngIf="!venueobject.fullbuyoutonline" style="background-color: green; color: white;">Push Online</button>
-        <button (click)="roomoffline()" *ngIf="venueobject.fullbuyoutonline" style="background-color: #ffbd59">Take Offline</button>
+        <button class="btn" (click)="roomonline()" *ngIf="!venueobject.fullbuyoutonline" style="background-color: green; color: white;">Push Public</button>
+        <button class="btn" (click)="roomoffline()" *ngIf="venueobject.fullbuyoutonline" style="background-color: #ffbd59">Hide Offline</button>
       </div>
     </div>
     <div class="col-auto">
       <div class="col-auto">
-        <button (click)="showdeleteconfrim()" class="btn-danger">Delete Room</button>
+        <button class="btn" (click)="showdeleteconfrim()" class="btn-danger">Delete Room</button>
       </div>
     </div>
     <div class="col-auto">
       <div class="col-auto">
-        <button style="background-color: #8B008B; color: white">Preview Room</button>
+        <a style="cursor: pointer;" [href]="domain" target="_blank"><button class="btn" style="background-color: #8B008B; color: white">Preview Room</button></a>
       </div>
     </div>
     <br>

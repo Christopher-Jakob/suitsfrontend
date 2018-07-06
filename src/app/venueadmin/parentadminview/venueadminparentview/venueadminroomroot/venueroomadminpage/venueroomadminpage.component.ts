@@ -26,6 +26,7 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
   }
 
   // venue object is only used if this is a full buyout room
+  domain;
   venueobject;
   roomobject = {
     pk: 1,
@@ -352,6 +353,7 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
                         if (req.semiprivateroom) {
                           this.capacitytype = 'semiprivate';
                         }
+                        this.domain = '/venue/' + this.venueobject.name + '/' + this.roomobject.name;
                       });
                 }
               });

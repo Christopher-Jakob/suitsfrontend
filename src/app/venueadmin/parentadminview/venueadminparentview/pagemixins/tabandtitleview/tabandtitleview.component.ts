@@ -7,6 +7,7 @@ import {VenueAdminTableandtitleHttpService} from "../../../../../services/venuea
 import {VenueAdminParentAdminService} from "../../../../../services/venueadmin/venueadminparentadminservice/venueadmin.parentadmin.service";
 import {SuitsVenueListService} from "../../../../../services/suitsadmin/suitsvenuelistservice/Suits.VenueList.Service";
 import {Observable} from 'rxjs';
+import {frontenddomain} from "../../../../../urls/rooturl";
 
 
 
@@ -86,6 +87,9 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
     cuisine2:'',
     experientialtype: ''
   };
+
+  // for preview venue
+  domain;
 
   navigatetovenuepage(){
     this.router.navigate(['/venue',this.venuenamelinkready], {queryParams : {option: this.permission}});
@@ -257,6 +261,7 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
         (req: any)=>{
           if(req !== null){
             this.venueobject = req;
+            this.domain = '/venue/' + this.venueobject.name;
           }
 
         }
