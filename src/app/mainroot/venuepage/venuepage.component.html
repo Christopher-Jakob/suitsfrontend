@@ -18,9 +18,16 @@
       <div *ngIf="venue.pricerating == 1" class="span-style">$30 and under</div>
       <div *ngIf="venue.pricerating == 2" class="span-style">$31 to $51</div>
       <div *ngIf="venue.pricerating == 3" class="span-style">$51 and over</div>
-      <button *ngIf="!showrfpbuttons" (click)="rfpclick()" class="button button__primary float-right" >Send RFP</button>
-      <button *ngIf="showrfpbuttons" [disabled]="user == null" class="button button__primary float-right">Create From Saved</button>
-      <button (click)="open(createProp)" *ngIf="showrfpbuttons" class="button button__primary float-right">Create New</button>
+      <form #rfpchoiceform="ngForm" class="float-right">
+        <select class="form-control" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
+                id="rfpsendselect"
+                name="rfpsendselect"
+                [ngModel]="dropdownreset">
+          <option value="">Submit RFP</option>
+          <option value="n">Create New RFP</option>
+          <option value="s">Create From Saved</option>
+        </select>
+      </form>
     </div>
   </div>
 
@@ -577,6 +584,49 @@
         </form>
       </div>
     </div> <!--loginsignup ng if-->
+  </div>
+
+</ng-template>
+
+
+<ng-template #createSaved let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Saved RFPs</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Event Date</th>
+          <th scope="col">Event Purpose</th>
+          <th scope="col">Start Time</th>
+          <th scope="col">End Time</th>
+          <th scope="col">Head Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rfp of savedrfps; let i=index" (click)="populaterfpfromsaved(i, createSaved, createProp)">
+          <td>
+            {{rfp.eventdate}}
+          </td>
+          <td>
+            {{rfp.eventpurpose}}
+          </td>
+          <td>
+            {{rfp.starttime}}
+          </td>
+          <td>
+            {{rfp.endtime}}
+          </td>
+          <td>
+            {{rfp.headcount}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 </ng-template>

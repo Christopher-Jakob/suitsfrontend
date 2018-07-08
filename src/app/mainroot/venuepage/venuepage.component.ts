@@ -11,16 +11,18 @@ import {NgForm} from "@angular/forms";
 import {Makerfpservice} from "../../services/pagemixins/make-rfp.service";
 import {ClientUserService} from "../../services/userservice/clientuserservice/clientuserservice";
 import {BrowsevenuescomponentcommService} from "../../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
+import {RFPService} from "../../services/rfpservice/rfpservice";
+import $ from "jquery";
 
 @Component({
   selector: 'app-venuepage',
   templateUrl: './venuepage.component.html',
   styleUrls: ['./venuepage.component.scss'],
-  providers: [VenueService, SuitsAdminDependancySettings, Makerfpservice, ClientUserService]
+  providers: [VenueService, SuitsAdminDependancySettings, ClientUserService, RFPService]
 })
 export class VenuepageComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private venueservice: VenueService, private router: Router, private rfpmodaltoggle: ModalToggleService, private parentadminservice: VenueAdminParentAdminService, private modalService: NgbModal, private settingservice: SuitsAdminDependancySettings, public sanitizer: DomSanitizer, private authservice: UserAuthorizationService, private rfpservice: Makerfpservice, private clientservice: ClientUserService, private browsevenuescommservice:BrowsevenuescomponentcommService) { }
+  constructor(private route: ActivatedRoute, private venueservice: VenueService, private router: Router, private rfpmodaltoggle: ModalToggleService, private parentadminservice: VenueAdminParentAdminService, private modalService: NgbModal, private settingservice: SuitsAdminDependancySettings, public sanitizer: DomSanitizer, private authservice: UserAuthorizationService, private clientservice: ClientUserService, private browsevenuescommservice:BrowsevenuescomponentcommService, private rfpservice : RFPService) { }
 
   // variable to hold venue name only needed if venue not send by venueservice
   rfpshow = false;
@@ -142,6 +144,31 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     }
   }
 
+  populaterfpfromsaved(index, savedrfp, newrfp){
+    const scoperfp = this.savedrfps[index];
+    this.savedevent.date = scoperfp.datename;
+    this.savedevent.programdate = scoperfp.datevalue;
+    this.savedevent.dateflex = scoperfp.dateflex;
+    this.savedevent.eventpurpose = scoperfp.eventpurpose;
+    this.savedevent.starttime = scoperfp.startime;
+    this.savedevent.starttimeflex = scoperfp.starttimeflex;
+    this.savedevent.endtime = scoperfp.endtime;
+    this.savedevent.endtimeflex = scoperfp.endtimeflex;
+    this.savedevent.headcount = scoperfp.headcount;
+    this.savedevent.eventdetails = scoperfp.eventdetails;
+    let options = {
+      'show': false
+    };
+    (<any>$('#createSaved')).modal(options);
+    options = {
+      'show': true
+    };
+    (<any>$('#createProp')).modal(options);
+
+
+  }
+
+  savedrfps;
   useremail;
   userpassword;
   clientsignup(form:NgForm){
@@ -236,16 +263,26 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   // variable to hold venue service
   venueservicevar;
 
-  // when rfp button is clicked toggle the modal to pop up from the navbar component
-  togglerfpmodal() {
-    this.rfpmodaltoggle.togglerfpmodal();
-    this.venueservice.sendVenue(this.venue);
+  // variable used to reset rfp dropdown
+  dropdownreset = "";
+  // determine which rfp to send
+
+  rfptoggle(form:NgForm, createnew, createsaved){
+    if(form.value.rfpsendselect === 'n'){
+      this.open(createnew);
+      this.dropdownreset = 'n';
+      this.dropdownreset = ''
+
+    }
+    if(form.value.rfpsendselect === 's'){
+      this.open(createsaved);
+      this.dropdownreset = "s";
+      this.dropdownreset = '';
+    }
+
   }
 
-  showrfpbuttons = false;
-  rfpclick(){
-    this.showrfpbuttons = !this.showrfpbuttons;
-  }
+
 
   closeResult: string;
   isCollapsed = true;
@@ -403,6 +440,14 @@ export class VenuepageComponent implements OnInit, OnDestroy {
                     });
               });
         });
+    this.rfpservice.getsavedrfps()
+      .subscribe(
+        (req: any)=>{
+          this.savedrfps = req;
+        }
+      );
+
+
   }
 
   ngOnDestroy() {

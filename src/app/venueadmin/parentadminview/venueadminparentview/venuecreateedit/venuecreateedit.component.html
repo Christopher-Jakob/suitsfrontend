@@ -180,8 +180,8 @@
       <div class="col-8">
         <strong>Add Venue User</strong>
         <br>
-        <button (click)="addexistinguser()" *ngIf="existingbutton" class="STButton">Add Existing User</button>
-        <button (click)="createnewuser()" *ngIf="newbutton" class="STButton">Create New User</button>
+        <button (click)="addexistinguser()" *ngIf="existingbutton" class="btn STButton">Add Existing User</button>
+        <button (click)="createnewuser()" *ngIf="newbutton" class=" btn STButton">Create New User</button>
         <br>
         <form (ngSubmit)="addnewuser()" #addnewuserform="ngForm" *ngIf="showform">
           <div>

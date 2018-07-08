@@ -64,11 +64,9 @@ textarea{
 }
 
 #venuephotoadd{
-  margin-top: 2%;
-  color: white;
-  background-color: #00b3ee;
-  border: solid #00b3ee;
-  border-radius: 4%;
+  color: #00b3ee;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #textareasave{
@@ -125,6 +123,7 @@ td{
   background-color: white;
   color: #00b3ee;
   border: solid white;
+  cursor: pointer;
   margin-top: 1%;
   margin-left: 4%;
   text-decoration: underline;

@@ -1,10 +1,11 @@
 <div class="container">
   <div class="row align-items-start"> <!--toprow-->
     <div id="venuephotosdiv" class="col-3">
-      <h5><strong>Venue Photos</strong></h5>
-    </div>
-    <div id="resnote" class="col-9">
-      Images should be no larger than 12MB and at least 1500 X 700 pixels in resolution.
+      <div class="row">
+        <div class="auto">
+          <h5><strong>Venue Photos &nbsp;</strong><a *ngIf="!showphotoupload" (click)="venuephotodisplaytoggle()" id="venuephotoadd">+Add Photo</a></h5>
+        </div>
+      </div>
     </div>
   </div> <!--top row-->
 
@@ -15,6 +16,11 @@
       </div>
     </div>
     <div *ngIf="showphotoupload && !choicesload" class="suitsphotoupload">
+      <div class="row">
+        <div id="resnote" class="col-9">
+          Images should be no larger than 12MB and at least 1500 X 700 pixels in resolution.
+        </div>
+      </div>
       <form (change)="addvenuephotos($event)" #venuephotoform="ngForm">
         <label for="venuephotoinput">Add Venue Photo</label>
         <br>
@@ -39,8 +45,7 @@
 </div> <!--photorows-->
 <div class="row justify-content-center">
   <div>
-    <button *ngIf="!showphotoupload" (click)="venuephotodisplaytoggle()" id="venuephotoadd">Add Venue Photo</button>
-    <button *ngIf="!showphotos && !showphotoupload" (click)="venuephotoshowtoggle()" id="venuephotoshow" class="btn-success">Display Photos</button>
+    <button *ngIf="!showphotos && !showphotoupload" (click)="venuephotoshowtoggle()" id="venuephotoshow" class=" btn btn-success">Display Photos</button>
   </div>
 </div> <!--addvenuebuttonrow-->
 <hr>

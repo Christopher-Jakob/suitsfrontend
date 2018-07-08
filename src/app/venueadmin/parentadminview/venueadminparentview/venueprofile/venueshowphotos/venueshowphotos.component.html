@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row" appSortableList (sort)="sort($event)">
-    <div *ngFor="let photo of venueobject.venueimage_set; let i =index" class="col-md-4 imagecontainer box" appSortable> <!--venueimagecontainer-->
+    <div *ngFor="let photo of venueobject.venueimage_set; let i =index" class="col-3 imagecontainer box" appSortable> <!--venueimagecontainer-->
       <div *ngIf="activevenueimageindex !== i">
         <div class="img-responsive  imagefullheight venueimage" [ngStyle]="{'background-image': 'url(' + photo.imageurl + ')'}">
         </div> <!--venueimage-->
@@ -11,7 +11,7 @@
         <br>
         <button (click)="deactivatedeleteimageconfrim()">Cancel</button>
         <br>
-        <button (click)="deletevenuephoto(i)">Delete</button>
+        <button class="btn" (click)="deletevenuephoto(i)">Delete</button>
       </div>
       <div class="text-center" style="margin-top: 10px;">
         <button *ngIf="activevenueimageindex != i" (click)="activatedeleteimageconfrim(i)" class="deletebutton btn-danger">Delete</button>

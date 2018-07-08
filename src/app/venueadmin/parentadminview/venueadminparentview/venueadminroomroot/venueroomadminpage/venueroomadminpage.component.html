@@ -1,7 +1,14 @@
 <div class="container-fluid" *ngIf="fullbuyoutedit"> <!--fullbuyout-->
   <div class="row">
-    <div class="col-auto">
+    <div class="col-8">
       <h3>{{venueobject.name}} Full Buyout</h3>
+    </div>
+    <div class="col-4">
+      <div class="float-right">
+          <a style="cursor: pointer;" [href]="fullbuyouturl" target="_blank">
+            <button class="btn" style="background-color: #8B008B; color: white">Preview Room</button>
+          </a>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -31,12 +38,7 @@
     </div>
     <div class="col-auto">
       <div class="col-auto">
-        <button class="btn" (click)="showdeleteconfrim()" class="btn-danger">Delete Room</button>
-      </div>
-    </div>
-    <div class="col-auto">
-      <div class="col-auto">
-        <a style="cursor: pointer;" [href]="domain" target="_blank"><button class="btn" style="background-color: #8B008B; color: white">Preview Room</button></a>
+        <button (click)="showdeleteconfrim()" class="btn btn-danger">Delete Room</button>
       </div>
     </div>
     <br>
@@ -241,9 +243,16 @@
 
 <div *ngIf="!fullbuyoutedit" class="container-fluid"> <!--root container-->
   <div class="row">
-    <div class="col-12">
+    <div class="col-8">
       <h3 *ngIf="roomobject.name != null">{{roomobject.name}}</h3>
       <h3 *ngIf="roomobject.name == null">Unnamed Room</h3>
+    </div>
+    <div class="col-4">
+      <div class="float-right">
+        <a [href]="roomurl" target="_blank">
+          <button class="btn" style="background-color: #8B008B; color: white">Preview Room</button>
+        </a>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -258,24 +267,21 @@
     <div class="col-2">
       <div class="text-center">
         <div *ngIf="roomobject.online" class="onlinestatus">
-          Online
+          Public
         </div>
       </div>
       <div class="text-center">
         <div *ngIf="!roomobject.online" class="offlinestatus">
-          Offline
+          Hidden
         </div>
       </div>
     </div>
     <div class="col-auto">
-      <button (click)="roomonline()" *ngIf="!roomobject.online" style="background-color: green; color: white;">Push Online</button>
-      <button (click)="roomoffline()" *ngIf="roomobject.online" style="background-color: #ffbd59">Take Offline</button>
+      <button class="btn" (click)="roomonline()" *ngIf="!roomobject.online" style="background-color: green; color: white;">Push Public</button>
+      <button class="btn" (click)="roomoffline()" *ngIf="roomobject.online" style="background-color: #ffbd59">Hide Room</button>
     </div>
     <div class="col-auto">
-      <button (click)="showdeleteconfrim()" class="btn-danger">Delete Room</button>
-    </div>
-    <div class="col-auto">
-      <button style="background-color: #8B008B; color: white">Preview Room</button>
+      <button (click)="showdeleteconfrim()" class=" btn btn-danger">Delete Room</button>
     </div>
   </div>
   <form  #topparamsform="ngForm">

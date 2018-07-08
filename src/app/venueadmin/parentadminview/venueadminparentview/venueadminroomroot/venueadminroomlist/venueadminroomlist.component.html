@@ -44,21 +44,21 @@
               <strong>Status:</strong>
             </div>
             <div *ngIf="!venueobject.fullbuyoutonline" >
-              <strong style="color: white; background-color: red; border: solid 1px red">Offline</strong>
+              <strong style="color: white; background-color: red; border: solid 1px red">Hidden</strong>
             </div>
             <div *ngIf="venueobject.fullbuyoutonline" >
-              <strong style="color: white; background-color: green; border: solid 1px green">Online</strong>
+              <strong style="color: white; background-color: green; border: solid 1px green">Public</strong>
             </div>
           </div>
           <hr>
           <div *ngIf="!showfullbuyoutdeleteconfrim" class="text-center">
-            <button class="btn-danger" (click)="fullbuyoutdeleteconfrim()">Delete</button>
+            <button class="btn btn-danger" (click)="fullbuyoutdeleteconfrim()">Delete</button>
           </div>
           <div *ngIf="showfullbuyoutdeleteconfrim" class="text-center">
             <h4>Are you sure you want to remove this venues full buyout option?</h4>
             <br>
-            <button (click)="cancelfullbuyoutdelete()" class="STButton">Cancel</button>
-            <button (click)="fullbuyouttoggle()" class="btn-danger">Remove</button>
+            <button (click)="cancelfullbuyoutdelete()" class=" btn STButton">Cancel</button>
+            <button (click)="fullbuyouttoggle()" class=" btn btn-danger">Remove</button>
           </div>
           <br>
         </div>

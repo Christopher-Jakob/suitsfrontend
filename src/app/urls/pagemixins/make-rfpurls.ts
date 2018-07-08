@@ -4,4 +4,8 @@
 
 import {rooturl} from '../rooturl';
 
-export const sendinitalrfp = rooturl + 'make-rfp/sendinitalrfp';
+const makerfproot = rooturl + 'make-rfp/';
+
+export const sendinitalrfp = makerfproot + 'sendinitalrfp';
+
+export const savedrfps = makerfproot + 'savedrfps';
