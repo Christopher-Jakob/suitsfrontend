@@ -57,6 +57,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     description: '',
     latitude: '',
     longitude: '',
+    searchneighborhood: '',
     experientialtype: '',
     onsiteparking: false,
     valetparking: false,
@@ -358,6 +359,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     this.browsevenuescommservice.sendstate('show');
     let cuisine;
     let experiential;
+    let searchneighborhood;
 
     this.venueadmin = this.route.snapshot.queryParams['option'] || null;
     if (this.venueadmin !== null) {
@@ -389,10 +391,12 @@ export class VenuepageComponent implements OnInit, OnDestroy {
           this.settingservice.getallcityobjects()
             .subscribe(
               (req: any) => {
+                console.log('here are the settings objects');
                 console.log(req);
                 this.eventpurpose = req.eventpurpose;
                 cuisine = req.cuisine;
                 experiential = req.experientialtype;
+                searchneighborhood = req.neighborhood;
                 let preview = false;
                 if(this.option){
                   preview = true;
@@ -425,6 +429,12 @@ export class VenuepageComponent implements OnInit, OnDestroy {
                       for (let e of experiential) {
                         if (this.venue.experientialtype === e.pk) {
                           this.venue.experientialtype = e.type;
+                        }
+                      }
+                      for(let n of searchneighborhood ){
+                        if(this.venue.searchneighborhood === n.pk){
+                          console.log('the neighborhood got done');
+                          this.venue.searchneighborhood = n.neighborhood;
                         }
                       }
                       for (let image in this.venue.venueimage_set) {

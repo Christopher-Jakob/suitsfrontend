@@ -12,6 +12,9 @@
         <button id="listvenuebutton" class="dropdown-item" data-toggle="modal" data-target="#Venue-SignUp">List Your Venue</button>
         <span class="sr-only">(current)</span>
       </li>
+      <li *ngIf="!showbrowse" class="nav-item">
+        <a class="nav-link" routerLink="/how-it-works">How It Works</a>
+      </li>
       <li *ngIf="showbrowse" class="nav-item">
         <div class="auto d-inline-block">
           <label class="nav-link">Browse</label>
@@ -137,7 +140,7 @@
                      class="form-control"
                      ngModel
                      placeholder="First name"
-                     required>
+                     required><span class="STredstar">*</span>
             </div>
             <div class="col">
               <label for="LN" class="col-form-label">Last Name:</label>
@@ -147,7 +150,7 @@
                      class="form-control"
                      ngModel
                      placeholder="Last name"
-                     required>
+                     required><span class="STredstar">*</span>
             </div>
           </div>
           <div class="row">
@@ -160,7 +163,7 @@
                      name="clientemail"
                      ngModel
                      placeholder="Email"
-                     required>
+                     required><span class="STredstar">*</span>
             </div>
             <div class="form-group col-md-6">
               <label for="C-inputconfirmEmail4" class="col-form-label">Confirm Email:</label>
@@ -171,7 +174,7 @@
                      ngModel
                      name="clientemailconfrim"
                      placeholder="Email"
-                     required>
+                     required><span class="STredstar">*</span>
               <span style="color: red" class="help-block" *ngIf="emailmismatch">Emails do not match</span>
             </div>
           </div>
@@ -186,7 +189,7 @@
                      ngModel
                      name="clientpassword"
                      placeholder="Password"
-                     required>
+                     required><span class="STredstar">*</span>
             </div>
             <div class="form-group col-md-6">
               <label for="C-inputvalidatePassword4" class="col-form-label">Confirm Password:</label>
@@ -197,7 +200,7 @@
                      ngModel
                      id="C-inputvalidatePassword4"
                      placeholder="Password"
-                     required>
+                     required><span class="STredstar">*</span>
               <span style="color: red" *ngIf="passwordmismatch" class="help-block">Passwords do not match</span>
             </div>
           </div>
@@ -228,7 +231,7 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label for="C-inputCity" class="col-form-label">City:</label>
-              <input type="text" class="form-control" name="clientcity" ngModel id="C-inputCity">
+              <input type="text" class="form-control" name="clientcity" ngModel id="C-inputCity"><span class="STredstar">*</span>
             </div>
             <div class="form-group col-md-4">
               <label for="C-inputState" class="col-form-label">State:</label>
@@ -284,7 +287,7 @@
                 <option value="WV">WV</option>
                 <option value="WI">WI</option>
                 <option value="WY">WY</option>
-              </select>
+              </select><span class="STredstar">*</span>
             </div>
           </div>
 
@@ -326,7 +329,7 @@
                    name="venuename"
                    ngModel
                    required
-            >
+            ><span class="STredstar">*</span>
           </div>
 
           <div class="row">
@@ -337,7 +340,7 @@
                      name="venueaddress1"
                      ngModel
                      id="inputAddress"
-                     required>
+                     required><span class="STredstar">*</span>
             </div>
 
             <div class="form-group col-md-6">
@@ -359,7 +362,7 @@
                      class="form-control"
                      id="inputCity"
                      required
-              >
+              ><span class="STredstar">*</span>
             </div>
 
             <div class="form-group col-md-4">
@@ -420,7 +423,7 @@
                 <option value="WV">WV</option>
                 <option value="WI">WI</option>
                 <option value="WY">WY</option>
-              </select>
+              </select><span class="STredstar">*</span>
             </div>
           </div>
 
@@ -432,7 +435,7 @@
                      name="venuecontactname"
                      ngModel
                      id="inputContactName"
-                     required>
+                     required><span class="STredstar">*</span>
             </div>
 
             <div class="form-group col-md-6">
@@ -445,7 +448,7 @@
                      ngModel
                      #PhoneCSS = "ngModel"
                      required
-              >
+              ><span class="STredstar">*</span>
               <span *ngIf="PhoneCSS.touched && !PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
             </div>
           </div>
@@ -467,7 +470,7 @@
                      id="inputEmail"
                      name="venueemail"
                      ngModel
-                     required>
+                     required><span class="STredstar">*</span>
             </div>
           </div>
           <div class="row">

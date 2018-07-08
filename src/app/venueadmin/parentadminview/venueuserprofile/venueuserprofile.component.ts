@@ -100,7 +100,8 @@ export class VenueuserprofileComponent implements OnInit {
       pk: this.userobject.pk,
       name: this.personalinfoform.form.value.nameinput,
       email: this.personalinfoform.form.value.emailinput,
-      phone: this.personalinfoform.form.value.phoneinput
+      phone: this.personalinfoform.form.value.phoneinput,
+      jobtitle: this.personalinfoform.form.value.jobtitleinput
     };
     this.userservice.edituser(payload, this.userobject.pk)
       .subscribe(

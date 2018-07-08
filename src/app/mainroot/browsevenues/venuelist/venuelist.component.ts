@@ -44,6 +44,7 @@ export class VenuelistComponent implements OnInit, OnDestroy {
         (req: any)=> {
           if (req != null) {
             this.venuelist = req;
+            this.venuelist = this.venuelist.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
             console.log('the venue list arrving to the venues list');
             console.log(this.venuelist);
           }

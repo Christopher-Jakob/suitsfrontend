@@ -12,6 +12,9 @@
       {{venue.name}}
     </div>
     <div class="SecHead">
+      {{venue.searchneighborhood}}
+    </div>
+    <div class="SecHead">
       <div *ngIf="venue.cuisine1 != null" id="Type" class="span-style">{{venue.cuisine1}}</div>
       <div *ngIf="venue.cuisine2 != null" class="span-style">{{venue.cuisine2}}</div>
       <div *ngIf="venue.experientialtype != null" class="span-style">{{venue.experientialtype}}</div>
@@ -130,7 +133,7 @@
                  id="eventdate"
                  name="eventdate"
                  required
-                 [ngModel]="savedevent.date">
+                 [ngModel]="savedevent.date"><span class="STredstar">*</span>
           <br>
           <div class="checkboxdiv">
             <input class="form-check-input"
@@ -151,7 +154,7 @@
                   [ngModel]="savedevent.eventpurpose">
             <option value="">Select Event Purpose</option>
             <option *ngFor="let p of eventpurpose" [value]="p.purpose">{{p.purpose}}</option>
-          </select>
+          </select><span class="STredstar">*</span>
         </div>
         <div class="col-6">
           <label>Start Time</label>
@@ -258,7 +261,7 @@
             <option value="7:15 AM">7:15 AM</option>
             <option value="7:30 AM">7:30 AM</option>
             <option value="7:45 AM">7:45 AM</option>
-          </select>
+          </select><span class="STredstar">*</span>
           <br>
           <div class="checkboxdiv">
             <input class="form-check-input"
@@ -374,7 +377,7 @@
             <option value="7:15 AM">7:15 AM</option>
             <option value="7:30 AM">7:30 AM</option>
             <option value="7:45 AM">7:45 AM</option>
-          </select>
+          </select><span class="STredstar">*</span>
           <br>
           <div class="checkboxdiv">
             <input class="form-check-input"
@@ -393,7 +396,7 @@
                  id="guestcount"
                  name="guestcount"
                  required
-                 [ngModel]="savedevent.guestcount">
+                 [ngModel]="savedevent.guestcount"><span class="STredstar">*</span>
         </div>
         <div class="col-6">
           <label>Room Preference</label>
@@ -417,7 +420,7 @@
                     required
                     [ngModel]="savedevent.eventdetails">
 
-            </textarea>
+            </textarea><span class="STredstar">*</span>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Create a new event</button>

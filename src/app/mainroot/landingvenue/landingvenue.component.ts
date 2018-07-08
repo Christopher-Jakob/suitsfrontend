@@ -17,6 +17,7 @@ export class LandingvenueComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.width = window.screen.width;
     this.height =window.screen.height;
   }

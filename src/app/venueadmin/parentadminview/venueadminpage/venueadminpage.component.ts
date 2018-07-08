@@ -3,20 +3,22 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {VenueUserService} from "../../../services/userservice/venueuserservice/venueuserservice";
 import {VenueAdminVolleyService} from "../../../services/venueadmin/venueadminvolleyservice/venueadmin.volley.service";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ModalToggleService} from "../../../services/pagemixins/modeltoggleservice/modaltoggle.service";
+import {VenueService} from "../../../services/venueservice/venueservice";
+
 
 @Component({
   selector: 'app-venueadminpage',
   templateUrl: './venueadminpage.component.html',
   styleUrls: ['./venueadminpage.component.scss'],
-  providers: [VenueUserService]
+  providers: [VenueUserService, VenueService]
 })
 export class VenueadminpageComponent implements OnInit {
 
-  constructor( private route: ActivatedRoute, private router: Router, private userservice: VenueUserService, private venuevolley : VenueAdminVolleyService) { }
+  constructor( private route: ActivatedRoute, private router: Router, private userservice: VenueUserService, private modalService: NgbModal, private venuevolley : VenueAdminVolleyService, private venueservice: VenueService) { }
 
   venues =[];
-
-
 
   navipush(index){
 
@@ -41,48 +43,52 @@ export class VenueadminpageComponent implements OnInit {
   closeaddvenue(){
     this.addvenueshow = false;
     this.addrequestsucess = false;
-    this.showsecondcuisine = false;
-    this.showcuisine = false;
-    this.showexperiential = false;
-  }
-
-
-  @ViewChild('addvenueform') addvenueform:NgForm;
-
-  // add venue code
-
-  // venue type code
-
-  showcuisine = false;
-  showexperiential = false;
-  experientialorcuisinechoose(){
-    const value = this.addvenueform.form.value.venuetype;
-    if(value === "experiential"){
-      this.showcuisine = false;
-      this.showexperiential = true;
-    }
-    else{
-      this.showcuisine = true;
-      this.showexperiential = false;
-    }
 
   }
 
-  // cuisine 1 before cuisine 2 code
-  showsecondcuisine = false;
-  cuisinechange(){
-    const choice = this.addvenueform.form.value.cuisine1select;
-    if(choice !== ''){
-      this.showsecondcuisine = true;
-    }
-    else{
-      this.showsecondcuisine = false;
-    }
+  closeResult: string;
+  isCollapsed = true;
 
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
-  addvenue(){
-    //todo
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  signupcompelete = false;
+  addvenue(form:NgForm) {
+    let payload = {
+      name: form.value.venuename,
+      streetaddress1: form.value.venueaddress1,
+      streetaddress2: form.value.venueaddress2,
+      city: form.value.city,
+      state: form.value.venuestateselect,
+      venuephone: form.value.venuephone,
+      venuecontactname: form.value.venuecontactname,
+      venuecontactjobtitle: form.value.venuejobtitle,
+      venuecontactemail: form.value.venueemail,
+      phonenumber: form.value.venuephone
+    };
+    if(form.valid) {
+      this.venueservice.submitapplication(payload)
+        .subscribe(
+          (req: any) => {
+            this.signupcompelete = true;
+          }
+        );
+    }
   }
 
 

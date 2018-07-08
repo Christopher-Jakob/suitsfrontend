@@ -71,6 +71,16 @@
             <br>
           </div>
           <div class="col-12">
+            <label for="jobtitleinput">Job Title</label>
+            <br>
+            <input type="text"
+                   placeholder="Job Title"
+                   id="jobtitleinput"
+                   name="jobtitleinput"
+                   [ngModel]="userobject.jobtitle">
+            <br>
+          </div>
+          <div class="col-12">
             <br>
             <button class="btn btn-danger" (click)="unshoweditform()">Cancel</button> &nbsp;
 
@@ -86,6 +96,8 @@
           <label>Email:</label> &nbsp;{{userobject.email}}
           <br>
           <label>Phone:</label> &nbsp; {{userobject.phone}}
+          <br>
+          <label>Job Title:</label> &nbsp; {{userobject.jobtitle}}
           <br>
           <a *ngIf="venueadminpermission && userisself && !passwordform" (click)="showpasswordform()"  style="cursor: pointer; text-decoration: underline;">Change Password</a>
         </div>
