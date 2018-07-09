@@ -262,6 +262,9 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
         permission: this.addnewuserform.form.value.newuserroleselect,
         rfpemail: this.addnewuserform.form.value.rfpreceiveemail,
       };
+      if(payload.rfpemail != true){
+        payload.rfpemail = false;
+      }
     }
     this.userservice.createvenueuser(payload)
       .subscribe(
