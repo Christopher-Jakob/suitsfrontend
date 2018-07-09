@@ -12,9 +12,6 @@
         <button id="listvenuebutton" class="dropdown-item" data-toggle="modal" data-target="#Venue-SignUp">List Your Venue</button>
         <span class="sr-only">(current)</span>
       </li>
-      <li *ngIf="!showbrowse" class="nav-item">
-        <a class="nav-link" routerLink="/how-it-works">How It Works</a>
-      </li>
       <li *ngIf="showbrowse" class="nav-item">
         <div class="auto d-inline-block">
           <label class="nav-link">Browse</label>
@@ -36,6 +33,9 @@
         <a class="nav-item nav-link" (click)="navigatetopermission()" *ngIf="user.isclient">Dashboard </a>
         <a class="nav-item nav-link" (click)="navigatetopermission()" *ngIf="user.issuitsadministrator || user.issuitssuperuser || user.issuitsviewer">Suits Admin </a>
         <a class="nav-item nav-link" (click)="navigatetopermission()" *ngIf="user.isvenueuser">Venue Admin </a>
+      </li>
+      <li *ngIf="!showbrowse && !signedin" class="nav-item hiwitem">
+        <a class="hiwbutton" routerLink="/how-it-works">How It Works</a>
       </li>
       <li class="nav-item">
         <a *ngIf="!signedin" class="nav-item nav-link" data-toggle="modal" data-target="#signinModal">Log In</a>
