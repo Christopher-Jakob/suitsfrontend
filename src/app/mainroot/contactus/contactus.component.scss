@@ -1,0 +1,48 @@
+.container-fluid{
+  margin-top: 10vh;
+}
+
+.pannel{
+  position: relative;
+  height: 50vh;
+
+}
+
+.top{
+  background-color: #00b3ee;
+  color: white;
+}
+
+.middle{
+
+}
+
+.content{
+  position: absolute;
+  top: 40%;
+  left: 25%
+}
+
+.middlecontent{
+  left: 35%;
+}
+
+.bottomcontent{
+  top: 85%;
+  left: 37%;
+
+
+}
+
+ h3 a{
+  color: #00b3ee;
+}
+
+.bottompannel{
+  margin-bottom: 150px;
+}
+
+.applybutton{
+  margin-left: 10px;
+  margin-right: 10px;
+}

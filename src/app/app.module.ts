@@ -81,6 +81,7 @@ import {IsNotVenueUserGuard} from "./services/userservice/authguardservices/isno
 import {ClientadminComponent} from "./mainroot/clientadmin/clientadmin.component";
 import { SigninComponent } from './pagemixins/modals/signin/signin.component';
 import { SuitsvenueusersComponent } from './suitsandtablesadmin/suitsvenueusers/suitsvenueusers.component';
+import { ContactusComponent } from './mainroot/contactus/contactus.component';
 
 
 const appRoutes: Routes = [
@@ -95,6 +96,7 @@ const appRoutes: Routes = [
       {path: 'team',  canActivate: [IsNotVenueUserGuard], component: TeamComponent},
       {path: 'privacy', component: PrivacyComponent},
       {path: 'terms', component: TermsComponent},
+      {path: 'contact', component: ContactusComponent},
       {path: 'browse/:city',  canActivate: [IsNotVenueUserGuard], component: BrowsevenuesrootComponent},
       {path: 'how-it-works', component: HowitworksComponent},
       {path: 'venue/:name', component: VenuepageComponent},
@@ -201,6 +203,7 @@ const appRoutes: Routes = [
     VenueroomshowphotosComponent,
     SigninComponent,
     SuitsvenueusersComponent,
+    ContactusComponent,
   ],
   imports: [
     BrowserModule,
