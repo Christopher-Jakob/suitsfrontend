@@ -30,6 +30,9 @@ export class TokenInterceptor implements HttpInterceptor{
         });
       }
     }
+    request = request.clone({
+      url: encodeURI(request.url)
+    });
     return next.handle(request);
   }
 
