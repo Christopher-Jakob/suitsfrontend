@@ -38,8 +38,8 @@
       </h5>
     </div>
     <div *ngIf="suitsadmin" class="col-2">
-      <button class="btn" (click)="deactivatevenue()" *ngIf="venueobject.online && !deleteconfrimshow && !deleterequestshow" id="deactivatebutton">Hide Venue</button>
-      <button (click)="activatevenue()" *ngIf="!venueobject.online && !deleteconfrimshow && !deleterequestshow" class="btn btn-success">Push Public</button>
+      <button class="btn" (click)="changestatus()" *ngIf="venueobject.online && !deleteconfrimshow && !deleterequestshow" id="deactivatebutton">Hide Venue</button>
+      <button (click)="changestatus()" *ngIf="!venueobject.online && !deleteconfrimshow && !deleterequestshow" class="btn btn-success">Push Public</button>
     </div>
     <div *ngIf="!suitsadmin" class="col-auto">
       <h5>Please email or call us to change the status of your venue</h5>
@@ -63,83 +63,16 @@
   </div>
 </div>
 
-<div id="navtabrow" class="row"> <!-- nav tab row-->
 
-  <div class="col-md-2">
-    <!-- venue admin view-->
-    <a *ngIf=" venueadmin" [routerLink]="['/admin',permission,'venue-admin',venuenamelinkready,venueid, 'profile']">
-      <button type="button" class=" btn btn-secondary">
-        Venue Profile
-      </button>
-    </a>
-    <!-- suits admin view-->
-    <a *ngIf="suitsadmin" [routerLink]="['/admin',permission,'venue-admin', venuenamelinkready,venueid,'profile']">
-      <button type="button" class=" btn btn-secondary">
-        Venue Profile
-      </button>
-    </a>
-  </div>
-  <div class="col-md-2">
-    <!--venue admin view-->
-    <a *ngIf=" venueadmin" [routerLink]="['/admin',permission,'venue-admin', venuenamelinkready, venueid,'venuepage']">
-      <button type="button" class="btn btn-secondary">
-        Venue Page
-      </button>
-    </a>
-    <!-- suits admin view-->
-    <a *ngIf="suitsadmin" [routerLink]="['/admin',permission,'venue-admin',venuenamelinkready,venueid,'venuepage']">
-      <button type="button" class="btn btn-secondary">
-        Venue Page
-      </button>
-    </a>
-  </div>
-  <div class="col-md-2">
-    <!--venue admin view-->
-    <a *ngIf=" venueadmin" [routerLink]="['/admin',permission,'venue-admin', venuenamelinkready, venueid,'room','list']">
-      <button type="button" class="btn btn-secondary">
-        Room List
-      </button>
-    </a>
-    <!-- suits admin view-->
-    <a *ngIf="suitsadmin" [routerLink]="['/admin',permission,'venue-admin',venuenamelinkready,venueid,'room','list']">
-      <button type="button" class="btn btn-secondary">
-        Room List
-      </button>
-    </a>
-  </div>
-</div>
-<!-- venue admin view
-<a *ngIf=" venueadmin" [routerLink]="['/admin','venue-admin',permission, venuenamelinkready,venueid,'catering']">
-  <div class="navtab">
-    Catering
-  </div>
-</a>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/admin', permission, 'venue-admin',venuenamelinkready,venueid, 'profile']">Venue Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/admin',permission,'venue-admin', venuenamelinkready, venueid,'venuepage' ]">Venue Page</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/admin',permission,'venue-admin', venuenamelinkready, venueid,'room','list']">Room List</a>
+  </li>
+</ul>
 
-<a *ngIf="suitsadmin" [routerLink]="['/admin','venue-admin',permission, venuenamelinkready,venueid,'catering']">
-  <div class="navtab">
-    Catering
-  </div>
-</a>
-
-<a *ngIf=" venueadmin" [routerLink]="['/admin','venue-admin',permission, venuenamelinkready, venuename,venueid,'socialmedia']">
-  <div class="navtab">
-    Social Media
-  </div>
-</a>
-
-<a *ngIf="suitsadmin" [routerLink]="['/admin','venue-admin',permission, venuenamelinkready,venueid,'socialmedia']">
-  <div class="navtab">
-    Social Media
-  </div>
-</a>
-<a *ngIf=" venueadmin" href="#">
-  <div class="navtab">
-    Event Performance
-  </div>
-</a>
-<a *ngIf=" venueadmin" href="#">
-  <div class="navtab">
-    Billing
-  </div>
-</a>
-</div> <!-- nav tab row-->

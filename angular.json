@@ -29,13 +29,15 @@
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-toggle/css/bootstrap2-toggle.min.css",
               "src/styles.scss",
               "src/loadingcircle.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/bootstrap-toggle/js/bootstrap2-toggle.min.js"
             ]
           },
           "configurations": {

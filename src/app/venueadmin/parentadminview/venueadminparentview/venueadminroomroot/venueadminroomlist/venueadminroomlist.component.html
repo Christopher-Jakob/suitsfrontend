@@ -1,22 +1,16 @@
 <div class="container"> <!-- root row-->
   <div class="row">
-    <div class="col-12">
-      <br>
+    <div class="col-6">
       <h3><strong>Room List</strong></h3>
     </div>
-  </div>
-
-  <div class="row">
-    <hr>
-    <div class="col-md-4">
-      <p *ngIf="venuerooms.length > 0  || venueobject.fullbuyout" style="">(Click on a room to view its details)</p>
-    </div>
-    <div class="col-md-4">
-      <button *ngIf="!roomadded" class="btn btn-outline-primary" (click)="addroom()">+ Add Room</button>
-      <h4 *ngIf="roomadded">Room Added Below</h4>
-    </div>
-    <div *ngIf="!venueobject.fullbuyout" class="col-md-4">
-      <a (click)="fullbuyouttoggle()">Offer Full Buyout</a>
+    <div class="col-6">
+      <div *ngIf="!venueobject.fullbuyout" class="float-right">
+        <button class="btn btn-outline-primary" (click)="fullbuyouttoggle()">Offer Full Buyout</button>
+      </div>
+      <div class="float-right">
+        <button *ngIf="!roomadded" class="btn btn-outline-primary" (click)="addroom()">+ Add Room</button>
+        <h4 *ngIf="roomadded">Room Added Below</h4>
+      </div>
     </div>
   </div>
 
@@ -44,10 +38,10 @@
               <strong>Status:</strong>
             </div>
             <div *ngIf="!venueobject.fullbuyoutonline" >
-              <strong style="color: white; background-color: red; border: solid 1px red">Hidden</strong>
+              <strong style="color: red; font-style: italic;">Hidden</strong>
             </div>
             <div *ngIf="venueobject.fullbuyoutonline" >
-              <strong style="color: white; background-color: green; border: solid 1px green">Public</strong>
+              <strong style="color: green; font-style: italic">Public</strong>
             </div>
           </div>
           <hr>

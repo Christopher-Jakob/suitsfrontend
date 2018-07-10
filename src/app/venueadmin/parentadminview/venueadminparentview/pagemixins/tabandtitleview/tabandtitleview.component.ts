@@ -154,7 +154,8 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
 
   //visiblilty
 
-  deactivatevenue(){
+
+  changestatus(){
     const pk = this.venueobject.id;
     const payload = {
       name: this.venueobject.name,
@@ -166,40 +167,17 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
       venuecontactname: this.venueobject.venuecontactname,
       venuecontactjobtitle: this.venueobject.venuecontactjobtitle,
       venuecontactemail: this.venueobject.venuecontactemail,
-      online: false
+      online: !this.venueobject.online
     };
     this.venuevisibiltyservice.deactivatevenue(payload, pk)
       .subscribe(
         (req: any)=>{
-          this.venueobject.online = false;
+          this.venueobject.online = !this.venueobject.online;
           console.log('online status');
           console.log(this.venueobject.online);
         }
       );
-  }
 
-  activatevenue(){
-    const pk = this.venueobject.id;
-    const payload = {
-      name: this.venueobject.name,
-      city: this.venueobject.city,
-      streetaddress1: this.venueobject.streetaddress1,
-      state: this.venueobject.state,
-      zipcode: this.venueobject.zipcode,
-      phonenumber: this.venueobject.phonenumber,
-      venuecontactname: this.venueobject.venuecontactname,
-      venuecontactjobtitle: this.venueobject.venuecontactjobtitle,
-      venuecontactemail: this.venueobject.venuecontactemail,
-      online: true
-    };
-    this.venuevisibiltyservice.activatevenue(payload, pk)
-      .subscribe(
-        (req: any)=>{
-          this.venueobject.online = true;
-          console.log('online status');
-          console.log(this.venueobject.online);
-        }
-      );
   }
 
   ngOnInit() {
