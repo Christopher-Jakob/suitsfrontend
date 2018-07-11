@@ -1,3 +1,4 @@
+<div class="container">
 <div class="row pb-3" id="VenueList">
   <div class="col-sm-12 col-md-6 col-lg-4 pb-4" *ngFor="let card of venuelist; let i= index">
     <div class="card-container">
@@ -11,7 +12,7 @@
         {{ card.searchneighborhood }}
       </div>
       <div (click)="navigatetovenue(i)" class="card-container-information">
-        <div>
+        <div class="venuename">
           {{ card.name }}
         </div>
         <div>
@@ -35,4 +36,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

@@ -119,7 +119,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Client Sign Up</h4>
+        <h4 class="modal-title">Client Sign Up <span style="color: red"> &nbsp;* Mandatory Fields</span></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -133,89 +133,81 @@
         <form (ngSubmit)="clientsignup(clientsignupform)" #clientsignupform="ngForm">
           <div class="row">
             <div class="col">
-              <label for="FN" class="col-form-label">First Name:</label>
               <input type="text"
                      id="FN"
                      name="clientfirstname"
                      class="form-control"
                      ngModel
-                     placeholder="First name"
-                     required><span class="STredstar">*</span>
+                     placeholder="First name *"
+                     required>
             </div>
             <div class="col">
-              <label for="LN" class="col-form-label">Last Name:</label>
               <input type="text"
                      id="LN"
                      name="clientlastname"
                      class="form-control"
                      ngModel
-                     placeholder="Last name"
-                     required><span class="STredstar">*</span>
+                     placeholder="Last name *"
+                     required>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="C-inputEmail4" class="col-form-label">Email:</label>
               <input (change)="checkemail(clientsignupform)"
                      type="email"
                      class="form-control"
+                     placeholder="Email *"
                      id="C-inputEmail4"
                      name="clientemail"
                      ngModel
-                     placeholder="Email"
-                     required><span class="STredstar">*</span>
+                     required>
             </div>
             <div class="form-group col-md-6">
-              <label for="C-inputconfirmEmail4" class="col-form-label">Confirm Email:</label>
               <input (change)="checkemail(clientsignupform)"
                      type="email"
                      class="form-control"
                      id="C-inputconfirmEmail4"
                      ngModel
                      name="clientemailconfrim"
-                     placeholder="Email"
-                     required><span class="STredstar">*</span>
+                     placeholder="Confirm Email *"
+                     required>
               <span style="color: red" class="help-block" *ngIf="emailmismatch">Emails do not match</span>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="C-inputPassword4" class="col-form-label">Password:</label>
               <input (change)="checkpassword(clientsignupform)"
                      type="password"
                      class="form-control"
                      id="C-inputPassword4"
                      ngModel
                      name="clientpassword"
-                     placeholder="Password"
-                     required><span class="STredstar">*</span>
+                     placeholder="Password *"
+                     required>
             </div>
             <div class="form-group col-md-6">
-              <label for="C-inputvalidatePassword4" class="col-form-label">Confirm Password:</label>
               <input (change)="checkpassword(clientsignupform)"
                      type="password"
                      class="form-control"
                      name="clientconfrimpassword"
                      ngModel
                      id="C-inputvalidatePassword4"
-                     placeholder="Password"
-                     required><span class="STredstar">*</span>
+                     placeholder=" Confrim Password *"
+                     required>
               <span style="color: red" *ngIf="passwordmismatch" class="help-block">Passwords do not match</span>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="C-inputAddress" class="col-form-label">Company Name:</label>
             <input type="text"
                    class="form-control"
                    id="C-inputAddress"
                    name="clientcompany"
                    ngModel
-                   placeholder="Optional">
+                   placeholder="Company Name">
           </div>
           <div class="form-group">
-            <label for="P_phone" class="col-form-label">Primary phone number (Digits Only):</label>
             <input type="number"
                    class="form-control"
                    id="P_phone"
@@ -223,20 +215,23 @@
                    pattern="([0-9]{10})"
                    ngModel
                    #P_PhoneCSS = "ngModel"
-                   placeholder="Optional"
+                   placeholder="Phone"
             >
             <span *ngIf="P_PhoneCSS.touched && !P_PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
 
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="C-inputCity" class="col-form-label">City:</label>
-              <input type="text" class="form-control" name="clientcity" ngModel id="C-inputCity"><span class="STredstar">*</span>
+              <input type="text"
+                     class="form-control"
+                     name="clientcity"
+                     placeholder="City *"
+                     ngModel
+                     id="C-inputCity">
             </div>
             <div class="form-group col-md-4">
-              <label for="C-inputState" class="col-form-label">State:</label>
               <select id="C-inputState" class="form-control" ngModel name="clientstate">
-                <option value="">Choose</option>
+                <option value="">State *</option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -287,13 +282,12 @@
                 <option value="WV">WV</option>
                 <option value="WI">WI</option>
                 <option value="WY">WY</option>
-              </select><span class="STredstar">*</span>
+              </select>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="How-to-find-1" class="col-form-label">How did you hear about us?:</label>
-            <textarea rows="4" cols="50" type="text" class="form-control" id="How-to-find-1" name="How-to-find" ngModel></textarea>
+            <textarea rows="4" cols="50" type="text" class="form-control" id="How-to-find-1" name="How-to-find" ngModel placeholder="How did you hear about us?"></textarea>
           </div>
 
           <div *ngIf="!clientsignupconfrim" class="modal-footer">
@@ -311,7 +305,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up <span style="color: red"> &nbsp;* Mandatory Fields</span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -322,32 +316,32 @@
       <div *ngIf="!signupcompelete" class="modal-body">
         <form (ngSubmit)="createvenue(createvenueform)" #createvenueform="ngForm">
           <div class="form-group">
-            <label for="inputVenueName" class="col-form-label">Venue Name:</label>
             <input type="text"
                    class="form-control"
                    id="inputVenueName"
+                   placeholder="Venue Name *"
                    name="venuename"
                    ngModel
                    required
-            ><span class="STredstar">*</span>
+            >
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputAddress" class="col-form-label">Address 1:</label>
               <input type="text"
                      class="form-control"
                      name="venueaddress1"
+                     placeholder="Address 1 *"
                      ngModel
                      id="inputAddress"
-                     required><span class="STredstar">*</span>
+                     required>
             </div>
 
             <div class="form-group col-md-6">
-              <label for="inputAddress2" class="col-form-label">Address 2:</label>
               <input type="text"
                      class="form-control"
                      name="venueaddress2"
+                     placeholder="Address 2"
                      ngModel
                      id="inputAddress2">
             </div>
@@ -355,24 +349,23 @@
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputCity" class="col-form-label">City:</label>
               <input type="text"
                      name="city"
                      ngModel
+                     placeholder="City *"
                      class="form-control"
                      id="inputCity"
                      required
-              ><span class="STredstar">*</span>
+              >
             </div>
 
             <div class="form-group col-md-4">
-              <label for="inputState" class="col-form-label">State:</label>
               <select id="inputState"
                       class="form-control"
                       name="venuestateselect"
                       required
                       ngModel>
-                <option value="">Choose</option>
+                <option value="">State *</option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -423,63 +416,63 @@
                 <option value="WV">WV</option>
                 <option value="WI">WI</option>
                 <option value="WY">WY</option>
-              </select><span class="STredstar">*</span>
+              </select>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputContactName" class="col-form-label">Contact Name:</label>
               <input type="text"
                      class="form-control"
                      name="venuecontactname"
+                     placeholder="Contact Name *"
                      ngModel
                      id="inputContactName"
-                     required><span class="STredstar">*</span>
+                     required>
             </div>
 
             <div class="form-group col-md-6">
-              <label for="inputPhone" class="col-form-label">Phone Number (Digits Only):</label>
               <input type="number"
                      class="form-control"
                      id="inputPhone"
+                     placeholder="Phone *"
                      name="venuephone"
                      pattern="([0-9]{10})"
                      ngModel
                      #PhoneCSS = "ngModel"
                      required
-              ><span class="STredstar">*</span>
+              >
               <span *ngIf="PhoneCSS.touched && !PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputJobTitle" class="col-form-label">Job Title:</label>
               <input type="text"
                      class="form-control"
                      name="venuejobtitle"
+                     placeholder="Job Title"
                      ngModel
                      id="inputJobTitle">
             </div>
 
             <div class="form-group col-md-6">
-              <label for="inputEmail" class="col-form-label">Contact Email:</label>
               <input type="email"
                      class="form-control"
                      id="inputEmail"
                      name="venueemail"
+                     placeholder="Contact Email *"
                      ngModel
-                     required><span class="STredstar">*</span>
+                     required>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
-              <label for="hearaboutus" class="col-form-label">How Did You Hear About Us?</label>
               <textarea type="text"
                         class="form-control"
                         name="aboutus"
                         id="hearaboutus"
+                        placeholder="How Did You Hear About Us?"
                         ngModel
                         rows="4"
                         cols="50">

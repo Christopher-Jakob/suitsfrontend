@@ -25,10 +25,6 @@ $bg-white: white;
   }
 }
 
-#seatingdropdown{
-  position: relative;
-  top: 7px;
-}
 
 #searchinput, #searchbutton{
   position: relative;
@@ -61,4 +57,58 @@ $bg-white: white;
   border-radius: 5px;
   border: rgb(68,147,192) solid 1px;
   color: rgb(68,147,192);
+}
+
+#amenityselect{
+  display: block;
+  position: relative;
+  right: 2.3px;
+  width: 18.5vw;
+}
+
+#cuisinesselect{
+  display: block;
+  position: relative;
+  right: 14px;
+  width: 18.5vw;
+}
+
+#seatingselect{
+  display: block;
+  position: relative;
+  left: 11.5px;
+  width: 18.5vw;
+}
+
+#seatingdropdown{
+  position: relative;
+  display: block;
+  left: 3.5px;
+  font-size: 14px;
+}
+
+#capacityamount{
+  position: relative;
+  bottom: 7px;
+  font-size: 14px;
+}
+
+#searchinput{
+  top: -.5vh;
+  left: .5vh;
+  font-size: 14px;
+  height: 35px;
+}
+
+#searchbutton{
+  position: relative;
+  top: -5.5vh;
+  left: 42vw;
+  font-size: 14px;
+  height: 35px;
+}
+
+.rightbuttons{
+  height: 30px;
+  font-size: 12px;
 }

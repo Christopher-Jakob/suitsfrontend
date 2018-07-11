@@ -20,7 +20,8 @@
                   <div class="spinner"></div>
                 </div>
               </div>
-              <input *ngIf="!choicesload" type="file"
+              <input class="form-control"
+                     *ngIf="!choicesload" type="file"
                      id="groupphotoinput"
                      name="groupphotoinput"
                      accept=".png, .jpg, .jpeg"
@@ -79,91 +80,103 @@
           <div class="restaurantprofiletext STnopadding">
             <h4><strong>Venue Profile <span *ngIf="profileupdatesucess" style="color: green"> Updated Sucessfully</span></strong></h4>
           </div>
-          <div class="col-12 formdiv">
-            <form (click)="activatevenueprofilesubmitbutton()"
-                  (ngSubmit)="editvenueprofile()"
-                  #venueprofileform ="ngForm"
-                  id="resturantprofile">
-              <input type="text"
-                     id="streetaddress1input"
-                     name="streetaddress1input"
-                     placeholder="Street address"
-                     required
-                     [ngModel]="venueobject.streetaddress1">
-              <br>
-              <input type="text"
-                     id="streetaddress2input"
-                     name="streetaddress2input"
-                     placeholder="Street address 2 (optional)"
-                     [ngModel]="venueobject.streetaddress2">
-              <br>
-              <input type="text"
-                     id="phonenumberinput"
-                     name="phonenumberinput"
-                     placeholder="Phone Number"
-                     required
-                     pattern="[0-9]{10}"
-                     [ngModel]="venueobject.phonenumber"
-                     #phonenumberinputcss="ngModel">
-              <span class="help-block" *ngIf="!phonenumberinputcss.valid && phonenumberinputcss.touched">Phone numbers must consist of 10 numbers. Numbers only</span>
+          <form (click)="activatevenueprofilesubmitbutton()"
+                (ngSubmit)="editvenueprofile()"
+                #venueprofileform ="ngForm">
+          <div class="row">
+              <div class="col-12">
+                <input class="form-control"
+                       type="text"
+                       id="streetaddress1input"
+                       name="streetaddress1input"
+                       placeholder="Street address"
+                       required
+                       [ngModel]="venueobject.streetaddress1">
+              </div>
+              <div class="col-12">
+                <input class="form-control"
+                       type="text"
+                       id="streetaddress2input"
+                       name="streetaddress2input"
+                       placeholder="Street address 2 (optional)"
+                       [ngModel]="venueobject.streetaddress2">
 
-              <br>
-              <input type="text"
-                     id="cityinput"
-                     name="cityinput"
-                     placeholder="City"
-                     required
-                     pattern="([A-Z][a-z]+(\s[A-Z][a-z]+)*)"
-                     [ngModel]="venueobject.city"
-                     #cityinputcss="ngModel">
-              <span class="help-block" *ngIf="!cityinputcss.valid && cityinputcss.touched">Each word in a city name must start with a capital with a space between words, and must only contain letters. </span>
-              <br>
-              <input class="halflength"
-                     type="text"
-                     placeholder="State"
-                     id="stateinput"
-                     name="stateinput"
-                     pattern="[A-Z]{2}"
-                     required
-                     [ngModel]="venueobject.state"
-                     #stateinputcss="ngModel">
-              <div *ngIf="stateinputcss.touched && !stateinputcss.valid">A state name must the 2 capital letter abbreviation</div>
+              </div>
+              <div class="col-12">
+                <input class="form-control"
+                       type="text"
+                       id="phonenumberinput"
+                       name="phonenumberinput"
+                       placeholder="Phone Number"
+                       required
+                       pattern="[0-9]{10}"
+                       [ngModel]="venueobject.phonenumber"
+                       #phonenumberinputcss="ngModel">
+                <span class="help-block" *ngIf="!phonenumberinputcss.valid && phonenumberinputcss.touched">Phone numbers must consist of 10 numbers. Numbers only</span>
 
-              <input id="zipinput"
-                     name="zipinput"
-                     class="halflength"
-                     type="text"
-                     required
-                     placeholder="Zip"
-                     pattern="[0-9]{5}"
-                     [ngModel]="venueobject.zipcode"
-                     #zipinputcss="ngModel">
-              <span *ngIf="zipinputcss.touched && !zipinputcss.valid">A zipcode must only contain 5 numbers</span>
-              <br>
-              <div class="row">
-                <div class="col-6">
-                  <label>Search City</label>
+              </div>
+              <div class="col-12">
+                <input class="form-control"
+                       type="text"
+                       id="cityinput"
+                       name="cityinput"
+                       placeholder="City"
+                       required
+                       pattern="([A-Z][a-z]+(\s[A-Z][a-z]+)*)"
+                       [ngModel]="venueobject.city"
+                       #cityinputcss="ngModel">
+                <span class="help-block" *ngIf="!cityinputcss.valid && cityinputcss.touched">Each word in a city name must start with a capital with a space between words, and must only contain letters. </span>
+
+              </div>
+              <div class="col-6">
+                <input class="form-control"
+                       type="text"
+                       placeholder="State"
+                       id="stateinput"
+                       name="stateinput"
+                       pattern="[A-Z]{2}"
+                       required
+                       [ngModel]="venueobject.state"
+                       #stateinputcss="ngModel">
+                <div *ngIf="stateinputcss.touched && !stateinputcss.valid">A state name must the 2 capital letter abbreviation</div>
+
+              </div>
+              <div class="col-6">
+                <input id="zipinput"
+                       name="zipinput"
+                       class="form-control"
+                       type="text"
+                       required
+                       placeholder="Zip"
+                       pattern="[0-9]{5}"
+                       [ngModel]="venueobject.zipcode"
+                       #zipinputcss="ngModel">
+                <span *ngIf="zipinputcss.touched && !zipinputcss.valid">A zipcode must only contain 5 numbers</span>
+              </div>
+              <div class="col-6">
+                <label>Search City</label>
                   <br>
-                  <select id="selectcity"
+                  <select class="form-control"
+                          id="selectcity"
                           name="selectcity"
                           (change)="changesearchcity()"
                           [ngModel]="venueobject.searchcity">
                     <option *ngFor="let city of searchcitylist" [value]="city.pk">{{city.city}}</option>
                   </select>
-                </div>
-                <div class="col-6">
-                  <label>Search Neighborhood</label>
-                  <br>
-                  <select id="searchneighborhood"
-                          name="searchneighborhood"
-                          [ngModel]="venueobject.searchneighborhood">
-                    <option *ngFor="let n of searchneighborhoodlist" [value]="n.pk">{{n.neighborhood}}</option>
-                  </select>
-                </div>
+              </div>
+              <div class="col-6">
+                <label>Search Neighborhood</label>
+                <br>
+                <select class="form-control"
+                        id="searchneighborhood"
+                        name="searchneighborhood"
+                        [ngModel]="venueobject.searchneighborhood">
+                  <option *ngFor="let n of searchneighborhoodlist" [value]="n.pk">{{n.neighborhood}}</option>
+                </select>
               </div>
               <button *ngIf="showvenueprofilesubmitbutton && venueprofileform.valid  " type="submit">Save Changes</button>
-            </form>
           </div>
+          </form>
         </div>
       </div> <!--middlediv-->
 
@@ -191,7 +204,8 @@
             <div class="col-6">
               <label for="newuseremailinput">Email: </label>
               <br>
-              <input type="email"
+              <input class="form-control"
+                     type="email"
                      id="newuseremailinput"
                      required
                      name="newuseremailinput"
@@ -205,7 +219,8 @@
             <div class="col-6" *ngIf="newusercreate">
               <label for="newusernameinput">Name: </label>
               <br>
-              <input type="text"
+              <input class="form-control"
+                     type="text"
                      required
                      id="newusernameinput"
                      name="newusernameinput"
@@ -219,7 +234,8 @@
             <div class="col-6" *ngIf="newusercreate">
               <label for=newuserjobtitle>Job Title: </label>
               <br>
-              <input type="text"
+              <input class="form-control"
+                     type="text"
                      required
                      id="newuserjobtitle"
                      name="newuserjobtitle"
@@ -233,7 +249,8 @@
             <div class="col-6" *ngIf="newusercreate">
               <label for="newuserphoneinput">Phone: </label>
               <br>
-              <input type="text"
+              <input class="form-control"
+                     type="text"
                      pattern="[0-9]{10}"
                      id="newuserphoneinput"
                      name="newuserphoneinput"
@@ -246,7 +263,8 @@
             <div class="col-6">
               <label for="newuserroleselect">Role: </label>
               <br>
-              <select id="newuserroleselect"
+              <select class="form-control"
+                      id="newuserroleselect"
                       required
                       name="newuserroleselect"
                       ngModel
@@ -264,7 +282,8 @@
             <div class="col-6">
               <br>
               <label>Receive RFP Emails &nbsp;</label>
-              <input type="checkbox"
+              <input class="form-control"
+                     type="checkbox"
                      id="rfpreceiveemail"
                      name="rfpreceiveemail"
                      ngModel>
@@ -311,7 +330,8 @@
         <tbody>
         <tr *ngFor="let user of venueusers; let i =index">
           <td>
-            <input (change)="deleteUser(user.id)" type="checkbox"
+            <input class="form-control"
+                   (change)="deleteUser(user.id)" type="checkbox"
                    id="deletecheckbox">
           </td>
           <td>
@@ -320,7 +340,8 @@
             </div>
           </td>
           <td>
-            <input (click)=changerfpemail(i)
+            <input class="form-control"
+                   (click)=changerfpemail(i)
                    type="checkbox"
                    id="changerfpemail"
                    name="changerfpemail"

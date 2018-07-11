@@ -25,12 +25,11 @@ img {
 #img-container {
   position: relative;
   display: block;
-  height: 200px;
+  height: 150px;
 }
 
 .social {
   display: block;
-  border-top: 1px solid #777;
   padding-top: 30px;
   text-align: center;
   padding-left: 0;
@@ -55,7 +54,7 @@ img {
     margin-right: 30px;
     display: inline-block;
     a {
-      color: #777;
+      color: white;
     }
   }
 
@@ -66,17 +65,17 @@ img {
   }
 }
 
+
 #main-info {
   display: block;
-  border-top: 1px solid #777;
   padding-top: 30px;
   text-align: center;
-  color: #777;
+  color: white;
 }
 
 #sub-info {
   display: block;
   padding-top: 20px;
   text-align: center;
-  color: #777;
+  color: white;
 }

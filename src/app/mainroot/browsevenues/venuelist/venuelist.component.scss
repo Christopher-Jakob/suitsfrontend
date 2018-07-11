@@ -7,7 +7,6 @@ $color-primary: rgb(83,139,197);
   overflow: hidden;
   height: 25rem;
   border-radius: 5px;
-  box-shadow: 0 0.5rem 4rem rgba(0,0,0, 0.2);
   transition: all 0.2s;
 
   &:hover {
@@ -30,6 +29,10 @@ $color-primary: rgb(83,139,197);
     color: black;
   }
   .card-container-information{
+    font-size: .9rem;
+  }
+
+  .venuename{
     font-size: 1.3rem;
   }
 }

@@ -36,7 +36,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up Request</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up Request  <span style="color: red"> &nbsp; * Mandatory Fields</span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -47,31 +47,31 @@
       <div *ngIf="!signupcompelete" class="modal-body">
         <form (ngSubmit)="addvenue(createvenueform)" #createvenueform="ngForm">
           <div class="form-group">
-            <label for="inputVenueName" class="col-form-label">Venue Name:</label>
             <input type="text"
+                   placeholder="Venue Name *"
                    class="form-control"
                    id="inputVenueName"
                    name="venuename"
                    ngModel
                    required
-            ><span class="STredstar">*</span>
+            >
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputAddress" class="col-form-label">Address 1:</label>
               <input type="text"
                      class="form-control"
+                     placeholder="Address 1 *"
                      name="venueaddress1"
                      ngModel
                      id="inputAddress"
-                     required><span class="STredstar">*</span>
+                     required>
             </div>
 
             <div class="form-group col-md-6">
-              <label for="inputAddress2" class="col-form-label">Address 2:</label>
               <input type="text"
                      class="form-control"
+                     placeholder="Address 2"
                      name="venueaddress2"
                      ngModel
                      id="inputAddress2">
@@ -80,24 +80,23 @@
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputCity" class="col-form-label">City:</label>
               <input type="text"
                      name="city"
+                     placeholder="City *"
                      ngModel
                      class="form-control"
                      id="inputCity"
                      required
-              ><span class="STredstar">*</span>
+              >
             </div>
 
             <div class="form-group col-md-4">
-              <label for="inputState" class="col-form-label">State:</label>
               <select id="inputState"
                       class="form-control"
                       name="venuestateselect"
                       required
                       ngModel>
-                <option value="">Choose</option>
+                <option value="">State *</option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -148,40 +147,40 @@
                 <option value="WV">WV</option>
                 <option value="WI">WI</option>
                 <option value="WY">WY</option>
-              </select><span class="STredstar">*</span>
+              </select>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputContactName" class="col-form-label">Contact Name:</label>
               <input type="text"
                      class="form-control"
+                     placeholder="Contact Name *"
                      name="venuecontactname"
                      ngModel
                      id="inputContactName"
-                     required><span class="STredstar">*</span>
+                     required>
             </div>
 
             <div class="form-group col-md-6">
-              <label for="inputPhone" class="col-form-label">Phone Number (Digits Only):</label>
-              <input type="number"
+              <input type="text"
                      class="form-control"
                      id="inputPhone"
                      name="venuephone"
+                     placeholder="Phone (Digits Only) *"
                      pattern="([0-9]{10})"
                      ngModel
                      #PhoneCSS = "ngModel"
                      required
-              ><span class="STredstar">*</span>
+              >
               <span *ngIf="PhoneCSS.touched && !PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputJobTitle" class="col-form-label">Job Title:</label>
               <input type="text"
+                     placeholder="Job Title"
                      class="form-control"
                      name="venuejobtitle"
                      ngModel
@@ -189,13 +188,13 @@
             </div>
 
             <div class="form-group col-md-6">
-              <label for="inputEmail" class="col-form-label">Contact Email:</label>
               <input type="email"
                      class="form-control"
+                     placeholder="Contact Email *"
                      id="inputEmail"
                      name="venueemail"
                      ngModel
-                     required><span class="STredstar">*</span>
+                     required>
             </div>
           </div>
           <div class="modal-footer">
