@@ -69,6 +69,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   };
 
   savedevent = {
+    name: '',
     date: '',
     programdate: '',
     dateflex: false,
@@ -90,6 +91,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
 
   sendrfp(form:NgForm) {
     if (this.user == null) {
+      this.savedevent.name = form.value.eventname;
       this.savedevent.date = form.value.eventdate;
       this.savedevent.programdate = form.value.eventdate;
       this.savedevent.dateflex = form.value.dateflexcheckbox;
@@ -105,6 +107,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     }
     if(this.user != null){
       let payload = {
+        eventname: form.value.eventname,
         eventdate: form.value.eventdate,
         programdate: form.value.eventdate,
         eventdateflex: form.value.dateflexcheckbox,
@@ -126,6 +129,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
           (error)=>{
             if(error.status === 403){
               this.user = null;
+              this.savedevent.name = form.value.eventname;
               this.savedevent.date = form.value.eventdate;
               this.savedevent.programdate = form.value.eventdate;
               this.savedevent.dateflex = form.value.dateflexcheckbox;
@@ -147,6 +151,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
 
   populaterfpfromsaved(index, savedrfp, newrfp){
     const scoperfp = this.savedrfps[index];
+    this.savedevent.name = scoperfp.eventname;
     this.savedevent.date = scoperfp.datename;
     this.savedevent.programdate = scoperfp.datevalue;
     this.savedevent.dateflex = scoperfp.dateflex;

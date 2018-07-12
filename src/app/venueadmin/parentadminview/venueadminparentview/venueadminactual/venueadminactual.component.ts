@@ -16,6 +16,7 @@ export class VenueadminactualComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router:Router, private inceptionservice: VenueAdminInceptionService, private venuevolley: VenueAdminVolleyService, private parentadminservice: VenueAdminParentAdminService ) { }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.parentadminservicevar = this.parentadminservice.receivepermission()
       .subscribe(
         (req: any)=>{

@@ -1,21 +1,41 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {VenueService} from "../../services/venueservice/venueservice";
+import {NgForm} from "@angular/forms";
 import {ModalToggleService} from '../../services/pagemixins/modeltoggleservice/modaltoggle.service';
 import {RoompageDependancyService} from '../../services/pagedependancy/roompage/roompage.dependancy.service';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BrowsevenuescomponentcommService} from "../../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
+import {RFPService} from "../../services/rfpservice/rfpservice";
+import {ClientUserService} from "../../services/userservice/clientuserservice/clientuserservice";
+import {UserAuthorizationService} from "../../services/userservice/userauthorizationservice/userauthorizationservice";
 
 @Component({
   selector: 'app-roompage',
   templateUrl: './roompage.component.html',
   styleUrls: ['./roompage.component.scss'],
-  providers:[RoompageDependancyService]
+  providers:[RoompageDependancyService, RFPService, ClientUserService]
 })
 export class RoompageComponent implements OnInit, OnDestroy {
 
-  constructor(private venueservice: VenueService, private route: ActivatedRoute, private roompagedependancyservice: RoompageDependancyService, private router: Router, private rfpmodaltoggle: ModalToggleService, private modalService: NgbModal, private browsevenuescommservice:BrowsevenuescomponentcommService) {
+  constructor(private venueservice: VenueService, private route: ActivatedRoute, private roompagedependancyservice: RoompageDependancyService, private router: Router, private rfpmodaltoggle: ModalToggleService, private modalService: NgbModal, private browsevenuescommservice:BrowsevenuescomponentcommService, private rfpservice : RFPService, private clientservice: ClientUserService,  private authservice: UserAuthorizationService) {
   }
+
+  signup =false;
+  rfpshow = false;
+  verifysignup = false;
+  venuename;
+  venueadmin;
+  option = false;
+  permission;
+  rfpsent = false;
+  loginorsignup =false;
+  parentadminservicevar;
+  userservicesubscription;
+  user = null;
+  // used for  event purpose dropdown on rfp
+  eventpurpose;
+  roomnames = [];
 
   // height
   roomheight = "30rem";
@@ -74,7 +94,6 @@ export class RoompageComponent implements OnInit, OnDestroy {
 
   };
   otherrooms = [];
-  venuename;
   roomname;
   linkvenuename;
 
@@ -117,6 +136,235 @@ export class RoompageComponent implements OnInit, OnDestroy {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  savedevent = {
+    name: '',
+    date: '',
+    programdate: '',
+    dateflex: false,
+    eventpurpose: '',
+    roompreference: '',
+    starttime: '',
+    starttimeflex: false,
+    endtime: '',
+    endtimeflex: false,
+    headcount: '',
+    eventdetails: ''
+
+  };
+
+  sendrfp(form:NgForm) {
+    if (this.user == null) {
+      this.savedevent.name = form.value.eventname;
+      this.savedevent.date = form.value.eventdate;
+      this.savedevent.programdate = form.value.eventdate;
+      this.savedevent.dateflex = form.value.dateflexcheckbox;
+      this.savedevent.eventpurpose = form.value.eventpurpose;
+      this.savedevent.starttime = form.value.starttime;
+      this.savedevent.starttimeflex = form.value.starttimeflexcheckbox;
+      this.savedevent.endtime = form.value.endtime;
+      this.savedevent.endtimeflex = form.value.endtimeflexcheckbox;
+      this.savedevent.roompreference = form.value.roomselect;
+      this.savedevent.headcount = form.value.guestcount;
+      this.savedevent.eventdetails = form.value.eventdetails;
+    }
+    if(this.user != null){
+      let payload = {
+        eventname: form.value.eventname,
+        eventdate: form.value.eventdate,
+        programdate: form.value.eventdate,
+        eventdateflex: form.value.dateflexcheckbox,
+        eventpurpose: form.value.eventpurpose,
+        startime: form.value.starttime,
+        starttimeflex: form.value.starttimeflexcheckbox,
+        endtime: form.value.endtime,
+        endtimeflex: form.value.endtimecheckbox,
+        roompreference : form.value.roomselect,
+        guestcount: form.value.guestcount,
+        eventdetails: form.value.eventdetails
+      };
+      payload.eventdate = this.datevaluetoname(payload.eventdate);
+      this.rfpservice.emailrfp(payload, this.venue.id)
+        .subscribe(
+          (req: any) => {
+            this.rfpsent = true;
+          },
+          (error)=>{
+            if(error.status === 403){
+              this.user = null;
+              this.savedevent.name = form.value.eventname;
+              this.savedevent.date = form.value.eventdate;
+              this.savedevent.programdate = form.value.eventdate;
+              this.savedevent.dateflex = form.value.dateflexcheckbox;
+              this.savedevent.eventpurpose = form.value.eventpurpose;
+              this.savedevent.starttime = form.value.starttime;
+              this.savedevent.starttimeflex = form.value.starttimeflexcheckbox;
+              this.savedevent.endtime = form.value.endtime;
+              this.savedevent.endtimeflex = form.value.endtimeflexcheckbox;
+              this.savedevent.roompreference = form.value.roomselect,
+                this.savedevent.headcount = form.value.guestcount;
+              this.savedevent.eventdetails = form.value.eventdetails;
+              this.loginorsignup = true;
+            }
+          }
+        );
+
+    }
+  }
+
+  populaterfpfromsaved(index, savedrfp, newrfp){
+    const scoperfp = this.savedrfps[index];
+    this.savedevent.name = scoperfp.name;
+    this.savedevent.date = scoperfp.datename;
+    this.savedevent.programdate = scoperfp.datevalue;
+    this.savedevent.dateflex = scoperfp.dateflex;
+    this.savedevent.eventpurpose = scoperfp.eventpurpose;
+    this.savedevent.starttime = scoperfp.startime;
+    this.savedevent.starttimeflex = scoperfp.starttimeflex;
+    this.savedevent.endtime = scoperfp.endtime;
+    this.savedevent.endtimeflex = scoperfp.endtimeflex;
+    this.savedevent.headcount = scoperfp.headcount;
+    this.savedevent.eventdetails = scoperfp.eventdetails;
+    let options = {
+      'show': false
+    };
+    (<any>$('#createSaved')).modal(options);
+    options = {
+      'show': true
+    };
+    (<any>$('#createProp')).modal(options);
+
+
+  }
+
+  savedrfps;
+  useremail;
+  userpassword;
+  clientsignup(form:NgForm){
+    let payload = {
+      name: form.value.signupfirstname + ' ' + form.value.signuplastname,
+      email: form.value.signupemail,
+      password: form.value.signuppassword,
+      companyname: form.value.companyname,
+      phone: form.value.signupphoneinput,
+      isclient: true,
+      rfpsignup: true
+    };
+    this.useremail = payload.email;
+    this.userpassword = payload.password;
+    this.clientservice.createclientuser(payload)
+      .subscribe(
+        (req: any)=>{
+          this.verifysignup = true;
+        }
+      );
+
+  }
+
+  login(form:NgForm){
+    const payload = {
+      email: form.value.loginemail,
+      password: form.value.passwordlogin,
+      localstorage: true
+    };
+    if(form.value.remembercheckbox == ''){
+      payload.localstorage = false;
+    }
+    this.authservice.gettoken(payload);
+  }
+
+  signupverify(form:NgForm){
+    const payload ={
+      password: form.value.signupverification
+    };
+    this.clientservice.clientverify(payload)
+      .subscribe(
+        (req: any)=>{
+          const payload = {
+            email: this.useremail,
+            password: this.userpassword
+          };
+          this.authservice.gettoken(payload);
+
+
+        }
+      );
+
+  }
+
+  rfpusersignuptoggle(){
+    this.signup = !this.signup;
+  }
+
+  // variable to hold venue service
+  venueservicevar;
+
+  // variable used to reset rfp dropdown
+  dropdownreset = "";
+  // determine which rfp to send
+
+  rfptoggle(form:NgForm, createnew, createsaved){
+    if(form.value.rfpsendselect === 'n'){
+      this.open(createnew);
+      this.dropdownreset = 'n';
+      this.dropdownreset = ''
+
+    }
+    if(form.value.rfpsendselect === 's'){
+      this.open(createsaved);
+      this.dropdownreset = "s";
+      this.dropdownreset = '';
+    }
+
+  }
+
+  // code for changing a date value to a date name
+  datevaluetoname(eventdate){
+    const spilteventdate = eventdate.split('-', 3);
+    let eventdatename;
+    const monthnumber = spilteventdate[1];
+    if(monthnumber === '01'){
+      eventdatename = 'January ';
+    }
+    else if(monthnumber === '02'){
+      eventdatename = 'Febuary ';
+    }
+    else if(monthnumber === '03'){
+      eventdatename = 'March ';
+    }
+
+    else if(monthnumber === '04'){
+      eventdatename = 'April ';
+    }
+
+    else if(monthnumber === '05'){
+      eventdatename = 'May ';
+    }
+    else if(monthnumber === '06'){
+      eventdatename = 'June ';
+    }
+    else if(monthnumber === '07'){
+      eventdatename = 'July ';
+    }
+    else if(monthnumber === '08'){
+      eventdatename = 'August ';
+    }
+    else if(monthnumber === '09'){
+      eventdatename = 'September ';
+    }
+    else if(monthnumber === '10'){
+      eventdatename = 'October ';
+    }
+    else if(monthnumber === '11'){
+      eventdatename = 'November ';
+    }
+    else {
+      eventdatename = 'December';
+    }
+    eventdatename = eventdatename + spilteventdate[2] + ' ' + spilteventdate[0];
+    return eventdatename;
+
   }
 
 

@@ -82,6 +82,8 @@ import {ClientadminComponent} from "./mainroot/clientadmin/clientadmin.component
 import { SigninComponent } from './pagemixins/modals/signin/signin.component';
 import { SuitsvenueusersComponent } from './suitsandtablesadmin/suitsvenueusers/suitsvenueusers.component';
 import { ContactusComponent } from './mainroot/contactus/contactus.component';
+import { SentrfpsComponent } from './mainroot/clientadmin/sentrfps/sentrfps.component';
+import { ReceivedrfpsComponent } from './venueadmin/parentadminview/receivedrfps/receivedrfps.component';
 
 
 const appRoutes: Routes = [
@@ -105,6 +107,7 @@ const appRoutes: Routes = [
         children:[
           {path: 'profile', component: ClientprofileComponent},
         ]},
+      {path: 'rfps', component: SentrfpsComponent },
       {path: 'client-profile-deleted', component: ClientprofiledeletesuccessComponent},
       {path: 'user/forgot-password/validate/:resetstring', component: ResetpasswordComponent},
       {path: 'user/:type/validate/:verificationstring', component: UservenueverificaitonComponent},
@@ -127,6 +130,7 @@ const appRoutes: Routes = [
   {path: 'admin/:permission', canActivate: [VenueSuitsAdminSuperUserGuard], component: ParentadminviewComponent,
     children:[
       {path: 'user-profile/:pk', component: VenueuserprofileComponent},
+      {path: 'receivedrfps', component:ReceivedrfpsComponent},
       {path: 'venue-list', component: VenueadminparentviewComponent,
         children:[
           {path: '', component: VenueadminpageComponent},
@@ -204,6 +208,8 @@ const appRoutes: Routes = [
     SigninComponent,
     SuitsvenueusersComponent,
     ContactusComponent,
+    SentrfpsComponent,
+    ReceivedrfpsComponent,
   ],
   imports: [
     BrowserModule,

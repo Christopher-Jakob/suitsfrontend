@@ -334,6 +334,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(){
+    window.scrollTo(0,0);
     this.inceptionservice.sendsignal('venuepage');
     this.parentadminservicevar = this.parentadminservice.receivepermission()
       .subscribe(

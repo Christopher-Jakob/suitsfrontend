@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="float-left">
+        <h2> Sent Requests For Proposals</h2>
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Event Name</th>
+            <th scope="col">Event Date</th>
+            <th scope="col">Event Purpose</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">End Time</th>
+            <th scope="col">Head Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rfp of sentrfps">
+            <td>{{rfp.date}}</td>
+            <td>{{rfp.name}}</td>
+            <td>{{rfp.purpose}}</td>
+            <td>{{rfp.starttime}}</td>
+            <td>{{rfp.endttime}}</td>
+            <td>{{rfp.headcount}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
