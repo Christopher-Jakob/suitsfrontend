@@ -166,7 +166,6 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('descriptioninputform') descriptioninputform:NgForm;
-  @ViewChild('hoursofoperationform') hoursofoperation: NgForm;
   @ViewChild('updateparkingform') updateparkingform: NgForm;
   @ViewChild('venueattributeform') venueattributeform: NgForm;
 
@@ -182,27 +181,6 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
       venuecontactname: this.venueobject.venuecontactname,
       venuecontactjobtitle: this.venueobject.venuecontactjobtitle,
       venuecontactemail: this.venueobject.venuecontactemail,
-      sundayhop: this.hoursofoperation.form.value.sundaycheckbox,
-      sundayhopopen: this.hoursofoperation.form.value.sundayopentime,
-      sundayhopclose: this.hoursofoperation.form.value.sundayclosetime,
-      mondayhop: this.hoursofoperation.form.value.mondaycheckbox,
-      mondayhopopen: this.hoursofoperation.form.value.mondayopentime,
-      mondayhopclose: this.hoursofoperation.form.value.mondayclosetime,
-      tuesdayhop: this.hoursofoperation.form.value.tuesdaycheckbox,
-      tuesdayhopopen: this.hoursofoperation.form.value.tuesdayopentime,
-      tuesdayhopclose: this.hoursofoperation.form.value.tuesdayclosetime,
-      wednesdayhop: this.hoursofoperation.form.value.wednesdaycheckbox,
-      wednesdayhopopen: this.hoursofoperation.form.value.wednesdayopentime,
-      wednesdayhopclose: this.hoursofoperation.form.value.wednesdayclosetime,
-      thursdayhop: this.hoursofoperation.form.value.thursdaycheckbox,
-      thursdayhopopen: this.hoursofoperation.form.value.thursdayopentime,
-      thursdayhopclose: this.hoursofoperation.form.value.thursdayclosetime,
-      fridayhop: this.hoursofoperation.form.value.fridaycheckbox,
-      fridayhopopen: this.hoursofoperation.form.value.fridayopentime,
-      fridayhopclose: this.hoursofoperation.form.value.fridayclosetime,
-      saturdayhop: this.hoursofoperation.form.value.saturdaycheckbox,
-      saturdayhopopen: this.hoursofoperation.form.value.saturdayopentime,
-      saturdayhopclose: this.hoursofoperation.form.value.saturdayclosetime,
       valetparking: this.updateparkingform.form.value.valetparkingcheckbox,
       valetparkingamount: this.updateparkingform.form.value.valetprice,
       onsiteparking: this.updateparkingform.form.value.onsitecheckbox,

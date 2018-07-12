@@ -33,16 +33,16 @@
     <th>
       City
     </th>
-    <th>
+    <th *ngIf="!pusherror">
       Contact Name
     </th>
-    <th>
+    <th *ngIf="!pusherror">
       Email Address
     </th>
-    <th>
+    <th *ngIf="!pusherror">
       Phone Number
     </th>
-    <th>
+    <th *ngIf="!pusherror">
       Status
     </th>
     <th>
@@ -58,13 +58,13 @@
     <td>
       {{venue.city}}
     </td>
-    <td>
+    <td *ngIf="!pusherror && activeindex != i">
       {{venue.venuecontactname}}
     </td>
-    <td>
+    <td *ngIf="!pusherror && activeindex != i">
       {{venue.venuecontactemail}}
     </td>
-    <td>
+    <td *ngIf="!pusherror && activeindex != i">
       {{venue.phonenumber}}
     </td>
     <td *ngIf="!deleteconfrimshow && activeindex !== i">
@@ -74,6 +74,9 @@
     <td *ngIf="!deleteconfrimshow && activeindex !== i">
       <button (click)="deactivatevenue(i)" *ngIf="venue.online" id="deactivatebutton">Hide Venue</button>
       <button (click)="activatevenue(i)" *ngIf="!venue.online" class="btn-success">Push Public</button>
+    </td>
+    <td *ngIf="pusherror && activeindex == i">
+      Venues Must Have A Image
     </td>
     <td>
       <button (click)="showdeleteconfrim(i)" *ngIf="activeindex !== i" class="btn-danger">Delete</button>
