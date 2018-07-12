@@ -129,6 +129,7 @@ export class SuitsvenuesComponent implements OnInit {
 
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.dependancyservice.getvenuelist()
       .subscribe(
         (req: any)=>{

@@ -130,7 +130,6 @@ const appRoutes: Routes = [
   {path: 'admin/:permission', canActivate: [VenueSuitsAdminSuperUserGuard], component: ParentadminviewComponent,
     children:[
       {path: 'user-profile/:pk', component: VenueuserprofileComponent},
-      {path: 'receivedrfps', component:ReceivedrfpsComponent},
       {path: 'venue-list', component: VenueadminparentviewComponent,
         children:[
           {path: '', component: VenueadminpageComponent},
@@ -139,6 +138,7 @@ const appRoutes: Routes = [
         children:[
           {path: 'profile', component: VenueprofileComponent },
           {path: 'venuepage', component: VenuecreateeditComponent},
+          {path: 'receivedrfps', component:ReceivedrfpsComponent},
           {path: 'room', component: VenueadminroomrootComponent,
             children:[
               {path: 'list', component: VenueadminroomlistComponent},

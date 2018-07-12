@@ -44,6 +44,7 @@ export class SuitsvenueusersComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.venueuserservice.venueuserlist()
       .subscribe(
         (req: any)=>{

@@ -48,6 +48,7 @@ export class SuitsdeclinedapplicationdetailComponent implements OnInit {
 
   venuepk;
   ngOnInit() {
+    window.scrollTo(0,0);
     this.route.params
       .subscribe(
         params =>{

@@ -17,6 +17,7 @@ export class SuitsnewvenueapplicationsComponent implements OnInit {
 
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.applicationlistservice.getvenueapplicationlist()
       .subscribe(
         (req: any)=>{

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {savedrfps, sendinitalrfp} from "../../urls/pagemixins/make-rfpurls";
+import {savedrfps, sendinitalrfp, sentrfps} from "../../urls/pagemixins/make-rfpurls";
 /**
  * Created by rickus on 7/6/18.
  */
@@ -17,6 +17,15 @@ export class RFPService{
   emailrfp(payload, venueid){
     const url = sendinitalrfp + '/' + String(venueid);
     return this.http.post(url, payload);
+  }
+
+  getreceivedrfps(venuepk){
+    const url = sentrfps + '/' + String(venuepk);
+    return this.http.get(url);
+  }
+
+  getsendtrfps(){
+    return this.http.get(sentrfps);
   }
 
 }

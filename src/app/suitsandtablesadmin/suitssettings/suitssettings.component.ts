@@ -739,6 +739,7 @@ export class SuitssettingsComponent implements OnInit {
 
 
   ngOnInit() {
+    window.scrollTo(0,0);
 
     // dependancy services
 

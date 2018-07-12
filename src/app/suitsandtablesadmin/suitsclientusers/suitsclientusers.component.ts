@@ -38,6 +38,7 @@ export class SuitsclientusersComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.clientuser.clientuserlist()
       .subscribe(
         (req: any)=>{

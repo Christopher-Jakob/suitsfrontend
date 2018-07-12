@@ -40,6 +40,7 @@ export class SuitsdeclinedapplicationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.dependancyservice.declinedvenueapplicationlist()
       .subscribe(
         (req: any)=>{

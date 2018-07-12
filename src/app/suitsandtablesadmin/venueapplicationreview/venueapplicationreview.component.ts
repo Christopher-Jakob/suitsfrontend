@@ -231,6 +231,7 @@ export class VenueapplicationreviewComponent implements OnInit{
   cuisines=[];
   venueapplicationpk;
   ngOnInit() {
+    window.scrollTo(0,0);
     //get pk from route for venueapplication object get
     this.route.params
       .subscribe(
