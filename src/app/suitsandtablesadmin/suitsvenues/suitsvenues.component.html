@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<table *ngIf="!choicesload" width="100%">
+<table class="table-hover" *ngIf="!choicesload" width="100%">
   <tr>
     <th>
       Venue ID
@@ -49,25 +49,25 @@
     </th>
   </tr>
   <tr *ngFor=" let venue of venues; let i=index">
-    <td>
-      <a (click)="navipush(i)">{{venue.id}}</a>
+    <td (click)="navipush(i)">
+      {{venue.id}}
     </td>
-    <td>
+    <td (click)="navipush(i)">
       {{venue.name}}
     </td>
-    <td>
+    <td (click)="navipush(i)">
       {{venue.city}}
     </td>
-    <td *ngIf="!pusherror && activeindex != i">
+    <td *ngIf="!pusherror && activeindex != i" (click)="navipush(i)">
       {{venue.venuecontactname}}
     </td>
-    <td *ngIf="!pusherror && activeindex != i">
+    <td *ngIf="!pusherror && activeindex != i" (click)="navipush(i)">
       {{venue.venuecontactemail}}
     </td>
-    <td *ngIf="!pusherror && activeindex != i">
+    <td *ngIf="!pusherror && activeindex != i" (click)="navipush(i)">
       {{venue.phonenumber}}
     </td>
-    <td *ngIf="!deleteconfrimshow && activeindex !== i">
+    <td *ngIf="!deleteconfrimshow && activeindex !== i" (click)="navipush(i)">
       <h5 *ngIf="venue.online" style="color: green">Public</h5>
       <h5 *ngIf="!venue.online" style="color: red"> Hidden</h5>
     </td>

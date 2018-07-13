@@ -96,9 +96,18 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
 
     }
   }
-
+  fullbuyoutnoonline = false;
+  roomnoonline = false;
   roomonline() {
     if (!this.fullbuyoutedit) {
+      const roomimagelength = this.roomobject.roomimage_set.length;
+      if(roomimagelength < 1 && !this.roomobject.online){
+        this.roomnoonline = true;
+        setTimeout(()=>{
+          this.roomnoonline = false;
+        }, 5000);
+        return 0;
+      }
       const payload = {
         venue: this.venueobject.id,
         online: true
@@ -111,6 +120,14 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
         );
     }
     if (this.fullbuyoutedit) {
+      const venueimagelength = this.venueobject.venueimage_set.length;
+      if(venueimagelength < 1 && !this.venueobject.fullbuyoutonline){
+        this.fullbuyoutnoonline = true;
+        setTimeout(()=>{
+          this.fullbuyoutnoonline = false;
+        }, 5000);
+        return 0;
+      }
       const payload = {
         name: this.venueobject.name,
         city: this.venueobject.city,

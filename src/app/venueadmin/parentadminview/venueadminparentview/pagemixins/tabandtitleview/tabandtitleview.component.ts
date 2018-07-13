@@ -34,6 +34,7 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
   updatedvolleyvar;
   tabservicevar;
   showupdated = false;
+  pushfail = false;
 
   unshowupdated(){
     this.showupdated = false;
@@ -156,6 +157,15 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
 
 
   changestatus(){
+    const venuephotolength = this.venueobject.venueimage_set.length;
+    if(venuephotolength < 1){
+      this.pushfail = true;
+      setTimeout(()=>{
+        this.pushfail = false;
+      }, 2500);
+      return 0;
+    }
+
     const pk = this.venueobject.id;
     const payload = {
       name: this.venueobject.name,

@@ -390,6 +390,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
                       this.filteredvenues = req;
                       for(let venue in this.filteredvenues){
                         let images = this.filteredvenues[venue].venueimage_set;
+                        images = images.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
                         for(let image in images){
                           images[image] = images[image].imageurl;
                         }

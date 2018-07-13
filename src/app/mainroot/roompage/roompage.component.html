@@ -21,34 +21,30 @@
     <div class="SecHeadunderline">
       <a [routerLink]="['/venue',venue.name]">{{ venue.name }}</a>
     </div>
-    <div class="FirstHead">
-      <div *ngIf="!fullbuyoutroomactive" class="span-style">
+    <div class="row">
+      <div *ngIf="!fullbuyoutroomactive" class="col-auto roommain">
         {{ roomname }}
       </div>
-      <div *ngIf="fullbuyoutroomactive" class="span-style">
+      <div *ngIf="fullbuyoutroomactive" class="col-auto roommain">
         Full Buyout
       </div>
-      <div class="span-style" *ngIf= "room.privateroom == true">
-        &nbsp; Private
+      <div class="col-auto roommain" *ngIf= "room.privateroom == true">
+        Private
       </div>
 
-      <div class="span-style" *ngIf= "room.semiprivateroom == true">
-        &nbsp; Semi-Private
+      <div class="col-auto roommain" *ngIf= "room.semiprivateroom == true">
+        Semi-Private
       </div>
-    </div>
-
-    <div class="SecHead">
-      <div>
-        <div *ngIf="!fullbuyoutroomactive" id="Seat" class="span-style"> {{ room.seatedcapacity }} seated </div>
-        <div *ngIf="fullbuyoutroomactive" id="Seat" class="span-style"> {{ venue.fullbuyoutseatedcapacity }} seated </div>
-        <div *ngIf="!fullbuyoutroomactive" id="Stand" class="span-style"> &nbsp; {{ room.standingcapacity }} standing </div>
-        <div *ngIf="fullbuyoutroomactive" id="Stand" class="span-style"> &nbsp; {{ venue.fullbuyoutstandingcapactiy }} standing </div>
+      <div *ngIf="!fullbuyoutroomactive" id="Seat" class="col-auto roommain"> {{ room.seatedcapacity }} seated
       </div>
+    <div *ngIf="fullbuyoutroomactive" id="Seat" class="col-auto roommain"> {{ venue.fullbuyoutseatedcapacity }} seated
     </div>
+    <div *ngIf="!fullbuyoutroomactive" id="Stand" class="col-auto roommain"> {{ room.standingcapacity }} standing </div>
+    <div *ngIf="fullbuyoutroomactive" id="Stand" class="col-auto roommain"> {{ venue.fullbuyoutstandingcapactiy }} standing </div>
   </div>
   <div id="rfpselect">
     <form #rfpchoiceform="ngForm" class="float-right">
-      <select class="form-control" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
+      <select class="form-control btn-primary" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
               id="rfpsendselect"
               name="rfpsendselect"
               [ngModel]="dropdownreset">
@@ -177,7 +173,7 @@
             </slideshow>
           </div>
 
-          <div (click)="ngOnInit()" style="cursor: pointer;" class="card-container-information" [routerLink]="['/venue',venue.name,r.name]">
+          <div style="cursor: pointer;" class="card-container-information" [routerLink]="['/venue',venue.name,r.name]">
             <div class="card-container-information__main">
               {{ r.name }}
             </div>

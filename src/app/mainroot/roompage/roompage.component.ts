@@ -308,7 +308,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
     if(form.value.rfpsendselect === 'n'){
       this.open(createnew);
       this.dropdownreset = 'n';
-      this.dropdownreset = ''
+      this.dropdownreset = '';
 
     }
     if(form.value.rfpsendselect === 's'){
@@ -370,13 +370,15 @@ export class RoompageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    window.scrollTo(0,0);
-    this.browsevenuescommservice.sendstate('show');
+       this.browsevenuescommservice.sendstate('show');
     this.route.params
       .subscribe(
         (params: Params)=>{
+          window.scrollTo(0,0);
           this.fullbuyoutroomactive = false;
           this.otherrooms = [];
+          this.venue = null;
+          this.room = null;
           this.venuename = params['name'];
           this.roomname = params['room'];
           this.linkvenuename = this.venuename;
@@ -395,7 +397,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
                 this.venue = req.venue;
                 console.log("this is venue");
                 console.log(this.venue);
-
+                this.venue.venueimage_set = this.venue.venueimage_set = this.venue.venueimage_set.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
                 for(let image in this.venue.venueimage_set){
                   this.venue.venueimage_set[+image] = this.venue.venueimage_set[+image].imageurl as any;
                 }
@@ -408,6 +410,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
 
                     console.log(this.room);
                     let roomimageset = this.room.roomimage_set;
+                    roomimageset = roomimageset.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
                     for (let image in roomimageset) {
                       roomimageset[+image] = roomimageset[+image].imageurl;
                     }
@@ -416,6 +419,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
                   if (this.venue.room_set[+r].online && this.venue.room_set[+r].name !== this.roomname) {
                     let workingroom = this.venue.room_set[+r];
                     let images = workingroom.roomimage_set;
+                    images = images.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
                     for (let i in images) {
                       images[i] = images[i].imageurl;
                     }
@@ -423,13 +427,13 @@ export class RoompageComponent implements OnInit, OnDestroy {
                     this.otherrooms.push(workingroom);
                   }
                 }
-                console.log('this is the other rooms');
-                console.log(this.otherrooms);
+
               });
         });
   }
 
   ngOnDestroy(){
+    this.otherrooms =[];
     this.browsevenuescommservice.sendstate('unshow');
 
   }

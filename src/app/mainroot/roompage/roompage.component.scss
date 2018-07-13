@@ -6,7 +6,7 @@ $color-gray: rgb(236,236,236);
 }
 
 .FirstHead {
-  font-size: 2.0rem;
+  font-size: 1.5rem;
   font-weight: 100;
   padding: 0.5rem 0;
 }
@@ -24,21 +24,8 @@ $color-gray: rgb(236,236,236);
 
 }
 
-.span-style {
-  display: inline-block;
-  &:not(:last-child){
-    border-right: black solid 2px;
-    padding-right: 1rem;
-    padding-left: 3rem;
-  }
-  &__mid {
-    padding-right: 3rem;
-    padding-left: 3rem
-  }
-  &__lg {
-    padding-right: 10rem;
-    padding-left: 3rem;
-  }
+.roommain{
+  font-size: 22px;
 }
 
 p {
@@ -125,6 +112,8 @@ $color-primary: rgb(83,139,197);
 
 #rfpselect{
   display: block;
+  background-color: #00688B;
+  border-color: #00688B;
   position: relative;
-  top: -35vh;
+  top: -10vh;
 }

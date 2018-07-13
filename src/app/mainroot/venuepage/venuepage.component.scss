@@ -1,7 +1,7 @@
 $color-gray: rgb(236,236,236);
 .Section {
   border-bottom: $color-gray solid 3px;
-  padding: 3rem 0;
+  padding: 1.5rem 1rem;
   margin-bottom: 1rem;
 }
 
@@ -66,12 +66,10 @@ p {
 $color-primary: rgb(83,139,197);
 
 .card-container {
-  backface-visibility: hidden;
   overflow: hidden;
   cursor: pointer;
   height: 25rem;
   border-radius: 5px;
-  box-shadow: 0 0.5rem 4rem rgba(0,0,0, 0.2);
   transition: all 0.2s;
 
   &:hover {
