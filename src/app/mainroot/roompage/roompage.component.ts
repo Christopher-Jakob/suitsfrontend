@@ -403,7 +403,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
                 }
 
                 for(let r in this.venue.room_set) {
-                  if (this.venue.room_set[+r].name === this.roomname && this.venue.room_set[+r].online) {
+                  if (this.venue.room_set[+r].name === this.roomname) {
                     this.room = this.venue.room_set[+r];
 
                     console.log("this is the room");
