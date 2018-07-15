@@ -19,11 +19,6 @@ export class TeamComponent implements OnInit {
         title:"Founder and CEO"
       },
       {
-        selfie: "assets/images/team/bobby.jpg",
-        name: "Bobby Corsentino",
-        title:"Founder and CEO"
-      },
-      {
         selfie: "assets/images/team/brandon.jpg",
         name: "Brandon Pearlman",
         title: "COO"

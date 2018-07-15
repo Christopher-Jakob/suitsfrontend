@@ -2,7 +2,7 @@
 
 <div class="row">
   <!--city and neighborhood row-->
-  <div class="col-md-5">
+  <div class="col-5">
     <!-- state-->
     <h3>State</h3>
     <br>
@@ -16,9 +16,9 @@
       <!--city display wrapper-->
       <div *ngFor="let s of states; let i=index">
         <div *ngIf="activestateindex !==i">
-          <a (click)="selectstatecity(i)" class="cityselectlink">{{s.name}}</a>
-          <a (click)="activateeditstate(i)" class="settingslink">Edit</a>
-          <a (click)="activatedeletestate(i)" class="settingslink">Delete</a>
+          <a (click)="selectstatecity(i)" class="badge badge-light col-2">{{s.name}}</a>
+          <a (click)="activateeditstate(i)" class="badge badge-secondary col-2">Edit</a>
+          <a (click)="activatedeletestate(i)" class="badge badge-danger col-2">Delete</a>
         </div>
 
         <div *ngIf="activestateindex === i">
@@ -50,7 +50,7 @@
   </div>
   <!--state-->
 
-  <div class="col-md-5">
+  <div class="col-5">
     <!--city-->
     <h3>{{selectedstate}} Cities</h3>
     <br>
@@ -72,11 +72,11 @@
         <!--city display wrapper-->
         <div *ngFor="let c of cities; let i=index">
           <div *ngIf="activecityindex !== i">
-            <a (click)="selectcityneighborhood(i)" class="cityselectlink"> {{c.city}}</a>
-            <label *ngIf="c.online">Online</label>
-            <label *ngIf="!c.online">Offline</label>
-            <a (click)="activateeditcity(i)" class="settingslink">Edit</a>
-            <a (click)="activatedeletecity(i)" class="settingslink">Delete</a>
+            <a  (click)="selectcityneighborhood(i)" class="col-6 badge badge-light  "> {{c.city}}</a>
+            <a class="col-2 badge badge-success" *ngIf="c.online">Online</a>
+            <a class="col-2 badge badge-danger" *ngIf="!c.online">Offline</a>
+            <a (click)="activateeditcity(i)" class="col-2 badge badge-secondary">Edit</a>
+            <a class="badge badge-danger col-2" (click)="activatedeletecity(i)">Delete</a>
           </div>
 
           <div *ngIf="showeditcity && activecityindex === i">
@@ -144,9 +144,9 @@
 
       <div *ngFor="let neighborhoods of selectedcityneighborhoods; let i =index">
         <div>
-          {{neighborhoods.neighborhood}}
-          <a (click)="activateeditneighborhood(i)" class="settingslink">Edit</a>
-          <a (click)="activatedeleteneighborhood(i)" class="settingslink">Delete</a>
+          <a class="col-8 badge badge-light">{{neighborhoods.neighborhood}}</a>
+          <a class="col-2 badge badge-secondary"  (click)="activateeditneighborhood(i)" class="col">Edit</a>
+          <a (click)="activatedeleteneighborhood(i)" class="col-2 badge badge-danger">Delete</a>
         </div>
 
         <div *ngIf="showeditneighborhood && activeneighborhoodindex === i">
@@ -197,9 +197,9 @@
 
 
       <div *ngIf="activevenuetypeindex !== i ">
-        {{types.type}}
-        <a (click)="activatevenuetypeedit(i)" class="settingslink">Edit</a>
-        <a (click)="activatevenuetypedelete(i)" class="settingslink">Delete</a>
+        <a class="col-8 badge badge-light">{{types.type}}</a>
+        <a (click)="activatevenuetypeedit(i)" class="col-2 badge badge-secondary">Edit</a>
+        <a (click)="activatevenuetypedelete(i)" class="col-2 badge badge-danger">Delete</a>
       </div>
 
       <div *ngIf="activevenuetypeedit && activevenuetypeindex === i ">
@@ -237,9 +237,9 @@
     <!-- this is test to see if tracking is working -->
     <div *ngFor="let c of cuisines; let i=index">
       <div *ngIf="activecuisineindex !== i">
-        {{c.name}}
-        <a (click)="activatecuisineedit(i)" class="settingslink">Edit</a>
-        <a (click)="activatecuisinedelete(i)" class="settingslink">Delete</a>
+        <a class="col-8 badge badge-light">{{c.name}}</a>
+        <a (click)="activatecuisineedit(i)" class="col-2 badge badge-secondary">Edit</a>
+        <a (click)="activatecuisinedelete(i)" class="col-2 badge badge-danger">Delete</a>
       </div>
 
       <div *ngIf="showeditcuisine && activecuisineindex === i ">
@@ -288,9 +288,9 @@
 
     <div *ngFor="let t of experientialtypes; let i=index">
       <div *ngIf="activeexperientialtypeindex !== i">
-        {{t.type}}
-        <a (click)="activateeditexperientialtype(i)" class="settingslink">Edit</a>
-        <a (click)="activatedeleteexperientialtype(i)" class="settingslink">Delete</a>
+        <a class="col-8 badge badge-light">{{t.type}}</a>
+        <a (click)="activateeditexperientialtype(i)" class="col-2 badge badge-secondary">Edit</a>
+        <a (click)="activatedeleteexperientialtype(i)" class="col-2 badge badge-danger">Delete</a>
       </div>
 
       <div *ngIf="showeditexperientialtype && activeexperientialtypeindex === i">
@@ -332,9 +332,9 @@
 
     <div *ngFor="let type of eventpurpose; let i=index">
       <div *ngIf="activatedeventpurposeindex !== i">
-        {{type.purpose}}
-        <a (click)="activateediteventpurpose(i)" class="settingslink">Edit</a>
-        <a (click)="activatedeleteeventpurpose(i)" class="settingslink">Delete</a>
+        <a class="col-8 badge badge-light">{{type.purpose}}</a>
+        <a (click)="activateediteventpurpose(i)" class="col-2 badge badge-secondary">Edit</a>
+        <a (click)="activatedeleteeventpurpose(i)" class="col-2 badge badge-danger">Delete</a>
       </div>
 
       <div *ngIf="showediteventpurpose && activatedeventpurposeindex === i">
@@ -381,9 +381,9 @@
     <div *ngFor="let vadr of venueapplicationdeclinereasons; let i=index;">
 
       <div *ngIf="activevadrindex !== i">
-        {{vadr.reason}}
-        <a (click)="activateshoweditvadr(i)" class="settingslink">Edit</a>
-        <a (click)="activateshowdeletevadr(i)" class="settingslink">Delete</a>
+        <a class="col-8 badge badge-light">{{vadr.reason}}</a>
+        <a (click)="activateshoweditvadr(i)" class="col-2 badge badge-secondary">Edit</a>
+        <a (click)="activateshowdeletevadr(i)" class="col-2 badge badge-danger">Delete</a>
       </div>
 
       <div *ngIf="showeditvadr && activevadrindex === i">
