@@ -388,14 +388,19 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
                   .subscribe(
                     (req: any)=>{
                       this.filteredvenues = req;
+                      console.log('this is the filtered venues');
+                      console.log(this.filteredvenues);
                       for(let venue in this.filteredvenues){
                         let images = this.filteredvenues[venue].venueimage_set;
+                        console.log('this is the venue images before ordering');
+                        console.log(images);
                         images = images.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
+                        console.log('this is the venue images after ordering');
+                        console.log(images);
                         for(let image in images){
                           images[image] = images[image].imageurl;
                         }
                         this.filteredvenues[venue].venueimage_set = images;
-
                         let semiprivaterooms = 0;
                         let privaterooms = 0;
                         if(this.filteredvenues[venue].fullbuyout){

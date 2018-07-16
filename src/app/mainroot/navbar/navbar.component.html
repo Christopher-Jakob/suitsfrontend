@@ -121,7 +121,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Client Sign Up <span style="color: red"> &nbsp;* Mandatory Fields</span></h4>
+        <h4 class="modal-title">Client Sign Up <span> &nbsp;* Mandatory Fields</span></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -134,7 +134,7 @@
       <div *ngIf="!clientsignupconfrim" class="modal-body">
         <form (ngSubmit)="clientsignup(clientsignupform)" #clientsignupform="ngForm">
           <div class="row">
-            <div class="col">
+            <div class="form-group col-6">
               <input type="text"
                      id="FN"
                      name="clientfirstname"
@@ -143,7 +143,7 @@
                      placeholder="First name *"
                      required>
             </div>
-            <div class="col">
+            <div class="form-group col-6">
               <input type="text"
                      id="LN"
                      name="clientlastname"
@@ -152,9 +152,7 @@
                      placeholder="Last name *"
                      required>
             </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-6">
               <input (change)="checkemail(clientsignupform)"
                      type="email"
                      class="form-control"
@@ -164,7 +162,7 @@
                      ngModel
                      required>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-6">
               <input (change)="checkemail(clientsignupform)"
                      type="email"
                      class="form-control"
@@ -175,33 +173,28 @@
                      required>
               <span style="color: red" class="help-block" *ngIf="emailmismatch">Emails do not match</span>
             </div>
+          <div class="form-group col-6">
+            <input (change)="checkpassword(clientsignupform)"
+                   type="password"
+                   class="form-control"
+                   id="C-inputPassword4"
+                   ngModel
+                   name="clientpassword"
+                   placeholder="Password *"
+                   required>
           </div>
-
-          <div class="row">
-            <div class="form-group col-md-6">
-              <input (change)="checkpassword(clientsignupform)"
-                     type="password"
-                     class="form-control"
-                     id="C-inputPassword4"
-                     ngModel
-                     name="clientpassword"
-                     placeholder="Password *"
-                     required>
-            </div>
-            <div class="form-group col-md-6">
-              <input (change)="checkpassword(clientsignupform)"
-                     type="password"
-                     class="form-control"
-                     name="clientconfrimpassword"
-                     ngModel
-                     id="C-inputvalidatePassword4"
-                     placeholder=" Confrim Password *"
-                     required>
-              <span style="color: red" *ngIf="passwordmismatch" class="help-block">Passwords do not match</span>
-            </div>
+          <div class="form-group col-6">
+            <input (change)="checkpassword(clientsignupform)"
+                   type="password"
+                   class="form-control"
+                   name="clientconfrimpassword"
+                   ngModel
+                   id="C-inputvalidatePassword4"
+                   placeholder=" Confrim Password *"
+                   required>
+            <span style="color: red" *ngIf="passwordmismatch" class="help-block">Passwords do not match</span>
           </div>
-
-          <div class="form-group">
+          <div class="form-group col-6">
             <input type="text"
                    class="form-control"
                    id="C-inputAddress"
@@ -209,7 +202,7 @@
                    ngModel
                    placeholder="Company Name">
           </div>
-          <div class="form-group">
+          <div class="form-group col-6">
             <input type="number"
                    class="form-control"
                    id="P_phone"
@@ -222,8 +215,8 @@
             <span *ngIf="P_PhoneCSS.touched && !P_PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
 
           </div>
-          <div class="row">
-            <div class="form-group col-md-6">
+
+            <div class="form-group col-6">
               <input type="text"
                      class="form-control"
                      name="clientcity"
@@ -231,7 +224,7 @@
                      ngModel
                      id="C-inputCity">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-6">
               <select id="C-inputState" class="form-control" ngModel name="clientstate">
                 <option value="">State *</option>
                 <option value="AL">AL</option>
@@ -286,7 +279,7 @@
                 <option value="WY">WY</option>
               </select>
             </div>
-          </div>
+
 
           <div class="form-group">
             <textarea rows="4" cols="50" type="text" class="form-control" id="How-to-find-1" name="How-to-find" ngModel placeholder="How did you hear about us?"></textarea>
@@ -295,6 +288,7 @@
           <div *ngIf="!clientsignupconfrim" class="modal-footer">
             <button [disabled]="!clientsignupform.valid" type="submit" class="btn btn-primary">Sign Up</button>
             <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+          </div>
           </div>
         </form>
       </div>
@@ -307,7 +301,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up <span style="color: red"> &nbsp;* Mandatory Fields</span></h5>
+        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up <span> &nbsp;* Mandatory Fields</span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -329,7 +323,7 @@
           </div>
 
           <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-6">
               <input type="text"
                      class="form-control"
                      name="venueaddress1"
@@ -339,7 +333,7 @@
                      required>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-6">
               <input type="text"
                      class="form-control"
                      name="venueaddress2"
@@ -347,9 +341,6 @@
                      ngModel
                      id="inputAddress2">
             </div>
-          </div>
-
-          <div class="row">
             <div class="form-group col-md-6">
               <input type="text"
                      name="city"
@@ -361,7 +352,7 @@
               >
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-4">
               <select id="inputState"
                       class="form-control"
                       name="venuestateselect"
@@ -420,9 +411,6 @@
                 <option value="WY">WY</option>
               </select>
             </div>
-          </div>
-
-          <div class="row">
             <div class="form-group col-md-6">
               <input type="text"
                      class="form-control"
@@ -446,9 +434,6 @@
               >
               <span *ngIf="PhoneCSS.touched && !PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
             </div>
-          </div>
-
-          <div class="row">
             <div class="form-group col-md-6">
               <input type="text"
                      class="form-control"
@@ -467,8 +452,6 @@
                      ngModel
                      required>
             </div>
-          </div>
-          <div class="row">
             <div class="col-md-12">
               <textarea type="text"
                         class="form-control"
