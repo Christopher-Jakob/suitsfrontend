@@ -84,6 +84,8 @@ import { SuitsvenueusersComponent } from './suitsandtablesadmin/suitsvenueusers/
 import { ContactusComponent } from './mainroot/contactus/contactus.component';
 import { SentrfpsComponent } from './mainroot/clientadmin/sentrfps/sentrfps.component';
 import { ReceivedrfpsComponent } from './venueadmin/parentadminview/receivedrfps/receivedrfps.component';
+import { PreviewvenueComponent } from './mainroot/previewvenue/previewvenue.component';
+import { PreviewvenueroomComponent } from './mainroot/previewvenueroom/previewvenueroom.component';
 
 
 const appRoutes: Routes = [
@@ -100,9 +102,11 @@ const appRoutes: Routes = [
       {path: 'terms', component: TermsComponent},
       {path: 'contact', component: ContactusComponent},
       {path: 'browse/:city',  canActivate: [IsNotVenueUserGuard], component: BrowsevenuesrootComponent},
-      {path: 'how-it-works', component: HowitworksComponent},
-      {path: 'venue/:name', component: VenuepageComponent},
-      {path: 'venue/:name/:room', component: RoompageComponent},
+      {path: 'how-it-works', canActivate: [IsNotVenueUserGuard], component: HowitworksComponent},
+      {path: 'venue/:name', canActivate: [IsNotVenueUserGuard], component: VenuepageComponent},
+      {path: 'venue/:name/:room', canActivate: [IsNotVenueUserGuard], component: RoompageComponent},
+      {path: 'preview/venue/:name', component: PreviewvenueComponent },
+      {path: 'preview/venue/:name/:room', component: PreviewvenueroomComponent},
       {path: 'dashboard/:permission/:pk', canActivate: [ClientSuitsAdminSuperUserGuard], component: ClientadminComponent,
         children:[
           {path: 'profile', component: ClientprofileComponent},
@@ -210,6 +214,8 @@ const appRoutes: Routes = [
     ContactusComponent,
     SentrfpsComponent,
     ReceivedrfpsComponent,
+    PreviewvenueComponent,
+    PreviewvenueroomComponent,
   ],
   imports: [
     BrowserModule,

@@ -190,6 +190,10 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
 
   }
 
+  navtovenue(){
+    this.router.navigate(['/preview','venue', this.venueobject.name ]);
+  }
+
   ngOnInit() {
     this.parentadminservicevar = this.parentadminservice.receivepermission()
       .subscribe(

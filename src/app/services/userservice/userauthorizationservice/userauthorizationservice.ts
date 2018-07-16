@@ -6,13 +6,13 @@ import {Injectable} from "@angular/core";
 import {Observable, BehaviorSubject} from "rxjs";
 import {userauthorization} from "../../../urls/user/authorization/userauthorization";
 import {userauthentication, userrefeshtoken} from "../../../urls/user/authentication/userauthentication";
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Injectable()
 export class UserAuthorizationService{
 
-  constructor(private http: HttpClient, private router: Router){}
+  constructor(private http: HttpClient, private router: Router, private currentroute: ActivatedRoute){}
 
   private user = {
     id: null,
@@ -45,8 +45,9 @@ export class UserAuthorizationService{
     this.usersubject.next(user);
     this.sendvalid(true);
     if(user.isvenueuser){
-      this.router.navigate(['/admin', 'venue','venue-list']);
+      this.router.navigate(['/admin','venue','venue-list']);
     }
+
   }
 
   receiveuser(): Observable<any>{

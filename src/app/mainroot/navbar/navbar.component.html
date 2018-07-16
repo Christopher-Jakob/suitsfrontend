@@ -12,7 +12,7 @@
         <button id="listvenuebutton" class="dropdown-item" data-toggle="modal" data-target="#Venue-SignUp">List Your Venue</button>
         <span class="sr-only">(current)</span>
       </li>
-      <li *ngIf="showbrowse" class="nav-item">
+      <li *ngIf="showbrowse && !user.isvenueuser" class="nav-item">
         <div class="auto d-inline-block">
           <label class="nav-link">Browse</label>
         </div>

@@ -237,6 +237,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
               this.signedin = false;
             }else{
               this.signedin = true;
+              if(this.user.isvenueuser){
+                //this.router.navigate(['/admin','venue','venue-list']);
+              }
             }
           }
         }
