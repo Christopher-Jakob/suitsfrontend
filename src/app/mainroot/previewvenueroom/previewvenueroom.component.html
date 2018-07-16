@@ -110,12 +110,8 @@
           <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutushapeseatingoption === true ? 'black': 'gray' }">U-Shape</p>
         </div>
         <div class="col-md-3 col-6">
-          <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.sixtyroundseatingoption === true ? 'black': 'gray' }">60" Rounds</p>
-          <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutsixtyroundseatingoption === true ? 'black': 'gray' }">60" Rounds</p>
-        </div>
-        <div class="col-md-3 col-6">
-          <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.seventytworoundseatingoption === true ? 'black': 'gray' }">72" Rounds</p>
-          <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutseventytworoundseatingoption === true ? 'black': 'gray' }">72" Rounds</p>
+          <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.sixtyroundseatingoption === true ? 'black': 'gray' }">Rounds</p>
+          <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutsixtyroundseatingoption === true ? 'black': 'gray' }">Rounds</p>
         </div>
         <div class="col-md-3 col-6">
           <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.boardroomseatingoption === true ? 'black': 'gray' }">Boardroom</p>

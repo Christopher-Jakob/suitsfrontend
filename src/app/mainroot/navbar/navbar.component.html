@@ -1,5 +1,7 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="/">S U I T S
+  <a *ngIf="!user.isvenueuser" class="navbar-brand" routerLink="/">S U I T S
+    <span style="color: #00b3ee; cursor: pointer"> + </span> T A B L E S</a>
+  <a *ngIf="user.isvenueuser" class="navbar-brand">S U I T S
     <span style="color: #00b3ee"> + </span> T A B L E S</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
           aria-expanded="false" aria-label="Toggle navigation">
