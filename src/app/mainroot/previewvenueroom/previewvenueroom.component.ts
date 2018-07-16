@@ -81,6 +81,7 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
       }
     ],
     room_set: [],
+    fullbuyoutonline: false
 
   };
   room = {
