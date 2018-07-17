@@ -2,11 +2,11 @@ $color-gray: rgb(236,236,236);
 .Section {
   border-bottom: $color-gray solid 3px;
   padding: 1.5rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
 .FirstHead {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 100;
   padding: 0.5rem 0;
 }
@@ -19,15 +19,19 @@ td{
 }
 
 .SecHead {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem 0;
 }
 
 .span-style {
   display: inline-block;
   &:not(:last-child){
-    border-right: $color-gray solid 1px;
-    padding-right: 1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    border-right: solid 1px gray;
+  }
+  &:last-child{
+    padding-left: .5rem;
   }
   &__mid {
     padding-right: 5rem;
@@ -68,7 +72,7 @@ $color-primary: rgb(83,139,197);
 .card-container {
   overflow: hidden;
   cursor: pointer;
-  height: 25rem;
+  height: 20rem;
   border-radius: 5px;
   transition: all 0.2s;
 
@@ -92,19 +96,18 @@ $color-primary: rgb(83,139,197);
   }
 
   .card-container-information {
-    padding-top: 2rem;
+    padding-top: 1rem;
 
     .card-container-information__main {
       padding-left: 1rem;
       letter-spacing: 1px;
-      margin-bottom: 2rem;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 100;
       color: $color-primary;
     }
 
     .card-container-information__sub {
-      padding-left: 1rem;
+
       color: $color-primary;
       .card-container-information__sub--food {
         padding-right: 1rem;
@@ -121,6 +124,12 @@ $color-primary: rgb(83,139,197);
       }
     }
   }
+}
+
+#rfpsendselect{
+  border-color: #00b3ee;
+  color: #00b3ee;
+
 }
 
 #signuplink{

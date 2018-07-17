@@ -12,9 +12,6 @@
       {{venue.name}}
     </div>
     <div class="SecHead">
-      {{venue.searchneighborhood}}
-    </div>
-    <div class="SecHead">
       <div *ngIf="venue.cuisine1 != null" id="Type" class="span-style">{{venue.cuisine1}}</div>
       <div *ngIf="venue.cuisine2 != null" class="span-style">{{venue.cuisine2}}</div>
       <div *ngIf="venue.experientialtype != null" class="span-style">{{venue.experientialtype}}</div>
@@ -31,6 +28,9 @@
           <option value="s">Create From Saved</option>
         </select>
       </form>
+    </div>
+    <div class="SecHead">
+      {{venue.searchneighborhood}}
     </div>
   </div>
 
@@ -51,12 +51,11 @@
               Full Buyout
             </div>
             <p class="card-container-information__sub">
+              <span id="seat-number" class="card-container-information__sub--price">Private</span>
               <span id="seat-number" class="card-container-information__sub--price">{{ venue.fullbuyoutseatedcapacity }} Seated</span>
               <span id="stand-number" class="card-container-information__sub--room">{{ venue.fullbuyoutstandingcapactiy }} Standing</span>
             </p>
-
           </div>
-
         </div>
       </div>
       <div class="col-sm-12 col-md-6 col-lg-4 pb-4" *ngFor="let room of venue.room_set; let i = index">

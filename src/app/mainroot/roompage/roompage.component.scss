@@ -1,14 +1,13 @@
 $color-gray: rgb(236,236,236);
 .Section {
   border-bottom: $color-gray solid 3px;
-  padding: 3rem 0;
-  margin-bottom: 1rem;
+  padding: 1rem 0;
 }
 
 .FirstHead {
   font-size: 1.5rem;
   font-weight: 100;
-  padding: 0.5rem 0;
+  //padding: 0.5rem 0;
 }
 
 .SecHeadunderline {
@@ -20,7 +19,7 @@ $color-gray: rgb(236,236,236);
 
 .SecHead{
   font-size: 1.5rem;
-  padding: 0.5rem 0;
+  //padding: 0.3rem 0 0 ;
 
 }
 
@@ -84,7 +83,6 @@ $color-primary: rgb(83,139,197);
     .card-container-information__main {
       padding-left: 1rem;
       letter-spacing: 1px;
-      margin-bottom: 2rem;
       font-size: 1.5rem;
       font-weight: 100;
       color: $color-primary;
@@ -112,8 +110,11 @@ $color-primary: rgb(83,139,197);
 
 #rfpselect{
   display: block;
-  background-color: #00688B;
-  border-color: #00688B;
   position: relative;
   top: -10vh;
+}
+
+#rfpsendselect{
+  border-color: #00b3ee;
+  color: #00b3ee;
 }

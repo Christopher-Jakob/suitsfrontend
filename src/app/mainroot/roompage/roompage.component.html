@@ -44,7 +44,7 @@
   </div>
   <div id="rfpselect">
     <form #rfpchoiceform="ngForm" class="float-right">
-      <select class="form-control btn-primary" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
+      <select class="form-control" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
               id="rfpsendselect"
               name="rfpsendselect"
               [ngModel]="dropdownreset">
@@ -117,10 +117,6 @@
       <div class="col-md-3 col-6">
         <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.sixtyroundseatingoption === true ? 'black': 'gray' }">60" Rounds</p>
         <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutsixtyroundseatingoption === true ? 'black': 'gray' }">60" Rounds</p>
-      </div>
-      <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.seventytworoundseatingoption === true ? 'black': 'gray' }">72" Rounds</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutseventytworoundseatingoption === true ? 'black': 'gray' }">72" Rounds</p>
       </div>
       <div class="col-md-3 col-6">
         <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.boardroomseatingoption === true ? 'black': 'gray' }">Boardroom</p>

@@ -172,7 +172,14 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
   disablecapacityinput = true;
   enablecapinput(){
-    this.disablecapacityinput = false;
+    console.log('this is the enable push');
+    console.log(this.capacityform.form.value);
+    if(this.capacityform.form.value.capacityselectinput !== ''){
+      this.disablecapacityinput = false;
+    }
+    if(this.capacityform.form.value.capacityselectinput === ''){
+      this.disablecapacityinput = true;
+    }
   }
   applyfilters(){
     let queryparams ={

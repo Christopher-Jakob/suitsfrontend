@@ -28,6 +28,10 @@ $color-primary: rgb(83,139,197);
     left: 1%;
     color: black;
   }
+
+  .card-container-information:hover{
+    background-color: lightgray;
+  }
   .card-container-information{
     font-size: .9rem;
   }

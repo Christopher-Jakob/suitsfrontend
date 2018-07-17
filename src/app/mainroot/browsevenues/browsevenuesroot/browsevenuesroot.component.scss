@@ -11,6 +11,7 @@ $bg-white: white;
     .filter-option {
       display: inline-block;
       position: absolute;
+      margin-top: 3vh;
       right: 2%;
       bottom: 2%;
       font-size: 8px;
@@ -60,9 +61,9 @@ $bg-white: white;
 }
 
 #amenityselect{
-  display: block;
   position: relative;
-  right: 2.3px;
+  left: 3vw;
+  display: block;
   width: 18.5vw;
 }
 
@@ -87,9 +88,22 @@ $bg-white: white;
   font-size: 14px;
 }
 
+#capacitygroup{
+  display: block;
+  position: relative;
+  left: 7vw;
+
+}
+
+#capacityselectinput{
+  width: 10vw;
+}
+
 #capacityamount{
   position: relative;
   bottom: 7px;
+  width: 8vw;
+  height: 6vh;
   font-size: 14px;
 }
 
@@ -109,6 +123,9 @@ $bg-white: white;
 }
 
 .rightbuttons{
+  position: relative;
+  top: 5vh;
   height: 30px;
-  font-size: 12px;
+  font-size: 16px;
+  text-decoration: underline;
 }

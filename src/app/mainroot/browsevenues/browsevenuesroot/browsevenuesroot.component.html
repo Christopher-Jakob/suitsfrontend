@@ -30,10 +30,10 @@
         <ng-multiselect-dropdown *ngIf="!choicesload" [data]="privacytypechoices2" [(ngModel)]="privacytypemodel" [settings]="privacydropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Privacy'"></ng-multiselect-dropdown>
       </div>
     </div>
-    <div class="container" *ngIf="filterdropdown">
+    <div class="container">
       <div class=" row d-flex justify-content-between m-3">
 
-        <div class="select-down col-6 col-md-3 py-2">
+        <div class="select-down col-4 col-md-3 py-2">
 
           <div *ngIf="choicesload" class="spinner-container">
             <div class="spinner"></div>
@@ -42,37 +42,35 @@
           <ng-multiselect-dropdown id="cuisinesselect" *ngIf="!choicesload" [data]="cuisinechoices" [(ngModel)]="cuisinemodel" [settings]="cuisinedropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Cuisines'"></ng-multiselect-dropdown>
         </div>
 
-        <div class="select-down col-6 col-md-3 py-2">
+        <div class="select-down col-4 col-md-3 py-2">
           <div *ngIf="choicesload" class="spinner-container">
             <div class="spinner"></div>
           </div>
           <ng-multiselect-dropdown id="amenityselect" *ngIf="!choicesload" [data]="ammenitieschoices" [(ngModel)]="ammenitiesmodel" [settings]=" ammenitiesdropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Ammenity'"></ng-multiselect-dropdown>
         </div>
-
+        <!--
         <div class="select-down col-6 col-md-3 py-2">
           <div *ngIf="choicesload" class="spinner-container">
             <div class="spinner"></div>
           </div>
           <ng-multiselect-dropdown id="seatingselect" *ngIf="!choicesload" [data]="seatingtypeschoices" [(ngModel)]="seatingtypesmodel" [settings]=" seatingtypesdropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Seating Types'"></ng-multiselect-dropdown>
         </div>
-      </div>
-    </div>
-    <form #capacityform="ngForm">
-      <div class="row">
-        <div class="col-2 ml-4 d-inline-block">
-          <select (click)="enablecapinput()"
-                  id="seatingdropdown"
-                  name="capacityselectinput"
-                  class="form-control"
-                  [ngModel]="capacityformreset">
-            <option selected value="">Capacity Type</option>
-            <option value="seated">Seated</option>
-            <option value="standing">Standing</option>
-          </select>
-        </div>
-        <div class="col-2">
-          <div class="form-group capacitynumberinput">
-            <input type="number"
+        -->
+        <form id="capacitygroup" #capacityform="ngForm" class="col-4  d-inline-block">
+          <div class="d-inline-block">
+            <select (click)="enablecapinput()"
+                    id="seatingdropdown"
+                    name="capacityselectinput"
+                    class="form-control"
+                    [ngModel]="capacityformreset">
+              <option selected value="">Capacity Type</option>
+              <option value="seated">Seated</option>
+              <option value="standing">Standing</option>
+            </select>
+          </div>
+          <div class=" d-inline-block">
+            <div class="form-group capacitynumberinput">
+                <input type="number"
                    (change)="applyfilters()"
                    [disabled]="disablecapacityinput"
                    id="capacityamount"
@@ -80,27 +78,30 @@
                    ngModel
                    class="form-control"
                    name="groupnumberinput">
+            </div>
           </div>
-        </div>
-        <div class="ml-4 col-7">
-          <form>
-            <input type="text"
-                   placeholder="Search By Venue Name"
-                   id="searchinput"
-                   name="searchinput"
-                   ngModel
-                   class="col-7 p-0 form-control input-gray mr-5 input-lg">
-            <button id="searchbutton" type="submit" class="btn-light-blue col-2 p-0">Search</button>
-          </form>
-        </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
   <div class="container">
     <div class="filter-option">
-      <button  style="cursor: pointer" *ngIf="filterdropdown" (click)="showfiltertoggle()" class=" rightbuttons mr-2 btn-primary">- Show Less Filters</button>
-      <button style="cursor: pointer" *ngIf="!filterdropdown" (click)="showfiltertoggle()" class="  rightbuttons mr-2 btn-primary">+ Show More Filters</button>
-      <button class="  rightbuttons btn-danger" (click)="clearfilters()" style="cursor: pointer">Clear All</button>
+      <a class="rightbuttons" (click)="clearfilters()" style="cursor: pointer; color: red;">Clear All</a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="ml-4 col-7">
+      <form>
+        <input type="text"
+               placeholder="Search By Venue Name"
+               id="searchinput"
+               name="searchinput"
+               ngModel
+               class="col-7 p-0 form-control input-gray mr-5 input-lg">
+        <button id="searchbutton" type="submit" class="btn-light-blue col-2 p-0">Search</button>
+      </form>
     </div>
   </div>
 </div>
