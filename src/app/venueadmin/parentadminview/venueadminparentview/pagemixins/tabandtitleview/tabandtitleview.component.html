@@ -5,7 +5,7 @@
   Changes Saved!
 </div>
 <div *ngIf="!onroompage" id="titlerow" class="row"> <!--name row-->
-  <div class="venuetitle col-auto">
+  <div class="venuetitle col-6">
     <h4 *ngIf="!activateedittitle"><strong>{{venuename}}</strong></h4>
     <form *ngIf="activateedittitle" (ngSubmit)="editvenuename()" #venuenameform="ngForm">
       <label for="venuenameinput">Edit Title</label>
@@ -20,11 +20,16 @@
       <button (click)="canceledit()" class="btn-danger">Cancel</button>
     </form>
   </div>
-  <div class="">
-    <a *ngIf="suitsadmin && !activateedittitle" (click)="showedittitle()" class="settingslink"><h4>Edit</h4></a>
+  <div *ngIf="suitsadmin && !activateedittitle" class="col-2">
+    <a  (click)="showedittitle()" class="settingslink"><h4>Edit</h4></a>
   </div>
-  <div *ngIf="venueobject.venueimage_set.length > 0" class="col-4">
-    <div class="float-left">
+  <div *ngIf="venueobject.venueimage_set.length > 0 && suitsadmin" class="col-6">
+  <div class="float-right">
+    <a style="cursor: pointer" (click)="navtovenue()"><button *ngIf="!deleteconfrimshow && !deleterequestshow" class=" btn previewsubmitbuttons" id="previewbutton">Preview Venue</button></a>
+  </div>
+</div>
+  <div *ngIf="venueobject.venueimage_set.length > 0 && !suitsadmin" class="col-4">
+    <div class="float-right">
       <a style="cursor: pointer" (click)="navtovenue()"><button *ngIf="!deleteconfrimshow && !deleterequestshow" class=" btn previewsubmitbuttons" id="previewbutton">Preview Venue</button></a>
     </div>
   </div>

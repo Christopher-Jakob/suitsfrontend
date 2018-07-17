@@ -65,7 +65,13 @@ export class RoompageComponent implements OnInit, OnDestroy {
   fullbuyoutroomactive = false;
 
   // venuename from route param name used for navigation
-  venue;
+  venue = {
+    id: null,
+    name: '',
+    venueimage_set: [],
+    room_set:[],
+
+  };
   room = {
     // things that you didn't put in
     privateroom: false,
@@ -370,7 +376,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-       this.browsevenuescommservice.sendstate('show');
+    this.browsevenuescommservice.sendstate('show');
     this.route.params
       .subscribe(
         (params: Params)=>{
@@ -385,7 +391,8 @@ export class RoompageComponent implements OnInit, OnDestroy {
           this.venuename = this.venuename.replace(/_/g, ' ');
           if(this.roomname === 'fullbuyout'){
             this.fullbuyoutroomactive = true;
-          }else{
+          }
+          if(this.roomname !== 'fullbuyout'){
             this.roomname = this.roomname.replace(/_/g, ' ');
           }
           // option is a hack to  allow venue admins to see their offline venues

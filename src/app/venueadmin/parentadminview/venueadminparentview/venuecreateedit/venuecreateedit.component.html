@@ -64,7 +64,7 @@
                 <h5>{{venueobject.streetaddress2}}</h5>
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-auto">
               <div class="text-left">
                 <h5>{{venueobject.city}}</h5>
               </div>
@@ -192,9 +192,15 @@
       </div>
       <div class="col-8">
         <strong>Add Venue User</strong>
-        <br>
-        <button (click)="addexistinguser()" *ngIf="existingbutton" class="btn STButton">Add Existing User</button>
-        <button (click)="createnewuser()" *ngIf="newbutton" class=" btn STButton">Create New User</button>
+        <div class="row">
+          <div class="col-auto">
+            <button (click)="addexistinguser()" *ngIf="existingbutton" class="btn STButton">Add Existing User</button>
+          </div>
+          <div class="col-auto">
+            <button (click)="createnewuser()" *ngIf="newbutton" class=" btn STButton">Create New User</button>
+
+          </div>
+        </div>
         <br>
         <form (ngSubmit)="addnewuser()" #addnewuserform="ngForm" *ngIf="showform">
           <div>
@@ -202,11 +208,10 @@
           </div>
           <div class="row">
             <div class="col-6">
-              <label for="newuseremailinput">Email: </label>
-              <br>
               <input class="form-control"
                      type="email"
                      id="newuseremailinput"
+                     placeholder="Email *"
                      required
                      name="newuseremailinput"
                      ngModel
@@ -214,85 +219,71 @@
               <span class="STredstar"> &nbsp; *</span>
               <br>
               <span *ngIf="newuseremailcss.touched && !newuseremailcss.valid" class="help-block">Must be a valid email addresss</span>
-              <br>
             </div>
             <div class="col-6" *ngIf="newusercreate">
-              <label for="newusernameinput">Name: </label>
-              <br>
               <input class="form-control"
                      type="text"
                      required
                      id="newusernameinput"
                      name="newusernameinput"
+                     placeholder="Email *"
                      ngModel
                      #newusernameinputcss="ngModel">
-              <span class="STredstar"> &nbsp; *</span>
               <br>
               <span *ngIf="!newusernameinputcss.valid && newusernameinputcss.touched">Each word must start with a capital letter and have a space between words</span>
-              <br>
             </div>
             <div class="col-6" *ngIf="newusercreate">
-              <label for=newuserjobtitle>Job Title: </label>
-              <br>
               <input class="form-control"
                      type="text"
                      required
+                     placeholder="Job Title *"
                      id="newuserjobtitle"
                      name="newuserjobtitle"
                      ngModel
                      #newuserjobtitlecss="ngModel">
-              <span class="STredstar"> &nbsp; *</span>
               <br>
               <span *ngIf="! newuserjobtitlecss.valid && newuserjobtitlecss.touched">A job title is required</span>
-              <br>
             </div>
             <div class="col-6" *ngIf="newusercreate">
-              <label for="newuserphoneinput">Phone: </label>
-              <br>
               <input class="form-control"
                      type="text"
                      pattern="[0-9]{10}"
                      id="newuserphoneinput"
                      name="newuserphoneinput"
                      ngModel
+                     placeholder="Phone *"
                      #newuserphoneinputcss="ngModel">
               <br>
               <span *ngIf="newuserphoneinputcss.touched && !newuserphoneinputcss.valid">A phone number must consist of 10 digits with no spaces or dashes</span>
-              <br>
             </div>
             <div class="col-6">
-              <label for="newuserroleselect">Role: </label>
-              <br>
               <select class="form-control"
                       id="newuserroleselect"
                       required
                       name="newuserroleselect"
                       ngModel
                       #newuserroleselectcss="ngModel">
-                <option selected value="">Select Role</option>
+                <option selected value="">Select Role *</option>
                 <option value="viewer">Viewer</option>
                 <option value="event planner">Event Planner</option>
                 <option value="administrator">Administrator</option>
               </select>
-              <span class="STredstar"> &nbsp; *</span>
               <br>
               <span *ngIf="!newuserroleselectcss.valid && newuserroleselectcss.touched" style="color: red;">You must select a role</span>
               <br>
             </div>
             <div class="col-6">
-              <br>
               <label>Receive RFP Emails &nbsp;</label>
               <input class="form-control"
                      type="checkbox"
                      id="rfpreceiveemail"
                      name="rfpreceiveemail"
                      ngModel>
-              <br>
             </div>
           </div> <!-- row end -->
           <br>
-          <button (click)="cancelbutton()" *ngIf="showcancel" class="btn-danger">Cancel</button>
-          <button [disabled]="!addnewuserform.valid" type="submit"><span *ngIf="newusercreate">Create User</span><span *ngIf="!newusercreate">Add User</span></button>
+          <button (click)="cancelbutton()" *ngIf="showcancel" class=" btn btn-danger">Cancel</button>
+          <button class="btn btn-primary" [disabled]="!addnewuserform.valid" type="submit"><span *ngIf="newusercreate">Create User</span><span *ngIf="!newusercreate">Add User</span></button>
 
         </form>
       </div>
@@ -303,7 +294,7 @@
         <thead>
           <tr>
             <th>
-              <button style="font-weight: normal" (click)="commitdeleteuser()" *ngIf="deleteuserpklist.length > 0">Delete {{deleteuserpklist.length}} from Venue<span *ngIf="deleteuserpklist.length > 1">s</span></button>
+              <button class="btn" style="font-weight: normal" (click)="commitdeleteuser()" *ngIf="deleteuserpklist.length > 0">Delete {{deleteuserpklist.length}} from Venue<span *ngIf="deleteuserpklist.length > 1">s</span></button>
               <p *ngIf="deleteuserpklist.length < 1">Delete <br>from Venue</p>
             </th>
             <th>

@@ -246,48 +246,50 @@
 
 <div *ngIf="!fullbuyoutedit" class="container-fluid"> <!--root container-->
   <div class="row">
-    <div class="col-8">
+    <div class="col-auto">
       <h3 *ngIf="roomobject.name != null">{{roomobject.name}}</h3>
       <h3 *ngIf="roomobject.name == null">Unnamed Room</h3>
     </div>
-    <div class="col-4">
-      <div class="float-right">
-        <a [href]="roomurl" target="_blank">
-          <button class="btn" style="background-color: #8B008B; color: white">Preview Room</button>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div *ngIf="deleteconfrimshow" class="col-6 text-center">
-      <strong>Are you sure you want to delete this room?</strong>
-      <br>
-      <button (click)="unshowdeleteroomconfrim()" class="STButton" >Cancel</button>
-      <button (click)="deleteroom()" class="btn-danger">Delete Room</button>
-    </div>
-  </div>
-  <div *ngIf="!deleteconfrimshow" class="row">
     <div class="col-2">
       <div class="text-center">
-        <div *ngIf="roomobject.online" class="onlinestatus">
-          Public
+        <div *ngIf="roomobject.online && !deleteconfrimshow" class="onlinestatus">
+          <h4>Public</h4>
         </div>
       </div>
       <div class="text-center">
-        <div *ngIf="!roomobject.online" class="offlinestatus">
-          Hidden
+        <div *ngIf="!roomobject.online && !deleteconfrimshow" class="offlinestatus">
+          <h4>Hidden</h4>
         </div>
       </div>
     </div>
-    <div *ngIf="!roomnoonline" class="col-auto">
-      <button class="btn" (click)="roomonline()" *ngIf="!roomobject.online" style="background-color: green; color: white;">Push Public</button>
-      <button class="btn" (click)="roomoffline()" *ngIf="roomobject.online" style="background-color: #ffbd59">Hide Room</button>
-    </div>
-    <div *ngIf="roomnoonline" class="col-auto">
+    <div *ngIf="roomnoonline && !deleteconfrimshow" class="col-auto">
       Room cannot be turned on unless you have at least one image uploaded
     </div>
-    <div class="col-auto">
-      <button (click)="showdeleteconfrim()" class=" btn btn-danger">Delete Room</button>
+    <div class="col-6">
+      <div *ngIf="!deleteconfrimshow" class="auto">
+        <div class="float-right">
+          <button (click)="roompreview()" class="btn" style="background-color: #8B008B; color: white">Preview Room</button> &nbsp;
+        </div>
+      </div>
+      <div *ngIf="!deleteconfrimshow" class="auto">
+        <div class="float-right">
+          <button (click)="showdeleteconfrim()" class=" btn btn-danger">Delete Room</button> &nbsp;
+        </div>
+      </div>
+      <div *ngIf="!roomnoonline && !deleteconfrimshow" class="col-auto">
+        <div class="float-right">
+          <button class="btn" (click)="roomonline()" *ngIf="!roomobject.online" style="background-color: green; color: white; margin-right: 8px;">Push Public</button>
+          <button class="btn" (click)="roomoffline()" *ngIf="roomobject.online" style="background-color: #ffbd59; margin-right: 8px;">Hide Room</button>
+        </div>
+      </div>
+
+      <div *ngIf="deleteconfrimshow" class="col-12 text-center">
+        <h5>Are you sure you want to delete this room?</h5>
+        <br>
+        <button (click)="unshowdeleteroomconfrim()" class="btn btn-outline-primary" >Cancel</button>&nbsp;
+        <button (click)="deleteroom()" class=" btn btn-danger">Delete Room</button>
+      </div>
+
     </div>
   </div>
   <form  #topparamsform="ngForm">
@@ -352,11 +354,14 @@
       </div>
     </div> <!-- seatedcapacity-->
   </form>
-  <div class="">
-    <div class="STautowidth">
+  <div class="row">
+    <div class="col-auto">
       <h4><strong>Room Photos</strong></h4>
     </div>
-    <br>
+    <div class="col-auto">
+      <button *ngIf="!showfileuploadform" (click)="activateshowfileuploadform()" id="addroombutton"><h4>+Add Photo</h4></button>
+    </div>
+  </div>
     <div>
       <h5 id="photosizenote"><strong>Images should be no larger than 12MB and at least 1500 X 700 pixels in resolution.</strong></h5>
     </div>
@@ -365,7 +370,6 @@
       <app-venueroomshowphotos></app-venueroomshowphotos>
     </div>
     <div class="text-center STautowidth"> <!--add photo button and form input-->
-      <button *ngIf="!showfileuploadform" (click)="activateshowfileuploadform()" id="addroombutton">+Add Photo</button>
       <button class="btn-success" *ngIf="!showphotos && !showfileuploadform" (click)="roomphotoshow()">Display Photos</button>
     </div>
     <div *ngIf="showfileuploadform">
@@ -527,6 +531,6 @@
       </div> <!--Seating Options checkboxes-->
     </form>
   </div>
-</div> <!--root container-->
+
 
 

@@ -272,6 +272,10 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
       );
   }
 
+  roompreview(){
+    this.router.navigate(['/preview', 'venue',this.venueobject.name, this.roomobject.name]);
+  }
+
 
   // add room photo  code
   showfileuploadform = false;
