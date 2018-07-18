@@ -89,7 +89,7 @@ export class SuitsvenuesComponent implements OnInit {
       setTimeout(()=>{
         this.activeindex = null;
         this.pusherror = false;
-      }, 2500);
+      }, 5000);
       return 0;
     }
 
