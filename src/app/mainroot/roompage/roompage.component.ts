@@ -70,6 +70,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
     name: '',
     venueimage_set: [],
     room_set:[],
+    fullbuyoutonline: false
 
   };
   room = {
