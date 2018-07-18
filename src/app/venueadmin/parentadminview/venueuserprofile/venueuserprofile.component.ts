@@ -45,7 +45,7 @@ export class VenueuserprofileComponent implements OnInit {
   }
 
   uploadphoto(event){
-    let submittedimage = event.target.files;
+    let submittedimage = event.target.files[0];
     this.userservice.photoinit(this.userobject.pk)
       .subscribe(
         (req: any)=>{

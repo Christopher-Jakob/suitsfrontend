@@ -74,6 +74,11 @@
                 <h5>{{venueobject.state}}</h5>
               </div>
             </div>
+            <div class="col-12">
+              <div class="text-left">
+                <h5>{{venueobject.phonenumber}}</h5>
+              </div>
+            </div>
           </div>
         </div>
         <div *ngIf="suitspermission">
@@ -202,6 +207,14 @@
           </div>
         </div>
         <br>
+        <div class="text-center">
+          <h5 *ngIf="useralreadyexists">Your trying to create a user that already exists. Use the Add Existing User Option.</h5>
+
+          <h5 *ngIf="useralreadyonvenue">This user already has a permission on this this venue. A user may only have one permission per venue. </h5>
+
+          <h5 *ngIf="wronguseofform">Your trying to create a new user while using the Add Existing User option. Use the Create New User option</h5>
+        </div>
+
         <form (ngSubmit)="addnewuser()" #addnewuserform="ngForm" *ngIf="showform">
           <div>
             <p style="color: red">All fields with a * required</p>
@@ -216,7 +229,6 @@
                      name="newuseremailinput"
                      ngModel
                      #newuseremailcss="ngModel">
-              <span class="STredstar"> &nbsp; *</span>
               <br>
               <span *ngIf="newuseremailcss.touched && !newuseremailcss.valid" class="help-block">Must be a valid email addresss</span>
             </div>
@@ -326,7 +338,7 @@
                    id="deletecheckbox">
           </td>
           <td>
-            <div class="col-md-1 userphoto" [ngStyle]="{'background-image': 'url(' + user.userphoto + ')'}">
+            <div class="col-1 userphoto" [ngStyle]="{'background-image': 'url(' + user.userphoto + ')'}">
 
             </div>
           </td>

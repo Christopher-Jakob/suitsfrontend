@@ -96,6 +96,11 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
 
     }
   }
+
+  fullbuyoutroompreview(){
+    this.router.navigate(['/preview','venue',this.venueobject.name, 'fullbuyout']);
+  }
+
   fullbuyoutnoonline = false;
   roomnoonline = false;
   roomonline() {

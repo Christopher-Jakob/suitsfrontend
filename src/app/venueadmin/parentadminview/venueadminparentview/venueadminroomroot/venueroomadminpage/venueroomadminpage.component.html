@@ -3,13 +3,6 @@
     <div class="col-8">
       <h3>{{venueobject.name}} Full Buyout</h3>
     </div>
-    <div class="col-4">
-      <div class="float-right">
-          <a style="cursor: pointer;" [href]="fullbuyouturl" target="_blank">
-            <button class="btn" style="background-color: #8B008B; color: white">Preview Room</button>
-          </a>
-      </div>
-    </div>
   </div>
   <div class="row">
     <div *ngIf="deleteconfrimshow" class="col-auto">
@@ -18,15 +11,15 @@
       <button  (click)="unshowdeleteroomconfrim()" class=" btn STButton" >Cancel</button>
       <button (click)="deleteroom()" class="btn-danger">Delete Room</button>
     </div>
-    <div *ngIf="!deleteconfrimshow" class="col-auto STnopadding text-center">
-      <div class="col-auto STnopadding">
+    <div *ngIf="!deleteconfrimshow" class="col-2">
+      <div class="col-auto">
         <div  *ngIf="venueobject.fullbuyoutonline" class="onlinestatus STnopadding">
-          Public
+          <h5>Public</h5>
         </div>
       </div>
       <div class="col-auto STnopadding">
         <div *ngIf="!venueobject.fullbuyoutonline" class="offlinestatus STnopadding">
-          Hidden
+          <h5>Hidden</h5>
         </div>
       </div>
     </div>
@@ -44,11 +37,14 @@
         <button (click)="showdeleteconfrim()" class="btn btn-danger">Delete Room</button>
       </div>
     </div>
+    <div class="col-auto">
+        <button (click)="fullbuyoutroompreview()" class="btn" style="background-color: #8B008B; color: white">Preview Room</button>
+    </div>
     <br>
     <br>
-    <div class="col-12">
-      <div class="text-center">
-        <h4>All Changes Saved Automatically</h4>
+    <div class="col-6">
+      <div>
+        <p>All Changes Saved Automatically</p>
       </div>
     </div>
   </div>
@@ -59,7 +55,8 @@
       </div>
       <div class="col-1 STnopadding">
         <input (change)="fullbuyoutsave()"
-               type="number"
+               type="text"
+               class="form-control"
                id="seatedcapacityfullbuyoutinput"
                name="seatedcapacityinputfullbuyout"
                [ngModel]="venueobject.fullbuyoutseatedcapacity">
@@ -69,7 +66,8 @@
       </div>
       <div class="col-1 STnopadding">
         <input (change)="fullbuyoutsave()"
-               type="number"
+               type="text"
+               class="form-control"
                id="standingcapacityinput"
                name="standingcapacityinputfullbuyout"
                [ngModel]="venueobject.fullbuyoutstandingcapactiy">
@@ -79,7 +77,8 @@
       </div>
       <div class="col-2 STnopadding">
         <input (change)="fullbuyoutsave()"
-               type="number"
+               type="text"
+               class="form-control"
                id="minspendinputfullbuyout"
                name="minspendinputfullbuyout"
                placeholder="Optional"
@@ -96,6 +95,7 @@
       <div class="col-12">
          <textarea (change)="fullbuyoutsave()"
                    id="roomdescriptioninputfullbuyout"
+                   class="form-control"
                    name="roomdescriptionfullbuyoutinput"
                    placeholder="Enter Full Buyout Description"
                    [ngModel]="venueobject.fullbuyoutdescription">
@@ -119,69 +119,171 @@
   </div>
   <form #amenitiesfullbuyoutform="ngForm">
     <div class="row">
-      <div class="col-auto STnopadding">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="surroundsoundcheckboxfullbuyout"
-               name="surroundsoundcheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutsurrondsoundamenity"> <strong>Surround Sound</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="surroundsoundcheckboxfullbuyout"
+                     name="surroundsoundcheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutsurrondsoundamenity">
+
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Surround Sound</strong>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="stagecheckboxfullbuyout"
-               name="stagecheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutstageamenity"> <strong>Stage</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="stagecheckboxfullbuyout"
+                     name="stagecheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutstageamenity">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Stage</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="televisioncheckboxfullbuyout"
-               name="televisioncheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyouttelevisionamenity"> <strong>Television</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="televisioncheckboxfullbuyout"
+                     name="televisioncheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyouttelevisionamenity">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Television</strong>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="screenprojectorcheckboxfullbuyout"
-               name="screenprojectorcheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutscreenprojectoramenity"> <strong>Screen + Projector</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="screenprojectorcheckboxfullbuyout"
+                     name="screenprojectorcheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutscreenprojectoramenity">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Screen + Projector</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="microphonefullbuyout"
-               name="microphonefullbuyout"
-               [ngModel]="venueobject.fullbuyoutmicrophoneamenity"> <strong>Microphone</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="microphonefullbuyout"
+                     name="microphonefullbuyout"
+                     [ngModel]="venueobject.fullbuyoutmicrophoneamenity">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Microphone</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="naturallightcheckboxfullbuyout"
-               name="naturallightcheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutnaturallightamenity"> <strong>Natural Light</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="naturallightcheckboxfullbuyout"
+                     name="naturallightcheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutnaturallightamenity">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Natural Light</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="wificheckboxfullbuyout"
-               name="wificheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutwifiamenity"> <strong>Wifi</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="wificheckboxfullbuyout"
+                     name="wificheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutwifiamenity">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Wifi</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="wheelchaircheckboxfullbuyout"
-               name="wheelchaircheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutwheelchairaccessibleamenity"> <strong>Wheelchair Accessible</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="wheelchaircheckboxfullbuyout"
+                     name="wheelchaircheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutwheelchairaccessibleamenity">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Wheelchair Accessible</strong>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="outdoorseattingcheckboxfullbuyout"
-               name="outdoorseattingcheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutoutdoorseatingamenity"> <strong>Outdoor Seating</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="outdoorseattingcheckboxfullbuyout"
+                     name="outdoorseattingcheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutoutdoorseatingamenity">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Outdoor Seating</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </div> <!--amenities checkboxes-->
     <div class="row"> <!--Amenities row text-->
@@ -190,55 +292,132 @@
       </div>
     </div> <!--Amenities row text-->
     <div class="row"> <!--Seating Options checkboxes-->
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="cocktailstandingcheckboxfullbuyout"
-               name="cocktailstandingcheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutcocktailstandingseatingoption"> <strong>Cocktail / Standing</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="cocktailstandingcheckboxfullbuyout"
+                     name="cocktailstandingcheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutcocktailstandingseatingoption">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Cocktail / Standing</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="classroomseatingcheckboxfullbuyout"
-               name="classroomseatingcheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutclassroomseatingoption"> <strong>Classroom</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="classroomseatingcheckboxfullbuyout"
+                     name="classroomseatingcheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutclassroomseatingoption">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Classroom</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="ushapecheckboxfullbuyout"
-               name="ushapecheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutushapeseatingoption"> <strong>U-Shape</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="ushapecheckboxfullbuyout"
+                     name="ushapecheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutushapeseatingoption">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>U-Shape</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="sixtyinchroundscheckboxfullbuyout"
-               name="sixtyinchroundscheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutsixtyroundseatingoption"> <strong>60' Rounds</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="sixtyinchroundscheckboxfullbuyout"
+                     name="sixtyinchroundscheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutsixtyroundseatingoption">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Rounds</strong>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="boardroomcheckboxfullbuyout"
-               name="boardroomcheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyoutboardroomseatingoption"> <strong>Boardroom</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="boardroomcheckboxfullbuyout"
+                     name="boardroomcheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyoutboardroomseatingoption">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Boardroom</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="theatercheckboxfullbuyout"
-               name="theatercheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyouttheaterseatingoption"> <strong>Theater</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="theatercheckboxfullbuyout"
+                     name="theatercheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyouttheaterseatingoption">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Theater</strong>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <input (change)="fullbuyoutsave()"
-               type="checkbox"
-               id="hallowsquarecheckboxfullbuyout"
-               name="hallowsquarecheckboxfullbuyout"
-               [ngModel]="venueobject.fullbuyouthallowsquareseatingoption"> <strong>Hallow Square</strong>
+      <div class="col-2">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <input (change)="fullbuyoutsave()"
+                     type="checkbox"
+                     id="hallowsquarecheckboxfullbuyout"
+                     name="hallowsquarecheckboxfullbuyout"
+                     [ngModel]="venueobject.fullbuyouthallowsquareseatingoption">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center">
+              <strong>Hallow Square</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </form>
@@ -297,6 +476,7 @@
       <div class="col-3">
         <input (change)="savevenueroom()"
                type="text"
+               class="form-control"
                id="roominput"
                name="roomnameinput"
                [ngModel]="roomobject.name"
@@ -326,6 +506,7 @@
       <div class="col-1 STnopadding">
         <input (change)="savevenueroom()"
                type="number"
+               class="form-control"
                id="seatedcapacityinput"
                name="seatedcapacityinput"
                [ngModel]="roomobject.seatedcapacity">
@@ -336,6 +517,7 @@
       <div class="col-1 STnopadding">
         <input (change)="savevenueroom()"
                type="number"
+               class="form-control"
                id="standingcapacityinputfullbuyout"
                name="standingcapacityinput"
                [ngModel]="roomobject.standingcapacity">
@@ -345,7 +527,8 @@
       </div>
       <div class="col-1 STnopadding">
         <input (change)="savevenueroom()"
-               type="number"
+               type="text"
+               class="form-control"
                id="minspendinput"
                name="minspendinput"
                placeholder="Optional"
@@ -361,28 +544,30 @@
     <div class="col-auto">
       <button *ngIf="!showfileuploadform" (click)="activateshowfileuploadform()" id="addroombutton"><h4>+Add Photo</h4></button>
     </div>
-  </div>
-    <div>
-      <h5 id="photosizenote"><strong>Images should be no larger than 12MB and at least 1500 X 700 pixels in resolution.</strong></h5>
+    <div class="col-auto"> <!--add photo button and form input-->
+      <a id="displayphotoslink" *ngIf="!showphotos && !showfileuploadform" (click)="roomphotoshow()"><h4>Display Photos</h4></a>
     </div>
-    <br>
+    <div class="col-auto" *ngIf="showfileuploadform">
+      <div class="row">
+        <div class="col-auto">
+          <input  (change)="addroomphoto($event)"
+                  type="file"
+                  class="form-control"
+                  id="roomphotoinput"
+                  accept=".png, .jpg, jpeg">
+        </div>
+        <div class="col-auto">
+          <button  *ngIf="!hidecancelbutton" (click)="deactivateshowfileuploadform()" class=" btn btn-danger">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
     <div *ngIf="showphotos">
+      <div>
+        <h5 id="photosizenote">Images should be no larger than 12MB and at least 1500 X 700 pixels in resolution.</h5>
+      </div>
       <app-venueroomshowphotos></app-venueroomshowphotos>
     </div>
-    <div class="text-center STautowidth"> <!--add photo button and form input-->
-      <button class="btn-success" *ngIf="!showphotos && !showfileuploadform" (click)="roomphotoshow()">Display Photos</button>
-    </div>
-    <div *ngIf="showfileuploadform">
-      <input  (change)="addroomphoto($event)"
-              type="file"
-              id="roomphotoinput"
-              accept=".png, .jpg, jpeg">
-      <br>
-      <br>
-      <button *ngIf="!hidecancelbutton" (click)="deactivateshowfileuploadform()" class="btn-danger">Cancel</button>
-    </div>
-  </div>
-
   <form  #roomdescriptionform="ngForm">
     <div class="row"> <!--venue description row-->
       <div class="col-12">
@@ -407,69 +592,171 @@
     </div> <!--Amenities row text-->
     <form  #amenitiesseatingform="ngForm">
       <div class="row checkboxrow"> <!--amenities checkboxes-->
-        <div class="col-auto STnopadding">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="surroundsoundcheckbox"
-                 name="surroundsoundcheckbox"
-                 [ngModel]="roomobject.surroundsoundamenity"> <strong>Surround Sound</strong>
-        </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="stagecheckbox"
-                 name="stagecheckbox"
-                 [ngModel]="roomobject.stageamenity"> <strong>Stage</strong>
-        </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="televisioncheckbox"
-                 name="televisioncheckbox"
-                 [ngModel]="roomobject.televisionamenity"> <strong>Television</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="surroundsoundcheckbox"
+                       name="surroundsoundcheckbox"
+                       [ngModel]="roomobject.surroundsoundamenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Surround Sound</strong>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="screenprojectorcheckbox"
-                 name="screenprojectorcheckbox"
-                 [ngModel]="roomobject.screenprojectoramenity"> <strong>Screen + Projector</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="stagecheckbox"
+                       name="stagecheckbox"
+                       [ngModel]="roomobject.stageamenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Stage</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="microphoneamenitycheckbox"
-                 name="microphoneamenitycheckbox"
-                 [ngModel]="roomobject.microphoneamenity"> <strong>Microphone</strong>
+
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="televisioncheckbox"
+                       name="televisioncheckbox"
+                       [ngModel]="roomobject.televisionamenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Television</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="naturallightcheckbox"
-                 name="naturallightcheckbox"
-                 [ngModel]="roomobject.naturallightamenity"> <strong>Natural Light</strong>
+
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="screenprojectorcheckbox"
+                       name="screenprojectorcheckbox"
+                       [ngModel]="roomobject.screenprojectoramenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Screen + Projector</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="wificheckbox"
-                 name="wificheckbox"
-                 [ngModel]="roomobject.wifiamenity"> <strong>Wifi</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="microphoneamenitycheckbox"
+                       name="microphoneamenitycheckbox"
+                       [ngModel]="roomobject.microphoneamenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Microphone</strong>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="wheelchaircheckbox"
-                 name="wheelchaircheckbox"
-                 [ngModel]="roomobject.wheelchairaccessibleamenity"> <strong>Wheelchair Accessible</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="naturallightcheckbox"
+                       name="naturallightcheckbox"
+                       [ngModel]="roomobject.naturallightamenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Natural Light</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="outdoorseattingcheckbox"
-                 name="outdoorseattingcheckbox"
-                 [ngModel]="roomobject.outdoorseatingamenity"> <strong>Outdoor Seating</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="wificheckbox"
+                       name="wificheckbox"
+                       [ngModel]="roomobject.wifiamenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Wifi</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="wheelchaircheckbox"
+                       name="wheelchaircheckbox"
+                       [ngModel]="roomobject.wheelchairaccessibleamenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Wheelchair Accessible</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="outdoorseattingcheckbox"
+                       name="outdoorseattingcheckbox"
+                       [ngModel]="roomobject.outdoorseatingamenity">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Outdoor Seating</strong>
+              </div>
+            </div>
+          </div>
         </div>
       </div> <!--amenities checkboxes-->
       <div class="row upperlinerow row-eq-height"> <!--Amenities row text-->
@@ -478,55 +765,134 @@
         </div>
       </div> <!--Amenities row text-->
       <div class="row checkboxrow"> <!--Seating Options checkboxes-->
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="cocktailstandingcheckbox"
-                 name="cocktailstandingcheckbox"
-                 [ngModel]="roomobject.cocktailstandingseatingoption"> <strong>Cocktail / Standing</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="cocktailstandingcheckbox"
+                       name="cocktailstandingcheckbox"
+                       [ngModel]="roomobject.cocktailstandingseatingoption">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Cocktail / Standing</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="classroomseatingcheckbox"
-                 name="classroomseatingcheckbox"
-                 [ngModel]="roomobject.classroomseatingoption"> <strong>Classroom</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="classroomseatingcheckbox"
+                       name="classroomseatingcheckbox"
+                       [ngModel]="roomobject.classroomseatingoption">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Classroom</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="ushapecheckbox"
-                 name="ushapecheckbox"
-                 [ngModel]="roomobject.ushapeseatingoption"> <strong>U-Shape</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="ushapecheckbox"
+                       name="ushapecheckbox"
+                       [ngModel]="roomobject.ushapeseatingoption">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>U-Shape</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="sixtyinchroundscheckbox"
-                 name="sixtyinchroundscheckbox"
-                 [ngModel]="roomobject.sixtyroundseatingoption"> <strong> Rounds</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="sixtyinchroundscheckbox"
+                       name="sixtyinchroundscheckbox"
+                       [ngModel]="roomobject.sixtyroundseatingoption">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong> Rounds</strong>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="boardroomcheckbox"
-                 name="boardroomcheckbox"
-                 [ngModel]="roomobject.boardroomseatingoption"> <strong>Boardroom</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="boardroomcheckbox"
+                       name="boardroomcheckbox"
+                       [ngModel]="roomobject.boardroomseatingoption">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Boardroom</strong>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="theatercheckbox"
-                 name="theatercheckbox"
-                 [ngModel]="roomobject.theaterseatingoption"> <strong>Theater</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="theatercheckbox"
+                       name="theatercheckbox"
+                       [ngModel]="roomobject.theaterseatingoption">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Theater</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-auto">
-          <input (change)="savevenueroom()"
-                 type="checkbox"
-                 id="hallowsquarecheckbox"
-                 name="hallowsquarecheckbox"
-                 [ngModel]="roomobject.hallowsquareseatingoption"> <strong>Hallow Square</strong>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="hallowsquarecheckbox"
+                       name="hallowsquarecheckbox"
+                       [ngModel]="roomobject.hallowsquareseatingoption">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Hallow Square</strong>
+              </div>
+            </div>
+          </div>
         </div>
       </div> <!--Seating Options checkboxes-->
     </form>

@@ -194,9 +194,9 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
       );
 
   }
-
-
-
+  wronguseofform = false;
+  useralreadyonvenue = false;
+  useralreadyexists = false;
   //create new user delete user code
   createdeleteuseractive = false;
   activatecreatedeleteuser(){
@@ -279,6 +279,34 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
           }
           this.venueusers.push(req);
           this.cancelbutton();
+        },
+        error=>{
+          if(error.status === 403){
+            this.addnewuserform.reset();
+            this.cancelbutton();
+            this.useralreadyexists = true;
+            setTimeout(()=> {
+              this.useralreadyexists = false;
+            }, 5000);
+          }
+          if(error.status === 400){
+            this.addnewuserform.reset();
+            this.cancelbutton();
+            this.useralreadyonvenue = true;
+            setTimeout(()=> {
+              this.useralreadyonvenue = false;
+            }, 5000);
+
+          }
+          if(error.status === 406){
+            this.addnewuserform.reset();
+            this.cancelbutton();
+            this.wronguseofform = true;
+            setTimeout(()=> {
+              this.wronguseofform = false;
+            }, 5000);
+
+          }
         }
       );
 
@@ -336,6 +364,8 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
               .subscribe(
                 (req: any) => {
                   this.venueusers = req;
+                  console.log('this is the venueusers');
+                  console.log(this.venueusers);
                   for (let user of this.venueusers) {
                     let contextpermission;
                     for (let set of user.venuepermissions_set) {
