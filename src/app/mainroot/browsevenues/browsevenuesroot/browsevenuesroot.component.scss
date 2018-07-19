@@ -61,17 +61,13 @@ $bg-white: white;
 }
 
 #amenityselect{
-  position: relative;
-  left: 3vw;
   display: block;
-  width: 18.5vw;
+  width: 100%;
 }
 
 #cuisinesselect{
   display: block;
-  position: relative;
-  right: 14px;
-  width: 18.5vw;
+  width: 100%;
 }
 
 #seatingselect{
@@ -89,14 +85,14 @@ $bg-white: white;
 }
 
 #capacitygroup{
-  display: block;
-  position: relative;
-  left: 7vw;
+  display: inline-block;
+  width: 45%;
 
 }
 
 #capacityselectinput{
-  width: 10vw;
+  display: inline-block;
+  width: 45%;
 }
 
 #capacityamount{
