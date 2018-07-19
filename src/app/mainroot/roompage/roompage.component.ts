@@ -418,7 +418,11 @@ export class RoompageComponent implements OnInit, OnDestroy {
 
                     console.log(this.room);
                     let roomimageset = this.room.roomimage_set;
+                    console.log('this is the roomset pre sort');
+                    console.log(roomimageset);
                     roomimageset = roomimageset.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
+                    console.log('this is the roomset post sort');
+                    console.log(roomimageset);
                     for (let image in roomimageset) {
                       roomimageset[+image] = roomimageset[+image].imageurl;
                     }
