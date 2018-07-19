@@ -66,7 +66,7 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
   fullbuyoutroomactive = false;
 
   backtoadmin(){
-    this.router.navigate(['/admin', this.permission, 'venue-admin', this.venue.name, this.venue.id, 'room', this.room.id ]);
+    this.router.navigate(['/admin', this.permission, 'venue-admin', this.venue.name, this.venue.id, 'profile' ]);
   }
 
   // venuename from route param name used for navigation
@@ -86,6 +86,7 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
   };
   room = {
     id: null,
+    name: '',
     // things that you didn't put in
     privateroom: false,
     semiprivateroom: false,
@@ -402,7 +403,8 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
           this.venuename = this.venuename.replace(/_/g, ' ');
           if(this.roomname === 'fullbuyout'){
             this.fullbuyoutroomactive = true;
-          }else{
+          }
+          if(this.roomname !== 'fullbuyout'){
             this.roomname = this.roomname.replace(/_/g, ' ');
           }
           // option is a hack to  allow venue admins to see their offline venues
@@ -459,6 +461,7 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.otherrooms =[];
+    this.parentadminservicevar.unsubscribe();
     this.browsevenuescommservice.sendstate('unshow');
 
   }

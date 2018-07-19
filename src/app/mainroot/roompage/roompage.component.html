@@ -28,12 +28,15 @@
       <div *ngIf="fullbuyoutroomactive" class="col-auto roommain">
         Full Buyout
       </div>
+      <div *ngIf="!fullbuyoutroomactive">
       <div class="col-auto roommain" *ngIf= "room.privateroom == true">
         Private
       </div>
-
+      </div>
+      <div *ngIf="!fullbuyoutroomactive">
       <div class="col-auto roommain" *ngIf= "room.semiprivateroom == true">
         Semi-Private
+      </div>
       </div>
       <div *ngIf="!fullbuyoutroomactive" id="Seat" class="col-auto roommain"> {{ room.seatedcapacity }} seated
       </div>
