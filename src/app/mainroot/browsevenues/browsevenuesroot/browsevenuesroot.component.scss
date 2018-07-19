@@ -27,24 +27,6 @@ $bg-white: white;
 }
 
 
-#searchinput, #searchbutton{
-  position: relative;
-  top: 7px;
-}
-
-.capacitygroup{
-  position: relative;
-  bottom: 2rem;
-}
-
-.capacitynumberinput{
-  position: relative;
-  top: .5rem;
-  margin-left: 6%;
-
-
-}
-
 #venue-search {
   border-bottom: rgb(189,189,189) solid 5px;
 }
@@ -84,38 +66,14 @@ $bg-white: white;
   font-size: 14px;
 }
 
-#capacitygroup{
-  display: inline-block;
-  width: 45%;
 
-}
-
-#capacityselectinput{
-  display: inline-block;
-  width: 45%;
-}
-
-#capacityamount{
-  position: relative;
-  bottom: 7px;
-  width: 8vw;
-  height: 6vh;
-  font-size: 14px;
-}
 
 #searchinput{
-  top: -.5vh;
-  left: .5vh;
-  font-size: 14px;
-  height: 35px;
+  width: 100%;
 }
 
 #searchbutton{
-  position: relative;
-  top: -5.5vh;
-  left: 42vw;
-  font-size: 14px;
-  height: 35px;
+ width: 100%;
 }
 
 .rightbuttons{
@@ -124,4 +82,9 @@ $bg-white: white;
   height: 30px;
   font-size: 16px;
   text-decoration: underline;
+}
+
+.capacityrow{
+  position: relative;
+  top: -20px;
 }

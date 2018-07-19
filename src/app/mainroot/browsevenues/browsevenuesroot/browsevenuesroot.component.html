@@ -46,29 +46,29 @@
       <ng-multiselect-dropdown id="amenityselect" *ngIf="!choicesload" [data]="ammenitieschoices" [(ngModel)]="ammenitiesmodel" [settings]=" ammenitiesdropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Ammenity'"></ng-multiselect-dropdown>
     </div>
 
-    <form id="capacitygroup" #capacityform="ngForm" class="col4  d-inline-block">
-      <div class="d-inline-block">
+    <form #capacityform="ngForm" class="col-lg-4 col-md-4 col-sm-6">
+      <div class="row capacityrow">
+      <div class="col-lg-6 col-md-7">
         <select (click)="enablecapinput()"
                 id="seatingdropdown"
                 name="capacityselectinput"
                 class="form-control"
                 [ngModel]="capacityformreset">
-          <option selected value="">Capacity Type</option>
+          <option selected value="">Capacity</option>
           <option value="seated">Seated</option>
           <option value="standing">Standing</option>
         </select>
       </div>
-      <div class=" d-inline-block">
-        <div class="form-group capacitynumberinput">
-            <input type="number"
-               (change)="applyfilters()"
-               [disabled]="disablecapacityinput"
-               id="capacityamount"
-               placeholder="Party Size"
-               ngModel
-               class="form-control"
-               name="groupnumberinput">
-        </div>
+      <div class="col-lg-6 col-md-5">
+        <input type="text"
+           (change)="applyfilters()"
+           [disabled]="disablecapacityinput"
+           id="capacityamount"
+           placeholder="Party Size"
+           ngModel
+           class="form-control"
+           name="groupnumberinput">
+      </div>
       </div>
     </form>
   </div>
@@ -81,19 +81,21 @@
   </div>
 </div>
 <div class="container">
+  <form>
   <div class="row">
-    <div class="ml-4 col-lg-7 col-md-7 col-sm-12 col-xs-12">
-      <form>
+    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
         <input type="text"
                placeholder="Search By Venue Name"
                id="searchinput"
                name="searchinput"
                ngModel
-               class="col-7 p-0 form-control input-gray mr-5 input-lg">
-        <button id="searchbutton" type="submit" class="btn-light-blue col-2 p-0">Search</button>
-      </form>
+               class=" form-control input-gray">
+    </div>
+    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+        <button id="searchbutton" type="submit" class=" btn btn-light-blue">Search</button>
     </div>
   </div>
+  </form>
 </div>
 
 <!--
