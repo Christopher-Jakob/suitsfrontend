@@ -4,17 +4,19 @@ import {NgForm} from "@angular/forms";
 import {BrowseVenueDependancyService} from "../../../services/pagedependancy/browsevenues/browsevenues.dependancy.service";
 import {VenueService} from '../../../services/venueservice/venueservice';
 import {BrowsevenuescomponentcommService} from "../../../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
+import {LandingpageDependancyService} from "../../../services/mainroot/landingpage/LandingpageDependancyService";
 
 @Component({
   selector: 'app-browsevenuesroot',
   templateUrl: './browsevenuesroot.component.html',
   styleUrls: ['./browsevenuesroot.component.scss'],
-  providers: [BrowseVenueDependancyService]
+  providers: [BrowseVenueDependancyService, LandingpageDependancyService]
+
 
 })
 export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private browsevenuedependancyservice: BrowseVenueDependancyService,
+  constructor(private route: ActivatedRoute, private browsevenuedependancyservice: BrowseVenueDependancyService,  private landingpageservice: LandingpageDependancyService,
               private venueservice: VenueService, private browsevenuescommservice: BrowsevenuescomponentcommService, private cd: ChangeDetectorRef) { }
   choicesload = true;
   selectedcity;
@@ -466,6 +468,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
       .subscribe(
         (params: Params) =>{
           this.selectedcity = params['city'];
+          this.browsevenuescommservice.sendselectedcity(this.selectedcity);
           this.citypkreceivevar = this.browsevenuescommservice.receiveselectedcity()
             .subscribe(
               (req: any)=>{
@@ -560,7 +563,20 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
                     });
               });
+          let cities = [];
+          if(this.citypk != null){
+            this.landingpageservice.getsearchcitylist()
+              .subscribe(
+                (req: any)=> {
+                  cities = req;
+                  for(let c in cities){
+                    if(cities[c].city === this.selectedcity){
+                      this.citypk = cities[c].pk;
 
+                    }
+                  }
+                });
+          }
 
         });
 
