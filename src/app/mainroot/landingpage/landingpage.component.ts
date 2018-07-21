@@ -29,6 +29,13 @@ export class LandingpageComponent implements OnInit, OnDestroy {
   browse(){
     this.selectedcity = this.selectform.value.cityselect;
     this.navcomm.setselectedcity(this.selectedcity);
+    let citypk = null;
+    for(let city in this.cities){
+      if(this.cities[city].city === this.selectedcity){
+        citypk = this.cities[city].pk;
+      }
+    }
+    this.navcomm.sendselectedcity(citypk);
     this.router.navigate(['/browse', this.selectedcity]);
 
   }

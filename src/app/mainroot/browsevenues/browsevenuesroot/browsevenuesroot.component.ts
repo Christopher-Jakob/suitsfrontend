@@ -19,6 +19,8 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
   choicesload = true;
   selectedcity;
   filteredvenueslength;
+  citypkreceivevar;
+  citypk;
 
   // Settings configuration for neighborhood dropdown
   neighborhooddropdownsettings = {
@@ -164,11 +166,13 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
     this.disablecapacityinput = true;
     this.capacityformreset = '';
     this.applyfilters();
+    this.searchform.reset();
 
   }
 
   @ViewChild('capacityform') capacityform: NgForm;
   @ViewChild('minspendform') minspendform: NgForm;
+  @ViewChild('searchform') searchform: NgForm;
 
   disablecapacityinput = true;
   enablecapinput(){
@@ -181,7 +185,89 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
       this.disablecapacityinput = true;
     }
   }
+
+  searchvenue(){
+    const query = this.searchform.form.value.searchinput;
+    this.browsevenuedependancyservice.browsesearch(this.citypk, query)
+      .subscribe(
+        (req: any)=>{
+          this.filteredvenues = req;
+          console.log('this is the filtered venues');
+          console.log(this.filteredvenues);
+          for(let venue in this.filteredvenues){
+            let images = this.filteredvenues[venue].venueimage_set;
+            console.log('this is the venue images before ordering');
+            console.log(images);
+            images = images.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
+            console.log('this is the venue images after ordering');
+            console.log(images);
+            for(let image in images){
+              images[image] = images[image].imageurl;
+            }
+            this.filteredvenues[venue].venueimage_set = images;
+            let semiprivaterooms = 0;
+            let privaterooms = 0;
+            if(this.filteredvenues[venue].fullbuyout){
+              privaterooms ++;
+            }
+            let rooms = this.filteredvenues[venue].room_set;
+            for(const room of rooms){
+              if(room.privateroom){
+                privaterooms ++;
+              }
+              if(room.semiprivateroom){
+                semiprivaterooms ++;
+              }
+            }
+            const roomsets = {
+              semiprivate: semiprivaterooms,
+              privateroom: privaterooms
+            };
+            this.filteredvenues[venue].room_set = roomsets;
+
+            if(this.filteredvenues[venue].cuisine1 != null){
+              for(const cuisine of this.cuisinechoices){
+                if(this.filteredvenues[venue].cuisine1 == cuisine.pk){
+                  this.filteredvenues[venue].cuisine1 = cuisine.name;
+
+                }
+                if(this.filteredvenues[venue].cuisine2 == cuisine.pk){
+                  this.filteredvenues[venue].cuisine2 = cuisine.name;
+                }
+              }
+
+            }
+
+            for(const neighborhood of this.neighborhoodchoices){
+              if(this.filteredvenues[venue].searchneighborhood === neighborhood.pk){
+                this.filteredvenues[venue].searchneighborhood = neighborhood.neighborhood;
+              }
+            }
+            for(const choice of this.experientialchoices){
+              if(this.filteredvenues[venue].experientialtype === choice.pk){
+                this.filteredvenues[venue].experientialtype = choice.type;
+              }
+            }
+          }
+          this.filteredvenueslength = this.filteredvenues.length;
+
+
+          this.browsevenuescommservice.sendvenuelist(this.filteredvenues);
+
+          this.venuetypechoices2 = this.venuetypechoices.sort((a, b) => ((a.type) < (b.type) ? -1 : ((a.type) > (b.type) ? 1 : 0)));
+          this.privacytypechoices2 = this.privacytypechoices.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
+          this.neighborhoodchoices2 = this.neighborhoodchoices.sort((a, b) => ((a.neighborhood) < (b.neighborhood) ? -1 : ((a.neighborhood) > (b.neighborhood) ? 1 : 0)));
+          this.experientialchoices.sort((a, b) => ((a.type) < (b.type) ? -1 : ((a.type) > (b.type) ? 1 : 0)));
+          this.cuisinechoices.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
+          this.ammenitieschoices.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
+
+        });
+
+  }
+
+
   applyfilters(){
+    this.searchform.reset();
     let queryparams ={
       neighborhoods: null,
       venuetypes: null,
@@ -380,6 +466,14 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
       .subscribe(
         (params: Params) =>{
           this.selectedcity = params['city'];
+          this.citypkreceivevar = this.browsevenuescommservice.receiveselectedcity()
+            .subscribe(
+              (req: any)=>{
+                if(req != null){
+                  this.citypk = req;
+                }
+              }
+            );
           this.browsevenuedependancyservice.browsevenuesdependancy(this.selectedcity)
             .subscribe(
               (req: any)=>{

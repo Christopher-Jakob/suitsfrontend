@@ -17,3 +17,5 @@ const venuesroot = rooturl + mainroot + 'venue/';
 export const unapprovedvenuecreate = venuesroot;
 
 export const browsevenuesroot = unapprovedvenuecreate;
+
+export const searchvenue = venuesroot +  'search/';
