@@ -31,6 +31,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   selectedcityvar;
   statevar;
   showbrowse = true;
+  userpk;
 
   // code to send the selected city
   sendcity(){
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // boolean to determine if the make rfp model should be displayed
   user = {
     name: null,
+    pk: null,
     id: null,
     isclient: false,
     isvenueuser: false,
@@ -55,7 +57,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   //navigate to admin code
   navigatetopermission(){
     if(this.user.isclient){
-      this.router.navigate(['/dashboard','client',this.user.id]);
+      this.router.navigate(['/dashboard','client',this.userpk]);
     }
     if(this.user.isvenueuser){
       this.router.navigate(['/admin','venue']);
@@ -90,6 +92,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.signedin = false;
     this.user = {
       id: null,
+      pk: null,
       name: null,
       isclient: false,
       isvenueuser: false,
@@ -152,6 +155,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
           password: form.value.clientpassword,
           company: form.value.clientcompany,
           phone: form.value.clientphonenumber,
+          permission: null,
           city: form.value.clientcity,
           state: form.value.clientstate,
           contactname: form.value.venuecontactname,
@@ -237,8 +241,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
               this.signedin = false;
             }else{
               this.signedin = true;
-              if(this.user.isvenueuser){
-                //this.router.navigate(['/admin','venue','venue-list']);
+              if(this.user.id != null) {
+                this.userpk = this.user.id;
+              }
+              if(this.user.pk != null){
+                this.userpk = this.user.pk;
               }
             }
           }

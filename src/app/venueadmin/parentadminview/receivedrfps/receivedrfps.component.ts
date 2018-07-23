@@ -25,6 +25,8 @@ export class ReceivedrfpsComponent implements OnInit {
             this.rfpservice.getreceivedrfps(this.venueobject.id).subscribe(
                 (req: any)=>{
                   this.receviedrfps = req;
+                  console.log('this is the recevied rfps');
+                  console.log(this.receviedrfps);
                 }
               );
           }

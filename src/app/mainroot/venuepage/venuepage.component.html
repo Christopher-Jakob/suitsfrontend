@@ -131,7 +131,7 @@
                  id="eventname"
                  name="eventname"
                  required
-                 ngModel>
+                 [ngModel]="savedevent.name">
         </div>
         <div class="col-6">
           <input class="form-control"
@@ -152,26 +152,22 @@
           </div>
         </div>
         <div class="col-6">
-          <label>Event Purpose</label>
-          <br>
           <select class="form-control"
                   id="eventpurpose"
                   name="eventpurpose"
                   required
                   [ngModel]="savedevent.eventpurpose">
-            <option value="">Select Event Purpose</option>
+            <option value="">Select Event Purpose *</option>
             <option *ngFor="let p of eventpurpose" [value]="p.purpose">{{p.purpose}}</option>
-          </select><span class="STredstar">*</span>
+          </select>
         </div>
         <div class="col-6">
-          <label>Start Time</label>
-          <br>
           <select class="form-control"
                   id="startime"
                   name="starttime"
                   required
                   [ngModel]="savedevent.starttime">
-            <option value=""  selected>Select Start Time</option>
+            <option value=""  selected>Select Start Time *</option>
             <option value="8:00 AM">8:00 AM</option>
             <option value="8:15 AM">8:15 AM</option>
             <option value="8:30 AM">8:30 AM</option>
@@ -268,7 +264,7 @@
             <option value="7:15 AM">7:15 AM</option>
             <option value="7:30 AM">7:30 AM</option>
             <option value="7:45 AM">7:45 AM</option>
-          </select><span class="STredstar">*</span>
+          </select>
           <br>
           <div class="checkboxdiv">
             <input class="form-check-input"
@@ -280,14 +276,12 @@
           </div>
         </div>
         <div class="col-6">
-          <label>End Time</label>
-          <br>
           <select class="form-control"
                   id="endtime"
                   name="endtime"
                   required
                   [ngModel]="savedevent.endtime">
-            <option value="" disabled selected>Select End Time</option>
+            <option value="" disabled selected>Select End Time *</option>
             <option value="8:00 AM">8:00 AM</option>
             <option value="8:15 AM">8:15 AM</option>
             <option value="8:30 AM">8:30 AM</option>
@@ -384,7 +378,7 @@
             <option value="7:15 AM">7:15 AM</option>
             <option value="7:30 AM">7:30 AM</option>
             <option value="7:45 AM">7:45 AM</option>
-          </select><span class="STredstar">*</span>
+          </select>
           <br>
           <div class="checkboxdiv">
             <input class="form-check-input"
@@ -396,38 +390,34 @@
           </div>
         </div>
         <div class="col-6">
-          <label>Number of Guests</label>
-          <br>
           <input class="form-control"
                  type="number"
                  id="guestcount"
+                 placeholder="Number of Guests *"
                  name="guestcount"
                  required
-                 [ngModel]="savedevent.guestcount"><span class="STredstar">*</span>
+                 [ngModel]="savedevent.headcount">
         </div>
         <div class="col-6">
-          <label>Room Preference</label>
-          <br>
           <select class="form-control"
                   id="roomselect"
                   name="roomselect"
                   ngModel>
-            <option value="">No Preference</option>
+            <option value="">Select Room * </option>
+            <option value="no preference">No Preference</option>
             <option *ngFor="let room of roomnames" [value]="room">{{room}}</option>
           </select>
         </div>
         <div class="col-12">
-          <br>
-          <label>Event Details and Accomidation Requests</label>
-          <br>
           <textarea rows="10"
                     class="form-control"
                     id="eventdetails"
                     name="eventdetails"
+                    placeholder="Event Details and Accomidation Requests *"
                     required
                     [ngModel]="savedevent.eventdetails">
 
-            </textarea><span class="STredstar">*</span>
+            </textarea>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Create a new event</button>

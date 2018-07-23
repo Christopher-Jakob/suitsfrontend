@@ -113,6 +113,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
         programdate: form.value.eventdate,
         eventdateflex: form.value.dateflexcheckbox,
         eventpurpose: form.value.eventpurpose,
+        eventpurposepk: null,
         startime: form.value.starttime,
         starttimeflex: form.value.starttimeflexcheckbox,
         endtime: form.value.endtime,
@@ -121,6 +122,11 @@ export class VenuepageComponent implements OnInit, OnDestroy {
         guestcount: form.value.guestcount,
         eventdetails: form.value.eventdetails
       };
+      for(let p of this.eventpurpose){
+        if(p.purpose === payload.eventpurpose){
+          payload.eventpurposepk = p.pk;
+        }
+      }
       payload.eventdate = this.datevaluetoname(payload.eventdate);
       this.rfpservice.emailrfp(payload, this.venue.id)
         .subscribe(
@@ -128,6 +134,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
             this.rfpsent = true;
           },
           (error)=>{
+            console.log(error);
             if(error.status === 403){
               this.user = null;
               this.savedevent.name = form.value.eventname;
@@ -139,8 +146,8 @@ export class VenuepageComponent implements OnInit, OnDestroy {
               this.savedevent.starttimeflex = form.value.starttimeflexcheckbox;
               this.savedevent.endtime = form.value.endtime;
               this.savedevent.endtimeflex = form.value.endtimeflexcheckbox;
-              this.savedevent.roompreference = form.value.roomselect,
-                this.savedevent.headcount = form.value.guestcount;
+              this.savedevent.roompreference = form.value.roomselect;
+              this.savedevent.headcount = form.value.guestcount;
               this.savedevent.eventdetails = form.value.eventdetails;
               this.loginorsignup = true;
             }
@@ -382,7 +389,9 @@ export class VenuepageComponent implements OnInit, OnDestroy {
       .subscribe(
         (req: any)=>{
           if(req == null){
+            console.log('the user is set to null after logout');
             this.user = null;
+            console.log(this.user);
           }
           if(req != null){
             this.user = req;
@@ -480,6 +489,8 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.browsevenuescommservice.sendstate('unshow');
     this.parentadminservicevar.unsubscribe();
+    this.userservicesubscription.unsubscribe();
+    this.user = null;
   }
 
 }
