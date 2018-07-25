@@ -64,9 +64,10 @@
             <label for="phoneinput">Phone</label>
             <br>
             <input type="text"
-                   placeholder="Primary Phone"
+                   placeholder="Phone (digits only)"
                    id="phoneinput"
                    name="phoneinput"
+                   pattern="[0-9]+"
                    [ngModel]="userobject.phone">
             <br>
           </div>

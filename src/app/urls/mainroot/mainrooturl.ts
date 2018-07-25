@@ -6,4 +6,4 @@ import {rooturl} from "../rooturl";
 
 export const mainroot = 'main/';
 
-export const clientdashboardroot = rooturl + '/clientdashboard';
+export const clientdashboardroot = rooturl + 'clientdashboard';

@@ -121,14 +121,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Client Sign Up <span> &nbsp;* Mandatory Fields</span></h4>
+        <h4 class="modal-title">Client Sign Up</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
 
       </div>
       <div *ngIf="clientsignupconfrim" class="modal-body text-center">
-        <h3>Please check your email to complete the sign up process</h3>
+        <h3>Please check your email to complete the sign up process.</h3>
 
       </div>
       <div *ngIf="!clientsignupconfrim" class="modal-body">
@@ -153,8 +153,7 @@
                      required>
             </div>
             <div class="form-group col-6">
-              <input (change)="checkemail(clientsignupform)"
-                     type="email"
+              <input type="email"
                      class="form-control"
                      placeholder="Email *"
                      id="C-inputEmail4"
@@ -163,7 +162,7 @@
                      required>
             </div>
             <div class="form-group col-6">
-              <input (change)="checkemail(clientsignupform)"
+              <input (ngModelChange)="checkemail(clientsignupform)"
                      type="email"
                      class="form-control"
                      id="C-inputconfirmEmail4"
@@ -174,8 +173,7 @@
               <span style="color: red" class="help-block" *ngIf="emailmismatch">Emails do not match</span>
             </div>
           <div class="form-group col-6">
-            <input (change)="checkpassword(clientsignupform)"
-                   type="password"
+            <input type="password"
                    class="form-control"
                    id="C-inputPassword4"
                    ngModel
@@ -184,7 +182,7 @@
                    required>
           </div>
           <div class="form-group col-6">
-            <input (change)="checkpassword(clientsignupform)"
+            <input (ngModelChange)="checkpassword(clientsignupform)"
                    type="password"
                    class="form-control"
                    name="clientconfrimpassword"
@@ -203,14 +201,14 @@
                    placeholder="Company Name">
           </div>
           <div class="form-group col-6">
-            <input type="number"
+            <input type="text"
                    class="form-control"
                    id="P_phone"
                    name="P_phone"
                    pattern="([0-9]{10})"
                    ngModel
                    #P_PhoneCSS = "ngModel"
-                   placeholder="Phone"
+                   placeholder="Phone (digits only)"
             >
             <span *ngIf="P_PhoneCSS.touched && !P_PhoneCSS.valid" style="color: red">Phone Number Must be in 10 digits form. </span>
 
@@ -301,13 +299,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up <span> &nbsp;* Mandatory Fields</span></h5>
+        <h5 class="modal-title" id="exampleModalLabel">Venue Sign Up</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div *ngIf="signupcompelete" class="modal-body">
-        <h3>Your Venue application has been received we will be in touch</h3>
+        <div class="text-center">
+          <h3>Your Venue application has been received. We will get back to you shortly.</h3>
+        </div>
+
       </div>
       <div *ngIf="!signupcompelete" class="modal-body">
         <form (ngSubmit)="createvenue(createvenueform)" #createvenueform="ngForm">

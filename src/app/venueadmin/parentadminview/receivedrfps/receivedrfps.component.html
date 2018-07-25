@@ -19,12 +19,12 @@
         </thead>
         <tbody>
         <tr *ngFor="let rfp of receviedrfps">
-          <td>{{rfp.date}}</td>
           <td>{{rfp.name}}</td>
-          <td>{{rfp.purpose}}</td>
-          <td>{{rfp.starttime}}</td>
-          <td>{{rfp.endttime}}</td>
-          <td>{{rfp.headcount}}</td>
+          <td>{{rfp.eventdate}}</td>
+          <td>{{rfp.eventpurpose.purpose}}</td>
+          <td>{{rfp.startime}}</td>
+          <td>{{rfp.endtime}}</td>
+          <td>{{rfp.guestcount}}</td>
         </tr>
 
         </tbody>

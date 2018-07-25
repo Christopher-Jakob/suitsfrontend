@@ -467,7 +467,7 @@
 
                 <span style="color: red" *ngIf="invalidinfo">Email or password is incorrect</span>
                 <div id="signuplink">
-                  <a (click)="rfpusersignuptoggle()">Sign Up</a>
+                  <a style="cursor: pointer "(click)="rfpusersignuptoggle()">Sign Up</a>
                 </div>
               </div>
               <div class="col-12">
@@ -510,11 +510,17 @@
             </div>
             <div class="col-6">
               <label>Confirm Email</label>
-              <input class="form-control"
+              <input (ngModelChange)="emailconfrim(clientsignupform)"
+                     class="form-control"
                      type="email"
                      id="signupemailconfrim"
                      name="signupemailconfrim"
                      ngModel>
+            </div>
+            <div *ngIf="emailnomatch" class ="col-12">
+              <div class="text-center">
+                <span style="color: red">Emails do not match</span>
+              </div>
             </div>
             <div class="col-6">
               <label>Password</label>
@@ -526,11 +532,17 @@
             </div>
             <div class="col-6">
               <label>Confrim Password</label>
-              <input class="form-control"
+              <input (ngModelChange)="passwordconfirm(clientsignupform)"
+                     class="form-control"
                      type="password"
                      id="signuppasswordconfrim"
                      name="signuppasswordconfrim"
                      ngModel>
+            </div>
+            <div *ngIf="passwordnomatch" class="col-12">
+              <div class="text-center">
+                <span style="color: red">Passwords do not match</span>
+              </div>
             </div>
             <div class="col-6">
               <label>Company Name</label>

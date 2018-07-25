@@ -70,10 +70,10 @@
   <div *ngIf="!showsamplemenuupload" class="col-2">
     <button (click)="activatesamplemenuupload()" class="linkbutton">+Upload</button>
   </div>
-  <div *ngIf="showsamplemenuupload" class="col-4">
+  <div *ngIf="showsamplemenuupload && !notpdf" class="col-4">
     <form (change)="samplemenuupload($event)" #samplemenuform="ngForm">
       <label>Display Label:</label>
-      <input (click)="showsamplemenuinput()"
+      <input (ngModelChange)="showsamplemenuinput(samplemenuform)"
              type="text"
              id="pdfnameinput"
              name="pdfnameinput"
@@ -86,6 +86,11 @@
              accept="application/pdf"
              ngModel>
     </form>
+  </div>
+  <div *ngIf="notpdf" class="col-12">
+    <div class="text-center">
+      <span style="color:red">You may only upload PDFs</span>
+    </div>
   </div>
 </div> <!--sample menu pdf row-->
 <div class="row row-eq-height">

@@ -3,8 +3,7 @@
  */
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {MainRootClientDashboardService} from "../../services/mainroot/clientdashboard/mainroot.clientdashboard.service";
-import {MainrootClientProfileService} from "../../services/mainroot/mainrootclientprofile/mainroot.clientprofile.service";
+import {ClientUserService} from "../../services/userservice/clientuserservice/clientuserservice";
 
 @Component({
   selector: 'app-clientadmin',
@@ -13,7 +12,7 @@ import {MainrootClientProfileService} from "../../services/mainroot/mainrootclie
 })
 export class ClientadminComponent implements OnInit, OnDestroy{
 
-  constructor(private route: ActivatedRoute,  private clientdashboardservice: MainRootClientDashboardService, private router: Router) { }
+  constructor(private route: ActivatedRoute,  private clientdashboardservice:  ClientUserService , private router: Router) { }
   clientdashboardservicevar;
   isactingsuits = false;
 
@@ -32,18 +31,14 @@ export class ClientadminComponent implements OnInit, OnDestroy{
             this.isactingsuits = true;
           }
           this.clientdashboardservice.sendclientpermission(permission);
-
-          /*
-           this.clientdashboardservice.getclientobject(pk)
+           this.clientdashboardservice.getclientuser(pk)
            .subscribe(
            (req:any)=> {
-           clientobject = req.body;
+             clientobject = req;
+             this.clientdashboardservice.sendclientobject(clientobject);
 
-           this.clientdashboardservice.sendclientobject(clientobject);
+           });
 
-           }
-           );
-           */
         }
       );
     // temporary reroute while the next interation is being built.

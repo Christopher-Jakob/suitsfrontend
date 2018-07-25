@@ -226,11 +226,23 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   activatesamplemenuupload(){
     this.showsamplemenuupload = true;
   }
-
+  notpdf = false;
   @ViewChild('samplemenuform') samplemenuform: NgForm;
   samplemenuupload(event){
     let submittedpdfs = null;
     submittedpdfs = event.target.files[0];
+    console.log('this is the submitted pdf stuff');
+    console.log(submittedpdfs);
+    if(submittedpdfs.type != "application/pdf"){
+      this.notpdf = true;
+      submittedpdfs = null;
+      setTimeout(()=>{
+        this.notpdf = false;
+        this.showsamplemenuupload = false;
+      }, 3000);
+      return 0;
+
+    }
     const pdfname = this.samplemenuform.form.value.pdfnameinput;
 
     // need to set up a check to make sure file is valid
@@ -279,8 +291,15 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   }
 
   samplemenuinputshow = false;
-  showsamplemenuinput(){
-    this.samplemenuinputshow = true;
+  showsamplemenuinput(form:NgForm){
+    let displaytitle = form.value.pdfnameinput;
+    if(displaytitle != ''){
+      this.samplemenuinputshow = true;
+    }
+    if(displaytitle == ''){
+      this.samplemenuinputshow = false;
+    }
+
   }
 
   deletesamplemenu(index){

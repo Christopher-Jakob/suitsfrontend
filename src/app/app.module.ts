@@ -49,13 +49,10 @@ import {VenueroomadminpageComponent} from "./venueadmin/parentadminview/venueadm
 import {VenueadminroomlistComponent} from "./venueadmin/parentadminview/venueadminparentview/venueadminroomroot/venueadminroomlist/venueadminroomlist.component";
 import { ClientprofiledeletesuccessComponent } from './mainroot/clientadmin/clientprofiledeletesuccess/clientprofiledeletesuccess.component';
 import {VenueAdminParentAdminService} from "./services/venueadmin/venueadminparentadminservice/venueadmin.parentadmin.service";
-import {MainrootClientProfileService} from "./services/mainroot/mainrootclientprofile/mainroot.clientprofile.service";
 import {SuitssuitsuserprofileComponent} from './suitsandtablesadmin/suitssuitsuserprofile/suitssuitsuserprofile.component';
 import { SuitsdeclinedapplicationdetailComponent } from './suitsandtablesadmin/suitsdeclinedapplicationdetail/suitsdeclinedapplicationdetail.component';
 import {VenueAdminInceptionService} from "./services/venueadmin/venueadmininceptionservice/venueadmin.inception.service";
 import {AwsService} from "./services/amazonwebservice services/aws.services";
-import {MainRootClientDashboardService} from "./services/mainroot/clientdashboard/mainroot.clientdashboard.service";
-
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {
   BrowserAnimationsModule
@@ -86,6 +83,7 @@ import { SentrfpsComponent } from './mainroot/clientadmin/sentrfps/sentrfps.comp
 import { ReceivedrfpsComponent } from './venueadmin/parentadminview/receivedrfps/receivedrfps.component';
 import { PreviewvenueComponent } from './mainroot/previewvenue/previewvenue.component';
 import { PreviewvenueroomComponent } from './mainroot/previewvenueroom/previewvenueroom.component';
+import {ClientUserService} from "./services/userservice/clientuserservice/clientuserservice";
 
 
 const appRoutes: Routes = [
@@ -229,7 +227,7 @@ const appRoutes: Routes = [
     DraggableModule
   ],
   exports:[RouterModule],
-  providers: [VenueService, ModalToggleService, VenueAdminParentAdminService, MainrootClientProfileService, MainRootClientDashboardService, VenueAdminInceptionService, AwsService, UserAuthorizationService, ClientSuitsAdminSuperUserGuard, SuitsGuard, VenueSuitsAdminSuperUserGuard, IsNotVenueUserGuard, {
+  providers: [VenueService, ModalToggleService, VenueAdminParentAdminService,ClientUserService , VenueAdminInceptionService, AwsService, UserAuthorizationService, ClientSuitsAdminSuperUserGuard, SuitsGuard, VenueSuitsAdminSuperUserGuard, IsNotVenueUserGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true

@@ -1,18 +1,19 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {acceptedimagetypes} from "../../../constants/constants";
-import {MainRootClientDashboardService} from "../../../services/mainroot/clientdashboard/mainroot.clientdashboard.service";
-import {Router} from "@angular/router";
-import {MainrootClientProfileService} from "../../../services/mainroot/mainrootclientprofile/mainroot.clientprofile.service";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ClientUserService} from "../../../services/userservice/clientuserservice/clientuserservice";
+import {AwsService} from "../../../services/amazonwebservice services/aws.services";
 
 @Component({
   selector: 'app-clientprofile',
   templateUrl: './clientprofile.component.html',
-  styleUrls: ['./clientprofile.component.scss']
+  styleUrls: ['./clientprofile.component.scss'],
+  providers: [ClientUserService]
 })
 export class ClientprofileComponent implements OnInit, OnDestroy {
 
-  constructor(private dashboardservice:  MainRootClientDashboardService, private clientservice: MainrootClientProfileService, private router: Router) { }
+  constructor(private clientservice: ClientUserService,
+              private router: Router, private route: ActivatedRoute, private awsservice: AwsService) { }
   suitsdeleted = false;
   permission = 'client';
   suitpermission = true;
@@ -50,12 +51,13 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
       email: this.updateprofileform.form.value.emailinput,
       phone: this.updateprofileform.form.value.phoneinput
     };
-    this.dashboardservice.updateprofile(payload)
+    this.clientservice.updateclientuser(this.clientobject.pk, payload)
       .subscribe(
         (req: any)=>{
           // since the whole object is being returned
           this.clientobject = req.body;
-          this.dashboardservice.sendclientobject(this.clientobject);
+          this.clientservice.sendclientobject(this.clientobject)
+
         }
       );
   }
@@ -71,31 +73,43 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
   }
 
   uploadphoto(event){
-    let uploadedphotos = event.target.files;
-    for(let photo in uploadedphotos){
-      let remove = false;
-      for(let image of acceptedimagetypes){
-        if(uploadedphotos[+photo].type === image){
-          remove = false;
-          break;
-        }
-      }
-      if(!remove){
-        uploadedphotos.splice(+photo,1);
-      }
-    }
-    const payload = {
-      pk: this.clientobject.pk,
-      images: uploadedphotos
-    };
-
-    this.dashboardservice.uploadimage(payload)
+    let uploadedphoto = event.target.files[0];
+    this.clientservice.clientphotoinit(this.clientobject.pk)
       .subscribe(
         (req: any)=>{
-          this.clientobject.photo = req.body;
-          this.dashboardservice.sendclientobject(this.clientobject);
+          let url = req.url;
+          let fields = req.fields;
+          let uriroot = req.uriroot;
+          let photourl = uriroot + fields.key;
+          let fd = new FormData();
+          fd.append('acl', fields.acl);
+          fd.append('key', fields.key);
+          fd.append('content-type', fields['content-type']);
+          fd.append('policy', fields.policy);
+          fd.append('x-amz-algorithm', fields['x-amz-algorithm']);
+          fd.append('x-amz-credential', fields['x-amz-credential']);
+          fd.append('x-amz-date', fields['x-amz-date']);
+          fd.append('x-amz-signature', fields['x-amz-signature']);
+          fd.append('file', uploadedphoto);
+          let payload = {
+
+          };
+          this.awsservice.uploadtos3(req.url, fd)
+            .subscribe(
+              (req: any)=>{
+                this.clientservice.updateclientuser(this.clientobject.pk, payload)
+                  .subscribe(
+                    (req: any)=>{
+
+                    }
+                  );
+              }
+            );
+
+
         }
       );
+
   }
 
   //delete profile code
@@ -111,7 +125,7 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
 
   profiledelete(){
     const pk = this.clientobject.pk;
-    this.dashboardservice.deleteprofile(pk)
+    this.clientservice.deleteprofile(pk)
       .subscribe(
         (req: any)=>{
           if(req.status === 200){
@@ -160,7 +174,7 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
       password1: this.editpasswordform.form.value.newpassword1,
       password2: this.editpasswordform.form.value.newpassword2
     };
-    this.clientservice.editpassword(payload)
+    this.clientservice.editpassword(this.clientobject.pk, payload)
       .subscribe(
         (req: any)=>{
           if(req.status === 200){
@@ -183,7 +197,7 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0,0);
-    this. clientpermissionservicevar = this.dashboardservice.receiveclientpermission()
+    this. clientpermissionservicevar = this.clientservice.receiveclientpermission()
       .subscribe(
         (req: any)=>{
           console.log(req + 'this is the pure form');
@@ -201,21 +215,19 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
           }
         }
       );
-
-    /*
-     this.clientobjectservicevar = this.dashboardservice.receiveclientobject()
+     this.clientobjectservicevar = this.clientservice.receiveclientobject()
      .subscribe(
      (req: any)=>{
-     this.clientobject = req.body;
-     }
-     );
-     */
+     this.clientobject = req;
+     console.log(this.clientobject);
+     });
+
 
   }
 
   ngOnDestroy(){
-    // this.clientobjectservicevar.unsubscribe();
-    // this.clientpermissionservicevar.unsubscribe();
+    this.clientobjectservicevar.unsubscribe();
+    this.clientpermissionservicevar.unsubscribe();
   }
 
 }

@@ -90,6 +90,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   rfpsent =false;
   verifysignup = false;
 
+
   sendrfp(form:NgForm) {
     if (this.user == null) {
       this.savedevent.name = form.value.eventname;
@@ -106,7 +107,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
       this.savedevent.eventdetails = form.value.eventdetails;
       this.loginorsignup = true;
     }
-    if(this.user != null){
+    if (this.user != null) {
       let payload = {
         eventname: form.value.eventname,
         eventdate: form.value.eventdate,
@@ -118,12 +119,12 @@ export class VenuepageComponent implements OnInit, OnDestroy {
         starttimeflex: form.value.starttimeflexcheckbox,
         endtime: form.value.endtime,
         endtimeflex: form.value.endtimecheckbox,
-        roompreference : form.value.roomselect,
+        roompreference: form.value.roomselect,
         guestcount: form.value.guestcount,
         eventdetails: form.value.eventdetails
       };
-      for(let p of this.eventpurpose){
-        if(p.purpose === payload.eventpurpose){
+      for (let p of this.eventpurpose) {
+        if (p.purpose === payload.eventpurpose) {
           payload.eventpurposepk = p.pk;
         }
       }
@@ -132,10 +133,28 @@ export class VenuepageComponent implements OnInit, OnDestroy {
         .subscribe(
           (req: any) => {
             this.rfpsent = true;
+            form.reset();
+            this.user = null;
           },
-          (error)=>{
+          (error) => {
             console.log(error);
-            if(error.status === 403){
+            if (error.status === 401){
+              this.savedevent.name = form.value.eventname;
+              this.savedevent.date = form.value.eventdate;
+              this.savedevent.programdate = form.value.eventdate;
+              this.savedevent.dateflex = form.value.dateflexcheckbox;
+              this.savedevent.eventpurpose = form.value.eventpurpose;
+              this.savedevent.starttime = form.value.starttime;
+              this.savedevent.starttimeflex = form.value.starttimeflexcheckbox;
+              this.savedevent.endtime = form.value.endtime;
+              this.savedevent.endtimeflex = form.value.endtimeflexcheckbox;
+              this.savedevent.roompreference = form.value.roomselect;
+              this.savedevent.headcount = form.value.guestcount;
+              this.savedevent.eventdetails = form.value.eventdetails;
+              this.loginorsignup = true;
+
+            }
+            if (error.status === 403) {
               this.user = null;
               this.savedevent.name = form.value.eventname;
               this.savedevent.date = form.value.eventdate;
@@ -151,10 +170,11 @@ export class VenuepageComponent implements OnInit, OnDestroy {
               this.savedevent.eventdetails = form.value.eventdetails;
               this.loginorsignup = true;
             }
-          }
-        );
+
+          });
 
     }
+
   }
 
   populaterfpfromsaved(index, savedrfp, newrfp){
@@ -181,7 +201,8 @@ export class VenuepageComponent implements OnInit, OnDestroy {
 
 
   }
-
+  emailnomatch = false;
+  passwordnomatch = false;
   savedrfps;
   useremail;
   userpassword;
@@ -190,6 +211,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
       name: form.value.signupfirstname + ' ' + form.value.signuplastname,
       email: form.value.signupemail,
       password: form.value.signuppassword,
+      permission: null,
       companyname: form.value.companyname,
       phone: form.value.signupphoneinput,
       isclient: true,
@@ -367,7 +389,44 @@ export class VenuepageComponent implements OnInit, OnDestroy {
 
   }
 
+  emailconfrim(form:NgForm){
+    let form1 = form.value.signupemail;
+    let form2 = form.value.signupemailconfrim;
+    if(form1 !== form2){
+      this.emailnomatch = true;
+    }
+    if(form1 === form2){
+      this.emailnomatch = false;
+    }
+  }
+  passwordconfirm(form:NgForm){
+    let form1 = form.value.signuppassword;
+    let form2 = form.value.signuppasswordconfrim;
+    if(form1 !== form2){
+      this.passwordnomatch = true;
+    }
+    if(form1 === form2){
+      this.passwordnomatch = false;
+    }
+  }
+
+
+
   ngOnInit() {
+    this.userservicesubscription = this.authservice.receiveuser()
+      .subscribe(
+        (req: any) => {
+          if (req == null) {
+            console.log('the user is set to null after logout');
+            this.user = null;
+            console.log(this.user);
+          }
+          if (req != null) {
+            this.user = req;
+            this.loginorsignup = false;
+          }
+        });
+
     window.scrollTo(0,0);
     this.browsevenuescommservice.sendstate('show');
     let cuisine;
@@ -385,19 +444,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
             this.permission = req;
           }
         });
-    this.userservicesubscription = this.authservice.receiveuser()
-      .subscribe(
-        (req: any)=>{
-          if(req == null){
-            console.log('the user is set to null after logout');
-            this.user = null;
-            console.log(this.user);
-          }
-          if(req != null){
-            this.user = req;
-            this.loginorsignup = false;
-          }
-        });
+
     this.route.params
       .subscribe(
         (params: Params) => {

@@ -3,9 +3,7 @@
  */
 import {Component, OnDestroy, OnInit, AfterViewInit, ChangeDetectorRef} from '@angular/core';
 import {BrowsevenuescomponentcommService} from "../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
-import {MainRootClientDashboardService} from "../services/mainroot/clientdashboard/mainroot.clientdashboard.service";
-import {MainrootClientProfileService} from "../services/mainroot/mainrootclientprofile/mainroot.clientprofile.service";
-
+import {ClientUserService} from "../services/userservice/clientuserservice/clientuserservice";
 @Component({
   selector: 'app-mainroot',
   templateUrl: './mainroot.component.html',
@@ -14,7 +12,7 @@ import {MainrootClientProfileService} from "../services/mainroot/mainrootclientp
 })
 export class MainrootComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor(private dashboardservice : MainRootClientDashboardService, private cdr: ChangeDetectorRef) { }
+  constructor(private dashboardservice : ClientUserService, private cdr: ChangeDetectorRef) { }
   dashboardservicevar;
   isactingsuits = false;
 

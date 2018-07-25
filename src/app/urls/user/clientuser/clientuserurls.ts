@@ -8,3 +8,5 @@ export const clientroot = userroot + 'client/';
 export const clientuserlist = clientroot + 'list/';
 
 export const clientverify = clientroot + 'verify/';
+
+export const clientphotoinit = userroot + 'photo-signature/'; // pk is included in request

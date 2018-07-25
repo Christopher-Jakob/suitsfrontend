@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MainRootClientDashboardService} from "../../../services/mainroot/clientdashboard/mainroot.clientdashboard.service";
-
+import {ClientUserService} from "../../../services/userservice/clientuserservice/clientuserservice";
 @Component({
   selector: 'app-clientadminnavigation',
   templateUrl: './clientadminnavigation.component.html',
@@ -8,7 +7,7 @@ import {MainRootClientDashboardService} from "../../../services/mainroot/clientd
 })
 export class ClientadminnavigationComponent implements OnInit, OnDestroy{
 
-  constructor(private dashboardservice: MainRootClientDashboardService ) { }
+  constructor(private clientservice: ClientUserService) { }
   dashboardservicevar;
   clientpermissionservicevar;
   clientpk = 3;
@@ -17,7 +16,7 @@ export class ClientadminnavigationComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
 
-    this.clientpermissionservicevar = this.dashboardservice.receiveclientpermission()
+    this.clientpermissionservicevar = this.clientservice.receiveclientpermission()
       .subscribe(
         (req:any)=>{
           if(req !== null){
@@ -26,7 +25,7 @@ export class ClientadminnavigationComponent implements OnInit, OnDestroy{
           }
         }
       );
-    this.dashboardservicevar = this.dashboardservice.receiveclientobject()
+    this.dashboardservicevar = this.clientservice.receiveclientobject()
       .subscribe(
         (req: any)=>{
           if(req !== null){
@@ -39,8 +38,8 @@ export class ClientadminnavigationComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(){
-    //this.clientpermissionservicevar.unsubscribe();
-    //this.dashboardservicevar.unsubscribe();
+    this.clientpermissionservicevar.unsubscribe();
+    this.dashboardservicevar.unsubscribe();
   }
 
 }
