@@ -18,15 +18,33 @@
     </div>
   </div>
   <div id="RoomMain" class="Section">
-    <div class="SecHeadunderline">
-      <a [routerLink]="['/venue',venue.name]">{{ venue.name }}</a>
+    <div class="row">
+    <div class="SecHeadunderline col-6">
+      <div class="float-left">
+        <a [routerLink]="['/venue',venue.name]">{{ venue.name }}</a>
+      </div>
+    </div>
+      <div class="col-6">
+        <div class="float-right">
+          <form #rfpchoiceform="ngForm">
+            <select class="form-control" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
+                    id="rfpsendselect"
+                    name="rfpsendselect"
+                    [ngModel]="dropdownreset">
+              <option value="">Send RFP</option>
+              <option value="n">Create New RFP</option>
+              <option value="s">Create From Saved</option>
+            </select>
+          </form>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div *ngIf="!fullbuyoutroomactive" class="col-auto roommain">
         {{ roomname }}
       </div>
       <div *ngIf="fullbuyoutroomactive" class="col-auto roommain">
-        Full Buyout
+          Full Buyout
       </div>
       <div *ngIf="!fullbuyoutroomactive">
       <div class="col-auto roommain" *ngIf= "room.privateroom == true">
@@ -38,25 +56,18 @@
         Semi-Private
       </div>
       </div>
+  <div id="rfpselect">
+
+  </div>
+  </div>
+    <div class="row caprow">
       <div *ngIf="!fullbuyoutroomactive" id="Seat" class="col-auto roommain"> {{ room.seatedcapacity }} seated
       </div>
-    <div *ngIf="fullbuyoutroomactive" id="Seat" class="col-auto roommain"> {{ venue.fullbuyoutseatedcapacity }} seated
+      <div *ngIf="fullbuyoutroomactive" id="Seat" class="col-auto roommain"> {{ venue.fullbuyoutseatedcapacity }} seated
+      </div>
+      <div *ngIf="!fullbuyoutroomactive" id="Stand" class="col-auto roommain"> {{ room.standingcapacity }} standing </div>
+      <div *ngIf="fullbuyoutroomactive" id="Stand" class="col-auto roommain"> {{ venue.fullbuyoutstandingcapactiy }} standing </div>
     </div>
-    <div *ngIf="!fullbuyoutroomactive" id="Stand" class="col-auto roommain"> {{ room.standingcapacity }} standing </div>
-    <div *ngIf="fullbuyoutroomactive" id="Stand" class="col-auto roommain"> {{ venue.fullbuyoutstandingcapactiy }} standing </div>
-  </div>
-  <div id="rfpselect">
-    <form #rfpchoiceform="ngForm" class="float-right">
-      <select class="form-control" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
-              id="rfpsendselect"
-              name="rfpsendselect"
-              [ngModel]="dropdownreset">
-        <option value="">Send RFP</option>
-        <option value="n">Create New RFP</option>
-        <option value="s">Create From Saved</option>
-      </select>
-    </form>
-  </div>
 
   <div id="RoomDes" class="Section">
     <div class="SecHead">Description</div>

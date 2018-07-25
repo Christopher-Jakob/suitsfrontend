@@ -170,7 +170,7 @@
                      name="clientemailconfrim"
                      placeholder="Confirm Email *"
                      required>
-              <span style="color: red" class="help-block" *ngIf="emailmismatch">Emails do not match</span>
+              <span style="color: red" class="help-block" *ngIf="emailmismatch">Emails must match</span>
             </div>
           <div class="form-group col-6">
             <input type="password"
@@ -188,9 +188,9 @@
                    name="clientconfrimpassword"
                    ngModel
                    id="C-inputvalidatePassword4"
-                   placeholder=" Confrim Password *"
+                   placeholder=" Confirm Password *"
                    required>
-            <span style="color: red" *ngIf="passwordmismatch" class="help-block">Passwords do not match</span>
+            <span style="color: red" *ngIf="passwordmismatch" class="help-block">Passwords must match</span>
           </div>
           <div class="form-group col-6">
             <input type="text"
