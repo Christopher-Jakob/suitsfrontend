@@ -132,6 +132,10 @@ $color-primary: rgb(83,139,197);
 
 }
 
+td{
+  cursor: pointer;
+}
+
 #signuplink{
   position: relative;
   margin-left: 2px;
@@ -149,4 +153,8 @@ $color-primary: rgb(83,139,197);
 #verifybutton{
   position: relative;
   left: 45%;
+}
+
+#createsavedmodal{
+  width: 75vh !important;
 }

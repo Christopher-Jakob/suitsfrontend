@@ -30,6 +30,7 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-toggle/css/bootstrap2-toggle.min.css",
+              "node_modules/jquery-ui-dist/jquery-ui.min.js",
               "src/styles.scss",
               "src/loadingcircle.css"
             ],

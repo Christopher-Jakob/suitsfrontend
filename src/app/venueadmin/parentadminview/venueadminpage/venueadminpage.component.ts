@@ -97,6 +97,7 @@ export class VenueadminpageComponent implements OnInit {
       .subscribe(
         (req: any)=>{
           this.venues = req;
+          this.venues = this.venues.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
           console.log(this.venues);
         }
       );

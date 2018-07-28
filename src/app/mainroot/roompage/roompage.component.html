@@ -202,521 +202,535 @@
   </div>
 </div>
 
-<ng-template #createProp let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Request For Proposal</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form (ngSubmit)="sendrfp(rfpforminputs)" #rfpforminputs ="ngForm">
-      <div *ngIf="!loginorsignup && !rfpsent" class="row">
-        <div class="col-6">
-          <label>Date Of Event</label>
-          <br>
-          <input class="form-control"
-                 type="date"
-                 id="eventdate"
-                 name="eventdate"
-                 required
-                 [ngModel]="savedevent.date"><span class="STredstar">*</span>
-          <br>
-          <div class="checkboxdiv">
-            <input class="form-check-input"
-                   type="checkbox"
-                   id="dateflexcheckbox"
-                   name="dateflexcheckbox"
-                   [ngModel]="savedevent.dateflexcheckbox">
-            <label class="form-check-label">Date is flexible</label>
+  <ng-template #createProp let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Request For Proposal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="sendrfp(rfpforminputs)" #rfpforminputs ="ngForm">
+        <div *ngIf="!loginorsignup && !rfpsent" class="row">
+          <div class="col-6">
+            <input class="form-control"
+                   type="text"
+                   placeholder="Name Of Event *"
+                   id="eventname"
+                   name="eventname"
+                   required
+                   [ngModel]="savedevent.name">
           </div>
-        </div>
-        <div class="col-6">
-          <label>Event Purpose</label>
-          <br>
-          <select class="form-control"
-                  id="eventpurpose"
-                  name="eventpurpose"
-                  required
-                  [ngModel]="savedevent.eventpurpose">
-            <option value="">Select Event Purpose</option>
-            <option *ngFor="let p of eventpurpose" [value]="p.purpose">{{p.purpose}}</option>
-          </select><span class="STredstar">*</span>
-        </div>
-        <div class="col-6">
-          <label>Start Time</label>
-          <br>
-          <select class="form-control"
-                  id="startime"
-                  name="starttime"
-                  required
-                  [ngModel]="savedevent.starttime">
-            <option value=""  selected>Select Start Time</option>
-            <option value="8:00 AM">8:00 AM</option>
-            <option value="8:15 AM">8:15 AM</option>
-            <option value="8:30 AM">8:30 AM</option>
-            <option value="8:45 AM">8:45 AM</option>
-            <option value="9:00 AM">9:00 AM</option>
-            <option value="9:15 AM">9:15 AM</option>
-            <option value="9:30 AM">9:30 AM</option>
-            <option value="9:45 AM">9:45 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:15 AM">10:15 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="10:45 AM">10:45 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:15 AM">11:15 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="11:45 AM">11:45 AM</option>
-            <option value="12:00 PM">12:00 PM</option>
-            <option value="12:15 PM">12:15 PM</option>
-            <option value="12:30 PM">12:30 PM</option>
-            <option value="12:45 PM">12:45 PM</option>
-            <option value="1:00 PM">1:00 PM</option>
-            <option value="1:15 PM">1:15 PM</option>
-            <option value="1:30 PM">1:30 PM</option>
-            <option value="1:45 PM">1:45 PM</option>
-            <option value="2:00 PM">2:00 PM</option>
-            <option value="2:15 PM">2:15 PM</option>
-            <option value="2:30 PM">2:30 PM</option>
-            <option value="2:45 PM">2:45 PM</option>
-            <option value="3:00 PM">3:00 PM</option>
-            <option value="3:15 PM">3:15 PM</option>
-            <option value="3:30 PM">3:30 PM</option>
-            <option value="3:45 PM">3:45 PM</option>
-            <option value="4:00 PM">4:00 PM</option>
-            <option value="4:15 PM">4:15 PM</option>
-            <option value="4:30 PM">4:30 PM</option>
-            <option value="4:45 PM">4:45 PM</option>
-            <option value="5:00 PM">5:00 PM</option>
-            <option value="5:15 PM">5:15 PM</option>
-            <option value="5:30 PM">5:30 PM</option>
-            <option value="5:45 PM">5:45 PM</option>
-            <option value="6:00 PM">6:00 PM</option>
-            <option value="6:15 PM">6:15 PM</option>
-            <option value="6:30 PM">6:30 PM</option>
-            <option value="6:45 PM">6:45 PM</option>
-            <option value="7:00 PM">7:00 PM</option>
-            <option value="7:15 PM">7:15 PM</option>
-            <option value="7:30 PM">7:30 PM</option>
-            <option value="7:45 PM">7:45 PM</option>
-            <option value="8:00 PM">8:00 PM</option>
-            <option value="8:15 PM">8:15 PM</option>
-            <option value="8:30 PM">8:30 PM</option>
-            <option value="8:45 PM">8:45 PM</option>
-            <option value="9:00 PM">9:00 PM</option>
-            <option value="9:15 PM">9:15 PM</option>
-            <option value="9:30 PM">9:30 PM</option>
-            <option value="9:45 PM">9:45 PM</option>
-            <option value="10:00 PM">10:00 PM</option>
-            <option value="10:15 PM">10:15 PM</option>
-            <option value="10:30 PM">10:30 PM</option>
-            <option value="10:45 PM">10:45 PM</option>
-            <option value="11:00 PM">11:00 PM</option>
-            <option value="11:15 PM">11:15 PM</option>
-            <option value="11:30 PM">11:30 PM</option>
-            <option value="11:45 PM">11:45 PM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:15 AM">12:15 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="12:45 AM">12:45 AM</option>
-            <option value="1:00 AM">1:00 AM</option>
-            <option value="1:15 AM">1:15 AM</option>
-            <option value="1:30 AM">1:30 AM</option>
-            <option value="1:45 AM">1:45 AM</option>
-            <option value="2:00 AM">2:00 AM</option>
-            <option value="2:15 AM">2:15 AM</option>
-            <option value="2:30 AM">2:30 AM</option>
-            <option value="2:45 AM">2:45 AM</option>
-            <option value="3:00 AM">3:00 AM</option>
-            <option value="3:15 AM">3:15 AM</option>
-            <option value="3:30 AM">3:30 AM</option>
-            <option value="3:45 AM">3:45 AM</option>
-            <option value="4:00 AM">4:00 AM</option>
-            <option value="4:15 AM">4:15 AM</option>
-            <option value="4:30 AM">4:30 AM</option>
-            <option value="4:45 AM">4:45 AM</option>
-            <option value="5:00 AM">5:00 AM</option>
-            <option value="5:15 AM">5:15 AM</option>
-            <option value="5:30 AM">5:30 AM</option>
-            <option value="5:45 AM">5:45 AM</option>
-            <option value="6:00 AM">6:00 AM</option>
-            <option value="6:15 AM">6:15 AM</option>
-            <option value="6:30 AM">6:30 AM</option>
-            <option value="6:45 AM">6:45 AM</option>
-            <option value="7:00 AM">7:00 AM</option>
-            <option value="7:15 AM">7:15 AM</option>
-            <option value="7:30 AM">7:30 AM</option>
-            <option value="7:45 AM">7:45 AM</option>
-          </select><span class="STredstar">*</span>
-          <br>
-          <div class="checkboxdiv">
-            <input class="form-check-input"
-                   type="checkbox"
-                   id="startimeflexcheckbox"
-                   name="starttimeflexcheckbox"
-                   [ngModel]="savedevent.starttimeflexcheckbox">
-            <label class="form-check-label">Start Time is Flexible</label>
+          <div class="col-6">
+            <input class="form-control"
+                   type="date"
+                   placeholder="Date Of Event *"
+                   id="eventdate"
+                   name="eventdate"
+                   required
+                   [ngModel]="savedevent.date">
+            <br>
+            <div class="checkboxdiv">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="dateflexcheckbox"
+                     name="dateflexcheckbox"
+                     [ngModel]="savedevent.dateflexcheckbox">
+              <label class="form-check-label">Date is flexible</label>
+            </div>
           </div>
-        </div>
-        <div class="col-6">
-          <label>End Time</label>
-          <br>
-          <select class="form-control"
-                  id="endtime"
-                  name="endtime"
-                  required
-                  [ngModel]="savedevent.endtime">
-            <option value="" disabled selected>Select End Time</option>
-            <option value="8:00 AM">8:00 AM</option>
-            <option value="8:15 AM">8:15 AM</option>
-            <option value="8:30 AM">8:30 AM</option>
-            <option value="8:45 AM">8:45 AM</option>
-            <option value="9:00 AM">9:00 AM</option>
-            <option value="9:15 AM">9:15 AM</option>
-            <option value="9:30 AM">9:30 AM</option>
-            <option value="9:45 AM">9:45 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:15 AM">10:15 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="10:45 AM">10:45 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:15 AM">11:15 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="11:45 AM">11:45 AM</option>
-            <option value="12:00 PM">12:00 PM</option>
-            <option value="12:15 PM">12:15 PM</option>
-            <option value="12:30 PM">12:30 PM</option>
-            <option value="12:45 PM">12:45 PM</option>
-            <option value="1:00 PM">1:00 PM</option>
-            <option value="1:15 PM">1:15 PM</option>
-            <option value="1:30 PM">1:30 PM</option>
-            <option value="1:45 PM">1:45 PM</option>
-            <option value="2:00 PM">2:00 PM</option>
-            <option value="2:15 PM">2:15 PM</option>
-            <option value="2:30 PM">2:30 PM</option>
-            <option value="2:45 PM">2:45 PM</option>
-            <option value="3:00 PM">3:00 PM</option>
-            <option value="3:15 PM">3:15 PM</option>
-            <option value="3:30 PM">3:30 PM</option>
-            <option value="3:45 PM">3:45 PM</option>
-            <option value="4:00 PM">4:00 PM</option>
-            <option value="4:15 PM">4:15 PM</option>
-            <option value="4:30 PM">4:30 PM</option>
-            <option value="4:45 PM">4:45 PM</option>
-            <option value="5:00 PM">5:00 PM</option>
-            <option value="5:15 PM">5:15 PM</option>
-            <option value="5:30 PM">5:30 PM</option>
-            <option value="5:45 PM">5:45 PM</option>
-            <option value="6:00 PM">6:00 PM</option>
-            <option value="6:15 PM">6:15 PM</option>
-            <option value="6:30 PM">6:30 PM</option>
-            <option value="6:45 PM">6:45 PM</option>
-            <option value="7:00 PM">7:00 PM</option>
-            <option value="7:15 PM">7:15 PM</option>
-            <option value="7:30 PM">7:30 PM</option>
-            <option value="7:45 PM">7:45 PM</option>
-            <option value="8:00 PM">8:00 PM</option>
-            <option value="8:15 PM">8:15 PM</option>
-            <option value="8:30 PM">8:30 PM</option>
-            <option value="8:45 PM">8:45 PM</option>
-            <option value="9:00 PM">9:00 PM</option>
-            <option value="9:15 PM">9:15 PM</option>
-            <option value="9:30 PM">9:30 PM</option>
-            <option value="9:45 PM">9:45 PM</option>
-            <option value="10:00 PM">10:00 PM</option>
-            <option value="10:15 PM">10:15 PM</option>
-            <option value="10:30 PM">10:30 PM</option>
-            <option value="10:45 PM">10:45 PM</option>
-            <option value="11:00 PM">11:00 PM</option>
-            <option value="11:15 PM">11:15 PM</option>
-            <option value="11:30 PM">11:30 PM</option>
-            <option value="11:45 PM">11:45 PM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:15 AM">12:15 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="12:45 AM">12:45 AM</option>
-            <option value="1:00 AM">1:00 AM</option>
-            <option value="1:15 AM">1:15 AM</option>
-            <option value="1:30 AM">1:30 AM</option>
-            <option value="1:45 AM">1:45 AM</option>
-            <option value="2:00 AM">2:00 AM</option>
-            <option value="2:15 AM">2:15 AM</option>
-            <option value="2:30 AM">2:30 AM</option>
-            <option value="2:45 AM">2:45 AM</option>
-            <option value="3:00 AM">3:00 AM</option>
-            <option value="3:15 AM">3:15 AM</option>
-            <option value="3:30 AM">3:30 AM</option>
-            <option value="3:45 AM">3:45 AM</option>
-            <option value="4:00 AM">4:00 AM</option>
-            <option value="4:15 AM">4:15 AM</option>
-            <option value="4:30 AM">4:30 AM</option>
-            <option value="4:45 AM">4:45 AM</option>
-            <option value="5:00 AM">5:00 AM</option>
-            <option value="5:15 AM">5:15 AM</option>
-            <option value="5:30 AM">5:30 AM</option>
-            <option value="5:45 AM">5:45 AM</option>
-            <option value="6:00 AM">6:00 AM</option>
-            <option value="6:15 AM">6:15 AM</option>
-            <option value="6:30 AM">6:30 AM</option>
-            <option value="6:45 AM">6:45 AM</option>
-            <option value="7:00 AM">7:00 AM</option>
-            <option value="7:15 AM">7:15 AM</option>
-            <option value="7:30 AM">7:30 AM</option>
-            <option value="7:45 AM">7:45 AM</option>
-          </select><span class="STredstar">*</span>
-          <br>
-          <div class="checkboxdiv">
-            <input class="form-check-input"
-                   type="checkbox"
-                   id="endtimecheckbox"
-                   name="endtimecheckbox"
-                   [ngModel]="savedevent.endtimecheckbox">
-            <label class="form-check-label">End Time is Flexible</label>
+          <div class="col-6">
+            <select class="form-control"
+                    id="eventpurpose"
+                    name="eventpurpose"
+                    required
+                    [ngModel]="savedevent.eventpurpose">
+              <option value="">Select Event Purpose *</option>
+              <option *ngFor="let p of eventpurpose" [value]="p.purpose">{{p.purpose}}</option>
+            </select>
           </div>
-        </div>
-        <div class="col-6">
-          <label>Number of Guests</label>
-          <br>
-          <input class="form-control"
-                 type="number"
-                 id="guestcount"
-                 name="guestcount"
-                 required
-                 [ngModel]="savedevent.guestcount"><span class="STredstar">*</span>
-        </div>
-        <div class="col-6">
-          <label>Room Preference</label>
-          <br>
-          <select class="form-control"
-                  id="roomselect"
-                  name="roomselect"
-                  ngModel>
-            <option value="">No Preference</option>
-            <option *ngFor="let room of roomnames" [value]="room">{{room}}</option>
-          </select>
-        </div>
-        <div class="col-12">
-          <br>
-          <label>Event Details and Accomidation Requests</label>
-          <br>
+          <div class="col-6">
+            <select class="form-control"
+                    id="startime"
+                    name="starttime"
+                    required
+                    [ngModel]="savedevent.starttime">
+              <option value=""  selected>Select Start Time *</option>
+              <option value="8:00 AM">8:00 AM</option>
+              <option value="8:15 AM">8:15 AM</option>
+              <option value="8:30 AM">8:30 AM</option>
+              <option value="8:45 AM">8:45 AM</option>
+              <option value="9:00 AM">9:00 AM</option>
+              <option value="9:15 AM">9:15 AM</option>
+              <option value="9:30 AM">9:30 AM</option>
+              <option value="9:45 AM">9:45 AM</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="10:15 AM">10:15 AM</option>
+              <option value="10:30 AM">10:30 AM</option>
+              <option value="10:45 AM">10:45 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="11:15 AM">11:15 AM</option>
+              <option value="11:30 AM">11:30 AM</option>
+              <option value="11:45 AM">11:45 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="12:15 PM">12:15 PM</option>
+              <option value="12:30 PM">12:30 PM</option>
+              <option value="12:45 PM">12:45 PM</option>
+              <option value="1:00 PM">1:00 PM</option>
+              <option value="1:15 PM">1:15 PM</option>
+              <option value="1:30 PM">1:30 PM</option>
+              <option value="1:45 PM">1:45 PM</option>
+              <option value="2:00 PM">2:00 PM</option>
+              <option value="2:15 PM">2:15 PM</option>
+              <option value="2:30 PM">2:30 PM</option>
+              <option value="2:45 PM">2:45 PM</option>
+              <option value="3:00 PM">3:00 PM</option>
+              <option value="3:15 PM">3:15 PM</option>
+              <option value="3:30 PM">3:30 PM</option>
+              <option value="3:45 PM">3:45 PM</option>
+              <option value="4:00 PM">4:00 PM</option>
+              <option value="4:15 PM">4:15 PM</option>
+              <option value="4:30 PM">4:30 PM</option>
+              <option value="4:45 PM">4:45 PM</option>
+              <option value="5:00 PM">5:00 PM</option>
+              <option value="5:15 PM">5:15 PM</option>
+              <option value="5:30 PM">5:30 PM</option>
+              <option value="5:45 PM">5:45 PM</option>
+              <option value="6:00 PM">6:00 PM</option>
+              <option value="6:15 PM">6:15 PM</option>
+              <option value="6:30 PM">6:30 PM</option>
+              <option value="6:45 PM">6:45 PM</option>
+              <option value="7:00 PM">7:00 PM</option>
+              <option value="7:15 PM">7:15 PM</option>
+              <option value="7:30 PM">7:30 PM</option>
+              <option value="7:45 PM">7:45 PM</option>
+              <option value="8:00 PM">8:00 PM</option>
+              <option value="8:15 PM">8:15 PM</option>
+              <option value="8:30 PM">8:30 PM</option>
+              <option value="8:45 PM">8:45 PM</option>
+              <option value="9:00 PM">9:00 PM</option>
+              <option value="9:15 PM">9:15 PM</option>
+              <option value="9:30 PM">9:30 PM</option>
+              <option value="9:45 PM">9:45 PM</option>
+              <option value="10:00 PM">10:00 PM</option>
+              <option value="10:15 PM">10:15 PM</option>
+              <option value="10:30 PM">10:30 PM</option>
+              <option value="10:45 PM">10:45 PM</option>
+              <option value="11:00 PM">11:00 PM</option>
+              <option value="11:15 PM">11:15 PM</option>
+              <option value="11:30 PM">11:30 PM</option>
+              <option value="11:45 PM">11:45 PM</option>
+              <option value="12:00 AM">12:00 AM</option>
+              <option value="12:15 AM">12:15 AM</option>
+              <option value="12:30 AM">12:30 AM</option>
+              <option value="12:45 AM">12:45 AM</option>
+              <option value="1:00 AM">1:00 AM</option>
+              <option value="1:15 AM">1:15 AM</option>
+              <option value="1:30 AM">1:30 AM</option>
+              <option value="1:45 AM">1:45 AM</option>
+              <option value="2:00 AM">2:00 AM</option>
+              <option value="2:15 AM">2:15 AM</option>
+              <option value="2:30 AM">2:30 AM</option>
+              <option value="2:45 AM">2:45 AM</option>
+              <option value="3:00 AM">3:00 AM</option>
+              <option value="3:15 AM">3:15 AM</option>
+              <option value="3:30 AM">3:30 AM</option>
+              <option value="3:45 AM">3:45 AM</option>
+              <option value="4:00 AM">4:00 AM</option>
+              <option value="4:15 AM">4:15 AM</option>
+              <option value="4:30 AM">4:30 AM</option>
+              <option value="4:45 AM">4:45 AM</option>
+              <option value="5:00 AM">5:00 AM</option>
+              <option value="5:15 AM">5:15 AM</option>
+              <option value="5:30 AM">5:30 AM</option>
+              <option value="5:45 AM">5:45 AM</option>
+              <option value="6:00 AM">6:00 AM</option>
+              <option value="6:15 AM">6:15 AM</option>
+              <option value="6:30 AM">6:30 AM</option>
+              <option value="6:45 AM">6:45 AM</option>
+              <option value="7:00 AM">7:00 AM</option>
+              <option value="7:15 AM">7:15 AM</option>
+              <option value="7:30 AM">7:30 AM</option>
+              <option value="7:45 AM">7:45 AM</option>
+            </select>
+            <br>
+            <div class="checkboxdiv">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="startimeflexcheckbox"
+                     name="starttimeflexcheckbox"
+                     [ngModel]="savedevent.starttimeflexcheckbox">
+              <label class="form-check-label">Start Time is Flexible</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <select class="form-control"
+                    id="endtime"
+                    name="endtime"
+                    required
+                    [ngModel]="savedevent.endtime">
+              <option value="" disabled selected>Select End Time *</option>
+              <option value="8:00 AM">8:00 AM</option>
+              <option value="8:15 AM">8:15 AM</option>
+              <option value="8:30 AM">8:30 AM</option>
+              <option value="8:45 AM">8:45 AM</option>
+              <option value="9:00 AM">9:00 AM</option>
+              <option value="9:15 AM">9:15 AM</option>
+              <option value="9:30 AM">9:30 AM</option>
+              <option value="9:45 AM">9:45 AM</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="10:15 AM">10:15 AM</option>
+              <option value="10:30 AM">10:30 AM</option>
+              <option value="10:45 AM">10:45 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="11:15 AM">11:15 AM</option>
+              <option value="11:30 AM">11:30 AM</option>
+              <option value="11:45 AM">11:45 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="12:15 PM">12:15 PM</option>
+              <option value="12:30 PM">12:30 PM</option>
+              <option value="12:45 PM">12:45 PM</option>
+              <option value="1:00 PM">1:00 PM</option>
+              <option value="1:15 PM">1:15 PM</option>
+              <option value="1:30 PM">1:30 PM</option>
+              <option value="1:45 PM">1:45 PM</option>
+              <option value="2:00 PM">2:00 PM</option>
+              <option value="2:15 PM">2:15 PM</option>
+              <option value="2:30 PM">2:30 PM</option>
+              <option value="2:45 PM">2:45 PM</option>
+              <option value="3:00 PM">3:00 PM</option>
+              <option value="3:15 PM">3:15 PM</option>
+              <option value="3:30 PM">3:30 PM</option>
+              <option value="3:45 PM">3:45 PM</option>
+              <option value="4:00 PM">4:00 PM</option>
+              <option value="4:15 PM">4:15 PM</option>
+              <option value="4:30 PM">4:30 PM</option>
+              <option value="4:45 PM">4:45 PM</option>
+              <option value="5:00 PM">5:00 PM</option>
+              <option value="5:15 PM">5:15 PM</option>
+              <option value="5:30 PM">5:30 PM</option>
+              <option value="5:45 PM">5:45 PM</option>
+              <option value="6:00 PM">6:00 PM</option>
+              <option value="6:15 PM">6:15 PM</option>
+              <option value="6:30 PM">6:30 PM</option>
+              <option value="6:45 PM">6:45 PM</option>
+              <option value="7:00 PM">7:00 PM</option>
+              <option value="7:15 PM">7:15 PM</option>
+              <option value="7:30 PM">7:30 PM</option>
+              <option value="7:45 PM">7:45 PM</option>
+              <option value="8:00 PM">8:00 PM</option>
+              <option value="8:15 PM">8:15 PM</option>
+              <option value="8:30 PM">8:30 PM</option>
+              <option value="8:45 PM">8:45 PM</option>
+              <option value="9:00 PM">9:00 PM</option>
+              <option value="9:15 PM">9:15 PM</option>
+              <option value="9:30 PM">9:30 PM</option>
+              <option value="9:45 PM">9:45 PM</option>
+              <option value="10:00 PM">10:00 PM</option>
+              <option value="10:15 PM">10:15 PM</option>
+              <option value="10:30 PM">10:30 PM</option>
+              <option value="10:45 PM">10:45 PM</option>
+              <option value="11:00 PM">11:00 PM</option>
+              <option value="11:15 PM">11:15 PM</option>
+              <option value="11:30 PM">11:30 PM</option>
+              <option value="11:45 PM">11:45 PM</option>
+              <option value="12:00 AM">12:00 AM</option>
+              <option value="12:15 AM">12:15 AM</option>
+              <option value="12:30 AM">12:30 AM</option>
+              <option value="12:45 AM">12:45 AM</option>
+              <option value="1:00 AM">1:00 AM</option>
+              <option value="1:15 AM">1:15 AM</option>
+              <option value="1:30 AM">1:30 AM</option>
+              <option value="1:45 AM">1:45 AM</option>
+              <option value="2:00 AM">2:00 AM</option>
+              <option value="2:15 AM">2:15 AM</option>
+              <option value="2:30 AM">2:30 AM</option>
+              <option value="2:45 AM">2:45 AM</option>
+              <option value="3:00 AM">3:00 AM</option>
+              <option value="3:15 AM">3:15 AM</option>
+              <option value="3:30 AM">3:30 AM</option>
+              <option value="3:45 AM">3:45 AM</option>
+              <option value="4:00 AM">4:00 AM</option>
+              <option value="4:15 AM">4:15 AM</option>
+              <option value="4:30 AM">4:30 AM</option>
+              <option value="4:45 AM">4:45 AM</option>
+              <option value="5:00 AM">5:00 AM</option>
+              <option value="5:15 AM">5:15 AM</option>
+              <option value="5:30 AM">5:30 AM</option>
+              <option value="5:45 AM">5:45 AM</option>
+              <option value="6:00 AM">6:00 AM</option>
+              <option value="6:15 AM">6:15 AM</option>
+              <option value="6:30 AM">6:30 AM</option>
+              <option value="6:45 AM">6:45 AM</option>
+              <option value="7:00 AM">7:00 AM</option>
+              <option value="7:15 AM">7:15 AM</option>
+              <option value="7:30 AM">7:30 AM</option>
+              <option value="7:45 AM">7:45 AM</option>
+            </select>
+            <br>
+            <div class="checkboxdiv">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="endtimecheckbox"
+                     name="endtimecheckbox"
+                     [ngModel]="savedevent.endtimecheckbox">
+              <label class="form-check-label">End Time is Flexible</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <input class="form-control"
+                   type="number"
+                   id="guestcount"
+                   placeholder="Number of Guests *"
+                   name="guestcount"
+                   required
+                   [ngModel]="savedevent.headcount">
+          </div>
+          <div class="col-6">
+            <select class="form-control"
+                    id="roomselect"
+                    name="roomselect"
+                    ngModel>
+              <option value="">Select Room * </option>
+              <option value="no preference">No Preference</option>
+              <option *ngFor="let room of roomnames" [value]="room">{{room}}</option>
+            </select>
+          </div>
+          <div class="col-12">
           <textarea rows="10"
                     class="form-control"
                     id="eventdetails"
                     name="eventdetails"
+                    placeholder="Event Details and Accomidation Requests *"
                     required
                     [ngModel]="savedevent.eventdetails">
 
-            </textarea><span class="STredstar">*</span>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Create a new event</button>
-          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-        </div>
-      </div> <!-- loginsignup -->
-    </form>
-    <div *ngIf="rfpsent">
-      <h3>Your RFP has been sent!</h3>
-    </div>
-    <div *ngIf="loginorsignup">
-      <div *ngIf="!signup">
-        <form>
-          <div class="row">
-            <div class="col-12 text-center">
-              <h3>Log In</h3>
+            </textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Create a new event</button>
+            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+          </div>
+        </div> <!-- loginsignup -->
+      </form>
+      <div *ngIf="rfpsent">
+        <h3>Your RFP has been sent!</h3>
+      </div>
+      <div *ngIf="loginorsignup">
+        <div *ngIf="!signup">
+          <form>
+            <div class="row">
+              <div class="col-12 text-center">
+                <h3>Log In</h3>
+              </div>
+              <div class="col-12 text-center">
+                <p>Your RFP has been saved, but you'll need to sign up or login to send it.</p>
+              </div>
+              <form (ngSubmit)="login(loginform)" #loginform="ngForm">
+                <div class="col-12">
+                  <label>Email</label>
+                  <input class="form-control"
+                         type="email"
+                         id="loginemail"
+                         name="loginemail"
+                         ngModel
+                         required>
+                </div>
+                <div class="col-12">
+                  <label>Password</label>
+                  <input class="form-control"
+                         type="password"
+                         id="passwordlogin"
+                         name="passwordlogin"
+                         ngModel
+                         required>
+                  <br>
+
+                  <input class="form-check-input"
+                         type="checkbox"
+                         id="remembercheckbox"
+                         name="remembercheckbox"
+                         ngModel>
+                  <label class="form-check-label">Remember me</label>
+
+                  <span style="color: red" *ngIf="invalidinfo">Email or password is incorrect</span>
+                  <div id="signuplink">
+                    <a style="cursor: pointer "(click)="rfpusersignuptoggle()">Sign Up</a>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary float-right">Log In</button>
+                </div>
+              </form>
+
             </div>
-            <div class="col-12 text-center">
-              <p>Your RFP has been saved, but you'll need to sign up or login to send it.</p>
-            </div>
-            <form (ngSubmit)="login(loginform)" #loginform="ngForm">
-              <div class="col-12">
+          </form>
+        </div> <!--! signup-->
+        <div *ngIf="signup && !verifysignup">
+          <form (ngSubmit)="clientsignup(clientsignupform)" #clientsignupform="ngForm">
+            <div class="row">
+              <div class="col-12 text-center">
+                <h3>Sign Up</h3>
+              </div>
+              <div class="col-6">
+                <label>First Name</label>
+                <input class="form-control"
+                       type="text"
+                       id="signupfirstname"
+                       name="signupfirstname"
+                       ngModel>
+              </div>
+              <div class="col-6">
+                <label>Last Name</label>
+                <input class="form-control"
+                       type="text"
+                       id="signuplastname"
+                       name="signuplastname"
+                       ngModel>
+              </div>
+              <div class="col-6">
                 <label>Email</label>
                 <input class="form-control"
                        type="email"
-                       id="loginemail"
-                       name="loginemail"
-                       ngModel
-                       required>
+                       id="signupemail"
+                       name="signupemail"
+                       ngModel>
               </div>
-              <div class="col-12">
+              <div class="col-6">
+                <label>Confirm Email</label>
+                <input (ngModelChange)="emailconfrim(clientsignupform)"
+                       class="form-control"
+                       type="email"
+                       id="signupemailconfrim"
+                       name="signupemailconfrim"
+                       ngModel>
+              </div>
+              <div *ngIf="emailnomatch" class ="col-12">
+                <div class="text-center">
+                  <span style="color: red">Emails do not match</span>
+                </div>
+              </div>
+              <div class="col-6">
                 <label>Password</label>
                 <input class="form-control"
                        type="password"
-                       id="passwordlogin"
-                       name="passwordlogin"
-                       ngModel
-                       required>
-                <br>
-
-                <input class="form-check-input"
-                       type="checkbox"
-                       id="remembercheckbox"
-                       name="remembercheckbox"
+                       id="signuppassword"
+                       name="signuppassword"
                        ngModel>
-                <label class="form-check-label">Remember me</label>
-
-                <span style="color: red" *ngIf="invalidinfo">Email or password is incorrect</span>
-                <div id="signuplink">
-                  <a (click)="rfpusersignuptoggle()">Sign Up</a>
+              </div>
+              <div class="col-6">
+                <label>Confrim Password</label>
+                <input (ngModelChange)="passwordconfirm(clientsignupform)"
+                       class="form-control"
+                       type="password"
+                       id="signuppasswordconfrim"
+                       name="signuppasswordconfrim"
+                       ngModel>
+              </div>
+              <div *ngIf="passwordnomatch" class="col-12">
+                <div class="text-center">
+                  <span style="color: red">Passwords do not match</span>
                 </div>
               </div>
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary float-right">Log In</button>
+              <div class="col-6">
+                <label>Company Name</label>
+                <input class="form-control"
+                       type="text"
+                       id="companyname"
+                       name="companyname"
+                       ngModel>
+
               </div>
-            </form>
+              <div class="col-6">
+                <label>Primary Phone Number</label>
+                <input class="form-control"
+                       type="text"
+                       id="signupphoneinput"
+                       name="signupphoneinput"
+                       ngModel>
+              </div>
+              <div class="col-12">
+                <br>
+                <button type="submit" class="btn btn-primary float-right">Sign Up</button>
+              </div>
+            </div>
+          </form>
+        </div> <!-- signup ng if -->
+        <div *ngIf="verifysignup">
+          <form (ngSubmit)="signupverify(signupverifyform)" #signupverifyform="ngForm">
+            <div class="row">
+              <div class="col-12 text-center">
+                <h3>Verification</h3>
+              </div>
+              <div class="col-12 text-center">
+                <p>Please open a new window and find the verification code that has been sent to your email. Enter the code below</p>
+              </div>
 
-          </div>
-        </form>
-      </div> <!--! signup-->
-      <div *ngIf="signup && !verifysignup">
-        <form (ngSubmit)="clientsignup(clientsignupform)" #clientsignupform="ngForm">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h3>Sign Up</h3>
-            </div>
-            <div class="col-6">
-              <label>First Name</label>
-              <input class="form-control"
-                     type="text"
-                     id="signupfirstname"
-                     name="signupfirstname"
-                     ngModel>
-            </div>
-            <div class="col-6">
-              <label>Last Name</label>
-              <input class="form-control"
-                     type="text"
-                     id="signuplastname"
-                     name="signuplastname"
-                     ngModel>
-            </div>
-            <div class="col-6">
-              <label>Email</label>
-              <input class="form-control"
-                     type="email"
-                     id="signupemail"
-                     name="signupemail"
-                     ngModel>
-            </div>
-            <div class="col-6">
-              <label>Confirm Email</label>
-              <input class="form-control"
-                     type="email"
-                     id="signupemailconfrim"
-                     name="signupemailconfrim"
-                     ngModel>
-            </div>
-            <div class="col-6">
-              <label>Password</label>
-              <input class="form-control"
-                     type="password"
-                     id="signuppassword"
-                     name="signuppassword"
-                     ngModel>
-            </div>
-            <div class="col-6">
-              <label>Confrim Password</label>
-              <input class="form-control"
-                     type="password"
-                     id="signuppasswordconfrim"
-                     name="signuppasswordconfrim"
-                     ngModel>
-            </div>
-            <div class="col-6">
-              <label>Company Name</label>
-              <input class="form-control"
-                     type="text"
-                     id="companyname"
-                     name="companyname"
-                     ngModel>
+              <div class="col-12 text-center">
+                <label>Verification Code</label>
+                <input class="form-control"
+                       type="text"
+                       id="signupverification"
+                       name="signupverification"
+                       ngModel>
 
-            </div>
-            <div class="col-6">
-              <label>Primary Phone Number</label>
-              <input class="form-control"
-                     type="text"
-                     id="signupphoneinput"
-                     name="signupphoneinput"
-                     ngModel>
-            </div>
-            <div class="col-12">
-              <br>
-              <button type="submit" class="btn btn-primary float-right">Sign Up</button>
-            </div>
-          </div>
-        </form>
-      </div> <!-- signup ng if -->
-      <div *ngIf="verifysignup">
-        <form (ngSubmit)="signupverify(signupverifyform)" #signupverifyform="ngForm">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h3>Verification</h3>
-            </div>
-            <div class="col-12 text-center">
-              <p>Please open a new window and find the verification code that has been sent to your email. Enter the code below</p>
-            </div>
+              </div>
 
-            <div class="col-12 text-center">
-              <label>Verification Code</label>
-              <input class="form-control"
-                     type="text"
-                     id="signupverification"
-                     name="signupverification"
-                     ngModel>
-
+              <div class="col-12">
+                <br>
+                <button id="verifybutton" type="submit" class="btn btn-primary text-center">Verify</button>
+              </div>
             </div>
+          </form>
+        </div>
+      </div> <!--loginsignup ng if-->
+    </div>
 
-            <div class="col-12">
-              <br>
-              <button id="verifybutton" type="submit" class="btn btn-primary text-center">Verify</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div> <!--loginsignup ng if-->
-  </div>
-
-</ng-template>
+  </ng-template>
 
 
-<ng-template #createSaved let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Saved RFPs</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body table-responsive">
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th scope="col">Event Date</th>
-        <th scope="col">Event Purpose</th>
-        <th scope="col">Start Time</th>
-        <th scope="col">End Time</th>
-        <th scope="col">Head Count</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let rfp of savedrfps; let i=index" (click)="populaterfpfromsaved(i, createSaved, createProp)">
-        <td>
-          {{rfp.eventdate}}
-        </td>
-        <td>
-          {{rfp.eventpurpose}}
-        </td>
-        <td>
-          {{rfp.starttime}}
-        </td>
-        <td>
-          {{rfp.endtime}}
-        </td>
-        <td>
-          {{rfp.headcount}}
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+  <ng-template #createSaved let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Saved RFPs</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Event Name</th>
+          <th scope="col">Event Date</th>
+          <th scope="col">Event Purpose</th>
+          <th scope="col">Start Time</th>
+          <th scope="col">End Time</th>
+          <th scope="col">Head Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let rfp of savedrfps; let i=index" (click)="populaterfpfromsaved(i, createSaved, createProp)">
+          <td>
+            {{rfp.eventname}}
+          </td>
+          <td>
+            {{rfp.eventdate}}
+          </td>
+          <td>
+            {{rfp.eventpurpose}}
+          </td>
+          <td>
+            {{rfp.starttime}}
+          </td>
+          <td>
+            {{rfp.endtime}}
+          </td>
+          <td>
+            {{rfp.headcount}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
-</ng-template>
+  </ng-template>

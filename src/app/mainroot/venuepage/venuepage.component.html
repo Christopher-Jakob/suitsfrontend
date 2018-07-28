@@ -25,7 +25,7 @@
                 [ngModel]="dropdownreset">
           <option value="">Send RFP</option>
           <option value="n">Create New RFP</option>
-          <option value="s">Create From Saved</option>
+          <option [disabled]="savedrfps.length < 1" value="s">Create From Saved</option>
         </select>
       </form>
     </div>
@@ -113,7 +113,6 @@
 
 
 </div>
-
 <ng-template #createProp let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Request For Proposal</h4>
@@ -140,7 +139,7 @@
                  id="eventdate"
                  name="eventdate"
                  required
-                 [ngModel]="savedevent.date">
+                 [ngModel]="savedevent.programdate">
           <br>
           <div class="checkboxdiv">
             <input class="form-check-input"
@@ -621,28 +620,27 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rfp of savedrfps; let i=index" (click)="populaterfpfromsaved(i, createSaved, createProp)">
-          <td>
-            {{rfp.eventname}}
+        <tr *ngFor="let rfp of savedrfps; let i=index">
+          <td (click)="populaterfpfromsaved(i, createSaved, createProp )">
+            {{rfp.name}}
           </td>
-          <td>
+          <td (click)="populaterfpfromsaved(i, createSaved, createProp )">
             {{rfp.eventdate}}
           </td>
-          <td>
-            {{rfp.eventpurpose}}
+          <td (click)="populaterfpfromsaved(i, createSaved, createProp )">
+            {{rfp.eventpurpose.purpose}}
           </td>
-          <td>
-            {{rfp.starttime}}
+          <td (click)="populaterfpfromsaved(i, createSaved, createProp )">
+            {{rfp.startime}}
           </td>
-          <td>
+          <td (click)="populaterfpfromsaved(i, createSaved, createProp )">
             {{rfp.endtime}}
           </td>
-          <td>
-            {{rfp.headcount}}
+          <td (click)="populaterfpfromsaved(i, createSaved, createProp )">
+            {{rfp.guestcount}}
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-
 </ng-template>

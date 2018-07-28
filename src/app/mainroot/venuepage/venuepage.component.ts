@@ -12,7 +12,10 @@ import {Makerfpservice} from "../../services/pagemixins/make-rfp.service";
 import {ClientUserService} from "../../services/userservice/clientuserservice/clientuserservice";
 import {BrowsevenuescomponentcommService} from "../../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
 import {RFPService} from "../../services/rfpservice/rfpservice";
-import $ from "jquery";
+declare var $: any;
+
+
+
 
 @Component({
   selector: 'app-venuepage',
@@ -36,6 +39,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   // used for  event purpose dropdown on rfp
   eventpurpose;
   roomnames = [];
+
 
 
 
@@ -109,6 +113,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     }
     if (this.user != null) {
       let payload = {
+        name: form.value.eventname,
         eventname: form.value.eventname,
         eventdate: form.value.eventdate,
         programdate: form.value.eventdate,
@@ -177,33 +182,28 @@ export class VenuepageComponent implements OnInit, OnDestroy {
 
   }
 
-  populaterfpfromsaved(index, savedrfp, newrfp){
+  populaterfpfromsaved(index, create, prop){
+    console.log('it fired to open the rfp modal');
     const scoperfp = this.savedrfps[index];
-    this.savedevent.name = scoperfp.eventname;
-    this.savedevent.date = scoperfp.datename;
-    this.savedevent.programdate = scoperfp.datevalue;
+    this.savedevent.name = scoperfp.name;
+    this.savedevent.date = scoperfp.eventdate;
+    this.savedevent.programdate = scoperfp.programdate;
     this.savedevent.dateflex = scoperfp.dateflex;
-    this.savedevent.eventpurpose = scoperfp.eventpurpose;
+    this.savedevent.eventpurpose = scoperfp.eventpurpose.purpose;
     this.savedevent.starttime = scoperfp.startime;
     this.savedevent.starttimeflex = scoperfp.starttimeflex;
     this.savedevent.endtime = scoperfp.endtime;
     this.savedevent.endtimeflex = scoperfp.endtimeflex;
-    this.savedevent.headcount = scoperfp.headcount;
+    this.savedevent.headcount = scoperfp.guestcount;
     this.savedevent.eventdetails = scoperfp.eventdetails;
-    let options = {
-      'show': false
-    };
-    (<any>$('#createSaved')).modal(options);
-    options = {
-      'show': true
-    };
-    (<any>$('#createProp')).modal(options);
+    this.createpropopen(prop);
+    this.createsaveservice.close();
 
 
   }
   emailnomatch = false;
   passwordnomatch = false;
-  savedrfps;
+  savedrfps = [];
   useremail;
   userpassword;
   clientsignup(form:NgForm){
@@ -305,13 +305,13 @@ export class VenuepageComponent implements OnInit, OnDestroy {
 
   rfptoggle(form:NgForm, createnew, createsaved){
     if(form.value.rfpsendselect === 'n'){
-      this.open(createnew);
+      this.createpropopen(createnew);
       this.dropdownreset = 'n';
-      this.dropdownreset = ''
+      this.dropdownreset = '';
 
     }
     if(form.value.rfpsendselect === 's'){
-      this.open(createsaved);
+      this.createsaveopen(createsaved);
       this.dropdownreset = "s";
       this.dropdownreset = '';
     }
@@ -320,15 +320,30 @@ export class VenuepageComponent implements OnInit, OnDestroy {
 
 
 
+
   closeResult: string;
   isCollapsed = true;
 
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
+  createpropservice;
+  createsaveservice;
+
+  createpropopen(content) {
+    this.createpropservice = this.modalService.open(content);
+    this.createpropservice.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+   createsaveopen(content){
+    this.createsaveservice = this.modalService.open(content);
+    this.createsaveservice.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
   }
 
   private getDismissReason(reason: any): string {
@@ -424,6 +439,14 @@ export class VenuepageComponent implements OnInit, OnDestroy {
           if (req != null) {
             this.user = req;
             this.loginorsignup = false;
+            this.rfpservice.getsavedrfps()
+              .subscribe(
+                (req: any)=>{
+                  this.savedrfps = req;
+                  console.log('this is the saved rfps');
+                  console.log(this.savedrfps);
+                }
+              );
           }
         });
 
@@ -523,12 +546,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
                     });
               });
         });
-    this.rfpservice.getsavedrfps()
-      .subscribe(
-        (req: any)=>{
-          this.savedrfps = req;
-        }
-      );
+
 
 
   }
