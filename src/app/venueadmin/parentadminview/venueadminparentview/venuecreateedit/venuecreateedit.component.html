@@ -220,18 +220,6 @@
             <p style="color: red">All fields with a * required</p>
           </div>
           <div class="row">
-            <div class="col-6">
-              <input class="form-control"
-                     type="email"
-                     id="newuseremailinput"
-                     placeholder="Email *"
-                     required
-                     name="newuseremailinput"
-                     ngModel
-                     #newuseremailcss="ngModel">
-              <br>
-              <span *ngIf="newuseremailcss.touched && !newuseremailcss.valid" class="help-block">Must be a valid email addresss</span>
-            </div>
             <div class="col-6" *ngIf="newusercreate">
               <input class="form-control"
                      type="text"
@@ -241,8 +229,18 @@
                      placeholder="Name *"
                      ngModel
                      #newusernameinputcss="ngModel">
-              <br>
-              <span *ngIf="!newusernameinputcss.valid && newusernameinputcss.touched">Each word must start with a capital letter and have a space between words</span>
+              <span style="color: red" *ngIf="!newusernameinputcss.valid && newusernameinputcss.touched">Each word must start with a capital letter and have a space between words</span>
+            </div>
+            <div class="col-6">
+              <input class="form-control"
+                     type="email"
+                     id="newuseremailinput"
+                     placeholder="Email *"
+                     required
+                     name="newuseremailinput"
+                     ngModel
+                     #newuseremailcss="ngModel">
+              <span style="color: red" *ngIf="newuseremailcss.touched && !newuseremailcss.valid" class="help-block">Must be a valid email addresss</span>
             </div>
             <div class="col-6" *ngIf="newusercreate">
               <input class="form-control"
@@ -253,20 +251,19 @@
                      name="newuserjobtitle"
                      ngModel
                      #newuserjobtitlecss="ngModel">
-              <br>
-              <span *ngIf="! newuserjobtitlecss.valid && newuserjobtitlecss.touched">A job title is required</span>
+              <span style="color: red" *ngIf="! newuserjobtitlecss.valid && newuserjobtitlecss.touched">A job title is required</span>
             </div>
             <div class="col-6" *ngIf="newusercreate">
-              <input class="form-control"
+              <input (ngModelChange)="checkphone(addnewuserform)"
+                     class="form-control"
                      type="text"
                      pattern="[0-9]{10}"
                      id="newuserphoneinput"
                      name="newuserphoneinput"
                      ngModel
-                     placeholder="Phone *"
-                     #newuserphoneinputcss="ngModel">
-              <br>
-              <span *ngIf="newuserphoneinputcss.touched && !newuserphoneinputcss.valid">A phone number must consist of 10 digits with no spaces or dashes</span>
+                     placeholder="Phone (digits only) *"
+                     >
+              <span style="color: red" *ngIf="improperphone">A phone number must consist of 10 digits with no spaces or dashes</span>
             </div>
             <div class="col-6">
               <select class="form-control"
@@ -280,8 +277,7 @@
                 <option value="event planner">Event Planner</option>
                 <option value="administrator">Administrator</option>
               </select>
-              <br>
-              <span *ngIf="!newuserroleselectcss.valid && newuserroleselectcss.touched" style="color: red;">You must select a role</span>
+              <span style="color: red" *ngIf="!newuserroleselectcss.valid && newuserroleselectcss.touched" style="color: red;">You must select a role</span>
               <br>
             </div>
             <div class="col-6">

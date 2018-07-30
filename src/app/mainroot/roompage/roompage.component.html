@@ -21,7 +21,7 @@
     <div class="row">
     <div class="SecHeadunderline col-6">
       <div class="float-left">
-        <a [routerLink]="['/venue',venue.name]">{{ venue.name }}</a>
+        <a style="text-decoration: underline" [routerLink]="['/venue',venue.name]">{{ venue.name }}</a>
       </div>
     </div>
       <div class="col-6">
@@ -61,12 +61,18 @@
   </div>
   </div>
     <div class="row caprow">
-      <div *ngIf="!fullbuyoutroomactive" id="Seat" class="col-auto roommain"> {{ room.seatedcapacity }} seated
+      <div *ngIf="!fullbuyoutroomactive && room.seatedcapacity != null" id="Seat" class="col-auto roommain"> {{ room.seatedcapacity }} seated
       </div>
-      <div *ngIf="fullbuyoutroomactive" id="Seat" class="col-auto roommain"> {{ venue.fullbuyoutseatedcapacity }} seated
+      <div *ngIf="!fullbuyoutroomactive && room.seatedcapacity == null" id="Seat" class="col-auto roommain"> N/A seated
       </div>
-      <div *ngIf="!fullbuyoutroomactive" id="Stand" class="col-auto roommain"> {{ room.standingcapacity }} standing </div>
-      <div *ngIf="fullbuyoutroomactive" id="Stand" class="col-auto roommain"> {{ venue.fullbuyoutstandingcapactiy }} standing </div>
+      <div *ngIf="fullbuyoutroomactive && room.fullbuyoutroomactive != null" id="Seat" class="col-auto roommain"> {{ venue.fullbuyoutseatedcapacity }} seated
+      </div>
+      <div *ngIf="fullbuyoutroomactive && room.fullbuyoutroomactive == null" id="Seat" class="col-auto roommain"> N/A seated
+      </div>
+      <div *ngIf="!fullbuyoutroomactive && room.standingcapacity != null" id="Stand" class="col-auto roommain"> {{ room.standingcapacity }} standing </div>
+      <div *ngIf="!fullbuyoutroomactive && room.standingcapacity == null" id="Stand" class="col-auto roommain"> N/A standing </div>
+      <div *ngIf="fullbuyoutroomactive && room.standingcapacity != null" id="Stand" class="col-auto roommain"> {{ venue.fullbuyoutstandingcapactiy }} standing </div>
+      <div *ngIf="fullbuyoutroomactive && room.standingcapacity == null" id="Stand" class="col-auto roommain"> N/A standing </div>
     </div>
 
   <div id="RoomDes" class="Section">
@@ -165,8 +171,10 @@
             </div>
 
             <p class="card-container-information__sub">
-              <span id="seat-number" class="card-container-information__sub--price">{{ venue.fullbuyoutseatedcapacity }} Seated</span>
-              <span id="stand-number" class="card-container-information__sub--room">{{ venue.fullbuyoutstandingcapactiy }} Standing</span>
+              <span *ngIf="venue.fullbuyoutseatedcapacity != null" id="seat-number" class="card-container-information__sub--price">{{ venue.fullbuyoutseatedcapacity }} Seated</span>
+              <span *ngIf="venue.fullbuyoutseatedcapacity == null" id="seat-number" class="card-container-information__sub--price">N/A Seated</span>
+              <span *ngIf="venue.fullbuyoutstandingcapactiy != null" id="stand-number" class="card-container-information__sub--room">{{ venue.fullbuyoutstandingcapactiy }} Standing</span>
+              <span *ngIf="venue.fullbuyoutstandingcapactiy == null" id="stand-number" class="card-container-information__sub--room">N/A Standing</span>
             </p>
           </div>
         </div>
@@ -192,8 +200,10 @@
               <span *ngIf="r.privateroom == true" class="card-container-information__sub--food">Private</span>
               <span *ngIf="r.semiprivateroom == true" class="card-container-information__sub--food">Semi-Private</span>
 
-              <span id="seat-number" class="card-container-information__sub--price">{{ r.seatedcapacity }} Seated</span>
-              <span id="stand-number" class="card-container-information__sub--room">{{ r.standingcapacity }} Standing</span>
+              <span *ngIf="r.seatedcapacity != null" id="seat-number" class="card-container-information__sub--price">{{ r.seatedcapacity }} Seated</span>
+              <span *ngIf="r.seatedcapacity == null" id="seat-number" class="card-container-information__sub--price">{{ r.seatedcapacity }} Seated</span>
+              <span *ngIf="r.seatedcapacity != null" id="stand-number" class="card-container-information__sub--room">{{ r.standingcapacity }} Standing</span>
+              <span *ngIf="r.seatedcapacity == null" id="stand-number" class="card-container-information__sub--room">{{ r.standingcapacity }} Standing</span>
             </p>
           </div>
         </div>

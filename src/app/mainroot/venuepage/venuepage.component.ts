@@ -201,12 +201,20 @@ export class VenuepageComponent implements OnInit, OnDestroy {
 
 
   }
+  invalidsignup = false;
   emailnomatch = false;
   passwordnomatch = false;
   savedrfps = [];
   useremail;
   userpassword;
   clientsignup(form:NgForm){
+    if(!form.valid){
+      this.invalidsignup = true;
+      setTimeout(()=>{
+        this.invalidsignup = false;
+      },3000);
+      return 1;
+    }
     let payload = {
       name: form.value.signupfirstname + ' ' + form.value.signuplastname,
       email: form.value.signupemail,

@@ -74,9 +74,10 @@
             <p class="card-container-information__sub">
               <span *ngIf="room.privateroom == true" class="card-container-information__sub--food">Private</span>
               <span *ngIf="room.semiprivateroom == true" class="card-container-information__sub--food">Semi-Private</span>
-
-              <span id="seat-number" class="card-container-information__sub--price">{{ room.seatedcapacity }} Seated</span>
-              <span id="stand-number" class="card-container-information__sub--room">{{ room.standingcapacity }} Standing</span>
+              <span *ngIf="room.seatedcapacity == null" id="seat-number" class="card-container-information__sub--price">N/A Seated</span>
+              <span *ngIf="room.seatedcapacity != null" id="seat-number" class="card-container-information__sub--price">{{ room.seatedcapacity }} Seated</span>
+              <span *ngIf="room.standingcapacity == null" id="stand-number" class="card-container-information__sub--room">N/A Standing</span>
+              <span *ngIf="room.standingcapacity != null" id="stand-number" class="card-container-information__sub--room">{{ room.standingcapacity }} Standing</span>
             </p>
           </div>
         </div>
@@ -419,7 +420,7 @@
             </textarea>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Create a new event</button>
+          <button [disabled]="!rfpforminputs.valid" type="submit" class="btn btn-primary">Submit RFP</button>
           <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         </div>
       </div> <!-- loginsignup -->
@@ -480,38 +481,50 @@
       <div *ngIf="signup && !verifysignup">
         <form (ngSubmit)="clientsignup(clientsignupform)" #clientsignupform="ngForm">
           <div class="row">
-            <div class="col-12 text-center">
-              <h3>Sign Up</h3>
+            <div class="col-12">
+              <div class="text-center">
+                <h3>Sign Up</h3>
+              </div>
+              <div class="col-12">
+                <div class="text-center">
+                  <h5> * Mandatory Fields </h5>
+                </div>
+
+              </div>
             </div>
             <div class="col-6">
-              <label>First Name</label>
               <input class="form-control"
                      type="text"
                      id="signupfirstname"
+                     required
+                     placeholder="First Name *"
                      name="signupfirstname"
                      ngModel>
             </div>
             <div class="col-6">
-              <label>Last Name</label>
               <input class="form-control"
                      type="text"
                      id="signuplastname"
+                     required
+                     placeholder="Last Name *"
                      name="signuplastname"
                      ngModel>
             </div>
             <div class="col-6">
-              <label>Email</label>
               <input class="form-control"
                      type="email"
                      id="signupemail"
+                     required
+                     placeholder="Email * "
                      name="signupemail"
                      ngModel>
             </div>
             <div class="col-6">
-              <label>Confirm Email</label>
               <input (ngModelChange)="emailconfrim(clientsignupform)"
                      class="form-control"
                      type="email"
+                     required
+                     placeholder="Confrim Email *"
                      id="signupemailconfrim"
                      name="signupemailconfrim"
                      ngModel>
@@ -522,18 +535,20 @@
               </div>
             </div>
             <div class="col-6">
-              <label>Password</label>
               <input class="form-control"
                      type="password"
+                     required
+                     placeholder="Password *"
                      id="signuppassword"
                      name="signuppassword"
                      ngModel>
             </div>
             <div class="col-6">
-              <label>Confrim Password</label>
               <input (ngModelChange)="passwordconfirm(clientsignupform)"
                      class="form-control"
                      type="password"
+                     required
+                     placeholder="Confirm Password *"
                      id="signuppasswordconfrim"
                      name="signuppasswordconfrim"
                      ngModel>
@@ -544,25 +559,30 @@
               </div>
             </div>
             <div class="col-6">
-              <label>Company Name</label>
               <input class="form-control"
                      type="text"
                      id="companyname"
+                     placeholder="Company Name"
                      name="companyname"
                      ngModel>
 
             </div>
             <div class="col-6">
-              <label>Primary Phone Number</label>
               <input class="form-control"
                      type="text"
                      id="signupphoneinput"
+                     placeholder="Phone Number"
                      name="signupphoneinput"
                      ngModel>
             </div>
             <div class="col-12">
               <br>
               <button type="submit" class="btn btn-primary float-right">Sign Up</button>
+            </div>
+            <div *ngIf="invalidsignup" class="col-12">
+              <div class="text-center">
+                <span style="color: red">Please fill out all required fields</span>
+              </div>
             </div>
           </div>
         </form>

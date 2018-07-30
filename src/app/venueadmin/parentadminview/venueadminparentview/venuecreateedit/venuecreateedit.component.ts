@@ -89,6 +89,21 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
 
 
   }
+  improperphone = false;
+  checkphone(form: NgForm){
+    let input = form.value.newuserphoneinput;
+    const re =  new RegExp('[0-9]{10}');
+    let test =  re.test(input);
+    if(!test){
+      console.log('it is failing regex');
+      this.improperphone = true;
+    }
+    if(test){
+      console.log('it is passing regex');
+      this.improperphone = false;
+    }
+
+  }
 
   showgroupeditform(){
     this.showgroupphotoeditform = true;

@@ -18,24 +18,26 @@
         <div class="spinner"></div>
       </div>
     </div>
-    <div *ngIf="showphotoupload && !choicesload" class="suitsphotoupload">
-      <div class="row">
-        <div id="resnote" class="col-9">
-          Images should be no larger than 12MB and at least 1500 X 700 pixels in resolution.
+    <div *ngIf="showphotoupload && !choicesload" class="col-12">
+      <div class="col-12" id="resnote">
+        <div class="text-center">
+        Images should be no larger than 12MB and at least 1500 X 700 pixels in resolution.
         </div>
       </div>
-      <form (change)="addvenuephotos($event)" #venuephotoform="ngForm">
-        <label for="venuephotoinput">Add Venue Photo</label>
-        <br>
-        <input class="form-control"
-               type="file"
-               id="venuephotoinput"
-               name="venuephotoinput"
-               ngModel
-               accept=".png, .jpg, .jpeg">
-      </form>
-      <br>
-      <button (click)="canceladdphoto()" class="btn-danger">Cancel</button>
+      <div class="col-5">
+        <form (change)="addvenuephotos($event)" #venuephotoform="ngForm">
+          <br>
+          <input class="form-control"
+                 type="file"
+                 id="venuephotoinput"
+                 name="venuephotoinput"
+                 ngModel
+                 accept=".png, .jpg, .jpeg">
+        </form>
+      </div>
+      <div class="col-4">
+        <button (click)="canceladdphoto()" class=" btn btn-danger">Cancel</button>
+      </div>
     </div>
   </div>
 
