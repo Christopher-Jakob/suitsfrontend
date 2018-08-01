@@ -9,18 +9,22 @@ import {BrowsevenuescomponentcommService} from "../../services/browsevenueservic
 import {RFPService} from "../../services/rfpservice/rfpservice";
 import {ClientUserService} from "../../services/userservice/clientuserservice/clientuserservice";
 import {UserAuthorizationService} from "../../services/userservice/userauthorizationservice/userauthorizationservice";
+import {SuitsAdminDependancySettings} from "../../services/pagedependancy/suitsadmin/suitssettings/suitssettings.dependancy.service";
 
 @Component({
   selector: 'app-roompage',
   templateUrl: './roompage.component.html',
   styleUrls: ['./roompage.component.scss'],
-  providers:[RoompageDependancyService, RFPService, ClientUserService]
+  providers:[RoompageDependancyService, RFPService, ClientUserService, SuitsAdminDependancySettings]
 })
 export class RoompageComponent implements OnInit, OnDestroy {
 
-  constructor(private venueservice: VenueService, private route: ActivatedRoute, private roompagedependancyservice: RoompageDependancyService, private router: Router, private rfpmodaltoggle: ModalToggleService, private modalService: NgbModal, private browsevenuescommservice:BrowsevenuescomponentcommService, private rfpservice : RFPService, private clientservice: ClientUserService,  private authservice: UserAuthorizationService) {
+  constructor(private venueservice: VenueService, private route: ActivatedRoute, private roompagedependancyservice: RoompageDependancyService, private router: Router, private rfpmodaltoggle: ModalToggleService, private modalService: NgbModal, private browsevenuescommservice:BrowsevenuescomponentcommService, private rfpservice : RFPService, private clientservice: ClientUserService,  private authservice: UserAuthorizationService, private settingservice: SuitsAdminDependancySettings) {
   }
 
+  eventpurpose;
+  createpropservice;
+  createsaveservice;
   signup =false;
   rfpshow = false;
   verifysignup = false;
@@ -165,7 +169,6 @@ export class RoompageComponent implements OnInit, OnDestroy {
   };
 
   sendrfp(form:NgForm) {
-    console.log('it started');
     if (this.user == null) {
       this.savedevent.name = form.value.eventname;
       this.savedevent.date = form.value.eventdate;
@@ -181,7 +184,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
       this.savedevent.eventdetails = form.value.eventdetails;
       this.loginorsignup = true;
     }
-    if(this.user != null){
+    if (this.user != null) {
       let payload = {
         name: form.value.eventname,
         eventname: form.value.eventname,
@@ -189,14 +192,20 @@ export class RoompageComponent implements OnInit, OnDestroy {
         programdate: form.value.eventdate,
         eventdateflex: form.value.dateflexcheckbox,
         eventpurpose: form.value.eventpurpose,
+        eventpurposepk: null,
         startime: form.value.starttime,
         starttimeflex: form.value.starttimeflexcheckbox,
         endtime: form.value.endtime,
         endtimeflex: form.value.endtimecheckbox,
-        roompreference : form.value.roomselect,
+        roompreference: form.value.roomselect,
         guestcount: form.value.guestcount,
         eventdetails: form.value.eventdetails
       };
+      for (let p of this.eventpurpose) {
+        if (p.purpose === payload.eventpurpose) {
+          payload.eventpurposepk = p.pk;
+        }
+      }
       payload.eventdate = this.datevaluetoname(payload.eventdate);
       this.rfpservice.emailrfp(payload, this.venue.id)
         .subscribe(
@@ -205,8 +214,26 @@ export class RoompageComponent implements OnInit, OnDestroy {
             form.reset();
             this.user = null;
           },
-          (error)=>{
-            if(error.status === 401){
+          (error) => {
+            console.log(error);
+            if (error.status === 401){
+              this.savedevent.name = form.value.eventname;
+              this.savedevent.date = form.value.eventdate;
+              this.savedevent.programdate = form.value.eventdate;
+              this.savedevent.dateflex = form.value.dateflexcheckbox;
+              this.savedevent.eventpurpose = form.value.eventpurpose;
+              this.savedevent.starttime = form.value.starttime;
+              this.savedevent.starttimeflex = form.value.starttimeflexcheckbox;
+              this.savedevent.endtime = form.value.endtime;
+              this.savedevent.endtimeflex = form.value.endtimeflexcheckbox;
+              this.savedevent.roompreference = form.value.roomselect;
+              this.savedevent.headcount = form.value.guestcount;
+              this.savedevent.eventdetails = form.value.eventdetails;
+              this.loginorsignup = true;
+
+            }
+            if (error.status === 403) {
+              this.user = null;
               this.savedevent.name = form.value.eventname;
               this.savedevent.date = form.value.eventdate;
               this.savedevent.programdate = form.value.eventdate;
@@ -221,52 +248,33 @@ export class RoompageComponent implements OnInit, OnDestroy {
               this.savedevent.eventdetails = form.value.eventdetails;
               this.loginorsignup = true;
             }
-            if(error.status === 403){
-              this.user = null;
-              this.savedevent.name = form.value.eventname;
-              this.savedevent.date = form.value.eventdate;
-              this.savedevent.programdate = form.value.eventdate;
-              this.savedevent.dateflex = form.value.dateflexcheckbox;
-              this.savedevent.eventpurpose = form.value.eventpurpose;
-              this.savedevent.starttime = form.value.starttime;
-              this.savedevent.starttimeflex = form.value.starttimeflexcheckbox;
-              this.savedevent.endtime = form.value.endtime;
-              this.savedevent.endtimeflex = form.value.endtimeflexcheckbox;
-              this.savedevent.roompreference = form.value.roomselect,
-                this.savedevent.headcount = form.value.guestcount;
-              this.savedevent.eventdetails = form.value.eventdetails;
-              this.loginorsignup = true;
-            }
-          }
-        );
+
+          });
 
     }
+
   }
 
-  populaterfpfromsaved(index, savedrfp, newrfp){
+  populaterfpfromsaved(index, create, prop){
+    console.log('it fired to open the rfp modal');
     const scoperfp = this.savedrfps[index];
     this.savedevent.name = scoperfp.name;
-    this.savedevent.date = scoperfp.datename;
-    this.savedevent.programdate = scoperfp.datevalue;
+    this.savedevent.date = scoperfp.eventdate;
+    this.savedevent.programdate = scoperfp.programdate;
     this.savedevent.dateflex = scoperfp.dateflex;
-    this.savedevent.eventpurpose = scoperfp.eventpurpose;
+    this.savedevent.eventpurpose = scoperfp.eventpurpose.purpose;
     this.savedevent.starttime = scoperfp.startime;
     this.savedevent.starttimeflex = scoperfp.starttimeflex;
     this.savedevent.endtime = scoperfp.endtime;
     this.savedevent.endtimeflex = scoperfp.endtimeflex;
-    this.savedevent.headcount = scoperfp.headcount;
+    this.savedevent.headcount = scoperfp.guestcount;
     this.savedevent.eventdetails = scoperfp.eventdetails;
-    let options = {
-      'show': false
-    };
-    (<any>$('#createSaved')).modal(options);
-    options = {
-      'show': true
-    };
-    (<any>$('#createProp')).modal(options);
+    this.createpropopen(prop);
+    this.createsaveservice.close();
 
 
   }
+
 
   savedrfps;
   useremail;
@@ -337,18 +345,38 @@ export class RoompageComponent implements OnInit, OnDestroy {
 
   rfptoggle(form:NgForm, createnew, createsaved){
     if(form.value.rfpsendselect === 'n'){
-      this.open(createnew);
+      this.createpropopen(createnew);
       this.dropdownreset = 'n';
       this.dropdownreset = '';
 
     }
     if(form.value.rfpsendselect === 's'){
-      this.open(createsaved);
+      this.createsaveopen(createsaved);
       this.dropdownreset = "s";
       this.dropdownreset = '';
     }
 
   }
+
+  createpropopen(content) {
+    this.createpropservice = this.modalService.open(content);
+    this.createpropservice.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  createsaveopen(content){
+    this.createsaveservice = this.modalService.open(content);
+    this.createsaveservice.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
+  }
+
 
   // code for changing a date value to a date name
   datevaluetoname(eventdate){
@@ -421,8 +449,14 @@ export class RoompageComponent implements OnInit, OnDestroy {
     }
   }
 
-
   ngOnInit() {
+
+    this.settingservice.getallcityobjects()
+      .subscribe(
+        (req: any) => {
+          this.eventpurpose = req.eventpurpose;
+        });
+
     this.userservicesubscription = this.authservice.receiveuser()
       .subscribe(
         (req: any) => {
@@ -434,6 +468,14 @@ export class RoompageComponent implements OnInit, OnDestroy {
           if (req != null) {
             this.user = req;
             this.loginorsignup = false;
+            this.rfpservice.getsavedrfps()
+              .subscribe(
+                (req: any)=>{
+                  this.savedrfps = req;
+                  console.log('this is the saved rfps');
+                  console.log(this.savedrfps);
+                }
+              );
           }
         });
 
@@ -471,6 +513,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
                 }
 
                 for(let r in this.venue.room_set) {
+                  this.roomnames.push(this.venue.room_set[r].name);
                   if (this.venue.room_set[+r].name === this.roomname) {
                     this.room = this.venue.room_set[+r];
 
