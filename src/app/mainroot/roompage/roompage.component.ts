@@ -40,7 +40,6 @@ export class RoompageComponent implements OnInit, OnDestroy {
   userservicesubscription;
   user = null;
   // used for  event purpose dropdown on rfp
-  eventpurpose;
   roomnames = [];
 
   // height
