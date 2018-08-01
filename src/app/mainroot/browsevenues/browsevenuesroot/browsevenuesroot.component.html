@@ -43,7 +43,7 @@
       <div *ngIf="choicesload" class="spinner-container">
         <div class="spinner"></div>
       </div>
-      <ng-multiselect-dropdown id="amenityselect" *ngIf="!choicesload" [data]="ammenitieschoices" [(ngModel)]="ammenitiesmodel" [settings]=" ammenitiesdropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Ammenity'"></ng-multiselect-dropdown>
+      <ng-multiselect-dropdown id="amenityselect" *ngIf="!choicesload" [data]="ammenitieschoices" [(ngModel)]="ammenitiesmodel" [settings]=" ammenitiesdropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Amenity'"></ng-multiselect-dropdown>
     </div>
 
     <form #capacityform="ngForm" class="col-lg-4 col-md-4 col-sm-6">

@@ -59,7 +59,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 *ngIf="!showpasswordreset && !emailsent" class="modal-title">Sign In</h4>
-        <h4 *ngIf="showpasswordreset || emailsent" class="modal-title">Forgotten Password</h4>
+        <h4 *ngIf="showpasswordreset || emailsent" class="modal-title">Reset Password</h4>
         <button type="button" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -103,7 +103,7 @@
                 &nbsp; &nbsp; Remember Me
               </label>
             </div>
-            <small style="cursor: pointer" (click)="togglepassword()" class="form-text text-muted">Forget Password?</small>
+            <small style="cursor: pointer" (click)="togglepassword()" class="form-text text-muted">Forgot Password?</small>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Sign In</button>
