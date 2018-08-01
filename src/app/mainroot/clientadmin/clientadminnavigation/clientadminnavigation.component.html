@@ -1,39 +1,12 @@
 <div class="row">
-
-  <!--
-  <a routerLink="/dashboard">
-    <div class="col-md-12 navchoice">
-      <h4>Newsfeed</h4>
-    </div>
-  </a>
-
-  <a routerLink="/dashboard/outstanding-proposals">
-    <div class="col-md-12 navchoice">
-      <h4>Outstanding Proposals</h4>
-    </div>
-  </a>
-
-  <a routerLink="/dashboard/rejected-proposals">
-    <div class="col-md-12 navchoice">
-      <h4>Rejected Proposals</h4>
-    </div>
-  </a>
-
-  <a routerLink="/dashboard/messages">
-    <div class="col-md-12 navchoice">
-      <h4>Messages</h4>
-    </div>
-  </a>
-  -->
-
-  <a [routerLink]="['/dashboard',permission,clientpk,'profile']">
-    <div class="col-12 navchoice">
-      <h4>Profile</h4>
-    </div>
-  </a>
-  <a [routerLink]="['/dashboard', permission, clientpk, 'rfps']">
-    <div class="col-12 navchoice">
-      <h4>Sent RFPs</h4>
-    </div>
-  </a>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/dashboard',permission,clientpk,'profile']">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/dashboard', permission, clientpk, 'rfps']">
+        Sent RFPs
+      </a>
+    </li>
+  </ul>
 </div>

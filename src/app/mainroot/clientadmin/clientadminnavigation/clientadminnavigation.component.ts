@@ -28,11 +28,9 @@ export class ClientadminnavigationComponent implements OnInit, OnDestroy{
     this.dashboardservicevar = this.clientservice.receiveclientobject()
       .subscribe(
         (req: any)=>{
-          if(req !== null){
-            this.clientpk = req;
+          if(req != null){
+            this.clientpk = req.pk;
           }
-
-
         }
       );
   }

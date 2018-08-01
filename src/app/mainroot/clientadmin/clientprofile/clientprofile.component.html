@@ -10,13 +10,11 @@
   </div>
 
   <div *ngIf="!suitsdeleted" class="row"> <!--root row-->
-    <div class="col-md-3 STnopadding text-center">
+    <div style="max-height: 160px" class="col-3 text-center">
       <h4>Client Photo</h4>
-      <!--
-      <div  *ngIf="clientobject.photo !== null && !changephotoout" class="imagecontainer imagefullheight STnopadding profileimage "
-            [ngStyle]="{'background-image': 'url(' + clientobject.photo + ')'}">
+      <div  *ngIf="clientobject.userphoto != null && !changephotoout" class="imagecontainer imagefullheight STnopadding profileimage "
+            [ngStyle]="{'background-image': 'url(' + clientobject.userphoto + ')'}">
       </div>
-      -->
       <div *ngIf="changephotoout">
         <form>
           <label for="photouploadform">Profile Photo Form</label>
@@ -29,16 +27,19 @@
         </form>
       </div>
       <div>
-        <a *ngIf="clientobject.photo === null && !changephotoout" style="cursor: pointer" (click)="showprofilephotoform()">Add Photo</a>
+        <button *ngIf="clientobject.userphoto == null && !changephotoout" class="btn btn-outline-primary" (click)="showprofilephotoform()">Add Photo</button>
       </div>
+      <br>
       <div>
-        <a *ngIf="clientobject.photo !== null && !changephotoout" style="cursor: pointer" (click)="showprofilephotoform()">Change Photo</a>
-        <a (click)="unshowprofilephotoform()" *ngIf="changephotoout" style="cursor: pointer">Cancel</a>
-
+        <button *ngIf="clientobject.userphoto != null && !changephotoout" class="btn btn-primary" (click)="showprofilephotoform()">Change Photo</button>
+        <button (click)="unshowprofilephotoform()" *ngIf="changephotoout" class="btn btn-danger">Cancel</button>
       </div>
 
     </div> <!--col-md-2-->
-    <div *ngIf="!editprofileshow && !passwordform" class="col-md-6 clientinfo">
+    <div *ngIf="!editprofileshow && !passwordform" class="col-6 clientinfo">
+      <div class="text-center">
+        <h4>Profile</h4>
+      </div>
       <label>Name:</label> &nbsp;<span id="namespan">{{clientobject.name}}</span>
       <br>
       <label>Company Name:</label> &nbsp;{{clientobject.companyname}}
@@ -49,42 +50,48 @@
       <br>
       <label>Phone:</label> &nbsp;<span id="phonespan">{{clientobject.phone}}</span>
       <br>
-      <a style="cursor: pointer;" (click)=" showeditprofile()"> Edit Profile</a>
+      <br>
+      <button class="btn btn-primary" (click)=" showeditprofile()"> Edit Profile</button>
     </div>
     <div>
-      <div *ngIf="editprofileshow" class="col-md-6 forminput">
+      <div *ngIf="editprofileshow" class="col-6 forminput">
         <form (ngSubmit)="updateprofile()" #updateprofileform="ngForm">
-          <label for="clientnameinput">Name:</label>
           <input type="text"
                  id="clientnameinput"
+                 placeholder="Name"
+                 class="form-control"
                  name="clientnameinput"
                  [ngModel]="clientobject.name">
           <br>
-          <label  for="companynameinput">Company Name:</label>
           <input type="text"
                  id="companynameinput"
+                 placeholder="Company Name"
+                 class="form-control"
                  name="companynameinput"
                  [ngModel]="clientobject.companyname">
           <br>
-          <label for="jobtitleinput">Job Title:</label>
           <input  type="text"
                   id="jobtitleinput"
+                  placeholder="Job Title"
+                  class="form-control"
                   name="jobtitleinput"
                   [ngModel]="clientobject.jobtitle">
           <br>
-          <label for="emailinput">Email:</label>
           <input type="email"
                  id="emailinput"
+                 placeholder="Email"
+                 class="form-control"
                  name="emailinput"
                  [ngModel]="clientobject.email">
           <br>
-          <label for="phoneinput">Phone:</label>
           <input type="text"
                  id="phoneinput"
+                 placeholder="Phone"
+                 class="form-control"
                  name="phoneinput"
                  [ngModel]="clientobject.phone">
           <br>
-          <a *ngIf="clientpermission" (click)="showpasswordform()" style="cursor: pointer">Change Password</a>
+          <a *ngIf="clientpermission" (click)="showpasswordform()" style="cursor: pointer; text-decoration: underline">Change Password</a>
           <br>
           <div class="btn-group">
             <button (click)="unshoweditprofile()" class="btn btn-danger" id="cancel">Cancel</button>
@@ -96,20 +103,23 @@
         <h4 class="text-center">Change Password</h4>
         <br>
         <form (ngSubmit)="editpassword()" #editpasswordform="ngForm">
-          <label for="currentpasswordinput">Current Password:</label>
           <input type="password"
+                 placeholder="Current Password"
+                 class="form-input"
                  id="currentpasswordinput"
                  name="currentpasswordinput"
                  ngModel>
           <br>
-          <label for="newpassword1">New Password:</label>
           <input type="password"
                  id="newpassword1"
+                 class="form-input"
+                 placeholder="New Password"
                  name="newpassword1"
                  ngModel>
           <br>
-          <label for="newpassword2">New Password Again:</label>
           <input type="password"
+                 class="form-input"
+                 placeholder="New Password Again"
                  id="newpassword2"
                  name="newpassword2"
                  ngModel>
@@ -130,7 +140,7 @@
     </div>
 
     <div class="col-md-3 text-right bottom">
-      <button (click)="showdeleteconfrim()" *ngIf="!deleteconfrim && suitpermission" class="btn-danger">Delete Profile</button>
+      <button (click)="showdeleteconfrim()" *ngIf="!deleteconfrim && suitpermission" class=" btn btn-danger">Delete Profile</button>
       <div *ngIf="deleteconfrim" class="text-center">
         Are you sure you want to delete your profile? You will not be able to recover it!
         <br>

@@ -15,7 +15,7 @@ export class ClientUserService{
   }
 
   updateclientuser(pk, payload){
-    const url = clientroot + '/' + String(pk);
+    const url = clientroot + String(pk);
     return this.http.put(url, payload);
   }
 
@@ -28,7 +28,7 @@ export class ClientUserService{
   }
 
   getclientuser(pk){
-    const url = clientroot + '/' + String(pk);
+    const url = clientroot + String(pk);
     return this.http.get(url);
   }
 

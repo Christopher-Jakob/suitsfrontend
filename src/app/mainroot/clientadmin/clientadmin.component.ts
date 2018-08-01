@@ -2,7 +2,7 @@
  * Created by rickus on 7/1/18.
  */
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ClientUserService} from "../../services/userservice/clientuserservice/clientuserservice";
 
 @Component({
@@ -23,17 +23,21 @@ export class ClientadminComponent implements OnInit, OnDestroy{
     let clientobject = null;
     this.route.params
       .subscribe(
-        (req:any)=>{
-          pk = req.pk;
-          permission = req.permission;
+        (params:Params)=>{
+          pk = params.pk;
+          console.log('this is the pk');
+          console.log(pk);
+          permission = params.permission;
           console.log('before being set is this ' + permission);
           if(permission === 'suits'){
             this.isactingsuits = true;
           }
           this.clientdashboardservice.sendclientpermission(permission);
-           this.clientdashboardservice.getclientuser(pk)
-           .subscribe(
-           (req:any)=> {
+          this.clientdashboardservice.getclientuser(pk)
+            .subscribe(
+              (req:any)=> {
+                console.log('this is the request');
+                console.log(req);
              clientobject = req;
              this.clientdashboardservice.sendclientobject(clientobject);
 

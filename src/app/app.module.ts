@@ -108,8 +108,8 @@ const appRoutes: Routes = [
       {path: 'dashboard/:permission/:pk', canActivate: [ClientSuitsAdminSuperUserGuard], component: ClientadminComponent,
         children:[
           {path: 'profile', component: ClientprofileComponent},
+          {path: 'rfps', component: SentrfpsComponent },
         ]},
-      {path: 'rfps', component: SentrfpsComponent },
       {path: 'client-profile-deleted', component: ClientprofiledeletesuccessComponent},
       {path: 'user/forgot-password/validate/:resetstring', component: ResetpasswordComponent},
       {path: 'user/:type/validate/:verificationstring', component: UservenueverificaitonComponent},

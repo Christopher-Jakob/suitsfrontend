@@ -18,6 +18,8 @@ export class SentrfpsComponent implements OnInit {
       .subscribe(
         (req:any)=>{
           this.sentrfps = req;
+          console.log('this is the sent rfps');
+          console.log(this.sentrfps);
         }
       );
 

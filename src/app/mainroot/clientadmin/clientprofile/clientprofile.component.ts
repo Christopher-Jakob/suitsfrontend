@@ -8,7 +8,6 @@ import {AwsService} from "../../../services/amazonwebservice services/aws.servic
   selector: 'app-clientprofile',
   templateUrl: './clientprofile.component.html',
   styleUrls: ['./clientprofile.component.scss'],
-  providers: [ClientUserService]
 })
 export class ClientprofileComponent implements OnInit, OnDestroy {
 
@@ -28,7 +27,7 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
     jobtitle: 'Dreamer',
     email: 'christopher.m.jakob@gmail.com',
     phone: '630-618-0712',
-    photo: 'https://vignette.wikia.nocookie.net/thebiglebowski/images/7/7e/The_Dude.jpeg/revision/latest?cb=20111216183045',
+    userphoto: 'https://vignette.wikia.nocookie.net/thebiglebowski/images/7/7e/The_Dude.jpeg/revision/latest?cb=20111216183045',
   };
 
   // edit form code
@@ -55,8 +54,10 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
       .subscribe(
         (req: any)=>{
           // since the whole object is being returned
-          this.clientobject = req.body;
-          this.clientservice.sendclientobject(this.clientobject)
+          this.clientobject = req;
+          this.clientservice.sendclientobject(this.clientobject);
+          this.editprofileshow = false;
+
 
         }
       );
@@ -92,7 +93,8 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
           fd.append('x-amz-signature', fields['x-amz-signature']);
           fd.append('file', uploadedphoto);
           let payload = {
-
+            userphoto: photourl,
+            userphotokey: fields.key
           };
           this.awsservice.uploadtos3(req.url, fd)
             .subscribe(
@@ -100,16 +102,12 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
                 this.clientservice.updateclientuser(this.clientobject.pk, payload)
                   .subscribe(
                     (req: any)=>{
+                      this.clientobject = req;
+                      this.changephotoout = false;
 
-                    }
-                  );
-              }
-            );
-
-
-        }
-      );
-
+                    });
+              });
+        });
   }
 
   //delete profile code
@@ -218,8 +216,11 @@ export class ClientprofileComponent implements OnInit, OnDestroy {
      this.clientobjectservicevar = this.clientservice.receiveclientobject()
      .subscribe(
      (req: any)=>{
-     this.clientobject = req;
-     console.log(this.clientobject);
+       if(req != null){
+         this.clientobject = req;
+         console.log('this is the client object');
+         console.log(this.clientobject);
+       }
      });
 
 
