@@ -9,17 +9,18 @@ import {ClientUserService} from "../../services/userservice/clientuserservice/cl
 import {VenueService} from "../../services/venueservice/venueservice";
 import {LandingpageDependancyService} from "../../services/mainroot/landingpage/LandingpageDependancyService";
 import {BrowsevenuescomponentcommService} from "../../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
+import {FormValidators} from "../../helperfunctions/formvalidators/formvalidators";
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  providers:[ForgotPasswordService,  ClientUserService, VenueService, LandingpageDependancyService]
+  providers:[ForgotPasswordService,  ClientUserService, VenueService, LandingpageDependancyService, FormValidators]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  constructor(private modalservice: ModalToggleService, private router: Router, private userservice: UserAuthorizationService, private modalService: NgbModal, private forgotpasswordservice: ForgotPasswordService, private clientservice: ClientUserService, private venueservice: VenueService, private citydependancy: LandingpageDependancyService, private navbarcomm : BrowsevenuescomponentcommService) { }
+  constructor(private modalservice: ModalToggleService, private router: Router, private userservice: UserAuthorizationService, private modalService: NgbModal, private forgotpasswordservice: ForgotPasswordService, private clientservice: ClientUserService, private venueservice: VenueService, private citydependancy: LandingpageDependancyService, private navbarcomm : BrowsevenuescomponentcommService, private formvalidators:FormValidators) { }
 
 
   //user service subscription variable
@@ -108,6 +109,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   }
 
+
+
   // password reset form
   showpasswordreset = false;
   emailsent = false;
@@ -133,11 +136,24 @@ export class NavbarComponent implements OnInit, OnDestroy {
   passwordmismatch = false;
   emailmismatch = false;
 
+  invalidpassword = false;
+  passwordchecklength(form:NgForm){
+    let input = form.value.clientpassword;
+    let check = this.formvalidators.passwordvalidator(input);
+    if(check){
+      this.invalidpassword = false;
+    }
+    if(!check){
+      this.invalidpassword = true;
+    }
+  }
+
   checkpassword(form:NgForm){
     this.passwordmismatch = false;
     if(form.value.clientpassword != form.value.clientconfrimpassword){
       this.passwordmismatch = true;
     }
+
   }
 
   checkemail(form:NgForm){

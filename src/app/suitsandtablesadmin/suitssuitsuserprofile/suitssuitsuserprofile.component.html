@@ -61,6 +61,7 @@
         <label>Name:</label>&nbsp;
         <input type="text"
                placeholder="First and Last Name"
+               class="form-control"
                id="profilenameinput"
                name="profilenameinput"
                [ngModel]="userobject.name">
@@ -68,6 +69,7 @@
         <div *ngIf="userobject.issuitssuperuser">
           <label>Role:</label>&nbsp;
           <input type="text"
+                 class="form-control"
                  placeholder="Enter A Role"
                  id="profileroleinput"
                  name="profileroleinput"
@@ -76,6 +78,7 @@
           <label>Permission:</label>&nbsp;
           <select id="profilepermissionselect"
                   name="profilepermissionselect"
+                  class="form-control"
                   [ngModel]="currentpermission">
             <option value="viewer">Viewer</option>
             <option value="admin">Administrator</option>
@@ -84,6 +87,7 @@
         </div>
         <label>Email:</label>&nbsp;
         <input type="email"
+               class="form-control"
                id="profileemailinput"
                name="profileemailinput"
                [ngModel]="userobject.email">
@@ -91,13 +95,14 @@
         <label>Phone:</label>&nbsp;
         <input type="text"
                id="profilephoneinput"
+               class="form-control"
                name="profilephoneinput"
                [ngModel]="userobject.phone">
         <br>
         <br>
         <a *ngIf="userisself" (click)="showpasswordchange()" style="cursor: pointer">Change Password</a>
-        <button (click)="unshoweditprofile()" class="btn-danger" id="cancel">Cancel</button>
-        <button class="STButton" id="commit" type="submit">Commit Changes</button>
+        <button (click)="unshoweditprofile()" class=" btn btn-danger" id="cancel">Cancel</button>
+        <button class="btn btn-outline-primary" id="commit" type="submit">Commit Changes</button>
       </form>
     </div> <!-- end display info logic -->
     <div *ngIf="passwordchangeshow"> <!-- change password logic-->
@@ -106,6 +111,7 @@
       <form (ngSubmit)="changepassword()" #changepasswordform ="ngForm">
         <label>Current Password:</label>
         <input type="password"
+               class="form-control"
                id="currentpasswordinput"
                name="currentpasswordinput"
                ngModel>
@@ -113,6 +119,7 @@
         <label>New Password:</label>
         <input (change)="newpasswordmatch()"
                type="password"
+               class="form-control"
                id="newpassword1input"
                name="newpassword1input"
                ngModel>
@@ -120,14 +127,15 @@
         <label>New Password Again:</label>
         <input (change)="newpasswordmatch()" type="password"
                id="newpassword2input"
+               class="form-control"
                name="newpassword2input"
                ngModel>
         <br>
         <span style="color: red" *ngIf="nopasswordmatch">Both New Password Fields Much Match</span>
         <br>
         <br>
-        <button (click)="unshowpasswordchange()" id="cancelpassword" class="btn-danger">Cancel</button>
-        <button type="submit" id="changepassword" class="STButton">Change Password</button>
+        <button (click)="unshowpasswordchange()" id="cancelpassword" class="btn btn-danger">Cancel</button>
+        <button type="submit" id="changepassword" class="btn btn-ouline-primary">Change Password</button>
       </form>
 
     </div> <!-- end change password logic-->

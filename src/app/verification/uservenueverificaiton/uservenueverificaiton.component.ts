@@ -3,13 +3,14 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {NgForm} from "@angular/forms";
 import {Userservice} from "../../services/userservice/validateservice/uservalidateservice";
 import {Router} from "@angular/router";
+import {FormValidators} from "../../helperfunctions/formvalidators/formvalidators";
 
 
 @Component({
   selector: 'app-uservenueverificaiton',
   templateUrl: './uservenueverificaiton.component.html',
   styleUrls: ['./uservenueverificaiton.component.scss'],
-  providers:[Userservice]
+  providers:[Userservice, FormValidators ]
 })
 export class UservenueverificaitonComponent implements OnInit {
   passwordmismatch = false;
@@ -20,7 +21,7 @@ export class UservenueverificaitonComponent implements OnInit {
   usertype;
   verificationstring;
 
-  constructor(private route: ActivatedRoute, private userservice: Userservice, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userservice: Userservice, private router: Router, private formvalidators: FormValidators) { }
 
   resetpasswordmismatch(){
     this.passwordmismatch = false;
@@ -43,6 +44,18 @@ export class UservenueverificaitonComponent implements OnInit {
             this.validated = true;
           });
     }
+  }
+  invalidpassword = false;
+  checkpasswordvalidate(){
+    let password = this.passwordform.value.password1;
+   let check = this.formvalidators.passwordvalidator(password);
+   if(!check){
+     this.invalidpassword = true;
+   }
+   if(check){
+     this.invalidpassword = false;
+   }
+
   }
 
   navhomepage(){

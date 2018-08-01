@@ -210,7 +210,7 @@
         <div class="text-center">
           <h5 *ngIf="useralreadyexists">Your trying to create a user that already exists. Use the Add Existing User Option.</h5>
 
-          <h5 *ngIf="useralreadyonvenue">This user already has a permission on this this venue. A user may only have one permission per venue. </h5>
+          <h5 *ngIf="useralreadyonvenue">This user already has a permission on this venue. A user may only have one permission per venue. </h5>
 
           <h5 *ngIf="wronguseofform">Your trying to create a new user while using the Add Existing User option. Use the Create New User option</h5>
         </div>
@@ -240,7 +240,6 @@
                      name="newuseremailinput"
                      ngModel
                      #newuseremailcss="ngModel">
-              <span style="color: red" *ngIf="newuseremailcss.touched && !newuseremailcss.valid" class="help-block">Must be a valid email addresss</span>
             </div>
             <div class="col-6" *ngIf="newusercreate">
               <input class="form-control"
@@ -261,7 +260,7 @@
                      id="newuserphoneinput"
                      name="newuserphoneinput"
                      ngModel
-                     placeholder="Phone (digits only) *"
+                     placeholder="Phone (digits only)"
                      >
               <span style="color: red" *ngIf="improperphone">A phone number must consist of 10 digits with no spaces or dashes</span>
             </div>
