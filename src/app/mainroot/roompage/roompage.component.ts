@@ -39,7 +39,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
   parentadminservicevar;
   userservicesubscription;
   user = null;
-  // used for  event purpose dropdown on rfp **
+  // used for  event purpose dropdown on rfp
   roomnames = [];
 
   // height
@@ -133,12 +133,23 @@ export class RoompageComponent implements OnInit, OnDestroy {
   //other rooms to be displayed
   closeResult: string;
 
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
+  createpropopen(content) {
+    this.createpropservice = this.modalService.open(content);
+    this.createpropservice.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  createsaveopen(content){
+    this.createsaveservice = this.modalService.open(content);
+    this.createsaveservice.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
   }
 
   private getDismissReason(reason: any): string {
@@ -275,7 +286,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
   }
 
 
-  savedrfps;
+  savedrfps =[];
   useremail;
   userpassword;
   clientsignup(form:NgForm){
@@ -356,26 +367,6 @@ export class RoompageComponent implements OnInit, OnDestroy {
     }
 
   }
-
-  createpropopen(content) {
-    this.createpropservice = this.modalService.open(content);
-    this.createpropservice.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  createsaveopen(content){
-    this.createsaveservice = this.modalService.open(content);
-    this.createsaveservice.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-
-  }
-
 
   // code for changing a date value to a date name
   datevaluetoname(eventdate){

@@ -322,12 +322,20 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
       if (this.capacityform.form.value.capacityselectinput != null) {
         const capacityselect = this.capacityform.form.value.capacityselectinput;
         if (this.capacityform.form.value.groupnumberinput != null) {
-          const groupnumberinput = this.capacityform.form.value.groupnumberinput;
+          const groupnumberinput = this.capacityform.form.value.groupnumberinput
+          console.log('this is the group number input');
+          console.log(groupnumberinput);
           if (capacityselect === 'seated') {
-            queryparams.seatedcapacity = groupnumberinput;
+            if(groupnumberinput != ''){
+              queryparams.seatedcapacity = groupnumberinput;
+            }
+
           }
           if (capacityselect === 'standing') {
-            queryparams.standingcapacity = groupnumberinput;
+            if(groupnumberinput != ''){
+              queryparams.standingcapacity = groupnumberinput;
+            }
+
           }
         }
       }
@@ -338,6 +346,8 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
         cuisinetypelist.push(cuisine);
       }
       queryparams.cuisine = cuisinetypelist;
+      console.log('this is the query param cuisine');
+      console.log(queryparams.cuisine);
     }
     if(this.experientialmodel != null) {
       let experientiallist = [];
@@ -406,6 +416,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
     this.venueservice.browsevenues(this.selectedcity, queryparams)
       .subscribe(
         (req: any)=>{
+          console.log('this is the request from browse');
           this.filteredvenues = req;
           for(let venue in this.filteredvenues){
             for(const cuisine in this.cuisinechoices){

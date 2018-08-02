@@ -563,6 +563,8 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     this.browsevenuescommservice.sendstate('unshow');
     this.parentadminservicevar.unsubscribe();
     this.userservicesubscription.unsubscribe();
+    this.createpropservice = null;
+    this.createsaveservice = null;
     this.user = null;
   }
 

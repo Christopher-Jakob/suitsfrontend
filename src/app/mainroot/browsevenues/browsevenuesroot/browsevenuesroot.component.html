@@ -49,7 +49,7 @@
     <form #capacityform="ngForm" class="col-lg-4 col-md-4 col-sm-6">
       <div class="row capacityrow">
       <div class="col-lg-6 col-md-7">
-        <select (click)="enablecapinput()"
+        <select (ngModelChange)="enablecapinput()"
                 id="seatingdropdown"
                 name="capacityselectinput"
                 class="form-control"
@@ -61,7 +61,7 @@
       </div>
       <div class="col-lg-6 col-md-5">
         <input type="text"
-           (change)="applyfilters()"
+           (ngModelChange)="applyfilters()"
            [disabled]="disablecapacityinput"
            id="capacityamount"
            placeholder="Party Size"
