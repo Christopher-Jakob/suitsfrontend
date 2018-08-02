@@ -35,6 +35,17 @@ export class SuitssuitstablesusersComponent implements OnInit, OnDestroy {
     }
   }
 
+  deleteuser(index){
+    let user = this.suitsusers[index];
+    this.suitsuserservice.deletesuitsuser(user.pk)
+      .subscribe(
+        (req: any)=>{
+          this.suitsusers.splice(+index,1);
+          this.deleteindex = null;
+        }
+      );
+  }
+
   @ViewChild('createsuitsuserform')createsuitsuserform: NgForm;
   createsuitsuser(){
     const payload = {

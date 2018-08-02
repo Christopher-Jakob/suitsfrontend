@@ -68,7 +68,7 @@
     </td>
     <td *ngIf="deleteindex === i">
       <button (click)="deleteconfrimtoggle(i)" class="STButton">Cancel</button>
-      <button class="btn-danger">Delete</button>
+      <button (click)="deleteuser(i)" class="btn-danger">Delete</button>
     </td>
   </tr>
 </table>

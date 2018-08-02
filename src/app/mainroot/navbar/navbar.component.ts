@@ -81,7 +81,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       payload.localstorage = false;
     }
     this.userservice.gettoken(payload);
-    this.signedin = true;
   }
 
   toggleMenu()
@@ -253,18 +252,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
         (req: any)=>{
           if(req != null){
             this.user = req;
-            if(req.id === null){
+            if(req.id == null){
               this.signedin = false;
-            }else{
-              this.signedin = true;
-              if(this.user.id != null) {
-                this.userpk = this.user.id;
-              }
-              if(this.user.pk != null){
-                this.userpk = this.user.pk;
-              }
             }
+            if(this.user.id != null) {
+              this.userpk = this.user.id;
+              this.signedin = true;
+            }
+            if(this.user.pk != null){
+              this.userpk = this.user.pk;
+              this.signedin = true;
+            }
+
           }
+
         }
       );
 

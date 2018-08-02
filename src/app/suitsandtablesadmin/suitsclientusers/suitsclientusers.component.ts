@@ -37,6 +37,29 @@ export class SuitsclientusersComponent implements OnInit {
     this.router.navigate(['/dashboard',this.permission,this.clientobjects[index].pk,'profile']);
   }
 
+  deleteconfrim = false;
+  deleteindex = null;
+  deleteconfrimtoggle(index){
+    this.deleteconfrim = !this.deleteconfrim;
+    if(this.deleteconfrim){
+      this.deleteindex = index;
+    }
+    if(!this.deleteconfrim){
+      this.deleteindex = null;
+    }
+  }
+
+  deleteuser(index){
+    let user = this.clientobjects[index];
+    this.clientuser.deleteprofile(user.pk)
+      .subscribe(
+        (req: any)=>{
+          this.clientobjects.splice(+index,1);
+          this.deleteindex = null;
+        }
+      );
+  }
+
   ngOnInit() {
     window.scrollTo(0,0);
     this.clientuser.clientuserlist()

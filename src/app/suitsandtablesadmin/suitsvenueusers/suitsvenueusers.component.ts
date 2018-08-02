@@ -16,6 +16,7 @@ export class SuitsvenueusersComponent implements OnInit {
 
   userobjects = [
     {
+      pk: 1,
       id: 1,
       name: 'Christopher Jakob',
       authorizedvenues: ['Gibbsons', 'fity50',  'American place', 'Nandos', 'Fried Chicken and such'],
@@ -42,6 +43,30 @@ export class SuitsvenueusersComponent implements OnInit {
     const venuepk = this.userobjects[i].venuepermissions_set[j].venue.id;
     this.router.navigate(['/admin',this.permission, 'venue-admin',venuename, venuepk]);
   }
+
+  deleteconfrim = false;
+  deleteindex = null;
+  deleteconfrimtoggle(index){
+    this.deleteconfrim = !this.deleteconfrim;
+    if(this.deleteconfrim){
+      this.deleteindex = index;
+    }
+    if(!this.deleteconfrim){
+      this.deleteindex = null;
+    }
+  }
+
+  deleteuser(index){
+    let user = this.userobjects[index];
+    this.venueuserservice.deleteuser(user.id)
+      .subscribe(
+        (req: any)=>{
+          this.userobjects.splice(+index,1);
+          this.deleteindex = null;
+        }
+      );
+  }
+
 
   ngOnInit() {
     window.scrollTo(0,0);

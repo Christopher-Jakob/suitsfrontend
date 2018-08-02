@@ -11,7 +11,16 @@ export class BrowsevenuescomponentcommService{
   private venuelistsubject = new BehaviorSubject(null);
   private selectedcitysubject = new BehaviorSubject(null);
   private statesubject = new BehaviorSubject(null);
+  private loadstate = new BehaviorSubject(null);
   selectedcity;
+
+  sendloadstate(state){
+    this.loadstate.next(state);
+  }
+
+  receviveloadstate():Observable<any>{
+    return this.loadstate.asObservable();
+  }
 
   sendvenuelist(venueslist){
     this.venuelistsubject.next(venueslist);
@@ -45,6 +54,9 @@ export class BrowsevenuescomponentcommService{
   receivestate(): Observable<any>{
     return this.statesubject.asObservable();
   }
+
+  //used on to show loading circle or not
+
 
 
 

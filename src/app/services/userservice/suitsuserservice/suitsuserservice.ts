@@ -16,5 +16,9 @@ export class SuitsUserService{
   suitsuserlist(){
     return this.http.get(suitsuserlist);
   }
+
+  deletesuitsuser(pk){
+    return this.http.delete(suitsuserroot + String(pk));
+  }
 }
 

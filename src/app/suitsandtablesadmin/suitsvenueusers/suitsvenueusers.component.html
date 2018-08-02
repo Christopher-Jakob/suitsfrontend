@@ -28,6 +28,9 @@
     <th>
       Phone Number
     </th>
+    <th>
+
+    </th>
   </tr>
 
   <tr *ngFor="let object of userobjects; let i =index">
@@ -48,6 +51,16 @@
     </td>
     <td>
       {{object.phone}}
+    </td>
+    <td *ngIf="deleteindex === i">
+      <!-- placeholder space to keep line up-->
+    </td>
+    <td *ngIf="deleteindex !== i">
+      <button (click)="deleteconfrimtoggle(i)"  class="btn-danger">Delete</button>
+    </td>
+    <td *ngIf="deleteindex === i">
+      <button (click)="deleteconfrimtoggle(i)" class="STButton">Cancel</button>
+      <button (click)="deleteuser(i)" class="btn-danger">Delete</button>
     </td>
   </tr>
 </table>

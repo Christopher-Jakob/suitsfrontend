@@ -16,8 +16,7 @@ import {LandingpageDependancyService} from "../../../services/mainroot/landingpa
 })
 export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private browsevenuedependancyservice: BrowseVenueDependancyService,  private landingpageservice: LandingpageDependancyService,
-              private venueservice: VenueService, private browsevenuescommservice: BrowsevenuescomponentcommService, private cd: ChangeDetectorRef) { }
+  constructor(private route: ActivatedRoute, private browsevenuedependancyservice: BrowseVenueDependancyService,  private landingpageservice: LandingpageDependancyService, private venueservice: VenueService, private browsevenuescommservice: BrowsevenuescomponentcommService, private cd: ChangeDetectorRef) { }
   choicesload = true;
   selectedcity;
   filteredvenueslength;
@@ -178,8 +177,6 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
   disablecapacityinput = true;
   enablecapinput(){
-    console.log('this is the enable push');
-    console.log(this.capacityform.form.value);
     if(this.capacityform.form.value.capacityselectinput !== ''){
       this.disablecapacityinput = false;
     }
@@ -189,20 +186,15 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
   }
 
   searchvenue(){
+    this.browsevenuescommservice.sendloadstate(true);
     const query = this.searchform.form.value.searchinput;
     this.browsevenuedependancyservice.browsesearch(this.citypk, query)
       .subscribe(
         (req: any)=>{
           this.filteredvenues = req;
-          console.log('this is the filtered venues');
-          console.log(this.filteredvenues);
           for(let venue in this.filteredvenues){
             let images = this.filteredvenues[venue].venueimage_set;
-            console.log('this is the venue images before ordering');
-            console.log(images);
             images = images.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
-            console.log('this is the venue images after ordering');
-            console.log(images);
             for(let image in images){
               images[image] = images[image].imageurl;
             }
@@ -264,11 +256,12 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
           this.ammenitieschoices.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
 
         });
-
+    this.browsevenuescommservice.sendloadstate(false);
   }
 
 
   applyfilters(){
+    this.browsevenuescommservice.sendloadstate(true);
     this.searchform.reset();
     let queryparams ={
       neighborhoods: null,
@@ -322,9 +315,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
       if (this.capacityform.form.value.capacityselectinput != null) {
         const capacityselect = this.capacityform.form.value.capacityselectinput;
         if (this.capacityform.form.value.groupnumberinput != null) {
-          const groupnumberinput = this.capacityform.form.value.groupnumberinput
-          console.log('this is the group number input');
-          console.log(groupnumberinput);
+          const groupnumberinput = this.capacityform.form.value.groupnumberinput;
           if (capacityselect === 'seated') {
             if(groupnumberinput != ''){
               queryparams.seatedcapacity = groupnumberinput;
@@ -346,8 +337,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
         cuisinetypelist.push(cuisine);
       }
       queryparams.cuisine = cuisinetypelist;
-      console.log('this is the query param cuisine');
-      console.log(queryparams.cuisine);
+
     }
     if(this.experientialmodel != null) {
       let experientiallist = [];
@@ -416,7 +406,6 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
     this.venueservice.browsevenues(this.selectedcity, queryparams)
       .subscribe(
         (req: any)=>{
-          console.log('this is the request from browse');
           this.filteredvenues = req;
           for(let venue in this.filteredvenues){
             for(const cuisine in this.cuisinechoices){
@@ -466,12 +455,14 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
           }
           this.filteredvenueslength = this.filteredvenues.length;
           this.browsevenuescommservice.sendvenuelist(this.filteredvenues);
-        }
-      );
+          this.browsevenuescommservice.sendloadstate(false);
+        });
+
   }
 
   ngOnInit() {
     window.scrollTo(0,0);
+    this.browsevenuescommservice.sendloadstate(true);
     this.browsevenuescommservice.sendstate('show');
 
     // grab the inputed city from the route params then grab the neighbhorhoods for that particular city.
@@ -503,15 +494,9 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
                   .subscribe(
                     (req: any)=>{
                       this.filteredvenues = req;
-                      console.log('this is the filtered venues');
-                      console.log(this.filteredvenues);
                       for(let venue in this.filteredvenues){
                         let images = this.filteredvenues[venue].venueimage_set;
-                        console.log('this is the venue images before ordering');
-                        console.log(images);
                         images = images.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
-                        console.log('this is the venue images after ordering');
-                        console.log(images);
                         for(let image in images){
                           images[image] = images[image].imageurl;
                         }
@@ -564,6 +549,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
 
                       this.browsevenuescommservice.sendvenuelist(this.filteredvenues);
+                      this.browsevenuescommservice.sendloadstate(false);
 
                       this.venuetypechoices2 = this.venuetypechoices.sort((a, b) => ((a.type) < (b.type) ? -1 : ((a.type) > (b.type) ? 1 : 0)));
                       this.privacytypechoices2 = this.privacytypechoices.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
