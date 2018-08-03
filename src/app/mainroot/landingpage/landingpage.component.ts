@@ -17,6 +17,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute, private landingpageservice: LandingpageDependancyService, private navcomm : BrowsevenuescomponentcommService) { }
 
   isLeftVisible = true;
+  choicesload = true;
 
   @ViewChild('selectform') selectform : NgForm;
   loaded = false;
@@ -52,10 +53,10 @@ export class LandingpageComponent implements OnInit, OnDestroy {
           console.log(req);
           this.loaded = true;
           this.cities.sort((a, b) => ((a.city) < (b.city) ? -1 : ((a.city) > (b.city) ? 1 : 0)));
+          this.choicesload = false;
         }
       );
 
-    // this.cities.sort((a, b) => ((a.city) < (b.city) ? -1 : ((a.city) > (b.city) ? 1 : 0)));
 
   }
 

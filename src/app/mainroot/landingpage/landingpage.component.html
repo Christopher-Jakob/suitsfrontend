@@ -5,7 +5,12 @@
         <div class="d-flex flex-column justify-content-center align-items-center pushshim">
           <h1 class="main-text-line col-lg-7 text-center text-white mb-5 font-weight-bold">Browse and book the best venues in the city</h1>
           <h4 class="sub-text-line col-lg-10 text-center text-white mb-5">Time is precious. Don't waste any more of yours searching for the right venue for your corporate event when it's only a few clicks away.</h4>
-          <form #selectform="ngForm">
+          <div class="row">
+            <div *ngIf="choicesload" class="spinner-container">
+              <div class="spinner"></div>
+            </div>
+          </div>
+          <form *ngIf="!choicesload" #selectform="ngForm">
             <select
               id="cityselect"
               class="mt-3 mb-5 text-white"

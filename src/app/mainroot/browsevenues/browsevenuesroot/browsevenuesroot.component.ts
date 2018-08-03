@@ -456,6 +456,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
           this.filteredvenueslength = this.filteredvenues.length;
           this.browsevenuescommservice.sendvenuelist(this.filteredvenues);
           this.browsevenuescommservice.sendloadstate(false);
+
         });
 
   }
