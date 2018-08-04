@@ -37,21 +37,20 @@
 
     </div> <!--col-md-2-->
     <div *ngIf="!editprofileshow && !passwordform" class="col-6 clientinfo">
-      <div class="text-center">
-        <h4>Profile</h4>
+      <div>
+        <label><strong>Name:</strong></label> &nbsp;<span id="namespan">{{clientobject.name}}</span>
+        <br>
+        <label><strong>Company Name:</strong></label> &nbsp;{{clientobject.companyname}}
+        <br>
+        <label><strong>Job Title:</strong></label> &nbsp;<span id="jobtitlespan">{{clientobject.jobtitle}}</span>
+        <br>
+        <label><strong>Email:</strong></label> &nbsp;<span id="emailspan">{{clientobject.email}}</span>
+        <br>
+        <label><strong>Phone:</strong></label> &nbsp;<span id="phonespan">{{clientobject.phone}}</span>
+        <br>
+        <br>
+        <button class="btn btn-primary editbutton" (click)=" showeditprofile()"> Edit Profile</button>
       </div>
-      <label>Name:</label> &nbsp;<span id="namespan">{{clientobject.name}}</span>
-      <br>
-      <label>Company Name:</label> &nbsp;{{clientobject.companyname}}
-      <br>
-      <label>Job Title:</label> &nbsp;<span id="jobtitlespan">{{clientobject.jobtitle}}</span>
-      <br>
-      <label>Email:</label> &nbsp;<span id="emailspan">{{clientobject.email}}</span>
-      <br>
-      <label>Phone:</label> &nbsp;<span id="phonespan">{{clientobject.phone}}</span>
-      <br>
-      <br>
-      <button class="btn btn-primary" (click)=" showeditprofile()"> Edit Profile</button>
     </div>
     <div>
       <div *ngIf="editprofileshow" class="col-6 forminput">
@@ -105,20 +104,20 @@
         <form (ngSubmit)="editpassword()" #editpasswordform="ngForm">
           <input type="password"
                  placeholder="Current Password"
-                 class="form-input"
+                 class="form-control"
                  id="currentpasswordinput"
                  name="currentpasswordinput"
                  ngModel>
           <br>
           <input type="password"
                  id="newpassword1"
-                 class="form-input"
+                 class="form-control"
                  placeholder="New Password"
                  name="newpassword1"
                  ngModel>
           <br>
           <input type="password"
-                 class="form-input"
+                 class="form-control"
                  placeholder="New Password Again"
                  id="newpassword2"
                  name="newpassword2"
