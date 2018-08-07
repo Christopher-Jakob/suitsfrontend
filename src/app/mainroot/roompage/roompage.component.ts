@@ -102,7 +102,6 @@ export class RoompageComponent implements OnInit, OnDestroy {
     boardroomseatingoption: false,
     theaterseatingoption: false,
     hallowsquareseatingoption: false,
-    fullbuyoutroomactive: false,
     roomimage_set: [],
 
   };
