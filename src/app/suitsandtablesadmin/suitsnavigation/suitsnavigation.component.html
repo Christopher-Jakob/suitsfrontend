@@ -7,6 +7,7 @@
   <a routerLink="/suitsadmin/venue-users" *ngIf="user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">Venue Users</a>
   <a routerLink="/suitsadmin/suits-users" *ngIf="user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">S + T Users</a>
   <a routerLink="/suitsadmin/settings" *ngIf="user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">Attributes</a>
+  <a routerLink="/suitsadmin/onboard" *ngIf="user.issuitssuperuser" class="nav-link" role="tab" data-toggle="pill">Venue Onboarding</a>
 </div>
 
 <!--need to change the routerLink to a programatic route getting pk from users service -->

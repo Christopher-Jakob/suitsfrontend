@@ -39,7 +39,7 @@ export class SuitsvenueonboardingComponent implements OnInit {
         (req:any)=>{
           this.users = req;
         }
-      ):
+      );
   }
 
 }
