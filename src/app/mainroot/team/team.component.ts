@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamComponent implements OnInit {
 
-  TeamList
+  TeamList = [];
   constructor() { }
 
   ngOnInit() {
@@ -19,20 +19,16 @@ export class TeamComponent implements OnInit {
         title:"Founder and CEO"
       },
       {
-        selfie: "assets/images/team/brandon.jpg",
-        name: "Brandon Pearlman",
-        title: "COO"
+        selfie: "assets/images/team/kathy.jpg",
+        name: "Kathy Pirogova",
+        title:"Director of Venue Relations"
       },
       {
         selfie: "assets/images/team/christopher.jpg",
         name: "Christopher Jakob",
         title:"Lead Software Engineer"
       },
-      {
-        selfie: "assets/images/team/kathy.jpg",
-        name: "Kathy Pirogova",
-        title:"Director of Venue Relations"
-      },
+
      ];
   }
 
