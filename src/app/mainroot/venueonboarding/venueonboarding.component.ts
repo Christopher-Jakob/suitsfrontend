@@ -21,9 +21,7 @@ export class VenueonboardingComponent implements OnInit {
     onboardstring: null,
   };
 
-  navtohome(){
-    this.router.navigate['/'];
-  }
+
 
   setpassword(){
     const payload = {
@@ -33,6 +31,9 @@ export class VenueonboardingComponent implements OnInit {
       .subscribe(
         (req: any)=>{
           this.passwordset = true;
+          setTimeout(()=>{
+            this.router.navigate(['']);
+          }, 3500);
         }
       );
 
