@@ -84,6 +84,7 @@ import { ReceivedrfpsComponent } from './venueadmin/parentadminview/receivedrfps
 import { PreviewvenueComponent } from './mainroot/previewvenue/previewvenue.component';
 import { PreviewvenueroomComponent } from './mainroot/previewvenueroom/previewvenueroom.component';
 import {ClientUserService} from "./services/userservice/clientuserservice/clientuserservice";
+import { SuitsvenueonboardingComponent } from './suitsandtablesadmin/suitsvenueonboarding/suitsvenueonboarding.component';
 
 
 const appRoutes: Routes = [
@@ -128,6 +129,7 @@ const appRoutes: Routes = [
       {path: 'declined-venues', component: SuitsdeclinedapplicationsComponent},
       {path: 'declined-venues/:pk', component:  SuitsdeclinedapplicationdetailComponent},
       {path: 'settings', component: SuitssettingsComponent},
+      {path: 'onboard', component: SuitsvenueonboardingComponent }
     ]},
   {path: 'admin/:permission', canActivate: [VenueSuitsAdminSuperUserGuard], component: ParentadminviewComponent,
     children:[
@@ -214,6 +216,7 @@ const appRoutes: Routes = [
     ReceivedrfpsComponent,
     PreviewvenueComponent,
     PreviewvenueroomComponent,
+    SuitsvenueonboardingComponent,
   ],
   imports: [
     BrowserModule,

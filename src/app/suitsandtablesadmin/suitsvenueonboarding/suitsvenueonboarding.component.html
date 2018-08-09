@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <h3>Hi Kathy do yo thang!</h3>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="users.length > 0" class="row">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>User</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td *ngIf="linkshow !== i">{{user.name}}</td>
+        <td *ngIf="linkshow === i">https://www.suitsandtables.com/onboard/{{user.onboardstring}}</td>
+        <td *ngIf="linkshow !== i"><button class="btn btn-outline-primary" (click)="showlink(i)">Show Link</button></td>
+        <td *ngIf="linkshow === i"><button class="btn btn-outline-primary" (click)="emailsent(i)">Email Sent</button></td>
+        <td *ngIf="linkshow === i"><button class="btn btn-outline-danger" (click)="cancel()">Cancel</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="users.length < 1" class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <h1>Congrats you did it!</h1>
+      </div>
+    </div>
+  </div>
+</div>
