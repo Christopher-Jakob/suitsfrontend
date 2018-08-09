@@ -1,0 +1,81 @@
+<div *ngIf="!passwordset" class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <h3>Welcome to Suits + Tables!</h3>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <h4>Hi {{user.name}}! Please set your password to get access to your venue admin.</h4>
+      </div>
+    </div>
+  </div>
+  <div class="centereddiv">
+    <form (ngSubmit)="setpassword()" #passwordsetform="ngForm">
+      <div class="row">
+        <div class="col-6">
+          <input (ngModelChange)="passwordlength()"
+                 type="password"
+                 id="password"
+                 name="password"
+                 placeholder="password"
+                 class="form-control"
+                 ngModel>
+        </div>
+        <div class="col-6">
+          <input (ngModelChange)="passwordmatch()"
+                 type="password"
+                 id="passwordconfirm"
+                 name="passwordconfirm"
+                 placeholder="password confirm"
+                 class="form-control"
+                 ngModel>
+        </div>
+        <br>
+        <br>
+        <div *ngIf="passlength" class="col-12">
+          <div class="text-center">
+            <span class="help-block" style="color:red">
+              <h4>Passwords must be at least 8 characters</h4>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="passsame" class="col-12">
+          <div class="text-center">
+            <span class="help-block" style="color:red">
+              <h4>Password and confirm password must match</h4>
+            </span>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="col-12">
+          <div class="text-center">
+            <button [disabled]="nopass" class="btn btn-outline-primary" type="submit">Set Password</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="passwordset" class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <h2>Your password has been set!</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <button (click)="navtohome()" class="btn btn-outline-primary">To Home Page</button>
+      </div>
+    </div>
+  </div>
+</div>

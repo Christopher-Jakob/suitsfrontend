@@ -85,12 +85,14 @@ import { PreviewvenueComponent } from './mainroot/previewvenue/previewvenue.comp
 import { PreviewvenueroomComponent } from './mainroot/previewvenueroom/previewvenueroom.component';
 import {ClientUserService} from "./services/userservice/clientuserservice/clientuserservice";
 import { SuitsvenueonboardingComponent } from './suitsandtablesadmin/suitsvenueonboarding/suitsvenueonboarding.component';
+import { VenueonboardingComponent } from './mainroot/venueonboarding/venueonboarding.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: MainrootComponent,
     children:[
       {path: '', canActivate: [IsNotVenueUserGuard], component: LandingpageComponent},
+      {path: 'onboard/:onboardstring', component: VenueonboardingComponent },
       {path: 'join',  canActivate: [IsNotVenueUserGuard], component: LandingjoinComponent},
       {path: 'partner',  canActivate: [IsNotVenueUserGuard], component: LandingvenueComponent},
       {path: 'venuesignup',  canActivate: [IsNotVenueUserGuard], component: VenuesignupageComponent},
@@ -217,6 +219,7 @@ const appRoutes: Routes = [
     PreviewvenueComponent,
     PreviewvenueroomComponent,
     SuitsvenueonboardingComponent,
+    VenueonboardingComponent,
   ],
   imports: [
     BrowserModule,
