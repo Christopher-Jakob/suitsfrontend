@@ -448,7 +448,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
             let images = this.filteredvenues[venue].venueimage_set;
             for(let image in images){
-              images[image] = images[image].imageurl;
+              images[image] = images[image].thumbnail;
             }
             this.filteredvenues[venue].venueimage_set = images;
 
