@@ -12,6 +12,8 @@ export const venueprofileimage = venueroomlist1 + '/venueprofileimagepolicy';
 
 export const roomimagepolicyandcreate = venueroomlist1 + '/roomimagepolicy';
 
+export const cuisineimagepolicy = venueroomlist1 + '/cuisineimagepolicy';
+
 
 
 

@@ -3,7 +3,7 @@
     <div id="venuephotosdiv" class="col-12">
       <div class="row">
         <div class="col-4">
-          <h5><strong>Venue Photos &nbsp;</strong><button class="btn btn-primary" *ngIf="!showphotoupload" (click)="venuephotodisplaytoggle()">+Add Photo</button> &nbsp;</h5>
+          <h5><strong>Venue Photos &nbsp;</strong><button class="btn btn-outline-primary" *ngIf="!showphotoupload" (click)="venuephotodisplaytoggle()">+Add Photo</button> &nbsp;</h5>
         </div>
         <div class="col-2">
           <h5 id="displayphotos" *ngIf="!showphotos && !showphotoupload" (click)="venuephotoshowtoggle()">Display Photos</h5>
@@ -98,6 +98,42 @@
 <div class="row row-eq-height">
   <div *ngFor="let menu of venueobject.venuesamplemenu_set; let i=index" class="col-md-3">
     <span><a id="samplemenuname" target="_blank" [href]="menu.menupdfuri">{{menu.name}} </a>| <a id="samplemenudelete" (click)="deletesamplemenu(i)">Delete</a></span>
+  </div>
+</div>
+<br>
+<hr>
+<div class="row row-eq-height">
+  <div class="col-auto mr-2">
+    <h5><Strong>Cuisine Photos:</Strong></h5>
+  </div>
+  <div *ngIf="!showcuisineupload" class="auto">
+    <button (click)="cuisineuploadtoggle()" class="btn btn-outline-primary">+ Add Photo</button>
+  </div>
+  <div class="col-auto ml-2">
+    <button (click)="cuisinephototoggle()" class="btn btn-outline-success">Display Photos</button>
+  </div>
+</div>
+<div class="row row-eq-height">
+  <div class="col-12" *ngIf="showcuisinephotos">
+    <app-cuisineshowphotos></app-cuisineshowphotos>
+  </div>
+</div>
+<div *ngIf="showcuisineupload" class="row">
+  <div class="col-12">
+    <div class="float-left">
+      <form (change)="addcuisinephoto($event)" #cuisinephotoform="ngForm">
+        <input  type="file"
+               class="form-control col-12"
+               id="cuisinephotoinput"
+               name="cuisinephotoinput"
+               ngModel
+               accept=".png, .jpg, .jpeg">
+      </form>
+
+    </div>
+    <div class="float-left ml-2">
+      <button (click)="cuisineuploadtoggle()" class="btn btn-outline-danger">Cancel</button>
+    </div>
   </div>
 </div>
 <br>

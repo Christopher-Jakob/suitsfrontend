@@ -75,6 +75,13 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
       key: '',
       order: null
     }],
+    cuisineimage_set: [{
+      pk : null,
+      imageurl: '',
+      venue: null,
+      key: '',
+      order: null
+    }],
     valetparking: false,
     valetparkingamount: '',
     onsiteparking: false,
@@ -312,6 +319,65 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
           this.samplemenudeletesucess = true;
         });
   }
+
+  // cuisine photos
+  showcuisineupload = false;
+  showcuisinephotos = false;
+
+  cuisinephototoggle(){
+    this.showcuisinephotos = true;
+    this.showcuisineupload = false;
+  }
+
+  cuisineuploadtoggle(){
+    this.showcuisineupload = !this.showcuisineupload;
+    this.showcuisinephotos = false;
+  }
+  addcuisinephoto(event){
+    let submittedimage = event.target.files[0];
+    // payload is empty just to keep the post html happy
+    const payload = {};
+    this.awsservice.cuisineimagecreateandpolicy(this.venueobject.id, payload)
+      .subscribe(
+        (req: any)=>{
+          const cuisineimagepk = req.cuisineimagepk;
+          const venuepk = req.venuepk;
+          const databasekey = req.fields.key;
+          const uriroot = req.uriroot;
+          let fd = new FormData();
+          fd.append('acl', req.fields.acl);
+          fd.append('key', req.fields.key);
+          fd.append('content-type', req.fields['content-type']);
+          fd.append('Policy', req.fields.policy);
+          fd.append('x-amz-algorithm',req.fields["x-amz-algorithm"]);
+          fd.append('x-amz-credential',req.fields["x-amz-credential"]);
+          fd.append('x-amz-date', req.fields["x-amz-date"]);
+          fd.append('x-amz-signature', req.fields["x-amz-signature"]);
+          fd.append('file', submittedimage);
+          this.awsservice.uploadtos3(req.url, fd)
+            .subscribe(
+              (req: any)=>{
+                const payload = {
+                  venue: venuepk,
+                  key: databasekey,
+                  imageurl: uriroot + databasekey,
+                  order: this.venueobject.cuisineimage_set.length + 1
+                };
+                this.awsservice.cuisineimageupdate(cuisineimagepk, payload)
+                  .subscribe(
+                    (req: any)=>{
+                      this.showcuisineupload = false;
+                      this.venueobject.cuisineimage_set.push(req);
+                      this.venuevollyservice.sendobject(this.venueobject);
+                      this.cuisinephototoggle();
+                    });
+              });
+
+        });
+
+  }
+
+
 
   // venue attributes
   cuisineshow = false;

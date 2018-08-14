@@ -178,8 +178,13 @@ export class RoompageComponent implements OnInit, OnDestroy {
     eventdetails: ''
 
   };
-
-  sendrfp(form:NgForm) {
+  invalidroom = false;
+  sendrfp(form: NgForm) {
+    this.invalidroom = false;
+    if(form.value.roomselect === ''){
+      this.invalidroom = true;
+      return;
+    }
     if (this.user == null) {
       this.savedevent.name = form.value.eventname;
       this.savedevent.date = form.value.eventdate;

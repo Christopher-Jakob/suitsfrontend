@@ -93,9 +93,16 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   invalidinfo = false;
   rfpsent =false;
   verifysignup = false;
+  invalidroom = false;
+
 
 
   sendrfp(form:NgForm) {
+    this.invalidroom = false;
+    if(form.value.roomselect === ''){
+      this.invalidroom = true;
+      return;
+    }
     if (this.user == null) {
       this.savedevent.name = form.value.eventname;
       this.savedevent.date = form.value.eventdate;

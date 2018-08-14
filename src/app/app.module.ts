@@ -86,6 +86,7 @@ import { PreviewvenueroomComponent } from './mainroot/previewvenueroom/previewve
 import {ClientUserService} from "./services/userservice/clientuserservice/clientuserservice";
 import { SuitsvenueonboardingComponent } from './suitsandtablesadmin/suitsvenueonboarding/suitsvenueonboarding.component';
 import { VenueonboardingComponent } from './mainroot/venueonboarding/venueonboarding.component';
+import { CuisineshowphotosComponent } from './venueadmin/parentadminview/venueadminparentview/venueprofile/cuisineshowphotos/cuisineshowphotos.component';
 
 
 const appRoutes: Routes = [
@@ -220,6 +221,7 @@ const appRoutes: Routes = [
     PreviewvenueroomComponent,
     SuitsvenueonboardingComponent,
     VenueonboardingComponent,
+    CuisineshowphotosComponent,
   ],
   imports: [
     BrowserModule,

@@ -94,6 +94,12 @@
     </span>
   </div>
 
+  <div id="foodcarousel" class="Section center slider">
+    <div *ngFor="let item of foodpics">
+      <img [src]="item.image">
+    </div>
+  </div>
+
   <div class="Section" id="VenueMap">
     <iframe width="100%" height="450" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(mapsurl)'
             allowfullscreen></iframe>
@@ -402,19 +408,21 @@
           <select class="form-control"
                   id="roomselect"
                   name="roomselect"
+                  required
                   ngModel>
             <option value="">Select Room * </option>
             <option value="no preference">No Preference</option>
             <option *ngFor="let room of roomnames" [value]="room">{{room}}</option>
           </select>
+          <br>
+          <span *ngIf="invalidroom" style="color: red">Please choose a room or select No Preference</span>
         </div>
         <div class="col-12">
           <textarea rows="10"
                     class="form-control"
                     id="eventdetails"
                     name="eventdetails"
-                    placeholder="Event Details and Accommodation Requests *"
-                    required
+                    placeholder="Event Details and Accommodation Requests"
                     [ngModel]="savedevent.eventdetails">
 
             </textarea>
@@ -467,7 +475,7 @@
 
                 <span style="color: red" *ngIf="invalidinfo">Email or password is incorrect</span>
                 <div id="signuplink">
-                  <a style="cursor: pointer "(click)="rfpusersignuptoggle()">Sign Up</a>
+                  <a style="cursor: pointer " (click)="rfpusersignuptoggle()">Sign Up</a>
                 </div>
               </div>
               <div class="col-12">

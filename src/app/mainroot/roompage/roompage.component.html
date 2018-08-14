@@ -500,20 +500,22 @@
           <div class="col-6">
             <select class="form-control"
                     id="roomselect"
+                    required
                     name="roomselect"
                     [ngModel]="roomname">
               <option value="">Select Room * </option>
               <option value="no preference">No Preference</option>
               <option *ngFor="let room of roomnames" [value]="room">{{room}}</option>
             </select>
+            <br>
+            <span *ngIf="invalidroom" style="color: red">Please choose a room or select No Preference</span>
           </div>
           <div class="col-12">
           <textarea rows="10"
                     class="form-control"
                     id="eventdetails"
                     name="eventdetails"
-                    placeholder="Event Details and Accommodation Requests *"
-                    required
+                    placeholder="Event Details and Accommodation Requests"
                     [ngModel]="savedevent.eventdetails">
 
             </textarea>

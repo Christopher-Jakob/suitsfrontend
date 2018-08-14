@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row" appSortableList (sort)="sort($event)">
+    <div *ngFor="let photo of venueobject.cuisineimage_set; let i =index" class="col-3 imagecontainer box" appSortable> <!--venueimagecontainer-->
+      <div *ngIf="activevenueimageindex !== i">
+        <div class="img-responsive  imagefullheight venueimage" [ngStyle]="{'background-image': 'url(' + photo.imageurl + ')'}">
+        </div> <!--venueimage-->
+        <!-- <div class="box" *appDraggableHelper>{{ photo.imageurl }}</div> -->
+      </div>
+      <div class="text-center" *ngIf="showvenueimagedeleteconfrim && activevenueimageindex === i">
+        Are you sure you want to delete this image?
+        <br>
+        <button (click)="deactivatedeleteimageconfrim()">Cancel</button>
+        <br>
+        <button class="btn" (click)="deletevenuephoto(i)">Delete</button>
+      </div>
+      <div class="text-center" style="margin-top: 10px;">
+        <button *ngIf="activevenueimageindex != i" (click)="activatedeleteimageconfrim(i)" class="deletebutton btn-danger">Delete</button>
+      </div>
+    </div> <!--venueimagecontainer-->
+  </div>
+</div>

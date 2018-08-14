@@ -1,0 +1,30 @@
+
+.imagecontainer{
+  background-size: cover;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 30px;
+  // margin-right: 1px;
+  padding: 10px 10px 10px 10px;
+}
+
+.venueimage{
+  height: 200px;
+  background-size: cover;
+}
+
+.box {
+  border: 1px solid black;
+  // padding: 1px;
+  display: inline-block;
+
+  &.dragging {
+    background: coral;
+  }
+
+  &.sortable.dragging {
+    background: lightgray;
+    border: 1px dashed black;
+    color: transparent;
+  }
+}
