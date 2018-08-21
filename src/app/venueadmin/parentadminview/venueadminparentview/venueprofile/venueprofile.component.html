@@ -109,8 +109,15 @@
   <div *ngIf="!showcuisineupload" class="auto">
     <button (click)="cuisineuploadtoggle()" class="btn btn-outline-primary">+ Add Photo</button>
   </div>
-  <div class="col-auto ml-2">
+  <div *ngIf="venueobject.cuisineimage_set.length > 0" class="col-auto ml-2">
     <button (click)="cuisinephototoggle()" class="btn btn-outline-success">Display Photos</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="float-left">
+      <h5> Your venue must have at least 3 cuisine photos for the cuisine carousel to show on venue page.</h5>
+    </div>
   </div>
 </div>
 <div class="row row-eq-height">

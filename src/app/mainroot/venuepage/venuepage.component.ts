@@ -12,7 +12,6 @@ import {Makerfpservice} from "../../services/pagemixins/make-rfp.service";
 import {ClientUserService} from "../../services/userservice/clientuserservice/clientuserservice";
 import {BrowsevenuescomponentcommService} from "../../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
 import {RFPService} from "../../services/rfpservice/rfpservice";
-declare var $: any;
 
 
 
@@ -40,7 +39,16 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   eventpurpose;
   roomnames = [];
 
-
+  //food carousel settings
+  slideConfig = {
+    "slidesToShow": 3,
+    "slidesToScroll": 1,
+    "arrows": false,
+    "pauseOnDotsHover": true,
+    "autoplay": true,
+    "dots": true,
+    "centerMode": true,
+  };
 
 
   // variable to hold venue object
@@ -54,7 +62,12 @@ export class VenuepageComponent implements OnInit, OnDestroy {
         imageurl: '',
         order: 0,
       },
-
+    ],
+    cuisineimage_set:[
+      {
+        imageurl: '',
+        order: 0
+      }
     ],
     venuesamplemenu_set: [],
     cuisine1: '',

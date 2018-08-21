@@ -31,6 +31,9 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-toggle/css/bootstrap2-toggle.min.css",
               "node_modules/jquery-ui-dist/jquery-ui.min.js",
+              "node_modules/slick-carousel/slick/slick.css",
+              "node_modules/slick-carousel/slick/slick-theme.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.scss",
               "src/loadingcircle.css"
             ],
@@ -38,7 +41,8 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/bootstrap-toggle/js/bootstrap2-toggle.min.js"
+              "node_modules/bootstrap-toggle/js/bootstrap2-toggle.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
             ]
           },
           "configurations": {

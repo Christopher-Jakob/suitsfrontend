@@ -87,6 +87,7 @@ import {ClientUserService} from "./services/userservice/clientuserservice/client
 import { SuitsvenueonboardingComponent } from './suitsandtablesadmin/suitsvenueonboarding/suitsvenueonboarding.component';
 import { VenueonboardingComponent } from './mainroot/venueonboarding/venueonboarding.component';
 import { CuisineshowphotosComponent } from './venueadmin/parentadminview/venueadminparentview/venueprofile/cuisineshowphotos/cuisineshowphotos.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 const appRoutes: Routes = [
@@ -231,6 +232,7 @@ const appRoutes: Routes = [
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
+    SlickCarouselModule,
     BrowserAnimationsModule,
     DraggableModule
   ],
