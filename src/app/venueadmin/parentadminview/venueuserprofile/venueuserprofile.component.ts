@@ -27,10 +27,10 @@ export class VenueuserprofileComponent implements OnInit {
 
   userobject = {
     pk: 3,
-    name: 'Christopher Jakob',
-    email: 'Christopher.m.Jakob@gmail.com',
-    phone: '3125223599',
-    userphoto: 'https://exquisiteemmalisa.files.wordpress.com/2015/10/classic-lady.jpg?w=300&h=188',
+    name: null,
+    email: null,
+    phone: null,
+    userphoto: null,
   };
 
   // add edit profile photo
