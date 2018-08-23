@@ -83,9 +83,8 @@ export class VenuelistComponent implements OnInit, OnDestroy {
               console.log(this.venuelist[venue].venueimage_set);
 
             }
-            this.userablelist = this.venuelist;
             console.log('this is the userablelist');
-            console.log(this.userablelist);
+            console.log(this.venuelist);
             this.browsevenuescommservice.sendloadstate(false);
           }
         });
