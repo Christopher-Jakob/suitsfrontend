@@ -11,10 +11,35 @@ import {Router} from "@angular/router";
 export class VenuelistComponent implements OnInit, OnDestroy {
   // list of venues
 
+  userablelist= [
+    {
+      name: null,
+      venueimage_set: [
+        {
+          imageurl: '',
+          order: 1,
+          thumbnail: ''
+        },
+
+      ],
+      room_set: {
+        semiprivate: 0,
+        privateroom: 0
+      }
+    }
+  ];
+
   venuelist = [
     {
       name: null,
-      venueimage_set: ['temp'],
+      venueimage_set: [
+        {
+          imageurl: '',
+          order: 1,
+          thumbnail: ''
+        },
+
+      ],
       room_set: {
         semiprivate: 0,
         privateroom: 0
@@ -47,8 +72,21 @@ export class VenuelistComponent implements OnInit, OnDestroy {
           if (req != null) {
             this.venuelist = req;
             this.venuelist = this.venuelist.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
-            console.log('the venue list arrving to the venues list');
-            console.log(this.venuelist);
+            for(let venue in this.venuelist){
+              let images = this.venuelist[venue].venueimage_set;
+              images = images.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
+              for(let image in images){
+                images[image] = images[image].thumbnail as any;
+              }
+              this.venuelist[venue].venueimage_set = images;
+              console.log('this is the venueimage_set');
+              console.log(this.venuelist[venue].venueimage_set);
+
+            }
+            this.userablelist = this.venuelist;
+            console.log('this is the userablelist');
+            console.log(this.userablelist);
+            this.browsevenuescommservice.sendloadstate(false);
           }
         });
     this.stateservice = this.browsevenuescommservice.receviveloadstate()
@@ -64,6 +102,7 @@ export class VenuelistComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.browsevenuecomm.unsubscribe();
+    this.stateservice.unsubscribe();
 
   }
 

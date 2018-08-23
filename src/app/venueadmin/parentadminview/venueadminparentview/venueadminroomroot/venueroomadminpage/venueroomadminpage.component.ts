@@ -297,6 +297,7 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
   }
 
   roomphotoshow() {
+    this.showfileuploadform = false;
     this.showphotos = true;
   }
 

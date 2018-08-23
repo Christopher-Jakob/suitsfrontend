@@ -496,12 +496,6 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
                     (req: any)=>{
                       this.filteredvenues = req;
                       for(let venue in this.filteredvenues){
-                        let images = this.filteredvenues[venue].venueimage_set;
-                        images = images.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
-                        for(let image in images){
-                          images[image] = images[image].imageurl;
-                        }
-                        this.filteredvenues[venue].venueimage_set = images;
                         let semiprivaterooms = 0;
                         let privaterooms = 0;
                         if(this.filteredvenues[venue].fullbuyout){
@@ -547,10 +541,8 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
                         }
                       }
                       this.filteredvenueslength = this.filteredvenues.length;
-
-
                       this.browsevenuescommservice.sendvenuelist(this.filteredvenues);
-                      this.browsevenuescommservice.sendloadstate(false);
+
 
                       this.venuetypechoices2 = this.venuetypechoices.sort((a, b) => ((a.type) < (b.type) ? -1 : ((a.type) > (b.type) ? 1 : 0)));
                       this.privacytypechoices2 = this.privacytypechoices.sort((a, b) => ((a.name) < (b.name) ? -1 : ((a.name) > (b.name) ? 1 : 0)));
