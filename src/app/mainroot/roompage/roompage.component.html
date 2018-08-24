@@ -1,6 +1,15 @@
 <!-- <app-carousal>
 </app-carousal> -->
-<div class="container">
+
+<div *ngIf="choicesload" class="container">
+  <div class="row">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!choicesload" class="container">
   <div class="row">
     <div class="col-12">
       <slideshow *ngIf="!fullbuyoutroomactive"

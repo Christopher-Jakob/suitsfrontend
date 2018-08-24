@@ -43,6 +43,8 @@
             <div>
               <span>{{card.room_set.privateroom}} Private Rooms</span>
               <span> | {{card.room_set.semiprivate}} Semi-Private </span>
+              <br>
+              <span *ngIf="card.fullbuyout">Full Buyout Available</span>
             </div>
           </div>
         </div>

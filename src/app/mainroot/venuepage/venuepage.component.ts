@@ -454,8 +454,9 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   }
 
 
-
+  choicesload = true;
   ngOnInit() {
+    this.choicesload = true;
     this.userservicesubscription = this.authservice.receiveuser()
       .subscribe(
         (req: any) => {
@@ -571,6 +572,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
                         onlinerooms[room].roomimage_set = workingroomimages;
                       }
                       this.venue.room_set = onlinerooms;
+                      this.choicesload = false;
 
 
                     });

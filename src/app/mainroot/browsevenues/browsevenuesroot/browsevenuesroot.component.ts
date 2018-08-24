@@ -195,9 +195,6 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
           for(let venue in this.filteredvenues){
             let semiprivaterooms = 0;
             let privaterooms = 0;
-            if(this.filteredvenues[venue].fullbuyout){
-              privaterooms ++;
-            }
             let rooms = this.filteredvenues[venue].room_set;
             for(const room of rooms){
               if(room.privateroom){
@@ -422,9 +419,6 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
             }
             let semiprivaterooms = 0;
             let privaterooms = 0;
-            if(this.filteredvenues[venue].fullbuyout){
-              privaterooms ++;
-            }
             let rooms = this.filteredvenues[venue].room_set;
             for(const room of rooms){
               if(room.privateroom){
@@ -486,9 +480,6 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
                       for(let venue in this.filteredvenues){
                         let semiprivaterooms = 0;
                         let privaterooms = 0;
-                        if(this.filteredvenues[venue].fullbuyout){
-                          privaterooms ++;
-                        }
                         let rooms = this.filteredvenues[venue].room_set;
                         for(const room of rooms){
                           if(room.privateroom){

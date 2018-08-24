@@ -444,7 +444,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
       this.passwordnomatch = false;
     }
   }
-
+  choicesload = true;
   ngOnInit() {
 
     this.settingservice.getallcityobjects()
@@ -538,6 +538,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
                     this.otherrooms.push(workingroom);
                   }
                 }
+                this.choicesload = false;
 
               });
         });

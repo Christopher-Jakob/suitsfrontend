@@ -1,4 +1,12 @@
-<div class="container">
+<div *ngIf="choicesload" class="container">
+  <div class="row">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!choicesload" class="container">
   <div *ngIf="venue.venueimage_set.length > 0" class="col-12">
     <slideshow
       class="card-container-img"
@@ -118,8 +126,10 @@
       Parking Options:
     </div>
     <p>
+      <span *ngIf="!venue.valetparking" class="span-style">Valet: N/A</span>
       <span *ngIf="venue.valetparking == true" class="span-style">Valet: ${{venue.valetparkingamount}}</span>
       <span *ngIf="venue.onsiteparking == true" class="span-style">Onsite Parking Available</span>
+      <span *ngIf="!venue.onsiteparking" class="span-style">Onsite Parking Not  Available</span>
       <span class="span-style">
         <a [href]="spotherourl" target="_blank" class="link-style">Reserved Parking</a>
       </span>
