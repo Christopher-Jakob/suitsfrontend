@@ -554,6 +554,8 @@ export class VenuepageComponent implements OnInit, OnDestroy {
                       for (let image in this.venue.venueimage_set) {
                         this.venue.venueimage_set[+image] = this.venue.venueimage_set[+image].imageurl as any;
                       }
+                      this.venue.cuisineimage_set = this.venue.cuisineimage_set.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
+
                       let onlinerooms = [];
                       for (let room in this.venue.room_set) {
                         if (this.venue.room_set[room].online) {
@@ -564,7 +566,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
                         let workingroomimages = onlinerooms[room].roomimage_set;
                         workingroomimages = workingroomimages.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
                         for(let image in workingroomimages){
-                          workingroomimages[image] = workingroomimages[image].imageurl as any;
+                          workingroomimages[image] = workingroomimages[image].thumbnail as any;
                         }
                         onlinerooms[room].roomimage_set = workingroomimages;
                       }
