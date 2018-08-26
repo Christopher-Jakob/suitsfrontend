@@ -76,6 +76,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
     venueimage_set: [],
     room_set:[],
     fullbuyoutonline: false,
+    fullbuyoutminspend: null,
     fullbuyoutstandingcapactiy: null,
     fullbuyoutseatedcapacity: null
 
@@ -86,8 +87,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
     semiprivateroom: false,
     seatedcapacity: null,
     standingcapacity: null,
-
-
+    minimumspend: null,
     surroundsoundamenity: false,
     classroomamenity: false,
     stageamenity: false,

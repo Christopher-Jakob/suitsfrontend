@@ -55,6 +55,10 @@
       <div *ngIf="fullbuyoutroomactive" class="col-auto roommain">
           Full Buyout
       </div>
+      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutminspend != null" class="col-auto roommain">
+        Minimum Spend: ${{venue.fullbuyoutminspend}}
+      </div>
+
       <div *ngIf="!fullbuyoutroomactive">
       <div class="col-auto roommain" *ngIf= "room.privateroom == true">
         Private
@@ -64,6 +68,11 @@
       <div class="col-auto roommain" *ngIf= "room.semiprivateroom == true">
         Semi-Private
       </div>
+      </div>
+      <div *ngIf="!fullbuyoutroomactive">
+        <div class="col-auto roommain" *ngIf='room.minimumspend !=null'>
+          Minimum Spend: ${{room.minimumspend}}
+        </div>
       </div>
   <div id="rfpselect">
 

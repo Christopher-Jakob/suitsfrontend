@@ -95,8 +95,10 @@
 
   <div id="VenueMenu" class="Section">
     <span class="SecHead span-style__lg">
-      Sample Menus:
+      Sample Menus
     </span>
+    <br>
+    <br>
     <span>
       <a *ngFor="let menu of venue.venuesamplemenu_set" [href]="menu.menupdfuri" target="_blank" class="span-style__mid link-style">{{menu.name}}</a>
     </span>
