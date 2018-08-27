@@ -64,7 +64,7 @@ export class VenuelistComponent implements OnInit, OnDestroy {
     this.router.navigate(['/venue', venuename]);
   }
 
-  choicesload = false;
+  nosearch = false;
   ngOnInit() {
     this.browsevenuecomm = this.browsevenuescommservice.recevivevenuelist()
       .subscribe(
@@ -91,7 +91,7 @@ export class VenuelistComponent implements OnInit, OnDestroy {
     this.stateservice = this.browsevenuescommservice.receviveloadstate()
       .subscribe(
         (req: any)=>{
-          this.choicesload = req;
+          this.nosearch = req;
         }
       );
 
