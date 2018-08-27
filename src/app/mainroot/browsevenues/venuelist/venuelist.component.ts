@@ -64,7 +64,7 @@ export class VenuelistComponent implements OnInit, OnDestroy {
     this.router.navigate(['/venue', venuename]);
   }
 
-  nosearch = false;
+  choicesload= false;
   ngOnInit() {
     this.browsevenuecomm = this.browsevenuescommservice.recevivevenuelist()
       .subscribe(
