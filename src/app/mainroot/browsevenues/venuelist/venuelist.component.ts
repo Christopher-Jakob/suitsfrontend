@@ -91,7 +91,7 @@ export class VenuelistComponent implements OnInit, OnDestroy {
     this.stateservice = this.browsevenuescommservice.receviveloadstate()
       .subscribe(
         (req: any)=>{
-          this.nosearch = req;
+          this.choicesload = req;
         }
       );
 
