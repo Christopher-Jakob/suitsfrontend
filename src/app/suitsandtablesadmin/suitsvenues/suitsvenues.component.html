@@ -75,8 +75,11 @@
       <button (click)="deactivatevenue(i)" *ngIf="venue.online" id="deactivatebutton">Hide Venue</button>
       <button (click)="activatevenue(i)" *ngIf="!venue.online" class="btn-success">Push Public</button>
     </td>
-    <td *ngIf="pusherror && activeindex == i">
+    <td *ngIf="pusherrorimage && activeindex == i">
       Venues Must Have A Image
+    </td>
+    <td *ngIf="pusherrorroom && activeindex == i">
+      Venues Must Have At Least One Room Or Full Buyout
     </td>
     <td>
       <button (click)="showdeleteconfrim(i)" *ngIf="activeindex !== i" class="btn-danger">Delete</button>

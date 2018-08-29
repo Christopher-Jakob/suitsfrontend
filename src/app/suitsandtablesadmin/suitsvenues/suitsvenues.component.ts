@@ -14,7 +14,8 @@ export class SuitsvenuesComponent implements OnInit {
   constructor( private dependancyservice: VenueListDependancyService, private router: Router, private venuelistservice: SuitsVenueListService) { }
 
   //show push error message
-  pusherror =false;
+  pusherrorimage =false;
+  pusherrorroom = false;
 
   //loading
   choicesload = true;
@@ -82,14 +83,29 @@ export class SuitsvenuesComponent implements OnInit {
   }
 
   activatevenue(index){
+    let error = false;
     const venuephotolength = this.venues[index].venueimage_set.length;
+    const roomlist = this.venues[index].room_set.length;
     if(venuephotolength < 1){
       this.activeindex = index;
-      this.pusherror = true;
+      this.pusherrorimage = true;
+      error = true;
       setTimeout(()=>{
         this.activeindex = null;
-        this.pusherror = false;
+        this.pusherrorimage = false;
       }, 5000);
+
+    }
+    if(roomlist < 1 || !this.venues[index].fullbuyout){
+      this.activeindex = index;
+      this.pusherrorroom = true;
+      error = true;
+      setTimeout(()=>{
+        this.activeindex = null;
+        this.pusherrorroom = false;
+      }, 5000);
+    }
+    if(error){
       return 0;
     }
 
@@ -149,6 +165,7 @@ export class SuitsvenuesComponent implements OnInit {
         (req: any)=>{
           this.choicesload = false;
           this.venues = req;
+          console.log(this.venues);
         }
       );
 
