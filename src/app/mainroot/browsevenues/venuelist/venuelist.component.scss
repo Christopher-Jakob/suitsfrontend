@@ -39,5 +39,15 @@ $color-primary: rgb(83,139,197);
   .venuename{
     font-size: 1.3rem;
   }
+
+}
+.clickoverlay{
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  margin-left: 3.5vw;
+  margin-right: 3.5vw;
+  height: 35vh;
+  width: 20vw;
 }
 

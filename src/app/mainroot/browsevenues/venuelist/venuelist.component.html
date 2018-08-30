@@ -13,6 +13,11 @@
   </div>
   <div *ngIf="!choicesload" class="row pb-3" id="VenueList">
     <div class="col-sm-12 col-md-6 col-lg-4 pb-4" *ngFor="let card of venuelist; let i= index">
+
+      <div (click)="navigatetovenue(i)" class="clickoverlay">
+        <!-- overlay div for a clickable slide show frame -->
+      </div>
+
       <div class="card-container">
         <slideshow class="card-container-img"
                    [showArrows]="true"
