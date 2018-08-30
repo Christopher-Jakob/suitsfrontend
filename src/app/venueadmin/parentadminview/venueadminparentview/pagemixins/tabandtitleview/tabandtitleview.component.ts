@@ -34,7 +34,8 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
   updatedvolleyvar;
   tabservicevar;
   showupdated = false;
-  pushfail = false;
+  imagepushfail = false;
+  roompushfail = false;
 
   unshowupdated(){
     this.showupdated = false;
@@ -45,6 +46,7 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
     name: '',
     city: '',
     streetaddress1: '',
+    fullbuyout: false,
     state: '',
     online: false,
     zipcode: '',
@@ -75,6 +77,7 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
     saturdayhop: false,
     saturdayhopopen: '',
     saturdayhopclose: '',
+    room_set: [],
     venuesamplemenu_set: [],
     venueimage_set: [{
       id: null
@@ -158,11 +161,23 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
 
   changestatus(){
     const venuephotolength = this.venueobject.venueimage_set.length;
+    const roomlist = this.venueobject.room_set.length;
+    let fail = false;
     if(venuephotolength < 1){
-      this.pushfail = true;
+      this.imagepushfail = true;
+      fail = true;
       setTimeout(()=>{
-        this.pushfail = false;
+        this.imagepushfail = false;
       }, 2500);
+    }
+    if(roomlist < 1 || (roomlist < 1 && !this.venueobject.fullbuyout)){
+      this.roompushfail = true;
+      fail = true;
+      setTimeout(()=>{
+        this.roompushfail = false;
+      }, 2500)
+    }
+    if(fail){
       return 0;
     }
 

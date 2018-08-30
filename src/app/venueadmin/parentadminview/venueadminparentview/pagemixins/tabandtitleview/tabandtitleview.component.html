@@ -61,8 +61,11 @@
         <button (click)="deletevenue()" class="btn-danger">Delete</button>
       </div>
     </div>
-    <div *ngIf="pushfail" class="col-auto">
+    <div *ngIf="imagepushfail" class="col-auto">
       Venues must have an image
+    </div>
+    <div *ngIf="roompushfail" class="col-auto">
+      A venue must have at least one room or fullbuyout
     </div>
   </div>
 <div class="row">
