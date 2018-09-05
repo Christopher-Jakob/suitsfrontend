@@ -88,6 +88,7 @@ import { SuitsvenueonboardingComponent } from './suitsandtablesadmin/suitsvenueo
 import { VenueonboardingComponent } from './mainroot/venueonboarding/venueonboarding.component';
 import { CuisineshowphotosComponent } from './venueadmin/parentadminview/venueadminparentview/venueprofile/cuisineshowphotos/cuisineshowphotos.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { VenuefullbuyoutshowphotosComponent } from './venueadmin/parentadminview/venueadminparentview/venueadminroomroot/venueroomadminpage/venuefullbuyoutshowphotos/venuefullbuyoutshowphotos.component';
 
 
 const appRoutes: Routes = [
@@ -223,6 +224,7 @@ const appRoutes: Routes = [
     SuitsvenueonboardingComponent,
     VenueonboardingComponent,
     CuisineshowphotosComponent,
+    VenuefullbuyoutshowphotosComponent,
   ],
   imports: [
     BrowserModule,

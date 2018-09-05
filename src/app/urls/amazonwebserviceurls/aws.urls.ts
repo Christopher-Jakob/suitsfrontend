@@ -14,6 +14,8 @@ export const roomimagepolicyandcreate = venueroomlist1 + '/roomimagepolicy';
 
 export const cuisineimagepolicy = venueroomlist1 + '/cuisineimagepolicy';
 
+export const venuefullbuyoutpolicy = venueroomlist1 + '/venuefullbuyoutimagepolicy';
+
 
 
 

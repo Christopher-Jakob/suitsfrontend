@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {
   roomimagepolicyandcreate, samplemenupolicyandcreate,
-  venueimagepolicyandcreate, venueprofileimage, cuisineimagepolicy
+  venueimagepolicyandcreate, venueprofileimage, cuisineimagepolicy, venuefullbuyoutpolicy
 } from "../../urls/amazonwebserviceurls/aws.urls";
 /**
  * Created by rickus on 3/18/18.
@@ -18,7 +18,6 @@ export class AwsService {
   }
 
   samplemenucreateandpolicy(venuepk, payload){
-
     const url =  samplemenupolicyandcreate + '/' + String(venuepk);
     return this.http.post(url, payload);
   }
@@ -81,5 +80,20 @@ export class AwsService {
 
   venueprofilephotopolicy(payload){
     return this.http.post(venueprofileimage, payload);
+  }
+
+  venuefullbuyoutpolicycreate(payload, venuepk){
+    const url = venuefullbuyoutpolicy + '/' + String(venuepk);
+    return this.http.post(url, payload);
+  }
+
+  updatevenuefullbuyoutphotoinstance(photopk, payload){
+    const url = venuefullbuyoutpolicy + '/' + String(photopk);
+    return this.http.put(url, payload);
+  }
+
+  deletevenuefullbuyoutphotoinstance(photopk){
+    const url = venuefullbuyoutpolicy + '/' + String(photopk);
+    return this.http.delete(url);
   }
 }

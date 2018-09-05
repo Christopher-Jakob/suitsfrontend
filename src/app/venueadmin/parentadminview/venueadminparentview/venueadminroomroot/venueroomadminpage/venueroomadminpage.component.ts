@@ -25,11 +25,84 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
   constructor(private volleyservice: VenueAdminVolleyService, private route: ActivatedRoute, private router: Router, private roomdetailservice: VenueAdminVenueRoomDetailService, private profileservice: VenueAdminProfileService, private permissionservice: VenueAdminParentAdminService, private inceptionservice: VenueAdminInceptionService, private awsservice: AwsService) {
   }
 
+  //full buyout photos code
+  showfullbuyoutphoto = false;
+  showfullbuyoutuploadphoto = false;
+  fullbuyoutphotoshow(){
+    this.showfullbuyoutuploadphoto = true;
+    this.showfullbuyoutphoto = false;
+  }
+
+  displayfullbuyoutphotos(){
+    this.showfullbuyoutphoto =true;
+    this.showfullbuyoutuploadphoto = false;
+  }
+
+  addfullbuyoutphoto(event, form:NgForm){
+    let submittedimage = null;
+    submittedimage = event.target.files[0];
+    const payload = {};
+    this.awsservice.venuefullbuyoutpolicycreate(payload, this.venueobject.id)
+      .subscribe(
+        (req: any)=>{
+          const databasekey = req.fields.key;
+          const databaseurl = req.uriroot + databasekey;
+          const venuefullbuyoutimagepk = req.fullbuyoutimagepk;
+          const venuepk = req.venuepk;
+          let fd = new FormData();
+          fd.append('acl', req.fields.acl);
+          fd.append('key', req.fields.key);
+          fd.append('content-type', req.fields['content-type']);
+          fd.append('policy', req.fields.policy);
+          fd.append('x-amz-algorithm', req.fields['x-amz-algorithm']);
+          fd.append('x-amz-credential', req.fields['x-amz-credential']);
+          fd.append('x-amz-date', req.fields['x-amz-date']);
+          fd.append('x-amz-signature', req.fields['x-amz-signature']);
+          fd.append('file', submittedimage);
+          form.reset();
+          this.awsservice.uploadtos3(req.url, fd)
+            .subscribe(
+              (req: any)=>{
+                const payload = {
+                  venue: venuepk,
+                  order: this.venueobject.venuefullbuyoutphoto_set.length + 1,
+                  key: databasekey,
+                  imageurl: databaseurl
+
+              };
+                this.awsservice.updatevenuefullbuyoutphotoinstance(venuefullbuyoutimagepk, payload)
+                  .subscribe(
+                    (req: any)=>{
+                      this.venueobject.venuefullbuyoutphoto_set.push(req);
+                      this.displayfullbuyoutphotos();
+                    }
+                  );
+              });
+
+        });
+
+
+  }
+
   // venue object is only used if this is a full buyout room
   // preview urls
   roomurl;
   fullbuyouturl;
-  venueobject;
+  venueobject = {
+    id: null,
+    name: null,
+    city: null,
+    streetaddress1: null,
+    state: null,
+    zipcode: null,
+    phonenumber: null,
+    venueimage_set: [],
+    venuecontactname: null,
+    venuecontactjobtitle: null,
+    venuecontactemail: null,
+    fullbuyoutonline: null,
+    venuefullbuyoutphoto_set: [],
+  };
   roomobject = {
     pk: 1,
     id: 1,
@@ -360,6 +433,8 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
       .subscribe(
         (req: any) => {
           this.venueobject = req;
+          console.log('this is the venueobject');
+          console.log(this.venueobject);
           this.route.params
             .subscribe(
               (params: any) => {

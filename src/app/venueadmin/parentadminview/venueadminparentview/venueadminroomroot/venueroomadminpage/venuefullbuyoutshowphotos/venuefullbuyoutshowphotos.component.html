@@ -1,0 +1,17 @@
+<div class="container">
+  <div id="photorow" class="row" appSortableList (sort)="sort($event)"> <!--photorow-->
+    <div *ngFor="let image of venueobject.venuefullbuyoutphoto_set; let i=index" class="col-md-4 text-center box" appSortable> <!--photoitem-->
+      <div *ngIf="activatedindex !== i" class="roomimage img-responsive imgcontainer"
+           [ngStyle]="{'background-image': 'url(' + image.imageurl + ')'}">
+      </div> <!--img container-->
+      <div *ngIf="activatedindex == i" class="text-center">
+        <h4>Are you sure you want to delete this image?</h4>
+        <br>
+        <button (click)="unshowdeleteconfrim()" class="btn-danger">Cancel</button>
+        <br>
+        <button (click)="deleteimage(i)">Yes I am sure</button>
+      </div>
+      <button *ngIf="activatedindex !== i" class="btn-danger" (click)="showdeleteconfirm(i)" style="margin-top: 10px;">Delete</button>
+    </div> <!-- room photo item-->
+  </div> <!--photorow-->
+</div>

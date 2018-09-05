@@ -87,6 +87,37 @@
       </div>
     </div>
   </form>
+  <div class="row">
+    <div class="col-12">
+      <div class="float-left">
+        <h4>Full Buyout Photos</h4>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div class="auto mr-2">
+          <button (click)="fullbuyoutphotoshow()" class="btn btn-outline-primary">+ Add Photo</button>
+        </div>
+        <div *ngIf="!showfullbuyoutphoto && !showfullbuyoutuploadphoto" class="auto ml-2">
+          <button (click)="displayfullbuyoutphotos()" class="btn btn-outline-success">Display Photos</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showfullbuyoutuploadphoto" class="col-12">
+      <form #fullbuyoutphotoadd = "ngForm">
+        <input (change)="addfullbuyoutphoto($event, fullbuyoutphotoadd)"
+               type="file"
+               class="form-control"
+               id="fullbuyoutphotoinput"
+               name="fullbuyoutphotoinput"
+               ngModel
+               accept=".png, .jpg, .jpeg">
+      </form>
+    </div>
+    <div *ngIf="showfullbuyoutphoto" class="col-12">
+      <app-venuefullbuyoutshowphotos></app-venuefullbuyoutshowphotos>
+    </div>
+  </div>
   <form  #roomdescriptionfullbuyoutform="ngForm">
     <div  class="row">
       <div class="col-auto">
