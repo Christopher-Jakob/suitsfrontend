@@ -18,11 +18,17 @@
         [imageUrls]="room.roomimage_set"
         [height]="roomheight">
       </slideshow>
-      <slideshow *ngIf="fullbuyoutroomactive"
+      <slideshow *ngIf="fullbuyoutroomactive && venue.venuefullbuyoutphoto_set.length > 0"
          class="card-container-img"
          [showArrows]="true"
-         [imageUrls]="venue.venueimage_set"
+         [imageUrls]="venue.venuefullbuyoutphoto_set"
          [height]="roomheight">
+      </slideshow>
+      <slideshow *ngIf="fullbuyoutroomactive && venue.venuefullbuyoutphoto_set.length < 1"
+                 class="card-container-img"
+                 [showArrows]="true"
+                 [imageUrls]="venue.venueimage_set"
+                 [height]="roomheight">
       </slideshow>
     </div>
   </div>

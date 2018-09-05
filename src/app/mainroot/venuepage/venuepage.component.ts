@@ -69,6 +69,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
         order: 0
       }
     ],
+    venuefullbuyoutphoto_set: [],
     venuesamplemenu_set: [],
     cuisine1: '',
     cuisine2: '',
@@ -550,6 +551,10 @@ export class VenuepageComponent implements OnInit, OnDestroy {
                           console.log('the neighborhood got done');
                           this.venue.searchneighborhood = n.neighborhood;
                         }
+                      }
+                      this.venue.venuefullbuyoutphoto_set = this.venue.venuefullbuyoutphoto_set.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
+                      for (let image in this.venue.venuefullbuyoutphoto_set) {
+                        this.venue.venuefullbuyoutphoto_set[+image] = this.venue.venuefullbuyoutphoto_set[+image].imageurl as any;
                       }
                       this.venue.venueimage_set = this.venue.venueimage_set.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
                       for (let image in this.venue.venueimage_set) {

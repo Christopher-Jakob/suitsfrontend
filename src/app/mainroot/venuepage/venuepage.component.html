@@ -52,7 +52,14 @@
     <div class="row" *ngIf ="venue.room_set.length > 0 || venue.fullbuyout">
       <div class= "col-sm-12 col-md-6 col-lg-4 pb-4" *ngIf="venue.fullbuyout && venue.fullbuyoutonline">
         <div class="card-container">
-          <div class="card-container-img" [ngStyle]="{'background-image': 'url(' + venue.venueimage_set[0] + ')'}">
+          <div *ngIf="venue.venuefullbuyoutphoto_set.length < 1" class="card-container-img" [ngStyle]="{'background-image': 'url(' + venue.venueimage_set[0] + ')'}">
+          </div>
+          <div *ngIf="venue.venuefullbuyoutphoto_set.length > 0" class="card-container-img">
+            <slideshow
+              [showArrows]="true"
+              [imageUrls]="venue.venuefullbuyoutphoto_set">
+            </slideshow>
+
           </div>
           <div (click)="navfullbuyout()" class="card-container-information">
             <div class="card-container-information__main">

@@ -77,6 +77,7 @@ export class RoompageComponent implements OnInit, OnDestroy {
     room_set:[],
     fullbuyoutonline: false,
     fullbuyoutminspend: null,
+    venuefullbuyoutphoto_set: [],
     fullbuyoutstandingcapactiy: null,
     fullbuyoutseatedcapacity: null
 
@@ -506,6 +507,10 @@ export class RoompageComponent implements OnInit, OnDestroy {
                 this.venue.venueimage_set = this.venue.venueimage_set = this.venue.venueimage_set.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
                 for(let image in this.venue.venueimage_set){
                   this.venue.venueimage_set[+image] = this.venue.venueimage_set[+image].imageurl as any;
+                }
+                this.venue.venuefullbuyoutphoto_set = this.venue.venuefullbuyoutphoto_set = this.venue.venuefullbuyoutphoto_set.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
+                for(let image in this.venue.venuefullbuyoutphoto_set){
+                  this.venue.venuefullbuyoutphoto_set[+image] = this.venue.venuefullbuyoutphoto_set[+image].imageurl as any;
                 }
 
                 for(let r in this.venue.room_set) {
