@@ -52,6 +52,9 @@
     <div class="row" *ngIf ="venue.room_set.length > 0 || venue.fullbuyout">
       <div class= "col-sm-12 col-md-6 col-lg-4 pb-4" *ngIf="venue.fullbuyout && venue.fullbuyoutonline">
         <div class="card-container">
+          <div (click)="navfullbuyout()" class="clickoverlay">
+            <!-- overlay div for a clickable slide show frame -->
+          </div>
           <div *ngIf="venue.venuefullbuyoutphoto_set.length < 1" class="card-container-img" [ngStyle]="{'background-image': 'url(' + venue.venueimage_set[0] + ')'}">
           </div>
           <div *ngIf="venue.venuefullbuyoutphoto_set.length > 0" class="card-container-img">
@@ -75,6 +78,9 @@
       </div>
       <div class="col-sm-12 col-md-6 col-lg-4 pb-4" *ngFor="let room of venue.room_set; let i = index">
         <div class="card-container">
+          <div (click)="navtoroom(i)" class="clickoverlay">
+            <!-- overlay div for a clickable slide show frame -->
+          </div>
           <div *ngIf="room.roomimage_set.length > 0" class="card-container-img">
             <slideshow
               [showArrows]="true"

@@ -169,3 +169,13 @@ td{
 .slick-prev, .slick-next {
   background-color: lightgray;
 }
+
+.clickoverlay{
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  margin-left: 3.5vw;
+  margin-right: 3.5vw;
+  height: 35vh;
+  width: 20vw;
+}

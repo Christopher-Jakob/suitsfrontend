@@ -318,6 +318,14 @@ export class RoompageComponent implements OnInit, OnDestroy {
 
   }
 
+  navigatetofullbuyout(){
+    this.router.navigate(['/venue',this.venue.name,'fullbuyout']);
+  }
+
+  navigatetoroom(index){
+    this.router.navigate(['/venue',this.venue.name,this.otherrooms[index].name]);
+  }
+
   login(form:NgForm){
     const payload = {
       email: form.value.loginemail,
