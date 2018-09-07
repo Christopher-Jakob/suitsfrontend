@@ -96,7 +96,7 @@ export class SuitsvenuesComponent implements OnInit {
       }, 5000);
 
     }
-    if(roomlist < 1 || ( roomlist < 1 && !this.venues[index].fullbuyout)){
+    if(roomlist < 1 && !this.venues[index].fullbuyout){
       this.activeindex = index;
       this.pusherrorroom = true;
       error = true;

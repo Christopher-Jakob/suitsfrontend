@@ -170,7 +170,7 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
         this.imagepushfail = false;
       }, 2500);
     }
-    if(roomlist < 1 || (roomlist < 1 && !this.venueobject.fullbuyout)){
+    if(roomlist < 1 && !this.venueobject.fullbuyout){
       this.roompushfail = true;
       fail = true;
       setTimeout(()=>{
