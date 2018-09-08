@@ -419,7 +419,7 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
                       this.roomobject.roomimage_set.push(req);
                       console.log('this is the room object');
                       console.log(this.roomobject);
-                      this.showphotos = true;
+                      this.roomphotoshow();
                     });
               });
         });

@@ -179,8 +179,8 @@
 
   <div id="OtherRooms" class="Section">
     <div class="SecHead">View More Rooms</div>
-    <div class="row" *ngIf="!fullbuyoutroomactive && venue.fullbuyoutonline">
-      <div class="col-sm-12 col-md-6 col-lg-4 pb-4">
+    <div class="row">
+      <div *ngIf="!fullbuyoutroomactive && venue.fullbuyoutonline" class="col-sm-12 col-md-6 col-lg-4 pb-4">
         <div class="card-container">
           <div (click)="navigatetofullbuyout()" class="clickoverlay">
             <!-- overlay div for a clickable slide show frame -->
@@ -206,9 +206,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="row" *ngIf = "venue.room_set.length > 0">
       <div class="col-sm-12 col-md-6 col-lg-4 pb-4" *ngFor="let r of otherrooms; let i = index">
         <div class="card-container">
           <div (click)="navigatetoroom(i)" class="clickoverlay">
