@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {Router, ActivatedRoute} from "@angular/router";
 import {LandingpageDependancyService} from "../../services/mainroot/landingpage/LandingpageDependancyService";
 import {BrowsevenuescomponentcommService} from "../../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
+import {VenueService} from "../../services/venueservice/venueservice";
 
 
 
@@ -10,11 +11,11 @@ import {BrowsevenuescomponentcommService} from "../../services/browsevenueservic
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
   styleUrls: ['./landingpage.component.scss'],
-  providers:[LandingpageDependancyService]
+  providers:[LandingpageDependancyService, VenueService]
 })
 export class LandingpageComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private route: ActivatedRoute, private landingpageservice: LandingpageDependancyService, private navcomm : BrowsevenuescomponentcommService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private landingpageservice: LandingpageDependancyService, private navcomm : BrowsevenuescomponentcommService, private venueservice: VenueService) { }
 
   isLeftVisible = true;
   choicesload = true;
@@ -39,6 +40,32 @@ export class LandingpageComponent implements OnInit, OnDestroy {
     this.navcomm.sendselectedcity(citypk);
     this.router.navigate(['/browse', this.selectedcity]);
 
+  }
+  signupcompelete = false;
+  createvenue(form:NgForm){
+    let payload = {
+      name: form.value.venuename,
+      streetaddress1: form.value.streetaddress1,
+      streetaddress2: form.value.streetaddress2,
+      city: form.value.city,
+      state: form.value.venuestateselect,
+      venuephone: form.value.phone,
+      venuecontactname: form.value.contactname,
+      venuecontactjobtitle: form.value.jobtitle,
+      venuecontactemail: form.value.email,
+      phonenumber: form.value.phone
+    };
+
+    if(form.valid){
+      this.venueservice.submitapplication(payload)
+        .subscribe(
+          (req: any)=>{
+            this.signupcompelete = true;
+          }
+        );
+
+
+    }
   }
 
 

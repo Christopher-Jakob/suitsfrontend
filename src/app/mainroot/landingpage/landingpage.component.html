@@ -1,75 +1,250 @@
-<div id="first-pane" class="container-fluid topimage d-flex align-items-stretch justify-content-center">
-  <div class="container-fluid d-flex flex-column justify-content-center">
-    <div class="row flex-column justify-content-center align-items-center py-5 p-xs-5 mb-xs-5">
-      <div class=" col-lg-6 text-center">
-        <div class="d-flex flex-column justify-content-center align-items-center pushshim">
-          <h1 class="main-text-line col-lg-7 text-center text-white mb-5 font-weight-bold">Browse and book the best venues in the city</h1>
-          <h4 class="sub-text-line col-lg-10 text-center text-white mb-5">Time is precious. Don't waste any more of yours searching for the right venue for your corporate event when it's only a few clicks away.</h4>
-          <div class="row">
-            <div *ngIf="choicesload" class="spinner-container">
-              <div class="spinner"></div>
-            </div>
+<div class="container-fluid topimage justify-content-left">
+  <div class="container">
+    <div class="contenttop col-7">
+      <div class="float-left">
+        <h1 class="toptext"><strong>Browse and book the best venues <br> in the city.</strong></h1>
+        <br>
+        <div *ngIf="choicesload" class="spinner-container">
+          <div class="spinner"></div>
+        </div>
+        <form *ngIf="!choicesload" #selectform="ngForm">
+          <select
+            id="cityselect"
+            class="mt-3 mb-5 text-white"
+            autofocus
+            (change)="browse()"
+            name="cityselect"
+            ng-init="city[0]"
+            ngModel>
+            <option value="">Select Your City</option>
+            <option *ngFor="let city of cities"
+                    [value]="city.city">{{city.city}}</option>>Select Your City
+          </select>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="float-right">
+      <div class="socialdiv">
+        <a href="www.instagram.com/suitsandtables/" target="_blank">
+        <fa name="instagram" size="2x"></fa>
+        </a>
+      </div>
+      <div class="socialdiv">
+        <a href="www.facebook.com/suitsandtables/" target="_blank">
+        <fa name="facebook-f" size="2x"></fa>
+        </a>
+      </div>
+      <div class="socialdiv">
+        <a href="www.twitter.com/suitsandtables?lang=en" target="_blank">
+        <fa name="twitter" size="2x"></fa>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="second-pane">
+  <div class="secondtextdiv col-7">
+    <p id="secondpanetext">
+      <strong>Time is precious. Don't waste <br> any more of yours searching for the right venue for your corporate event when it's only a few clicks away.</strong>
+    </p>
+  </div>
+  <div id="third-pane">
+    <div class="container third-pane-content">
+      <div class="row">
+        <div class="col-4 hiwtitle">
+          <h1><strong>How it works.</strong></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 hiwbox">
+          <div class="col-12 underline">
+            1. BROWSE
           </div>
-          <form *ngIf="!choicesload" #selectform="ngForm">
-            <select
-              id="cityselect"
-              class="mt-3 mb-5 text-white"
-              autofocus
-              (change)="browse()"
-              name="cityselect"
-              ng-init="city[0]"
-              ngModel>
-              <option value="">Select Your City</option>
-              <option *ngFor="let city of cities"
-                      [value]="city.city">{{city.city}}</option>>Select Your City
+          <div class="col-12 hiwtext">
+            Browse more than 100 venues to pick the perfect spot for your event.
+          </div>
+        </div>
+        <div class="col-4 hiwbox">
+          <div class="col-12 underline">
+            2. CONTACT
+          </div>
+          <div class="col-12 hiwtext">
+            Seamlessly contact host for availability.
+          </div>
+        </div>
+        <div class="col-4 hiwbox">
+          <div class="col-12 underline">
+            3. BOOK
+          </div>
+          <div class="col-12 hiwtext">
+            Book your venue without the mess
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div id="forth-pane">
+    <div *ngIf="signupcompelete" class="row signupcompelete">
+      <div class="col-12 text-center">
+        <h2>
+          Your application has been received, we will be in touch!
+        </h2>
+      </div>
+    </div>
+    <div *ngIf="!signupcompelete" class="row">
+      <div class="col-12 forthheader">
+        <h1><strong>Are you a venue?</strong></h1>
+      </div>
+      <div class="col-7 forthheader">
+        <h5>Looking to partner with Suits + Tables? Sign up below and we will be in touch to discuss listing you on our platform.</h5>
+      </div>
+    </div>
+    <form *ngIf="!signupcompelete" (ngSubmit)="createvenue(venuesignupform)" #venuesignupform="ngForm">
+    <div class="row">
+      <div class="col-6 formdiv">
+        <div class="row">
+          <div class="col-12">
+            <input type="text"
+                   class="form-control"
+                   name="venuename"
+                   id="venuename"
+                   required
+                   ngModel
+                   placeholder="Venue Name *">
+          </div>
+          <div class="col-6">
+            <input type="text"
+                   class="form-control"
+                   name="streetaddress1"
+                   id="streetaddress1"
+                   required
+                   ngModel
+                   placeholder="Address 1 *">
+          </div>
+          <div class="col-6">
+            <input type="text"
+                   class="form-control"
+                   name="streetaddress2"
+                   id="streetaddress2"
+                   ngModel
+                   placeholder="Address 2">
+          </div>
+          <div class="col-6">
+            <input type="text"
+                   class="form-control"
+                   name="city"
+                   id="city"
+                   required
+                   ngModel
+                   placeholder="City *">
+          </div>
+          <div class="col-6">
+            <select id="inputState"
+                    class="form-control"
+                    name="venuestateselect"
+                    required
+                    ngModel>
+              <option value="">State *</option>
+              <option value="AL">AL</option>
+              <option value="AK">AK</option>
+              <option value="AZ">AZ</option>
+              <option value="AR">AR</option>
+              <option value="CA">CA</option>
+              <option value="CO">CO</option>
+              <option value="CT">CT</option>
+              <option value="DE">DE</option>
+              <option value="FL">FL</option>
+              <option value="GA">GA</option>
+              <option value="HI">HI</option>
+              <option value="ID">ID</option>
+              <option value="IL">IL</option>
+              <option value="IN">IN</option>
+              <option value="IA">IA</option>
+              <option value="KS">KS</option>
+              <option value="KY">KY</option>
+              <option value="LA">LA</option>
+              <option value="ME">ME</option>
+              <option value="MD">MD</option>
+              <option value="MA">MA</option>
+              <option value="MI">MI</option>
+              <option value="MN">MN</option>
+              <option value="MS">MS</option>
+              <option value="MO">MO</option>
+              <option value="MT">MT</option>
+              <option value="NE">NE</option>
+              <option value="NV">NV</option>
+              <option value="NH">NH</option>
+              <option value="NJ">NJ</option>
+              <option value="NM">NM</option>
+              <option value="NY">NY</option>
+              <option value="NC">NC</option>
+              <option value="ND">ND</option>
+              <option value="OH">OH</option>
+              <option value="OK">OK</option>
+              <option value="OR">OR</option>
+              <option value="PA">PA</option>
+              <option value="RI">RI</option>
+              <option value="SC">SC</option>
+              <option value="SD">SD</option>
+              <option value="TN">TN</option>
+              <option value="TX">TX</option>
+              <option value="UT">UT</option>
+              <option value="VT">VT</option>
+              <option value="VA">VA</option>
+              <option value="WA">WA</option>
+              <option value="WV">WV</option>
+              <option value="WI">WI</option>
+              <option value="WY">WY</option>
             </select>
-          </form>
+          </div>
+          <div class="col-6">
+            <input type="text"
+                   id="contactname"
+                   class="form-control"
+                   name="contactname"
+                   required
+                   ngModel
+                   placeholder="Contact Name *">
+          </div>
+          <div class="col-6">
+            <input type="text"
+                   id="phone"
+                   class="form-control"
+                   required
+                   name="phone"
+                   ngModel
+                   placeholder="Phone (digits only) *">
+          </div>
+          <div class="col-6">
+            <input type="text"
+                   id="jobtitle"
+                   class="form-control"
+                   name="jobtitle"
+                   ngModel
+                   placeholder="Job Title">
+          </div>
+          <div class="col-6">
+            <input type="email"
+                   id="email"
+                   class="form-control"
+                   required
+                   name="email"
+                   ngModel
+                   placeholder="Contact Email *">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button [disabled]="!venuesignupform.valid" class="venuesubmit" type="submit">Submit</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div> <!--root container-->
-
-<div id="second-pane" class="container-fluid d-flex align-items-stretch">
-  <div class="row justify-content-around" id="leading-pane">
-    <div id="step1" class="col-lg-4 pr-0 d-flex flex-column justify-content-center">
-      <div class=" mb-5 text-center">
-        <i class="fa fa-map-marker fa-5x"></i>
-      </div>
-      <h3 class="text-center step-header">Browse Venues</h3>
-      <p class="text-center step-sub">Filter by unique event needs to find the perfect host</p>
-    </div>
-
-    <div class="col-lg-4 text-center p-0 clipshadow">
-      <div class="d-flex flex-column justify-content-center" id="step2" style="height: 100%">
-        <div class=" mb-5 text-center">
-          <i class="fa fa-pencil-square fa-5x"></i>
-        </div>
-        <h3 class="text-center step-header">Send RFPs</h3>
-        <p class="text-center step-sub">Create + send multiple RFPs and avoid endless phone tag or browsing</p>
-      </div>
-    </div>
-
-    <div id="step3" class="col-lg-4 pl-0 d-flex flex-column justify-content-center">
-      <div class=" mb-5 text-center">
-        <i class="fa fa-first-order fa-5x"></i>
-      </div>
-      <h3 class="text-center step-header">Communicate + Book!</h3>
-      <p class="text-center step-sub">No middleman. Speak directly with your host(s) + get your event booked!</p>
-    </div>
-  </div>
-</div>
-<div id="user-signup-pane">
-  <div class="signup-container">
-    <div class="col-12 title text-white">Join Now + Stay in the Loop!</div>
-    <div class="col-12 sub-info text-white">Not ready to book your first event? Sign up now and we'll keep you up to date on new city launches or feature releases to help streamline your event needs. Still need more information, check out our "How It Works" page <a routerLink="/how-it-works" style="color: #00b3ee; text-decoration: underline;">here</a>.</div>
-    <div class="col-12 btn-container d-flex justify-content-center"><a href="#" data-toggle="modal" data-target="#Client-SignUp" class="button btn-gray text-white">Join Now</a></div>
-  </div>
-</div>
-<div id="venu-signup-pane">
-  <div class="signup-container">
-    <div class="col-12 title">Are you a Venue?</div>
-    <div class="col-12 sub-info">Looking to partner with Suits + Tables? Complete our simple, sign up form and a representative from Suits + Tables will reach out to you to discuss listing your venue on the platform.</div>
-    <div class="col-12 btn-container d-flex justify-content-center"><a href="#" data-toggle="modal" data-target="#Venue-SignUp" class="button">Sign Up</a></div>
+    </form>
   </div>
 </div>

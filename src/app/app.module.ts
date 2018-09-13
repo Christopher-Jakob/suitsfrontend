@@ -9,7 +9,6 @@ import { BrowsevenuesrootComponent } from './mainroot/browsevenues/browsevenuesr
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { MapviewComponent } from './mainroot/browsevenues/mapview/mapview.component';
 import { VenuelistComponent } from './mainroot/browsevenues/venuelist/venuelist.component';
-import { HowitworksComponent } from './mainroot/howitworks/howitworks.component';
 import { LandingpageComponent } from './mainroot/landingpage/landingpage.component';
 import { NavbarComponent } from './mainroot/navbar/navbar.component';
 import { RoompageComponent } from './mainroot/roompage/roompage.component';
@@ -89,6 +88,7 @@ import { VenueonboardingComponent } from './mainroot/venueonboarding/venueonboar
 import { CuisineshowphotosComponent } from './venueadmin/parentadminview/venueadminparentview/venueprofile/cuisineshowphotos/cuisineshowphotos.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { VenuefullbuyoutshowphotosComponent } from './venueadmin/parentadminview/venueadminparentview/venueadminroomroot/venueroomadminpage/venuefullbuyoutshowphotos/venuefullbuyoutshowphotos.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 const appRoutes: Routes = [
@@ -106,7 +106,6 @@ const appRoutes: Routes = [
       {path: 'terms', component: TermsComponent},
       {path: 'contact', component: ContactusComponent},
       {path: 'browse/:city',  canActivate: [IsNotVenueUserGuard], component: BrowsevenuesrootComponent},
-      {path: 'how-it-works', canActivate: [IsNotVenueUserGuard], component: HowitworksComponent},
       {path: 'venue/:name', canActivate: [IsNotVenueUserGuard], component: VenuepageComponent},
       {path: 'venue/:name/:room', canActivate: [IsNotVenueUserGuard], component: RoompageComponent},
       {path: 'preview/venue/:name', component: PreviewvenueComponent },
@@ -164,7 +163,6 @@ const appRoutes: Routes = [
     BrowsevenuesrootComponent,
     MapviewComponent,
     VenuelistComponent,
-    HowitworksComponent,
     LandingpageComponent,
     NavbarComponent,
     ClientadminComponent,
@@ -236,7 +234,8 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     SlickCarouselModule,
     BrowserAnimationsModule,
-    DraggableModule
+    DraggableModule,
+    AngularFontAwesomeModule
   ],
   exports:[RouterModule],
   providers: [VenueService, ModalToggleService, VenueAdminParentAdminService,ClientUserService , VenueAdminInceptionService, AwsService, UserAuthorizationService, ClientSuitsAdminSuperUserGuard, SuitsGuard, VenueSuitsAdminSuperUserGuard, IsNotVenueUserGuard, {
