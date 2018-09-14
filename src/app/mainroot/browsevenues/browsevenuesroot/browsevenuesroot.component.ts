@@ -165,6 +165,7 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
     this.capacityform.reset();
     this.minspendform.reset();
     this.disablecapacityinput = true;
+    this.capacityfilterbuttonshow = false;
     this.capacityformreset = '';
     this.applyfilters();
     this.searchform.reset();
