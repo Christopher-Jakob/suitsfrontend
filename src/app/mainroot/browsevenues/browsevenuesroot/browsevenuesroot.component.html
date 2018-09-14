@@ -48,27 +48,31 @@
 
     <form #capacityform="ngForm" class="col-lg-4 col-md-4 col-sm-6">
       <div class="row capacityrow">
-      <div class="col-lg-6 col-md-7">
-        <select (ngModelChange)="enablecapinput()"
-                id="seatingdropdown"
-                name="capacityselectinput"
-                class="form-control"
-                [ngModel]="capacityformreset">
-          <option selected value="">Capacity</option>
-          <option value="seated">Seated</option>
-          <option value="standing">Standing</option>
-        </select>
-      </div>
-      <div class="col-lg-6 col-md-5">
-        <input type="text"
-           (ngModelChange)="applyfilters()"
-           [disabled]="disablecapacityinput"
-           id="capacityamount"
-           placeholder="Party Size"
-           ngModel
-           class="form-control"
-           name="groupnumberinput">
-      </div>
+        <div class="col-lg-6 col-md-7">
+          <select (ngModelChange)="enablecapinput()"
+                  id="seatingdropdown"
+                  name="capacityselectinput"
+                  class="form-control"
+                  [ngModel]="capacityformreset">
+            <option selected value="">Capacity</option>
+            <option value="seated">Seated</option>
+            <option value="standing">Standing</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-md-5">
+          <input type="text"
+             (ngModelChange)="showcapacityfilterbutton()"
+             [disabled]="disablecapacityinput"
+             id="capacityamount"
+             placeholder="Party Size"
+             ngModel
+             class="form-control"
+             name="groupnumberinput">
+        </div>
+        <div *ngIf="capacityfilterbuttonshow" class="col-12">
+          <button class="acfbutton btn" (click)="applyfilters()">Apply Capacity Filter</button>
+        </div>
+
       </div>
     </form>
   </div>

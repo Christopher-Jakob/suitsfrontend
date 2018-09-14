@@ -250,6 +250,11 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
     this.browsevenuescommservice.sendloadstate(false);
   }
 
+  capacityfilterbuttonshow = false;
+  showcapacityfilterbutton(){
+    this.capacityfilterbuttonshow = true;
+
+  }
 
   applyfilters(){
     this.browsevenuescommservice.sendloadstate(true);
