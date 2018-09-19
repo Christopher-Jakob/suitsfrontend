@@ -20,18 +20,20 @@ td{
 
 .SecHead {
   font-size: 1.3rem;
-  padding: 0.5rem 0;
 }
 
 .span-style {
   display: inline-block;
+  &:first-child{
+    padding-right: .5rem;
+    border-right: solid 1px gray;
+  }
   &:not(:last-child){
-    padding-left: .5rem;
     padding-right: .5rem;
     border-right: solid 1px gray;
   }
   &:last-child{
-    padding-left: .5rem;
+    border: none;
   }
   &__mid {
     padding-right: 5rem;
@@ -99,7 +101,6 @@ $color-primary: rgb(83,139,197);
     padding-top: 1rem;
 
     .card-container-information__main {
-      padding-left: 1rem;
       letter-spacing: 1px;
       font-size: 1.3rem;
       font-weight: 100;

@@ -21,11 +21,11 @@
     </div>
     <div class="SecHead">
       <div *ngIf="venue.cuisine1 != null" id="Type" class="span-style">{{venue.cuisine1}}</div>
-      <div *ngIf="venue.cuisine2 != null" class="span-style">{{venue.cuisine2}}</div>
-      <div *ngIf="venue.experientialtype != null" class="span-style">{{venue.experientialtype}}</div>
-      <div *ngIf="venue.pricerating == 1" class="span-style">$30 and under</div>
-      <div *ngIf="venue.pricerating == 2" class="span-style">$31 to $51</div>
-      <div *ngIf="venue.pricerating == 3" class="span-style">$51 and over</div>
+      <div *ngIf="venue.cuisine2 != null" class="span-style"> &nbsp; {{venue.cuisine2}}</div>
+      <div *ngIf="venue.experientialtype != null" class="span-style"> &nbsp; {{venue.experientialtype}}</div>
+      <div *ngIf="venue.pricerating == 1" class="span-style"> &nbsp; $30 and under</div>
+      <div *ngIf="venue.pricerating == 2" class="span-style"> &nbsp;$31 to $51</div>
+      <div *ngIf="venue.pricerating == 3" class="span-style"> &nbsp;$51 and over</div>
       <form #rfpchoiceform="ngForm" class="float-right">
         <select class="form-control" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
                 id="rfpsendselect"
@@ -112,7 +112,10 @@
     </span>
     <br>
     <br>
-    <span>
+    <span *ngIf="venue.venuesamplemenu_set.length < 1">
+      Please contact venue for menus
+    </span>
+    <span *ngIf="venue.venuesamplemenu_set.length > 0">
       <a *ngFor="let menu of venue.venuesamplemenu_set" [href]="menu.menupdfuri" target="_blank" class="span-style__mid link-style">{{menu.name}}</a>
     </span>
   </div>
@@ -141,7 +144,7 @@
       Parking Options:
     </div>
     <p>
-      <span *ngIf="!venue.valetparking" class="span-style">Valet: N/A</span>
+      <span *ngIf="!venue.valetparking" class="span-style">Valet: Not Available</span>
       <span *ngIf="venue.valetparking == true" class="span-style">Valet: ${{venue.valetparkingamount}}</span>
       <span *ngIf="venue.onsiteparking == true" class="span-style">Onsite Parking Available</span>
       <span *ngIf="!venue.onsiteparking" class="span-style">Onsite Parking Not  Available</span>

@@ -32,7 +32,7 @@
           <hr>
         </div>
         <div *ngIf="venueobject.venueimage_set.length > 0" (click)="navigatetofullbuyout()" style="cursor: pointer" class="imagecontainer"
-             [ngStyle]="{'background-image': 'url(' + venueobject.venueimage_set[0].imageurl +')'}">
+             [ngStyle]="{'background-image': 'url(' + venueobject.venuefullbuyoutphoto_set[0].imageurl +')'}">
         </div> <!--imagecontainer-->
         <div *ngIf="venueobject.venueimage_set.length < 1" (click)="navigatetofullbuyout()" style="cursor: pointer" class="imagecontainer">
           <br>
