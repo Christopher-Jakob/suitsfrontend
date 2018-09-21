@@ -31,7 +31,7 @@
           <h4>Full Buyout</h4>
           <hr>
         </div>
-        <div *ngIf="venueobject.venueimage_set.length > 0" (click)="navigatetofullbuyout()" style="cursor: pointer" class="imagecontainer"
+        <div *ngIf="venueobject.venuefullbuyoutphoto_set.length > 0" (click)="navigatetofullbuyout()" style="cursor: pointer" class="imagecontainer"
              [ngStyle]="{'background-image': 'url(' + venueobject.venuefullbuyoutphoto_set[0].imageurl +')'}">
         </div> <!--imagecontainer-->
         <div *ngIf="venueobject.venueimage_set.length < 1" (click)="navigatetofullbuyout()" style="cursor: pointer" class="imagecontainer">
@@ -67,11 +67,11 @@
     </div> <!--full buy out div-->
 
 
-    <div class="text-center" *ngIf="venuerooms.length < 1 && !venueobject.fullbuyout">
+    <div class="text-center" *ngIf="venueobject.room_set.length < 1 && !venueobject.fullbuyout">
       <h3 style="color: #00b3ee">This Venue Has No Rooms. Click Add Room To Get Started</h3>
     </div>
     <!--room div-->
-    <div class="col-md-4 roomdiv" *ngFor="let room of venuerooms; let i=index" >
+    <div class="col-md-4 roomdiv" *ngFor="let room of venueobject.room_set; let i=index" >
       <div class="">
         <br>
         <div (click)="navigatetoroom(i)" style="cursor: pointer" class="text-center">

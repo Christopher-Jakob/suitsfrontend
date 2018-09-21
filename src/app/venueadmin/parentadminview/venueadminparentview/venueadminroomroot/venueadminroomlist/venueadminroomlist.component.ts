@@ -157,6 +157,7 @@ export class VenueadminroomlistComponent implements OnInit, OnDestroy {
     this.roomlistservice.roomlist(this.venueobject.id)
       .subscribe(
         (req: any)=>{
+          console.log(this.venuerooms);
           this.venuerooms = req;
 
         });
