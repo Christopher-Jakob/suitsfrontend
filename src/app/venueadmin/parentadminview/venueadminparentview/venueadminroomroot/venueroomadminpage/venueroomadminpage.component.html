@@ -573,10 +573,10 @@
       <h4><strong>Room Photos</strong></h4>
     </div>
     <div class="col-auto">
-      <button *ngIf="!showfileuploadform" (click)="activateshowfileuploadform()" id="addroombutton"><h4>+Add Photo</h4></button>
+      <button class="btn btn-outline-primary" *ngIf="!showfileuploadform" (click)="activateshowfileuploadform()"> + Add photo</button>
     </div>
     <div class="col-auto"> <!--add photo button and form input-->
-      <a id="displayphotoslink" *ngIf="!showphotos && !showfileuploadform" (click)="roomphotoshow()"><h4>Display Photos</h4></a>
+      <button class="btn btn-outline-success" *ngIf="!showphotos && !showfileuploadform" (click)="roomphotoshow()">Display Photos</button>
     </div>
     <div class="col-auto" *ngIf="showfileuploadform">
       <div class="row">
