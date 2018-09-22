@@ -42,12 +42,12 @@ export class VenueadminroomlistComponent implements OnInit, OnDestroy {
   //delete room code
   deleteroom(index){
     const venueid = this.venueobject.id;
-    const roomid = this.venuerooms[+index].pk;
+    const roomid = this.venueobject.room_set[+index].pk;
     this.roomlistservice.deleteroom(venueid, roomid)
       .subscribe(
         (req: any)=>{
           this.roomactiveindex = null;
-          this.venuerooms.splice(+index,1);
+          this.venueobject.room_set.splice(+index,1);
         }
       );
   }
@@ -56,7 +56,7 @@ export class VenueadminroomlistComponent implements OnInit, OnDestroy {
     this.roomlistservice.addroom(this.venueobject.id)
       .subscribe(
         (req: any)=>{
-          this.venuerooms.push(req);
+          this.venueobject.room_set.push(req);
           this.roomadded = true;
           setTimeout(()=> {
             this.roomadded = false;
