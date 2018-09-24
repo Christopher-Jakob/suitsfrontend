@@ -603,12 +603,20 @@
     <div class="row"> <!--venue description row-->
       <div class="col-12">
           <textarea  (change)="savevenueroom()"
+                     (ngModelChange)="descriptioncounter()"
                      id="roomdescriptioninput"
                      name="roomdescriptioninput"
                      placeholder="Enter Room Description"
                      [ngModel]="roomobject.description">
 
           </textarea>
+        <div *ngIf="descriptioncountshow" class="float-left">
+          {{descriptioncount}} / 4000
+        </div>
+        <div *ngIf="descriptionerror" class="float-right">
+          <p style="color: red">Your Venue Description must be less than 4000 character!</p>
+        </div>
+
       </div>
     </div> <!--venue description row-->
   </form>

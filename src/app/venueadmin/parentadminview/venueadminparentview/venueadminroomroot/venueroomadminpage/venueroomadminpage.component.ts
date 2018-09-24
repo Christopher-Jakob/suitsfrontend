@@ -426,6 +426,21 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
 
   }
 
+  // description character count function
+  descriptioncount = 0;
+  descriptioncountshow = false;
+  descriptionerror = false;
+  descriptioncounter(){
+    this.descriptioncountshow = true;
+    let maxcount = 4000;
+    let count = this.roomdescriptionform.form.value.roomdescriptioninput.length;
+    this.descriptioncount = count;
+    if(count > maxcount){
+      this.descriptionerror = true;
+    }
+
+  }
+
 
   ngOnInit() {
     this.inceptionservice.sendsignal('roompage');

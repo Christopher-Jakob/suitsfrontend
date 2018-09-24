@@ -225,6 +225,23 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
 
   }
 
+  // description character count function
+  descriptioncount = 0;
+  descriptioncountshow = false;
+  descriptionerror = false;
+  descriptioncounter(){
+    this.descriptioncountshow = true;
+    let maxcount = 4000;
+    let count = this.descriptioninputform.form.value.descriptioninput.length;
+    this.descriptioncount = count;
+    if(count > maxcount){
+      this.descriptionerror = true;
+    }
+
+  }
+
+
+
   // sample menu upload
   showsamplemenuupload = false;
   samplemenudeletesucess = false;
@@ -423,6 +440,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
 
             }
           }
+
         });
 
     this.dependancyservice.getvenueattributeselections()
