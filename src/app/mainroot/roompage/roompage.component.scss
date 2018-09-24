@@ -147,3 +147,11 @@ $color-primary: rgb(83,139,197);
   height: 35vh;
   width: 10vw;
 }
+
+.hasprop{
+  color: black;
+}
+.nothasprop{
+  color: gray;
+  text-decoration: line-through;
+}

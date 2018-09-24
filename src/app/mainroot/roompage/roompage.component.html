@@ -108,36 +108,52 @@
     <div class="SecHead">Amenities</div>
     <div class="row">
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.surroundsoundamenity === true ? 'black': 'gray' }">Surround Sound</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutsurrondsoundamenity === true ? 'black': 'gray' }">Surround Sound</p>
+        <p *ngIf="!fullbuyoutroomactive && room.surroundsoundamenity" class="hasprop">Surround Sound</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.surroundsoundamenity" class="nothasprop">Surround Sound</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutsurrondsoundamenity" class="hasprop">Surround Sound</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutsurrondsoundamenity" class="nothasprop">Surround Sound</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.microphoneamenity === true ? 'black': 'gray' }">Microphone</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutmicrophoneamenity === true ? 'black': 'gray' }">Microphone</p>
+        <p *ngIf="!fullbuyoutroomactive && room.microphoneamenity" class="hasprop">Microphone</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.microphoneamenity" class="nothasprop">Microphone</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutmicrophoneamenity" class="hasprop">Microphone</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutmicrophoneamenity" class="nothasprop">Microphone</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.stageamenity === true ? 'black': 'gray' }">Stage</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutstageamenity === true ? 'black': 'gray' }">Stage</p>
+        <p *ngIf="!fullbuyoutroomactive && room.stageamenity" class="hasprop">Stage</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.stageamenity" class="nothasprop">Stage</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutstageamenity" class="hasprop">Stage</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutstageamenity" class="nothasprop">Stage</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.televisionamenity === true ? 'black': 'gray' }">Television</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyouttelevisionamenity === true ? 'black': 'gray' }">Television</p>
+        <p *ngIf="!fullbuyoutroomactive && room.televisionamenity" class="hasprop">Television</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.televisionamenity" class="nothasprop">Television</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyouttelevisionamenity" class="hasprop">Television</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyouttelevisionamenity" class="hasprop">Television</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.screenprojectoramenity === true ? 'black': 'gray' }">Screen + Projector</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutscreenprojectoramenity === true ? 'black': 'gray' }">Screen + Projector</p>
+        <p *ngIf="!fullbuyoutroomactive && room.screenprojectoramenity" class="hasprop">Screen + Projector</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.screenprojectoramenity" class="nothasprop">Screen + Projector</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutscreenprojectoramenity" class="hasprop">Screen + Projector</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutscreenprojectoramenity" class="nothasprop">Screen + Projector</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.naturallightamenity === true ? 'black': 'gray' }">Natural Light</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutnaturallightamenity === true ? 'black': 'gray' }">Natural Light</p>
+        <p *ngIf="!fullbuyoutroomactive && room.naturallightamenity" class="hasprop">Natural Light</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.naturallightamenity" class="nothasprop">Natural Light</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutnaturallightamenity" class="hasprop">Natural Light</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutnaturallightamenity" class="nothasprop">Natural Light</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.wifiamenity === true ? 'black': 'gray' }">WiFi</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutwifiamenity === true ? 'black': 'gray' }">WiFi</p>
+        <p *ngIf="!fullbuyoutroomactive && room.wifiamenity" class="hasprop">WiFi</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.wifiamenity" class="nothasprop">WiFi</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutwifiamenity" class="hasprop">WiFi</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutwifiamenity" class="nothasprop">WiFi</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.wheelchairaccessibleamenity=== true ? 'black': 'gray' }"> Wheelchair Accessible</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutwheelchairaccessibleamenity === true ? 'black': 'gray' }"> Wheelchair Accessible</p>
+        <p *ngIf="!fullbuyoutroomactive && room.wheelchairaccessibleamenity" class="hasprop"> Wheelchair Accessible</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.wheelchairaccessibleamenity" class="nothasprop"> Wheelchair Accessible</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutwheelchairaccessibleamenity" class="hasprop"> Wheelchair Accessible</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutwheelchairaccessibleamenity" class="nothasprop"> Wheelchair Accessible</p>
       </div>
     </div>
   </div>
@@ -146,32 +162,48 @@
     <div class="SecHead">Capacities</div>
     <div class="row">
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.cocktailstandingseatingoption === true ? 'black': 'gray' }">Cocktail / Standing</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutcocktailstandingseatingoption === true ? 'black': 'gray' }">Cocktail / Standing</p>
+        <p *ngIf="!fullbuyoutroomactive && room.cocktailstandingseatingoption" class="hasprop">Cocktail / Standing</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.cocktailstandingseatingoption" class="nothasprop">Cocktail / Standing</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutcocktailstandingseatingoption" class="hasprop">Cocktail / Standing</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutcocktailstandingseatingoption" class="nothasprop">Cocktail / Standing</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.classroomseatingoption === true ? 'black': 'gray' }">Classroom</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutclassroomseatingoption === true ? 'black': 'gray' }">Classroom</p>
+        <p *ngIf="!fullbuyoutroomactive && room.classroomseatingoption" class="hasprop">Classroom</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.classroomseatingoption" class="nothasprop">Classroom</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutclassroomseatingoption" class="hasprop"
+        >Classroom</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutclassroomseatingoption" class="nothasprop"
+        >Classroom</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.ushapeseatingoption === true ? 'black': 'gray' }">U-Shape</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutushapeseatingoption === true ? 'black': 'gray' }">U-Shape</p>
+        <p *ngIf="!fullbuyoutroomactive && room.ushapeseatingoption" class="hasprop">U-Shape</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.ushapeseatingoption" class="nothasprop">U-Shape</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutushapeseatingoption" class="hasprop">U-Shape</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutushapeseatingoption" class="nothasprop">U-Shape</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.sixtyroundseatingoption === true ? 'black': 'gray' }">60" Rounds</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutsixtyroundseatingoption === true ? 'black': 'gray' }">60" Rounds</p>
+        <p *ngIf="!fullbuyoutroomactive && room.sixtyroundseatingoption" class="hasprop">60" Rounds</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.sixtyroundseatingoption" class="nothasprop">60" Rounds</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutsixtyroundseatingoption" class="hasprop">60" Rounds</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutsixtyroundseatingoption" class="nothasprop">60" Rounds</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.boardroomseatingoption === true ? 'black': 'gray' }">Boardroom</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyoutboardroomseatingoption === true ? 'black': 'gray' }">Boardroom</p>
+        <p *ngIf="!fullbuyoutroomactive && room.boardroomseatingoption" class="hasprop">Boardroom</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.boardroomseatingoption" class="nothasprop">Boardroom</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutboardroomseatingoption" class="hasprop">Boardroom</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutboardroomseatingoption" class="nothasprop">Boardroom</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.theaterseatingoption === true ? 'black': 'gray' }">Theater</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyouttheaterseatingoption === true ? 'black': 'gray' }">Theater</p>
+        <p *ngIf="!fullbuyoutroomactive && room.theaterseatingoption" class="hasprop">Theater</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.theaterseatingoption" class="nothasprop">Theater</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyouttheaterseatingoption" class="hasprop">Theater</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyouttheaterseatingoption" class="nothasprop">Theater</p>
       </div>
       <div class="col-md-3 col-6">
-        <p *ngIf="!fullbuyoutroomactive" [ngStyle]="{'color' : room.hallowsquareseatingoption === true ? 'black': 'gray' }">Hallow Square</p>
-        <p *ngIf="fullbuyoutroomactive" [ngStyle]="{'color' : venue.fullbuyouthallowsquareseatingoption === true ? 'black': 'gray' }">Hallow Square</p>
+        <p *ngIf="!fullbuyoutroomactive && room.hallowsquareseatingoption" class="hasprop">Hallow Square</p>
+        <p *ngIf="!fullbuyoutroomactive && !room.hallowsquareseatingoption" class="nothasprop">Hallow Square</p>
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyouthallowsquareseatingoption" class="hasprop">Hallow Square</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyouthallowsquareseatingoption" class="nothasprop">Hallow Square</p>
       </div>
     </div>
   </div>
