@@ -74,7 +74,7 @@ $color-primary: rgb(83,139,197);
 .card-container {
   overflow: hidden;
   cursor: pointer;
-  height: 20rem;
+  height: 25rem;
   border-radius: 5px;
   transition: all 0.2s;
 
@@ -106,8 +106,16 @@ $color-primary: rgb(83,139,197);
       font-weight: 100;
       color: $color-primary;
     }
+    .card-min-spend{
+      letter-spacing: 1px;
+      font-size: 1rem;
+      font-weight: 100;
+      color: $color-primary;
+    }
 
     .card-container-information__sub {
+      margin-left: 0;
+      padding-left: 0;
 
       color: $color-primary;
       .card-container-information__sub--food {

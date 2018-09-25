@@ -69,10 +69,21 @@
               Full Buyout
             </div>
             <p class="card-container-information__sub">
-              <span id="seat-number" class="card-container-information__sub--price">Private</span>
+              <span id="seat-number" class="card-container-information__sub--food">Private</span>
               <span id="seat-number" class="card-container-information__sub--price">{{ venue.fullbuyoutseatedcapacity }} Seated</span>
-              <span id="stand-number" class="card-container-information__sub--room">{{ venue.fullbuyoutstandingcapactiy }} Standing</span>
+              <span id="stand-number" class="card-container-information__sub--price">{{ venue.fullbuyoutstandingcapactiy }} Standing</span>
             </p>
+            <div class="col-12 STnopadding">
+              <div class="float-left STnopadding">
+                <div *ngIf="venue.fullbuyoutminspend == null" class="card-min-spend STnopadding">
+                  Minimum Spend : Please Inquire
+                </div>
+                <div *ngIf="venue.fullbuyoutminspend != null" class="card-min-spend STnopadding">
+                  Minimum Spend : {{venue.fullbuyoutminspend}}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -100,6 +111,16 @@
               <span *ngIf="room.standingcapacity == null" id="stand-number" class="card-container-information__sub--room">N/A Standing</span>
               <span *ngIf="room.standingcapacity != null" id="stand-number" class="card-container-information__sub--room">{{ room.standingcapacity }} Standing</span>
             </p>
+            <div class="col-12 STnopadding">
+              <div class="float-left STnopadding">
+                <div *ngIf="room.minimumspend == null" class="card-min-spend STnopadding">
+                  Minimum Spend : Please Inquire
+                </div>
+                <div *ngIf="room.minimumspend != null" class="card-min-spend STnopadding">
+                  Minimum Spend : {{room.minimumspend}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -113,7 +134,7 @@
     <br>
     <br>
     <span *ngIf="venue.venuesamplemenu_set.length < 1">
-      Please contact venue for menus
+      Please contact venue for more information
     </span>
     <span *ngIf="venue.venuesamplemenu_set.length > 0">
       <a *ngFor="let menu of venue.venuesamplemenu_set" [href]="menu.menupdfuri" target="_blank" class="span-style__mid link-style">{{menu.name}}</a>
