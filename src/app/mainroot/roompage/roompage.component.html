@@ -61,10 +61,6 @@
       <div *ngIf="fullbuyoutroomactive" class="col-auto roommain">
           Full Buyout
       </div>
-      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutminspend != null" class="col-auto roommain">
-        Minimum Spend: ${{venue.fullbuyoutminspend}}
-      </div>
-
       <div *ngIf="!fullbuyoutroomactive">
       <div class="col-auto STnopadding roommain" *ngIf= "room.privateroom == true">
         Private
@@ -75,11 +71,7 @@
         Semi-Private
       </div>
       </div>
-      <div *ngIf="!fullbuyoutroomactive">
-        <div class="col-auto roommain" *ngIf='room.minimumspend !=null'>
-         | Minimum Spend: ${{room.minimumspend}}
-        </div>
-      </div>
+
   <div id="rfpselect">
 
   </div>
@@ -96,6 +88,25 @@
       <div *ngIf="!fullbuyoutroomactive && room.standingcapacity == null" id="Stand" class="col-auto roommain"> N/A standing </div>
       <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutstandingcapactiy != null" id="Stand" class="col-auto roommain"> {{ venue.fullbuyoutstandingcapactiy }} standing </div>
       <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutstandingcapactiy == null" id="Stand" class="col-auto roommain"> N/A standing </div>
+      <br>
+      <br>
+      <div class="col-12 STnopadding" *ngIf="!fullbuyoutroomactive">
+        <div class="col-auto roommain" *ngIf='room.minimumspend !=null'>
+          Minimum Spend: ${{room.minimumspend}}
+        </div>
+        <div class="col-auto roommain" *ngIf='room.minimumspend ==null'>
+          Minimum Spend: Please Inquire
+        </div>
+      </div>
+      <div class="col-12 STnopadding" *ngIf="fullbuyoutroomactive">
+        <div class="col-auto roommain" *ngIf='venue.fullbuyoutminspend !=null'>
+          Minimum Spend: ${{venue.fullbuyoutminspend}}
+        </div>
+        <div class="col-auto roommain" *ngIf='venue.fullbuyoutminspend ==null'>
+          Minimum Spend: Please Inquire
+        </div>
+      </div>
+
     </div>
 
   <div id="RoomDes" class="Section">
@@ -235,6 +246,16 @@
               <span *ngIf="venue.fullbuyoutstandingcapactiy != null" id="stand-number" class="card-container-information__sub--room">{{ venue.fullbuyoutstandingcapactiy }} Standing</span>
               <span *ngIf="venue.fullbuyoutstandingcapactiy == null" id="stand-number" class="card-container-information__sub--room">N/A Standing</span>
             </p>
+            <div class="col-12">
+              <div class="float-left">
+                <div *ngIf="venue.fullbuyoutminspend == null" class="card-min-spend STnopadding">
+                  Minimum Spend : Please Inquire
+                </div>
+                <div *ngIf="venue.fullbuyoutminspend != null" class="card-min-spend STnopadding">
+                  Minimum Spend : {{venue.fullbuyoutminspend}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -264,6 +285,16 @@
               <span *ngIf="r.seatedcapacity != null" id="stand-number" class="card-container-information__sub--room">{{ r.standingcapacity }} Standing</span>
               <span *ngIf="r.seatedcapacity == null" id="stand-number" class="card-container-information__sub--room">{{ r.standingcapacity }} Standing</span>
             </p>
+            <div class="col-12">
+              <div class="float-left">
+                <div *ngIf="r.minimumspend == null" class="card-min-spend STnopadding">
+                  Minimum Spend : Please Inquire
+                </div>
+                <div *ngIf="r.minimumspend != null" class="card-min-spend STnopadding">
+                  Minimum Spend : {{r.minimumspend}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
