@@ -413,6 +413,13 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
     this.showcuisine2 = true;
   }
 
+  // virtual tours
+  contactmass = false;
+
+  showmasscontact(){
+    this.contactmass = !this.contactmass;
+  }
+
   ngOnInit(){
     window.scrollTo(0,0);
     this.inceptionservice.sendsignal('venuepage');

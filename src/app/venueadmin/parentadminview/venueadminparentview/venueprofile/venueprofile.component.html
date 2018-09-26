@@ -153,6 +153,98 @@
 <br>
 <hr>
 <div class="row justify-content-start">
+  <h5><strong>Virtual Tours (Feature is still being built and will be online shortly)</strong></h5>
+</div>
+<form *ngIf="contactmass">
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center">
+        Contact Mass Interact For A Quote
+      </div>
+    </div>
+    <div class="col-6">
+      <input type="text"
+             id="name"
+             name="name"
+             ngModel
+             class="form-control"
+             width="100%"
+             placeholder="Contact Name">
+    </div>
+    <div class="col-6">
+      <input type="text"
+             id="email"
+             name="email"
+             ngModel
+             class="form-control"
+             width="100%"
+             placeholder="Contact Email">
+    </div>
+    <div class="col-6">
+      <input type="text"
+             id="phone"
+             name="phone"
+             ngModel
+             class="form-control"
+             width="100%"
+             placeholder="Contact Phone">
+    </div>
+    <div class="col-6">
+      <input type="text"
+             id="squarefeet"
+             name="squarefeet"
+             ngModel
+             class="form-control"
+             width="100%"
+             placeholder="Approx Square Feet">
+    </div>
+    <br>
+    <div class="col-12">
+      <div class="text-center">
+        <button class="btn btn-outline-primary" type="submit">Send</button>
+        <button (click)="showmasscontact()" class="btn btn-outline-danger">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</form>
+<div *ngIf="!contactmass" class="row">
+  <div id="virtualtourtext" class="col-12">
+    We have partnered with Mass Interact, a marketing company that specializes in google Virtual Tours. We have secured discounted pricing for venues on the Suits + Tables site. Virtual Tours allow for potential clients to walk through your venue without being physically present. Your tour will be featured in your google listing, and on your Suits + Tables profile. <a style="color: #00b3ee; text-decoration: underline" href="https://s3.us-east-2.amazonaws.com/suitsandtablesmedia/massinteract.jpg" target="_blank">Learn More</a>
+  </div>
+
+  <div class="col-6">
+    <div class="text-center">
+      Want to add a Virtual Tour to your profile?
+    </div>
+    <div class="text-center">
+      <br>
+      <button (click)="showmasscontact()" class="btn btn-outline-primary">Contact Mass Interact</button>
+    </div>
+  </div>
+  <div class="col-6">
+    <form>
+    <div class="col-12">
+      Already have a google Virtual Tour? Submit your tour url.
+    </div>
+      <div class="row">
+        <div class="col-8">
+          <input type="text"
+                 class="form-control"
+                 id="tour360url"
+                 name="tour360url"
+                 ngModel
+                 width="100%">
+        </div>
+        <div class="col-4">
+          <button class="btn btn-outline-primary" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<hr>
+<div class="row justify-content-start">
   <h5><strong>Parking Options</strong></h5>
 </div>
 <form  #updateparkingform="ngForm">
