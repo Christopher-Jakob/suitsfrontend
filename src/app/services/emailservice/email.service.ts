@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {rfpemailurl} from "../../urls/transmission/email/email.url";
+import {massinteractemail, rfpemailurl} from "../../urls/transmission/email/email.url";
 /**
  * Created by rickus on 4/3/18.
  */
@@ -10,5 +10,9 @@ export class EmailService{
 
   emailrfp(payload) {
     return this.Http.post(rfpemailurl , payload);
+  }
+
+  emailmassinteract(payload){
+    return  this.Http.post(massinteractemail, payload);
   }
 }

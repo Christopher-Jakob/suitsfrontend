@@ -22,6 +22,18 @@ $color-primary: rgb(83,139,197);
     font-size: 1.2rem;
   }
 
+  .venue-virtual-tour{
+    display: inline-block;
+    position : absolute;
+    color: white;
+    background: #bf395d;
+    border: solid 1px #bf395d;
+    font-size: 1.2rem;
+    bottom: 92.5%;
+    left: 63.1%;
+    z-index: 1;
+  }
+
   .card-container-information{
     cursor: pointer;
     position: relative;

@@ -7,13 +7,14 @@ import {VenueAdminVolleyService} from "../../../../services/venueadmin/venueadmi
 import {VenueAdminParentAdminService} from "../../../../services/venueadmin/venueadminparentadminservice/venueadmin.parentadmin.service";
 import {VenueAdminInceptionService} from "../../../../services/venueadmin/venueadmininceptionservice/venueadmin.inception.service";
 import {AwsService} from "../../../../services/amazonwebservice services/aws.services";
+import {EmailService} from "../../../../services/emailservice/email.service";
 
 
 @Component({
   selector: 'app-venueprofile',
   templateUrl: './venueprofile.component.html',
   styleUrls: ['./venueprofile.component.scss'],
-  providers: [VenueAdminProfileService, VenueAdminProfileDependancyService],
+  providers: [VenueAdminProfileService, VenueAdminProfileDependancyService, EmailService],
 })
 export class VenueprofileComponent implements OnInit, OnDestroy {
   parentadminservicevar;
@@ -29,7 +30,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor( private profileservice: VenueAdminProfileService, private route: ActivatedRoute, private dependancyservice: VenueAdminProfileDependancyService, private router: Router, private venuevollyservice: VenueAdminVolleyService, private awsservice: AwsService, private parentadminservice: VenueAdminParentAdminService, private inceptionservice: VenueAdminInceptionService ) { }
+  constructor( private profileservice: VenueAdminProfileService, private route: ActivatedRoute, private dependancyservice: VenueAdminProfileDependancyService, private router: Router, private venuevollyservice: VenueAdminVolleyService, private awsservice: AwsService, private parentadminservice: VenueAdminParentAdminService, private inceptionservice: VenueAdminInceptionService, private emailservice: EmailService ) { }
 
   // venueobject used to render page
   venueobject ={
@@ -52,6 +53,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
     mondayhop: false,
     mondayhopopen: '',
     mondayhopclose: '',
+    tour360url : '',
     tuesdayhop: false,
     tuesdayhopopen: '',
     tuesdayhopclose: '',
@@ -175,6 +177,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   @ViewChild('descriptioninputform') descriptioninputform:NgForm;
   @ViewChild('updateparkingform') updateparkingform: NgForm;
   @ViewChild('venueattributeform') venueattributeform: NgForm;
+  @ViewChild('toururlform') toururlform: NgForm;
 
   updatevenue(){
     let payload = {
@@ -183,6 +186,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
       city: this.venueobject.city,
       streetaddress1: this.venueobject.streetaddress1,
       state: this.venueobject.state,
+      tour360url: this.toururlform.form.value.tour360url,
       zipcode: this.venueobject.zipcode,
       phonenumber: this.venueobject.phonenumber,
       venuecontactname: this.venueobject.venuecontactname,
@@ -199,6 +203,13 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
       experientialtype: null,
       venuetype: this.venueattributeform.form.value.venuetypeselect
     };
+
+    if(payload.tour360url != null){
+      this.linksubmitted = true;
+      setTimeout(()=>{
+        this.linksubmitted = false;
+      }, 3000);
+    }
 
     if(this.venueattributeform.form.value.cuisineselect1 != null){
       payload.cuisine1 = this.venueattributeform.form.value.cuisineselect1;
@@ -414,10 +425,55 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   }
 
   // virtual tours
+  linksubmitted = false;
   contactmass = false;
 
   showmasscontact(){
     this.contactmass = !this.contactmass;
+  }
+
+  removetour(){
+    let payload = {
+      tour360url: null
+    };
+    this.profileservice.venueprofileupdate(payload, this.venueobject.id)
+      .subscribe(
+        (req: any)=>{
+          this.venueupdatesucess = true;
+          this.venueupdatesucess = false;
+          this.venueobject = req;
+          this.venuevollyservice.sendobject(this.venueobject);
+          this.venuevollyservice.sendupdated();
+
+        }
+      );
+
+
+  }
+  messagesent = false;
+  emailmassinteract(form:NgForm){
+    const payload = {
+      name: form.value.name,
+      email: form.value.email,
+      phone: form.value.phone,
+      squarefeet: form.value.squarefeet,
+      venuename: this.venueobject.name,
+      address: this.venueobject.streetaddress1 + ' ' + this.venueobject.city + ', ' + this.venueobject.state
+
+    };
+
+    this.emailservice.emailmassinteract(payload)
+      .subscribe(
+        (req: any)=>{
+          this.messagesent = true;
+          setTimeout(()=>{
+            this.messagesent = false;
+            this.showmasscontact();
+          }, 3000);
+
+        }
+      );
+
   }
 
   ngOnInit(){

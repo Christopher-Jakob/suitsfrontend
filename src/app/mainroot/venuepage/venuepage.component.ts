@@ -69,6 +69,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
         order: 0
       }
     ],
+    tour360url: null,
     venuefullbuyoutphoto_set: [],
     venuesamplemenu_set: [],
     cuisine1: '',

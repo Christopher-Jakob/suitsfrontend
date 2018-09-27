@@ -127,6 +127,12 @@
     </div>
   </div>
 
+  <div *ngIf="venue.tour360url != null" class="row">
+    <div class="col-12">
+      <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(venue.tour360url)" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+  </div>
+
   <div id="VenueMenu" class="Section">
     <span class="SecHead span-style__lg">
       Menus + Packages

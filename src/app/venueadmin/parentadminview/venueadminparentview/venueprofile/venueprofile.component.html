@@ -153,10 +153,10 @@
 <br>
 <hr>
 <div class="row justify-content-start">
-  <h5><strong>Virtual Tours (Feature is still being built and will be online shortly)</strong></h5>
+  <h5><strong>Virtual Tours</strong></h5>
 </div>
-<form *ngIf="contactmass">
-  <div class="row">
+<form (ngSubmit)="emailmassinteract(massinteractform)" #massinteractform="ngForm" *ngIf="contactmass">
+  <div *ngIf="!messagesent" class="row">
     <div class="col-12">
       <div class="text-center">
         Contact Mass Interact For A Quote
@@ -207,6 +207,13 @@
 
     </div>
   </div>
+  <div *ngIf="messagesent" class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <h4>Your message has been sent</h4>
+      </div>
+    </div>
+  </div>
 </form>
 <div *ngIf="!contactmass" class="row">
   <div id="virtualtourtext" class="col-12">
@@ -222,8 +229,8 @@
       <button (click)="showmasscontact()" class="btn btn-outline-primary">Contact Mass Interact</button>
     </div>
   </div>
-  <div class="col-6">
-    <form>
+  <div *ngIf="venueobject.tour360url == null" class="col-6">
+    <form (ngSubmit)="updatevenue()" #toururlform="ngForm">
     <div class="col-12">
       Already have a google Virtual Tour? Submit your tour url.
     </div>
@@ -241,6 +248,12 @@
         </div>
       </div>
     </form>
+  </div>
+  <div *ngIf="venueobject.tour360url != null" class="col-6">
+    <div class="text-center">
+      Tour url : {{venueobject.tour360url}} | <button (click)="removetour()" class="btn btn-outline-danger">Remove</button>
+    </div>
+
   </div>
 </div>
 <hr>

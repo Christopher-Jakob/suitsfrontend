@@ -32,6 +32,7 @@ export class VenuelistComponent implements OnInit, OnDestroy {
   venuelist = [
     {
       name: null,
+      tour360url: null,
       venueimage_set: [
         {
           imageurl: '',

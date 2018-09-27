@@ -25,6 +25,9 @@
                    [height]="slideshowparams.height">
 
         </slideshow>
+        <div *ngIf="card.tour360url != null" class="venue-virtual-tour col-auto">
+          Virtual Tour
+        </div>
         <div class="venue-location col-12">
           {{ card.searchneighborhood }}
         </div>
