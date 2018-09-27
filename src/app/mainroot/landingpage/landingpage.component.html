@@ -1,6 +1,31 @@
 <div class="container-fluid topimage justify-content-left">
   <div class="container">
-    <div class="contenttop col-7">
+
+    <div class="smallcontenttop col-12 d-sm-block d-md-none ">
+      <div class="text-center">
+        <h1 class="smalltoptext"><strong>Browse and book the best venues <br> in the city.</strong></h1>
+        <br>
+        <div *ngIf="choicesload" class="spinner-container">
+          <div class="spinner"></div>
+        </div>
+        <form *ngIf="!choicesload" #selectform="ngForm">
+          <select
+            id="cityselect"
+            class="mt-3 mb-5 text-white"
+            autofocus
+            (change)="browse()"
+            name="cityselect"
+            ng-init="city[0]"
+            ngModel>
+            <option value="">Select Your City</option>
+            <option *ngFor="let city of cities"
+                    [value]="city.city">{{city.city}}</option>>Select Your City
+          </select>
+        </form>
+      </div>
+    </div>
+
+    <div class="contenttop d-none d-md-block col-md-7">
       <div class="float-left">
         <h1 class="toptext"><strong>Browse and book the best venues <br> in the city.</strong></h1>
         <br>
@@ -25,8 +50,8 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-12 d-sm-none d-md-block">
+<div class="row d-none d-lg-block">
+  <div class="col-12">
     <div class="float-right">
       <div class="socialdiv">
         <a href="https://www.instagram.com/suitsandtables" target="_blank">
@@ -47,14 +72,19 @@
   </div>
 </div>
 <div id="second-pane">
-  <div class="secondtextdiv col-7">
+  <div class="secondtextdiv d-none d-md-block  col-7">
     <p id="secondpanetext">
       <strong>Time is precious. Don't waste <br> any more of yours searching for the right venue for your corporate event when it's only a few clicks away.</strong>
     </p>
   </div>
+  <div class="secondtextdivsmall d-sm-block d-md-none col-12">
+    <p id="secondpanetextsmall text-center">
+      <strong>Time is precious. Don't waste  any more of yours searching for the right venue for your corporate event when it's only a few clicks away.</strong>
+    </p>
+  </div>
   <div id="third-pane">
     <div class="container third-pane-content">
-      <div class="row">
+      <div class="row d-none d-sm-block">
         <div class="col-4 hiwtitle">
           <h1><strong>How it works.</strong></h1>
         </div>
@@ -97,16 +127,21 @@
       </div>
     </div>
     <div *ngIf="!signupcompelete" class="row">
-      <div class="col-12 forthheader">
+      <div class="col-12 d-none d-md-block forthheader">
         <h1><strong>Are you a venue?</strong></h1>
       </div>
-      <div class="col-7 forthheader">
+      <div class="col-7 d-none d-md-block  forthheader">
         <h5>Looking to partner with Suits + Tables? Sign up below and we will be in touch to discuss listing you on our platform.</h5>
+      </div>
+      <div class="col-12 d-sm-block d-md-none">
+        <div class="text-center">
+          <h5>Looking to partner with Suits + Tables? Sign up below and we will be in touch to discuss listing you on our platform.</h5>
+        </div>
       </div>
     </div>
     <form *ngIf="!signupcompelete" (ngSubmit)="createvenue(venuesignupform)" #venuesignupform="ngForm">
     <div class="row">
-      <div class="col-6 formdiv">
+      <div class="col-md-6 col-sm-12 formdiv">
         <div class="row">
           <div class="col-12">
             <input type="text"
@@ -117,7 +152,7 @@
                    ngModel
                    placeholder="Venue Name *">
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <input type="text"
                    class="form-control"
                    name="streetaddress1"
@@ -126,7 +161,7 @@
                    ngModel
                    placeholder="Address 1 *">
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <input type="text"
                    class="form-control"
                    name="streetaddress2"
@@ -134,7 +169,7 @@
                    ngModel
                    placeholder="Address 2">
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <input type="text"
                    class="form-control"
                    name="city"
@@ -143,7 +178,7 @@
                    ngModel
                    placeholder="City *">
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <select id="inputState"
                     class="form-control venuestateselect"
                     name="venuestateselect"
@@ -202,7 +237,7 @@
               <option value="WY">WY</option>
             </select>
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <input type="text"
                    id="contactname"
                    class="form-control"
@@ -211,7 +246,7 @@
                    ngModel
                    placeholder="Contact Name *">
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <input type="text"
                    id="phone"
                    class="form-control"
@@ -220,7 +255,7 @@
                    ngModel
                    placeholder="Phone (digits only) *">
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <input type="text"
                    id="jobtitle"
                    class="form-control"
@@ -228,7 +263,7 @@
                    ngModel
                    placeholder="Job Title">
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <input type="email"
                    id="email"
                    class="form-control"

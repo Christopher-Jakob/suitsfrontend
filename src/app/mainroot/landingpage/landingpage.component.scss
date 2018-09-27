@@ -1,9 +1,16 @@
 
+.smalltoptext{
+  color: white;
+  font-size: 25px;
+}
 .toptext{
   color: white;
   font-size: 55px;
 }
+.smallcontenttop{
+  padding-top: 9vh;
 
+}
 .contenttop{
   padding-top: 9vh;
   margin-left: 20vw;
@@ -60,9 +67,20 @@ option{
   padding-bottom: 5vw;
 }
 
+.secondtextdivsmall{
+  padding-top: 5vw;
+  padding-bottom: 5vw;
+}
+
 #secondpanetext{
   font-size: 2.1rem;
 }
+
+#secondpanetextsmall{
+  font-size: 1.3rem;
+}
+
+
 
 .underline{
   border-bottom: solid 3px black;
