@@ -229,10 +229,15 @@
       <button (click)="showmasscontact()" class="btn btn-outline-primary">Contact Mass Interact</button>
     </div>
   </div>
-  <div *ngIf="venueobject.tour360url == null" class="col-6">
+  <div *ngIf="venueobject.tour360url == null && permission != 'suits'">
+    <div class="col-12">
+      Already have a tour url? Submit it to admin@suitsandtables.com
+    </div>
+  </div>
+  <div *ngIf="venueobject.tour360url == null && permission == 'suits'" class="col-6">
     <form (ngSubmit)="updatevenue()" #toururlform="ngForm">
     <div class="col-12">
-      Already have a google Virtual Tour? Submit your tour url.
+      Submit tour url.
     </div>
       <div class="row">
         <div class="col-8">
