@@ -19,6 +19,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
   isLeftVisible = true;
   choicesload = true;
+  signupcompelete = false;
 
   @ViewChild('selectform') selectform : NgForm;
   @ViewChild('selectformlarge') selectformlarge : NgForm;
@@ -42,7 +43,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
     this.router.navigate(['/browse', this.selectedcity]);
 
   }
-  signupcompelete = false;
+
   createvenue(form:NgForm){
     let payload = {
       name: form.value.venuename,
@@ -82,7 +83,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
     this.router.navigate(['/browse', this.selectedcity]);
 
   }
-  signupcompelete = false;
+  
   createvenue(form:NgForm){
     let payload = {
       name: form.value.venuename,
