@@ -44,32 +44,6 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
   }
 
-  createvenue(form:NgForm){
-    let payload = {
-      name: form.value.venuename,
-      streetaddress1: form.value.streetaddress1,
-      streetaddress2: form.value.streetaddress2,
-      city: form.value.city,
-      state: form.value.venuestateselect,
-      venuephone: form.value.phone,
-      venuecontactname: form.value.contactname,
-      venuecontactjobtitle: form.value.jobtitle,
-      venuecontactemail: form.value.email,
-      phonenumber: form.value.phone
-    };
-
-    if(form.valid){
-      this.venueservice.submitapplication(payload)
-        .subscribe(
-          (req: any)=>{
-            this.signupcompelete = true;
-          }
-        );
-
-
-    }
-  }
-
   browselarge(){
     this.selectedcity = this.selectformlarge.value.cityselect;
     this.navcomm.setselectedcity(this.selectedcity);
@@ -81,9 +55,8 @@ export class LandingpageComponent implements OnInit, OnDestroy {
     }
     this.navcomm.sendselectedcity(citypk);
     this.router.navigate(['/browse', this.selectedcity]);
-
   }
-  
+
   createvenue(form:NgForm){
     let payload = {
       name: form.value.venuename,
@@ -105,8 +78,6 @@ export class LandingpageComponent implements OnInit, OnDestroy {
             this.signupcompelete = true;
           }
         );
-
-
     }
   }
 
