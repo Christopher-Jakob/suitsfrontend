@@ -174,10 +174,10 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   }
 
 
-  @ViewChild('descriptioninputform') descriptioninputform:NgForm;
+  @ViewChild('descriptioninputform') descriptioninputform: NgForm;
   @ViewChild('updateparkingform') updateparkingform: NgForm;
   @ViewChild('venueattributeform') venueattributeform: NgForm;
-  @ViewChild('toururlform') toururlform: NgForm;
+
 
   updatevenue(){
     let payload = {
@@ -186,7 +186,6 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
       city: this.venueobject.city,
       streetaddress1: this.venueobject.streetaddress1,
       state: this.venueobject.state,
-      tour360url: this.toururlform.form.value.tour360url,
       zipcode: this.venueobject.zipcode,
       phonenumber: this.venueobject.phonenumber,
       venuecontactname: this.venueobject.venuecontactname,
@@ -204,13 +203,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
       venuetype: this.venueattributeform.form.value.venuetypeselect
     };
 
-    if(payload.tour360url != null){
-      this.linksubmitted = true;
-      setTimeout(()=>{
-        this.linksubmitted = false;
-      }, 3000);
-    }
-
+    
     if(this.venueattributeform.form.value.cuisineselect1 != null){
       payload.cuisine1 = this.venueattributeform.form.value.cuisineselect1;
     }
