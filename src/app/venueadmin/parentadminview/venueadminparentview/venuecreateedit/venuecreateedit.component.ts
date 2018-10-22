@@ -10,15 +10,20 @@ import {VenueAdminProfileService} from "../../../../services/venueadmin/venueadm
 import {VenueUserService} from "../../../../services/userservice/venueuserservice/venueuserservice";
 import {SuitsAdminDependancySettings} from "../../../../services/pagedependancy/suitsadmin/suitssettings/suitssettings.dependancy.service";
 import {SuitsSettingsService} from "../../../../services/suitsadmin/suitssettingsservice/suitssettings.service";
+import {VenueService} from "../../../../services/venueservice/venueservice";
 
 @Component({
   selector: 'app-venuecreateedit',
   templateUrl: './venuecreateedit.component.html',
   styleUrls: ['./venuecreateedit.component.scss'],
-  providers: [AwsService, VenueAdminProfileService, VenueUserService, SuitsAdminDependancySettings, SuitsSettingsService]
+  providers: [AwsService, VenueAdminProfileService, VenueUserService, VenueService, SuitsAdminDependancySettings, SuitsSettingsService]
 })
 export class VenuecreateeditComponent implements OnInit, OnDestroy {
-  constructor(private volleyservice: VenueAdminVolleyService, private parentadminservice: VenueAdminParentAdminService, private inceptionservice: VenueAdminInceptionService, private awsservice: AwsService, private profileservice: VenueAdminProfileService, private userservice: VenueUserService, private citydependancy: SuitsAdminDependancySettings, private neighborhooddependancy: SuitsSettingsService) {}
+  constructor(private volleyservice: VenueAdminVolleyService,
+              private parentadminservice: VenueAdminParentAdminService,
+              private inceptionservice: VenueAdminInceptionService, private awsservice: AwsService,
+              private profileservice: VenueAdminProfileService, private userservice: VenueUserService,
+              private citydependancy: SuitsAdminDependancySettings, private neighborhooddependancy: SuitsSettingsService, private venueservice: VenueService) {}
   parentadminservicevar;
   venuevolleyservicevar;
   permission;
@@ -338,10 +343,52 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
       );
 
   }
-
+  paramsubject;
   ngOnInit() {
     window.scrollTo(0,0);
     this.inceptionservice.sendsignal('venuepage');
+    let venuename;
+    this.paramsubject = this.inceptionservice.recevieparams()
+      .subscribe(
+        (req: any)=>{
+          venuename = req.venuenamelinkready;
+          this.venueservice.getvenuebyname(venuename, false)
+            .subscribe(
+              (req :any)=>{
+                this.venueobject = req.venue;
+
+                this.userservice.getvenueusers(this.venueobject.id)
+                  .subscribe(
+                    (req: any) => {
+                      this.venueusers = req;
+                      console.log('this is the venueusers');
+                      console.log(this.venueusers);
+                      for (let user of this.venueusers) {
+                        let contextpermission;
+                        for (let set of user.venuepermissions_set) {
+                          if (set.venue.id === this.venueobject.id) {
+                            contextpermission = set;
+                            user.venuepermissions_set = contextpermission;
+                          }
+                        }
+                      }
+                    }
+                  );
+                this.citydependancy.getallcityobjects()
+                  .subscribe(
+                    (req: any) => {
+                      this.searchcitylist = req.cities;
+                      this.neighborhooddependancy.getneighborhoodsbycity(this.venueobject.searchcity)
+                        .subscribe(
+                          (req: any) => {
+                            this.searchneighborhoodlist = req.neighborhoods;
+                          }
+                        );
+                    });
+              }
+            );
+        }
+      );
     this.parentadminservicevar = this.parentadminservice.receivepermission()
       .subscribe(
         (req: any) => {
@@ -359,46 +406,11 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
         }
       );
 
-    this.venuevolleyservicevar = this.volleyservice.receiveobject()
-      .subscribe(
-        (req: any) => {
-          if (req !== null) {
-            this.venueobject = req;
-            this.citydependancy.getallcityobjects()
-              .subscribe(
-                (req: any) => {
-                  this.searchcitylist = req.cities;
-                  this.neighborhooddependancy.getneighborhoodsbycity(this.venueobject.searchcity)
-                    .subscribe(
-                      (req: any) => {
-                        this.searchneighborhoodlist = req.neighborhoods;
-                      }
-                    );
-                });
-            this.userservice.getvenueusers(this.venueobject.id)
-              .subscribe(
-                (req: any) => {
-                  this.venueusers = req;
-                  console.log('this is the venueusers');
-                  console.log(this.venueusers);
-                  for (let user of this.venueusers) {
-                    let contextpermission;
-                    for (let set of user.venuepermissions_set) {
-                      if (set.venue.id === this.venueobject.id) {
-                        contextpermission = set;
-                        user.venuepermissions_set = contextpermission;
-                      }
-                    }
-                  }
-                }
-              );
-          }
-        });
   }
 
   ngOnDestroy(){
-    this.venuevolleyservicevar.unsubscribe();
     this.parentadminservicevar.unsubscribe();
+    this.paramsubject.unsubscribe();
   }
 
 }

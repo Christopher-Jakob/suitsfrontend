@@ -4,19 +4,24 @@ import {VenueAdminRoomListService} from "../../../../../services/venueadmin/venu
 import {ActivatedRoute, Router} from "@angular/router";
 import {VenueAdminInceptionService} from "../../../../../services/venueadmin/venueadmininceptionservice/venueadmin.inception.service";
 import {VenueAdminParentAdminService} from "../../../../../services/venueadmin/venueadminparentadminservice/venueadmin.parentadmin.service";
+import {VenueService} from "../../../../../services/venueservice/venueservice";
 
 @Component({
   selector: 'app-venueadminroomlist',
   templateUrl: './venueadminroomlist.component.html',
   styleUrls: ['./venueadminroomlist.component.scss'],
-  providers: [VenueAdminRoomListService]
+  providers: [VenueAdminRoomListService, VenueService]
 })
 export class VenueadminroomlistComponent implements OnInit, OnDestroy {
   parentadminservicevar;
   venuevolleyservicevar;
   venueadmininceptionservicevar;
 
-  constructor(private volleyservice: VenueAdminVolleyService, private roomlistservice: VenueAdminRoomListService, private router: Router, private route: ActivatedRoute, private inceptionservice: VenueAdminInceptionService, private parentadminservice: VenueAdminParentAdminService) { }
+  constructor(private volleyservice: VenueAdminVolleyService,
+              private roomlistservice: VenueAdminRoomListService,
+              private router: Router, private route: ActivatedRoute,
+              private inceptionservice: VenueAdminInceptionService,
+              private parentadminservice: VenueAdminParentAdminService, private venueservice: VenueService) { }
   venueobject;
   venuerooms=[];
 
@@ -42,7 +47,10 @@ export class VenueadminroomlistComponent implements OnInit, OnDestroy {
   //delete room code
   deleteroom(index){
     const venueid = this.venueobject.id;
+    console.log('this is the roomid for deleting');
+
     const roomid = this.venueobject.room_set[+index].pk;
+    console.log(roomid);
     this.roomlistservice.deleteroom(venueid, roomid)
       .subscribe(
         (req: any)=>{
@@ -131,8 +139,8 @@ export class VenueadminroomlistComponent implements OnInit, OnDestroy {
 
     this.parentadminservicevar = this.parentadminservice.receivepermission()
       .subscribe(
-        (req:any)=>{
-          if(req !== null){
+        (req: any) => {
+          if (req !== null) {
             this.permission = req;
           }
         }
@@ -140,33 +148,33 @@ export class VenueadminroomlistComponent implements OnInit, OnDestroy {
 
     this.venueadmininceptionservicevar = this.inceptionservice.recevieparams()
       .subscribe(
-        (req:any)=>{
-          if(req != null){
+        (req: any) => {
+          if (req != null) {
             this.venuenamelinkready = req.venuenamelinkready;
+            this.venueservice.getvenuebyname(this.venuenamelinkready, false)
+              .subscribe(
+                (req: any) => {
+                  this.venueobject = req.venue;
+                  this.roomlistservice.roomlist(this.venueobject.id)
+                    .subscribe(
+                      (req: any) => {
+                        console.log(this.venuerooms);
+                        this.venuerooms = req;
+
+                      });
+
+                });
           }
 
-        }
-      );
-
-    this.venuevolleyservicevar = this.volleyservice.receiveobject()
-      .subscribe(
-        (req: any)=>{
-          this.venueobject = req;
-        }
-      );
-    this.roomlistservice.roomlist(this.venueobject.id)
-      .subscribe(
-        (req: any)=>{
-          console.log(this.venuerooms);
-          this.venuerooms = req;
-
         });
+
+
 
   }
 
   ngOnDestroy(){
-    this.venuevolleyservicevar.unsubscribe();
     this.parentadminservicevar.unsubscribe();
+    this.venueadmininceptionservicevar.unsubscribe();
   }
 
 }

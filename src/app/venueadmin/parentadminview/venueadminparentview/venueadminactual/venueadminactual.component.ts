@@ -24,21 +24,12 @@ export class VenueadminactualComponent implements OnInit {
             this.permission = req;
           }
         });
-    const routeparams = this.route.snapshot.params;
+    let routeparams = this.route.snapshot.params;
+    let venuename = routeparams.venuename.replace(/_/g, ' ');
     const payload = {
       venueid: routeparams.pk,
-      venuenamelinkready: routeparams.venuename
+      venuenamelinkready: venuename
     };
-
-    this.venuevolley.getvenueobject(payload.venueid)
-      .subscribe(
-        (req: any)=>{
-          this.venueobject = req;
-          console.log('here comes jeff');
-          console.log(this.venueobject);
-          this.venuevolley.sendobject(this.venueobject);
-        }
-      );
 
 
     this.inceptionservice.sendparams(payload);

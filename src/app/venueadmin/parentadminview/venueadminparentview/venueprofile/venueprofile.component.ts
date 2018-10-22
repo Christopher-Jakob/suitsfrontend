@@ -8,13 +8,14 @@ import {VenueAdminParentAdminService} from "../../../../services/venueadmin/venu
 import {VenueAdminInceptionService} from "../../../../services/venueadmin/venueadmininceptionservice/venueadmin.inception.service";
 import {AwsService} from "../../../../services/amazonwebservice services/aws.services";
 import {EmailService} from "../../../../services/emailservice/email.service";
+import {VenueService} from "../../../../services/venueservice/venueservice";
 
 
 @Component({
   selector: 'app-venueprofile',
   templateUrl: './venueprofile.component.html',
   styleUrls: ['./venueprofile.component.scss'],
-  providers: [VenueAdminProfileService, VenueAdminProfileDependancyService, EmailService],
+  providers: [VenueAdminProfileService, VenueAdminProfileDependancyService, EmailService, VenueService],
 })
 export class VenueprofileComponent implements OnInit, OnDestroy {
   parentadminservicevar;
@@ -30,7 +31,13 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor( private profileservice: VenueAdminProfileService, private route: ActivatedRoute, private dependancyservice: VenueAdminProfileDependancyService, private router: Router, private venuevollyservice: VenueAdminVolleyService, private awsservice: AwsService, private parentadminservice: VenueAdminParentAdminService, private inceptionservice: VenueAdminInceptionService, private emailservice: EmailService ) { }
+  constructor( private profileservice: VenueAdminProfileService,
+               private route: ActivatedRoute,
+               private venueservice : VenueService,
+               private dependancyservice: VenueAdminProfileDependancyService,
+               private router: Router, private venuevollyservice: VenueAdminVolleyService,
+               private awsservice: AwsService, private parentadminservice: VenueAdminParentAdminService,
+               private inceptionservice: VenueAdminInceptionService, private emailservice: EmailService ) { }
 
   // venueobject used to render page
   venueobject ={
@@ -44,6 +51,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
     phonenumber: '',
     venuecontactname: '',
     venuecontactjobtitle : '',
+
     venuecontactemail: '',
     venuetype: '',
     description: '',
@@ -468,10 +476,32 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
       );
 
   }
-
+  paramsvar;
   ngOnInit(){
     window.scrollTo(0,0);
     this.inceptionservice.sendsignal('venuepage');
+    let venuename;
+    this.paramsvar =  this.inceptionservice.recevieparams()
+      .subscribe(
+        (req: any)=>{
+          venuename = req.venuenamelinkready;
+          this.venueservice.getvenuebyname(venuename, false)
+            .subscribe(
+              (req: any)=>{
+                this.venueobject = req.venue;
+                console.log(this.venueobject);
+                if(this.venueobject.isexperiential){
+                  this.experientialshow = true;
+                }
+                if(this.venueobject.isrestaurant){
+                  this.cuisineshow = true;
+                  this.cuisineshow = true;
+                }
+              }
+            );
+
+        }
+      );
     this.parentadminservicevar = this.parentadminservice.receivepermission()
       .subscribe(
         (req:any)=>{
@@ -480,24 +510,6 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
           }
         });
 
-    this.venuevolleyservicevar = this.venuevollyservice.receiveobject()
-      .subscribe(
-        (req: any)=> {
-          if(req !== null){
-            this.venueobject = req;
-            console.log('this is the received venueobject');
-            console.log(this.venueobject);
-            if(this.venueobject.isexperiential){
-              this.experientialshow = true;
-            }
-            if(this.venueobject.isrestaurant){
-              this.cuisineshow = true;
-              this.showcuisine2 = true;
-
-            }
-          }
-
-        });
 
     this.dependancyservice.getvenueattributeselections()
       .subscribe(
@@ -511,8 +523,8 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
   } // end ngoninit
 
   ngOnDestroy(){
-    this.venuevolleyservicevar.unsubscribe();
     this.parentadminservicevar.unsubscribe();
+    this.paramsvar.unsubscribe();
   }
 
 }

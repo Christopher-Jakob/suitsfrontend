@@ -7,13 +7,14 @@ import {VenueAdminVenueRoomDetailService} from "../../../../../services/venueadm
 import {VenueAdminProfileService} from "../../../../../services/venueadmin/venueadminprofileservice/venueadmin.profile.service";
 import {VenueAdminParentAdminService} from "../../../../../services/venueadmin/venueadminparentadminservice/venueadmin.parentadmin.service";
 import {AwsService} from "../../../../../services/amazonwebservice services/aws.services";
+import {VenueService} from "../../../../../services/venueservice/venueservice";
 
 
 @Component({
   selector: 'app-venueroomadminpage',
   templateUrl: './venueroomadminpage.component.html',
   styleUrls: ['./venueroomadminpage.component.scss'],
-  providers: [VenueAdminVenueRoomDetailService, VenueAdminProfileService]
+  providers: [VenueAdminVenueRoomDetailService, VenueAdminProfileService, VenueService]
 })
 export class VenueroomadminpageComponent implements OnInit, OnDestroy {
   volleyservicevar;
@@ -22,7 +23,15 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
   capacitytype;
   fullbuyoutedit = false;
 
-  constructor(private volleyservice: VenueAdminVolleyService, private route: ActivatedRoute, private router: Router, private roomdetailservice: VenueAdminVenueRoomDetailService, private profileservice: VenueAdminProfileService, private permissionservice: VenueAdminParentAdminService, private inceptionservice: VenueAdminInceptionService, private awsservice: AwsService) {
+  constructor(private volleyservice: VenueAdminVolleyService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private venueservice : VenueService,
+              private roomdetailservice: VenueAdminVenueRoomDetailService,
+              private profileservice: VenueAdminProfileService,
+              private permissionservice: VenueAdminParentAdminService,
+              private inceptionservice: VenueAdminInceptionService,
+              private awsservice: AwsService) {
   }
 
   //full buyout photos code
@@ -441,53 +450,59 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
 
   }
 
-
+  paramsvar;
   ngOnInit() {
     this.inceptionservice.sendsignal('roompage');
-    this.volleyservicevar = this.volleyservice.receiveobject()
+    let venuename;
+    this.paramsvar = this.inceptionservice.recevieparams()
       .subscribe(
         (req: any) => {
-          this.venueobject = req;
-          console.log('this is the venueobject');
-          console.log(this.venueobject);
-          this.route.params
+          venuename = req.venuenamelinkready;
+          this.venueservice.getvenuebyname(venuename, false)
             .subscribe(
-              (params: any) => {
-                let roompk;
-                roompk = params['pk'];
-                if (roompk === 'fullbuyout') {
-                  this.fullbuyoutedit = true;
-                }
-                if (!this.fullbuyoutedit) {
-                  this.roomdetailservice.getroom(this.venueobject.id, roompk)
-                    .subscribe(
-                      (req: any) => {
-                        this.roomobject = req;
-                        console.log('this is the room object');
-                        console.log(this.roomobject);
-                        this.volleyservice.sendroom(this.roomobject);
-                        if (req.privateroom) {
-                          this.capacitytype = 'privateroom';
-                        }
-                        if (req.semiprivateroom) {
-                          this.capacitytype = 'semiprivate';
-                        }
-                        this.roomurl = '/venue/' + this.venueobject.name + '/' + this.roomobject.name;
-                      });
-                }
-                this.fullbuyouturl = '/venue/' + this.venueobject.name + '/fullbuyout';
+              (req: any) => {
+                this.venueobject = req.venue;
+                this.route.params
+                  .subscribe(
+                    (params: any) => {
+                      let roompk;
+                      roompk = params['pk'];
+                      if (roompk === 'fullbuyout') {
+                        this.fullbuyoutedit = true;
+                      }
+                      if (!this.fullbuyoutedit) {
+                        this.roomdetailservice.getroom(this.venueobject.id, roompk)
+                          .subscribe(
+                            (req: any) => {
+                              this.roomobject = req;
+                              console.log('this is the room object');
+                              console.log(this.roomobject);
+                              this.volleyservice.sendroom(this.roomobject);
+                              if (req.privateroom) {
+                                this.capacitytype = 'privateroom';
+                              }
+                              if (req.semiprivateroom) {
+                                this.capacitytype = 'semiprivate';
+                              }
+                              this.roomurl = '/venue/' + this.venueobject.name + '/' + this.roomobject.name;
+                            });
+                      }
+                      this.fullbuyouturl = '/venue/' + this.venueobject.name + '/fullbuyout';
+                    });
               });
-        });
-    this.permissionservice.receivepermission()
-      .subscribe(
-        (req: any)=>{
-          this.permission = req;
-        }
-      );
-  }
-  ngOnDestroy(){
-    this.volleyservicevar.unsubscribe();
 
+          this.permissionservice.receivepermission()
+            .subscribe(
+              (req: any) => {
+                this.permission = req;
+              }
+            );
+        });
+  }
+
+
+  ngOnDestroy(){
+    this.paramsvar.unsubscribe();
   }
 
 }
