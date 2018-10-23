@@ -8,6 +8,7 @@ import {VenueAdminParentAdminService} from "../../../../../services/venueadmin/v
 import {SuitsVenueListService} from "../../../../../services/suitsadmin/suitsvenuelistservice/Suits.VenueList.Service";
 import {Observable} from 'rxjs';
 import {frontenddomain} from "../../../../../urls/rooturl";
+import {VenueService} from "../../../../../services/venueservice/venueservice";
 
 
 
@@ -16,7 +17,7 @@ import {frontenddomain} from "../../../../../urls/rooturl";
   selector: 'app-tabandtitleview',
   templateUrl: './tabandtitleview.component.html',
   styleUrls: ['./tabandtitleview.component.scss'],
-  providers: [VenueAdminTableandtitleHttpService, SuitsVenueListService]
+  providers: [VenueAdminTableandtitleHttpService, SuitsVenueListService, VenueService]
 })
 export class TabandtitleviewComponent implements OnInit, OnDestroy {
   parentadminservicevar;
@@ -28,7 +29,10 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
   suitsadmin = false;
   onroompage = false;
 
-  constructor( private router: Router, private inceptionservice: VenueAdminInceptionService, private venuevolly: VenueAdminVolleyService, private titleupdate: VenueAdminTableandtitleHttpService, private parentadminservice: VenueAdminParentAdminService, private venuevisibiltyservice: SuitsVenueListService){}
+  constructor( private router: Router, private inceptionservice: VenueAdminInceptionService,
+               private venuevolly: VenueAdminVolleyService, private titleupdate: VenueAdminTableandtitleHttpService,
+               private parentadminservice: VenueAdminParentAdminService, private venuevisibiltyservice: SuitsVenueListService,
+               private venueservice : VenueService){}
   inceptionservicevar;
   venuevollyservicevar;
   updatedvolleyvar;
@@ -235,6 +239,13 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
             this.venueid = payload.venueid;
             this.venuenamelinkready = payload.venuenamelinkready;
             this.venuename = this.venuenamelinkready.replace(/_/g, ' ');
+            this.venueservice.getvenuebyname(this.venuename, false)
+              .subscribe(
+                (req : any)=>{
+                  this.venueobject = req.venue;
+                  this.domain = '/venue/' + this.venueobject.name;
+                }
+              );
           }
         }
       );
@@ -261,26 +272,10 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
         }
       );
 
-
-
-    this.venuevollyservicevar = this.venuevolly.receiveobject()
-      .subscribe(
-        (req: any)=>{
-          if(req !== null){
-            this.venueobject = req;
-            this.domain = '/venue/' + this.venueobject.name;
-          }
-
-        }
-      );
-
-
-
   }
 
   ngOnDestroy(){
     this.inceptionservicevar.unsubscribe();
-    this.venuevollyservicevar.unsubscribe();
     this.parentadminservicevar.unsubscribe();
     this.tabservicevar.unsubscribe();
 

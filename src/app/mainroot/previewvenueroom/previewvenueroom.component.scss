@@ -1,18 +1,18 @@
-$color-gray: rgb(236,236,236);
-
-.container{
-  margin-top: 15vh;
+.adminbuttons{
+  margin-top: 10vh;
 }
+
+$color-gray: rgb(236,236,236);
 .Section {
   border-bottom: $color-gray solid 3px;
-  padding: 3rem 0;
-  margin-bottom: 1rem;
+  padding: 1rem 0;
 }
 
 .FirstHead {
   font-size: 1.5rem;
   font-weight: 100;
-  padding: 0.5rem 0;
+  //padding: 0.5rem 0;
+  text-decoration: underline;
 }
 
 .SecHeadunderline {
@@ -24,12 +24,21 @@ $color-gray: rgb(236,236,236);
 
 .SecHead{
   font-size: 1.5rem;
-  padding: 0.5rem 0;
+  //padding: 0.3rem 0 0 ;
 
 }
 
+#Stand{
+  margin-left: 0;
+  padding-left: 0;
+}
+
 .roommain{
-  font-size: 22px;
+  font-size: 20px;
+}
+
+.caprow{
+  margin-top: -6px;
 }
 
 p {
@@ -53,6 +62,13 @@ p {
 }
 
 $color-primary: rgb(83,139,197);
+
+.card-min-spend{
+  letter-spacing: 1px;
+  font-size: 1rem;
+  font-weight: 100;
+  color: $color-primary;
+}
 
 .card-container {
   backface-visibility: hidden;
@@ -88,7 +104,6 @@ $color-primary: rgb(83,139,197);
     .card-container-information__main {
       padding-left: 1rem;
       letter-spacing: 1px;
-      margin-bottom: 2rem;
       font-size: 1.5rem;
       font-weight: 100;
       color: $color-primary;
@@ -116,8 +131,38 @@ $color-primary: rgb(83,139,197);
 
 #rfpselect{
   display: block;
-  background-color: #00688B;
-  border-color: #00688B;
   position: relative;
   top: -10vh;
+}
+
+@media screen and (max-width:992px ){
+  #rfpselect{
+    display: block;
+    position: relative;
+    top: 5vh;
+  }
+
+}
+
+#rfpsendselect{
+  border-color: #00b3ee;
+  color: #00b3ee;
+}
+
+.clickoverlay{
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  margin-left: 3.5vw;
+  margin-right: 3.5vw;
+  height: 35vh;
+  width: 10vw;
+}
+
+.hasprop{
+  color: black;
+}
+.nothasprop{
+  color: gray;
+  text-decoration: line-through;
 }

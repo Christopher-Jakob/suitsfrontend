@@ -52,6 +52,8 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
     this.makerfpmodal = false;
   }
 
+
+
   navigatetoroom(index) {
     let name;
     if (index === 'fullbuyout') {
@@ -60,7 +62,7 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
       name = this.otherrooms[index].name;
       name = name.replace(/ /g, '_');
     }
-    this.router.navigate(['/venue', this.linkvenuename, name]);
+    this.router.navigate(['/preview','venue', this.linkvenuename, name]);
   }
 
   fullbuyoutroomactive = false;
@@ -89,6 +91,9 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
     name: '',
     // things that you didn't put in
     privateroom: false,
+    fullbuyoutseatedcapacity: null,
+    fullbuyoutstandingcapactiy : null,
+    fullbuyoutminspend: null,
     semiprivateroom: false,
     seatedcapacity: null,
     standingcapacity: null,

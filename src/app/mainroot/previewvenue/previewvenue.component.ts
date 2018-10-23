@@ -37,6 +37,18 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
   eventpurpose;
   roomnames = [];
 
+  //food carousel settings
+  slideConfig = {
+    "slidesToShow": 3,
+    "slidesToScroll": 1,
+    "arrows": false,
+    "pauseOnDotsHover": true,
+    "autoplay": true,
+    "dots": true,
+    "centerMode": true,
+  };
+
+
 
 
   // variable to hold venue object
@@ -44,6 +56,13 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
     id: 0,
     name: '',
     fullbuyout: false,
+    venuefullbuyoutphoto_set: [],
+    fullbuyoutseatedcapacity: 0,
+    fullbuyoutstandingcapactiy: 0,
+    tour360url: '',
+    cuisineimage_set: [],
+
+    fullbuyoutminspend: 0,
     pricerating: null,
     venueimage_set: [
       {
@@ -69,171 +88,12 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
 
   };
 
-  savedevent = {
-    name: '',
-    date: '',
-    programdate: '',
-    dateflex: false,
-    eventpurpose: '',
-    roompreference: '',
-    starttime: '',
-    starttimeflex: false,
-    endtime: '',
-    endtimeflex: false,
-    headcount: '',
-    eventdetails: ''
 
-  };
   loginorsignup = false;
   signup = false;
   invalidinfo = false;
   rfpsent =false;
   verifysignup = false;
-
-  sendrfp(form:NgForm) {
-    if (this.user == null) {
-      this.savedevent.name = form.value.eventname;
-      this.savedevent.date = form.value.eventdate;
-      this.savedevent.programdate = form.value.eventdate;
-      this.savedevent.dateflex = form.value.dateflexcheckbox;
-      this.savedevent.eventpurpose = form.value.eventpurpose;
-      this.savedevent.starttime = form.value.starttime;
-      this.savedevent.starttimeflex = form.value.starttimeflexcheckbox;
-      this.savedevent.endtime = form.value.endtime;
-      this.savedevent.endtimeflex = form.value.endtimeflexcheckbox;
-      this.savedevent.roompreference = form.value.roomselect;
-      this.savedevent.headcount = form.value.guestcount;
-      this.savedevent.eventdetails = form.value.eventdetails;
-      this.loginorsignup = true;
-    }
-    if(this.user != null){
-      let payload = {
-        eventname: form.value.eventname,
-        eventdate: form.value.eventdate,
-        programdate: form.value.eventdate,
-        eventdateflex: form.value.dateflexcheckbox,
-        eventpurpose: form.value.eventpurpose,
-        startime: form.value.starttime,
-        starttimeflex: form.value.starttimeflexcheckbox,
-        endtime: form.value.endtime,
-        endtimeflex: form.value.endtimecheckbox,
-        roompreference : form.value.roomselect,
-        guestcount: form.value.guestcount,
-        eventdetails: form.value.eventdetails
-      };
-      payload.eventdate = this.datevaluetoname(payload.eventdate);
-      this.rfpservice.emailrfp(payload, this.venue.id)
-        .subscribe(
-          (req: any) => {
-            this.rfpsent = true;
-          },
-          (error)=>{
-            if(error.status === 403){
-              this.user = null;
-              this.savedevent.name = form.value.eventname;
-              this.savedevent.date = form.value.eventdate;
-              this.savedevent.programdate = form.value.eventdate;
-              this.savedevent.dateflex = form.value.dateflexcheckbox;
-              this.savedevent.eventpurpose = form.value.eventpurpose;
-              this.savedevent.starttime = form.value.starttime;
-              this.savedevent.starttimeflex = form.value.starttimeflexcheckbox;
-              this.savedevent.endtime = form.value.endtime;
-              this.savedevent.endtimeflex = form.value.endtimeflexcheckbox;
-              this.savedevent.roompreference = form.value.roomselect,
-                this.savedevent.headcount = form.value.guestcount;
-              this.savedevent.eventdetails = form.value.eventdetails;
-              this.loginorsignup = true;
-            }
-          }
-        );
-
-    }
-  }
-
-  populaterfpfromsaved(index, savedrfp, newrfp){
-    const scoperfp = this.savedrfps[index];
-    this.savedevent.name = scoperfp.eventname;
-    this.savedevent.date = scoperfp.datename;
-    this.savedevent.programdate = scoperfp.datevalue;
-    this.savedevent.dateflex = scoperfp.dateflex;
-    this.savedevent.eventpurpose = scoperfp.eventpurpose;
-    this.savedevent.starttime = scoperfp.startime;
-    this.savedevent.starttimeflex = scoperfp.starttimeflex;
-    this.savedevent.endtime = scoperfp.endtime;
-    this.savedevent.endtimeflex = scoperfp.endtimeflex;
-    this.savedevent.headcount = scoperfp.headcount;
-    this.savedevent.eventdetails = scoperfp.eventdetails;
-    let options = {
-      'show': false
-    };
-    (<any>$('#createSaved')).modal(options);
-    options = {
-      'show': true
-    };
-    (<any>$('#createProp')).modal(options);
-
-
-  }
-
-  savedrfps;
-  useremail;
-  userpassword;
-  clientsignup(form:NgForm){
-    let payload = {
-      name: form.value.signupfirstname + ' ' + form.value.signuplastname,
-      email: form.value.signupemail,
-      password: form.value.signuppassword,
-      companyname: form.value.companyname,
-      phone: form.value.signupphoneinput,
-      isclient: true,
-      rfpsignup: true
-    };
-    this.useremail = payload.email;
-    this.userpassword = payload.password;
-    this.clientservice.createclientuser(payload)
-      .subscribe(
-        (req: any)=>{
-          this.verifysignup = true;
-        }
-      );
-
-  }
-
-  login(form:NgForm){
-    const payload = {
-      email: form.value.loginemail,
-      password: form.value.passwordlogin,
-      localstorage: true
-    };
-    if(form.value.remembercheckbox == ''){
-      payload.localstorage = false;
-    }
-    this.authservice.gettoken(payload);
-  }
-
-  // using password variable name in json as I am resuing password serializer on backend
-  signupverify(form:NgForm){
-    const payload ={
-      password: form.value.signupverification
-    };
-    this.clientservice.clientverify(payload)
-      .subscribe(
-        (req: any)=>{
-          const payload = {
-            email: this.useremail,
-            password: this.userpassword
-          };
-          this.authservice.gettoken(payload);
-
-
-        }
-      );
-
-  }
-
-  rfpusersignuptoggle(){
-    this.signup = !this.signup;
-  }
 
 
   // roomslideshowheight = '1rem';
@@ -246,9 +106,6 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
   // spothero url for redirect to spot hero
   spotherourl ='';
 
-  onclickrfpshow() {
-    this.rfpshow = !this.rfpshow;
-  }
 
   navtoroom(index) {
     let roomname = this.venue.room_set[index].name;
@@ -266,101 +123,9 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin', this.permission, 'venue-admin', venuename, this.venue.id]);
   }
 
-  // variable to hold venue service
-  venueservicevar;
-
-  // variable used to reset rfp dropdown
-  dropdownreset = "";
-  // determine which rfp to send
-
-  rfptoggle(form:NgForm, createnew, createsaved){
-    if(form.value.rfpsendselect === 'n'){
-      this.open(createnew);
-      this.dropdownreset = 'n';
-      this.dropdownreset = ''
-
-    }
-    if(form.value.rfpsendselect === 's'){
-      this.open(createsaved);
-      this.dropdownreset = "s";
-      this.dropdownreset = '';
-    }
-
-  }
-
-
-
-  closeResult: string;
-  isCollapsed = true;
-
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  // code for changing a date value to a date name
-  datevaluetoname(eventdate){
-    const spilteventdate = eventdate.split('-', 3);
-    let eventdatename;
-    const monthnumber = spilteventdate[1];
-    if(monthnumber === '01'){
-      eventdatename = 'January ';
-    }
-    else if(monthnumber === '02'){
-      eventdatename = 'Febuary ';
-    }
-    else if(monthnumber === '03'){
-      eventdatename = 'March ';
-    }
-
-    else if(monthnumber === '04'){
-      eventdatename = 'April ';
-    }
-
-    else if(monthnumber === '05'){
-      eventdatename = 'May ';
-    }
-    else if(monthnumber === '06'){
-      eventdatename = 'June ';
-    }
-    else if(monthnumber === '07'){
-      eventdatename = 'July ';
-    }
-    else if(monthnumber === '08'){
-      eventdatename = 'August ';
-    }
-    else if(monthnumber === '09'){
-      eventdatename = 'September ';
-    }
-    else if(monthnumber === '10'){
-      eventdatename = 'October ';
-    }
-    else if(monthnumber === '11'){
-      eventdatename = 'November ';
-    }
-    else {
-      eventdatename = 'December';
-    }
-    eventdatename = eventdatename + spilteventdate[2] + ' ' + spilteventdate[0];
-    return eventdatename;
-
-  }
 
   ngOnInit() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     this.browsevenuescommservice.sendstate('show');
     let cuisine;
     let experiential;
@@ -373,17 +138,17 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
     this.parentadminservicevar = this.parentadminservice.receivepermission()
       .subscribe(
         (req: any) => {
-          if (req !== null) {
+          if (req != null) {
             this.permission = req;
           }
         });
     this.userservicesubscription = this.authservice.receiveuser()
       .subscribe(
-        (req: any)=>{
-          if(req == null){
+        (req: any) => {
+          if (req == null) {
             this.user = null;
           }
-          if(req != null){
+          if (req != null) {
             this.user = req;
             this.loginorsignup = false;
           }
@@ -403,7 +168,7 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
                 experiential = req.experientialtype;
                 searchneighborhood = req.neighborhood;
                 let preview = false;
-                if(this.option){
+                if (this.option) {
                   preview = true;
                 }
 
@@ -417,10 +182,10 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
                       this.spotherourl = 'https://spothero.com/search?latitude=' + String(this.venue.latitude) + '&longitude=' + String(this.venue.longitude);
                       // add venue room names to room preference array.
                       // if fullbuyout equals true add full buy out option.
-                      if(this.venue.fullbuyout){
+                      if (this.venue.fullbuyout) {
                         this.roomnames.push('Full Buyout');
                       }
-                      for(let room of this.venue.room_set){
+                      for (let room of this.venue.room_set) {
                         this.roomnames.push(room.name);
                       }
                       for (let c of cuisine) {
@@ -436,8 +201,8 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
                           this.venue.experientialtype = e.type;
                         }
                       }
-                      for(let n of searchneighborhood ){
-                        if(this.venue.searchneighborhood === n.pk){
+                      for (let n of searchneighborhood) {
+                        if (this.venue.searchneighborhood === n.pk) {
                           console.log('the neighborhood got done');
                           this.venue.searchneighborhood = n.neighborhood;
                         }
@@ -452,10 +217,10 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
                           onlinerooms.push(this.venue.room_set[room]);
                         }
                       }
-                      for(let room in onlinerooms){
+                      for (let room in onlinerooms) {
                         let workingroomimages = onlinerooms[room].roomimage_set;
                         workingroomimages = workingroomimages.sort((a, b) => ((a.order) < (b.order) ? -1 : ((a.order) > (b.order) ? 1 : 0)));
-                        for(let image in workingroomimages){
+                        for (let image in workingroomimages) {
                           workingroomimages[image] = workingroomimages[image].imageurl as any;
                         }
                         onlinerooms[room].roomimage_set = workingroomimages;
@@ -466,16 +231,8 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
                     });
               });
         });
-    this.rfpservice.getsavedrfps()
-      .subscribe(
-        (req: any)=>{
-          this.savedrfps = req;
-        }
-      );
-
 
   }
-
   ngOnDestroy() {
     this.browsevenuescommservice.sendstate('unshow');
     this.parentadminservicevar.unsubscribe();

@@ -1,17 +1,18 @@
-$color-gray: rgb(236,236,236);
-
 .container{
-  margin-top: 15vh;
+  margin-top: 10vh;
 }
 
+$color-gray: rgb(236,236,236);
 .Section {
   border-bottom: $color-gray solid 3px;
   padding: 1.5rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
+
+
 .FirstHead {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 100;
   padding: 0.5rem 0;
 }
@@ -24,15 +25,21 @@ td{
 }
 
 .SecHead {
-  font-size: 1.5rem;
-  padding: 0.5rem 0;
+  font-size: 1.3rem;
 }
 
 .span-style {
   display: inline-block;
+  &:first-child{
+    padding-right: .5rem;
+    border-right: solid 1px gray;
+  }
   &:not(:last-child){
-    border-right: $color-gray solid 1px;
-    padding-right: 1rem;
+    padding-right: .5rem;
+    border-right: solid 1px gray;
+  }
+  &:last-child{
+    border: none;
   }
   &__mid {
     padding-right: 5rem;
@@ -97,19 +104,25 @@ $color-primary: rgb(83,139,197);
   }
 
   .card-container-information {
-    padding-top: 2rem;
+    padding-top: 1rem;
 
     .card-container-information__main {
-      padding-left: 1rem;
       letter-spacing: 1px;
-      margin-bottom: 2rem;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: 100;
+      color: $color-primary;
+    }
+    .card-min-spend{
+      letter-spacing: 1px;
+      font-size: 1rem;
       font-weight: 100;
       color: $color-primary;
     }
 
     .card-container-information__sub {
-      padding-left: 1rem;
+      margin-left: 0;
+      padding-left: 0;
+
       color: $color-primary;
       .card-container-information__sub--food {
         padding-right: 1rem;
@@ -126,6 +139,16 @@ $color-primary: rgb(83,139,197);
       }
     }
   }
+}
+
+#rfpsendselect{
+  border-color: #00b3ee;
+  color: #00b3ee;
+
+}
+
+td{
+  cursor: pointer;
 }
 
 #signuplink{
@@ -145,4 +168,29 @@ $color-primary: rgb(83,139,197);
 #verifybutton{
   position: relative;
   left: 45%;
+}
+
+#createsavedmodal{
+  width: 75vh !important;
+}
+
+.cuisineimage{
+  min-height: 250px;
+  max-height: 250px;
+  background-size: cover;
+  margin: .5vw;
+}
+
+.slick-prev, .slick-next {
+  background-color: lightgray;
+}
+
+.clickoverlay{
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  margin-left: 3.5vw;
+  margin-right: 3.5vw;
+  height: 35vh;
+  width: 10vw;
 }
