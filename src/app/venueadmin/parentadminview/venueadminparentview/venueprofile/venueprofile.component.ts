@@ -443,7 +443,6 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
           this.venueupdatesucess = true;
           this.venueupdatesucess = false;
           this.venueobject = req;
-          this.venuevollyservice.sendobject(this.venueobject);
           this.venuevollyservice.sendupdated();
 
         }
@@ -489,6 +488,7 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
             .subscribe(
               (req: any)=>{
                 this.venueobject = req.venue;
+                this.venuevollyservice.sendobject(this.venueobject);
                 console.log(this.venueobject);
                 if(this.venueobject.isexperiential){
                   this.experientialshow = true;

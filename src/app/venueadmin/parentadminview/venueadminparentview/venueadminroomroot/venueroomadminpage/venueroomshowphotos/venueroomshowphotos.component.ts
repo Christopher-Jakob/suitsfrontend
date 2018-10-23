@@ -143,6 +143,7 @@ export class VenueroomshowphotosComponent implements OnInit {
 
   ngOnDestroy() {
     this.volleyservicevar.unsubscribe();
+    this.roomvolleyservicevar.unsubscribe();
   }
 
 }

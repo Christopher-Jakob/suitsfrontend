@@ -462,6 +462,8 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
             .subscribe(
               (req: any) => {
                 this.venueobject = req.venue;
+                this.volleyservice.sendobject(this.venueobject);
+                
                 this.route.params
                   .subscribe(
                     (params: any) => {
