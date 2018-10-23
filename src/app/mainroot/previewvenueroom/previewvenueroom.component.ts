@@ -52,7 +52,7 @@ export class PreviewvenueroomComponent implements OnInit, OnDestroy {
     this.makerfpmodal = false;
   }
 
-
+  choicesload = false;
 
   navigatetoroom(index) {
     let name;
