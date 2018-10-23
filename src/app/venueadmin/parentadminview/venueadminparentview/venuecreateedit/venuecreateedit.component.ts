@@ -357,6 +357,18 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
               (req :any)=>{
                 this.venueobject = req.venue;
 
+                this.citydependancy.getallcityobjects()
+                  .subscribe(
+                    (req: any) => {
+                      this.searchcitylist = req.cities;
+                      this.neighborhooddependancy.getneighborhoodsbycity(this.venueobject.searchcity)
+                        .subscribe(
+                          (req: any) => {
+                            this.searchneighborhoodlist = req.neighborhoods;
+                          }
+                        );
+                    });
+
                 this.userservice.getvenueusers(this.venueobject.id)
                   .subscribe(
                     (req: any) => {
@@ -374,17 +386,7 @@ export class VenuecreateeditComponent implements OnInit, OnDestroy {
                       }
                     }
                   );
-                this.citydependancy.getallcityobjects()
-                  .subscribe(
-                    (req: any) => {
-                      this.searchcitylist = req.cities;
-                      this.neighborhooddependancy.getneighborhoodsbycity(this.venueobject.searchcity)
-                        .subscribe(
-                          (req: any) => {
-                            this.searchneighborhoodlist = req.neighborhoods;
-                          }
-                        );
-                    });
+
               }
             );
         }
