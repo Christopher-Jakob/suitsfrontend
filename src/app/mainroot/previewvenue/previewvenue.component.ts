@@ -122,7 +122,7 @@ export class PreviewvenueComponent implements OnInit, OnDestroy {
     venuename = venuename.replace(/ /g, '_');
     this.router.navigate(['/admin', this.permission, 'venue-admin', venuename, this.venue.id]);
   }
-
+  choicesload = false;
 
   ngOnInit() {
     window.scrollTo(0, 0);
