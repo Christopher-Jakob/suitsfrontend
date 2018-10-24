@@ -143,7 +143,7 @@
       Please contact venue for more information
     </span>
     <span *ngIf="venue.venuesamplemenu_set.length > 0">
-      <a *ngFor="let menu of venue.venuesamplemenu_set" [href]="menu.menupdfuri" target="_blank" class="span-style__mid link-style">{{menu.name}}</a>
+      <a *ngFor="let menu of venue.venuesamplemenu_set" [href]="menu.menupdfuri" target="_blank" class="span-style__mid link-style menustyle">{{menu.name}}</a>
     </span>
   </div>
 

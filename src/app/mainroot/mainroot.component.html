@@ -1,11 +1,9 @@
 <app-navbar *ngIf="!isactingsuits"></app-navbar>
 <app-suitsnavbar *ngIf="isactingsuits"></app-suitsnavbar>
-<div>
-  <router-outlet></router-outlet>
-</div>
 
-<!--
-<app-footer *ngIf="!isactingsuits"></app-footer>
--->
+<router-outlet></router-outlet>
+
+<app-footer *ngIf="!isactingsuits && !landing"></app-footer>
+
 
 

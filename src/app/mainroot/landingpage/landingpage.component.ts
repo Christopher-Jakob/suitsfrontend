@@ -4,6 +4,7 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {LandingpageDependancyService} from "../../services/mainroot/landingpage/LandingpageDependancyService";
 import {BrowsevenuescomponentcommService} from "../../services/browsevenueservice/browsevenuescommservice/browsevenuescomponentcomm.service";
 import {VenueService} from "../../services/venueservice/venueservice";
+import {ClientUserService} from "../../services/userservice/clientuserservice/clientuserservice";
 
 
 
@@ -15,7 +16,12 @@ import {VenueService} from "../../services/venueservice/venueservice";
 })
 export class LandingpageComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private route: ActivatedRoute, private landingpageservice: LandingpageDependancyService, private navcomm: BrowsevenuescomponentcommService, private venueservice: VenueService) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private landingpageservice: LandingpageDependancyService,
+              private navcomm: BrowsevenuescomponentcommService,
+              private venueservice: VenueService,
+              private clientservice : ClientUserService ) { }
 
   isLeftVisible = true;
   choicesload = true;
@@ -84,6 +90,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.clientservice.sendclientpermission('landing');
     window.scrollTo(0,0);
     this.navcomm.sendstate('unshow');
     this.landingpageservice.getsearchcitylist()
@@ -101,6 +108,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+    this.clientservice.sendclientpermission('notlanding');
 
 
   }

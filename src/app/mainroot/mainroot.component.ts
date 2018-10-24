@@ -15,12 +15,9 @@ export class MainrootComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private dashboardservice : ClientUserService, private cdr: ChangeDetectorRef) { }
   dashboardservicevar;
   isactingsuits = false;
+  landing = false;
 
   ngOnInit() {
-
-  }
-
-  ngAfterViewInit(){
     this.dashboardservicevar = this.dashboardservice.receiveclientpermission()
       .subscribe(
         (req: any)=>{
@@ -34,9 +31,24 @@ export class MainrootComponent implements OnInit, OnDestroy, AfterViewInit {
 
               this.cdr.detectChanges();
             }
+            if(req === 'landing'){
+              console.log('it went to the landing page')
+              this.landing = true;
+              this.cdr.detectChanges();
+            }
+            if(req === 'notlanding'){
+              this.landing = false;
+              this.cdr.detectChanges();
+            }
+
           }
         }
       );
+
+  }
+
+  ngAfterViewInit(){
+
 
 
   }
