@@ -40,6 +40,7 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
   showupdated = false;
   imagepushfail = false;
   roompushfail = false;
+  descriptionpushfail = false;
 
   unshowupdated(){
     this.showupdated = false;
@@ -166,6 +167,7 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
   changestatus(){
     const venuephotolength = this.venueobject.venueimage_set.length;
     const roomlist = this.venueobject.room_set.length;
+    const description = this.venueobject.description;
     let fail = false;
     if(venuephotolength < 1){
       this.imagepushfail = true;
@@ -174,6 +176,15 @@ export class TabandtitleviewComponent implements OnInit, OnDestroy {
         this.imagepushfail = false;
       }, 2500);
     }
+
+    if(description === '' || description == null){
+      this.descriptionpushfail = true;
+      fail = true;
+      setTimeout( ()=>{
+        this.descriptionpushfail = false;
+      }, 2500);
+    }
+
     if(roomlist < 1 && !this.venueobject.fullbuyout){
       this.roompushfail = true;
       fail = true;

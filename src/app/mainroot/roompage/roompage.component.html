@@ -36,7 +36,7 @@
     <div class="row">
     <div class="SecHeadunderline col-6">
       <div class="float-left">
-        <a style="text-decoration: underline" [routerLink]="['/venue',venue.name]">{{ venue.name }}</a>
+        <a class="venuename" style="text-decoration: underline" [routerLink]="['/venue',venue.name]">{{ venue.name }}</a>
       </div>
     </div>
       <div class="col-6">
@@ -76,18 +76,18 @@
 
   </div>
   </div>
-    <div class="row caprow">
-      <div *ngIf="!fullbuyoutroomactive && room.seatedcapacity != null" id="Seat" class="col-auto roommain"> {{ room.seatedcapacity }} seated |
+    <div class="row Section caprow">
+      <div *ngIf="!fullbuyoutroomactive && room.seatedcapacity != null" id="Seat" class="col-auto roommain"> {{ room.seatedcapacity }} Seated |
       </div>
-      <div *ngIf="!fullbuyoutroomactive && room.seatedcapacity == null" id="Seat" class="col-auto roommain"> N/A seated |
+      <div *ngIf="!fullbuyoutroomactive && room.seatedcapacity == null" id="Seat" class="col-auto roommain"> N/A Seated |
       </div>
-      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutseatedcapacity != null" id="Seat" class="col-auto roommain"> {{ venue.fullbuyoutseatedcapacity }} seated |</div>
-      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutseatedcapacity == null" id="Seat" class="col-auto roommain"> N/A seated |
+      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutseatedcapacity != null" id="Seat" class="col-auto roommain"> {{ venue.fullbuyoutseatedcapacity }} Seated |</div>
+      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutseatedcapacity == null" id="Seat" class="col-auto roommain"> N/A Seated |
       </div>
-      <div *ngIf="!fullbuyoutroomactive && room.standingcapacity != null" id="Stand" class="col-auto roommain">{{ room.standingcapacity }} standing  </div>
+      <div *ngIf="!fullbuyoutroomactive && room.standingcapacity != null" id="Stand" class="col-auto roommain">{{ room.standingcapacity }} Standing  </div>
       <div *ngIf="!fullbuyoutroomactive && room.standingcapacity == null" id="Stand" class="col-auto roommain"> N/A standing </div>
-      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutstandingcapactiy != null" id="Stand" class="col-auto roommain"> {{ venue.fullbuyoutstandingcapactiy }} standing </div>
-      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutstandingcapactiy == null" id="Stand" class="col-auto roommain"> N/A standing </div>
+      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutstandingcapactiy != null" id="Stand" class="col-auto roommain"> {{ venue.fullbuyoutstandingcapactiy }} Standing </div>
+      <div *ngIf="fullbuyoutroomactive && venue.fullbuyoutstandingcapactiy == null" id="Stand" class="col-auto roommain"> N/A Standing </div>
       <br>
       <br>
       <div class="col-12 STnopadding" *ngIf="!fullbuyoutroomactive">

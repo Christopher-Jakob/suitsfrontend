@@ -67,6 +67,9 @@
     <div *ngIf="roompushfail" class="col-auto">
       A venue must have at least one room or fullbuyout
     </div>
+    <div *ngIf="descriptionpushfail" class="col-auto">
+      A venue must have a description
+    </div>
   </div>
 <div class="row">
     <div style="font-style: 9px" *ngIf="!suitsadmin" class="col-auto">

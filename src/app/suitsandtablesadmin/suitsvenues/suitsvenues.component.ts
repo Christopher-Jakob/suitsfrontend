@@ -16,6 +16,7 @@ export class SuitsvenuesComponent implements OnInit {
   //show push error message
   pusherrorimage =false;
   pusherrorroom = false;
+  pusherrordescription = false;
 
   //loading
   choicesload = true;
@@ -86,6 +87,7 @@ export class SuitsvenuesComponent implements OnInit {
     let error = false;
     const venuephotolength = this.venues[index].venueimage_set.length;
     const roomlist = this.venues[index].room_set.length;
+    const description = this.venues[index].description;
     if(venuephotolength < 1){
       this.activeindex = index;
       this.pusherrorimage = true;
@@ -96,6 +98,18 @@ export class SuitsvenuesComponent implements OnInit {
       }, 5000);
 
     }
+
+    if(description === '' || description == null){
+      this.activeindex = index;
+      this.pusherrordescription = true;
+      error = true;
+      setTimeout( ()=>{
+        this.activeindex = null;
+        this.pusherrordescription = false;
+      }, 5000);
+    }
+
+
     if(roomlist < 1 && !this.venues[index].fullbuyout){
       this.activeindex = index;
       this.pusherrorroom = true;

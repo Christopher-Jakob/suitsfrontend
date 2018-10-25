@@ -81,6 +81,9 @@
     <td *ngIf="pusherrorroom && activeindex == i">
       Venues Must Have At Least One Room Or Full Buyout
     </td>
+    <td *ngIf="pusherrordescription && activeindex == i">
+      Venues Must Have A Description
+    </td>
     <td>
       <button (click)="showdeleteconfrim(i)" *ngIf="activeindex !== i" class="btn-danger">Delete</button>
     </td>
