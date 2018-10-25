@@ -433,6 +433,23 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
     this.contactmass = !this.contactmass;
   }
 
+  addtour(toururlform : NgForm){
+    let payload = {
+      tour360url: toururlform.value.tour360url
+    };
+    this.profileservice.venueprofileupdate(payload, this.venueobject.id)
+      .subscribe(
+        (req : any)=>{
+          this.venueupdatesucess = true;
+          this.venueobject = req;
+          setTimeout(()=>{
+            this.venueupdatesucess = false;
+          }, 3000);
+
+        }
+      );
+  }
+
   removetour(){
     let payload = {
       tour360url: null
@@ -441,9 +458,10 @@ export class VenueprofileComponent implements OnInit, OnDestroy {
       .subscribe(
         (req: any)=>{
           this.venueupdatesucess = true;
-          this.venueupdatesucess = false;
+          setTimeout(()=>{
+            this.venueupdatesucess = false;
+          }, 3000);
           this.venueobject = req;
-          this.venuevollyservice.sendupdated();
 
         }
       );
