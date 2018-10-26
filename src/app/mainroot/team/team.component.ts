@@ -26,7 +26,7 @@ export class TeamComponent implements OnInit {
       {
         selfie: "assets/images/team/christopher.jpg",
         name: "Christopher Jakob",
-        title:"Lead Software Engineer"
+        title:"Principle Software Engineer"
       },
 
      ];

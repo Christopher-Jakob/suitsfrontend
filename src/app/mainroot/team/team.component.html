@@ -25,14 +25,14 @@
 
 
 <div id="team-member" class="container-fluid">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-12">
       <div class="header">
         The Team
       </div>
     </div>
     <div class="col-sm-12 col-md-4 col-lg-3" *ngFor="let member of TeamList">
-      <div class="card">
+      <div class="card ">
         <div class="card__img" [ngStyle]="{'background-image': 'url('+ member.selfie + ')'}">
         </div>
         <div class="card__info">

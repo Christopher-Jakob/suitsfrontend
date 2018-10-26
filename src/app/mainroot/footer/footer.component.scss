@@ -14,19 +14,10 @@ footer {
   background-color: rgb(48,48,58);
 }
 
-img {
-  height: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+li{
+  display: inline;
 }
 
-#img-container {
-  position: relative;
-  display: block;
-  height: 150px;
-}
 
 .social {
   display: block;
@@ -44,25 +35,11 @@ img {
   }
 }
 
-.nav-info {
-  display: block;
-  text-align: center;
-  padding-left: 0;
-  list-style: none;
-
-  li {
-    margin-right: 30px;
-    display: inline-block;
-    a {
-      color: white;
-    }
-  }
-
-  li:hover {
-    a {
-      color: white;
-    }
-  }
+.navlinks{
+  margin-bottom: 10px;
+}
+.whitelink{
+  color: white;
 }
 
 

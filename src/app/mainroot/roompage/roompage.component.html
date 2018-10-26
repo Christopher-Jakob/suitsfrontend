@@ -216,6 +216,18 @@
         <p *ngIf="fullbuyoutroomactive && venue.fullbuyouthallowsquareseatingoption" class="hasprop">Hallow Square</p>
         <p *ngIf="fullbuyoutroomactive && !venue.fullbuyouthallowsquareseatingoption" class="nothasprop">Hallow Square</p>
       </div>
+      <div *ngIf="!fullbuyoutroomactive" class="col-md-3 col-6">
+        <p *ngIf="room.privatecoatcheck" class="hasprop">Private Coat Check</p>
+        <p *ngIf="!room.privatecoatcheck" class="nothasprop">Private Coat Check</p>
+      </div>
+      <div *ngIf="!fullbuyoutroomactive" class="col-md-3 col-6">
+        <p *ngIf="room.privatewashroom" class="hasprop">Private Wash Room</p>
+        <p *ngIf="!room.privatewashroom" class="nothasprop">Private Wash Room</p>
+      </div>
+      <div *ngIf="!fullbuyoutroomactive" class="col-md-3 col-6">
+        <p *ngIf="room.privatebar" class="hasprop">Private Bar</p>
+        <p *ngIf="!room.privatebar" class="nothasprop">Private Bar</p>
+      <div>
     </div>
   </div>
 
