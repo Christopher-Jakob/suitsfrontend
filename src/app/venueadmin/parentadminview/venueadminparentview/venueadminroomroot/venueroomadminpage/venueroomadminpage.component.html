@@ -797,6 +797,62 @@
             </div>
           </div>
         </div>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="privatecoatcheckamenitycheckbox"
+                       name="privatecoatcheckbox"
+                       [ngModel]="roomobject.privatecoatcheck">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Private Coat Check</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="privatewashroomcheckbox"
+                       name="privatewashroomcheckbox"
+                       [ngModel]="roomobject.privatewashroom">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Private Wash Room</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <input (change)="savevenueroom()"
+                       type="checkbox"
+                       id="privatebarcheckbox"
+                       name="privatebarcheck"
+                       [ngModel]="roomobject.privatebar">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="text-center">
+                <strong>Private Bar</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div> <!--amenities checkboxes-->
       <div class="row upperlinerow row-eq-height"> <!--Amenities row text-->
         <div class="col-auto">

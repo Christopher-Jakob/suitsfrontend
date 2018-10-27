@@ -138,6 +138,9 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
     boardroomseatingoption: false,
     theaterseatingoption: false,
     hallowsquareseatingoption: false,
+    privatecoatcheck: false,
+    privatewashroom : false,
+    privatebar: false,
     roomimage_set: []
   };
 
@@ -336,7 +339,10 @@ export class VenueroomadminpageComponent implements OnInit, OnDestroy {
       sixtyroundseatingoption:this.amenitiesseatingform.form.value.sixtyinchroundscheckbox,
       boardroomseatingoption: this.amenitiesseatingform.form.value.boardroomcheckbox,
       theaterseatingoption: this.amenitiesseatingform.form.value.theatercheckbox,
-      hallowsquareseatingoption: this.amenitiesseatingform.form.value.hallowsquarecheckbox
+      hallowsquareseatingoption: this.amenitiesseatingform.form.value.hallowsquarecheckbox,
+      privatecoatcheck: this.amenitiesseatingform.form.value.privatecoatcheck,
+      privatewashroom: this.amenitiesseatingform.form.value.privatewashroom,
+      privatebar: this.amenitiesseatingform.form.value.privatebar
     };
     if(this.topparamsform.form.value.privateroomcheckbox === 'privateroom'){
       payload.privateroom = true;
