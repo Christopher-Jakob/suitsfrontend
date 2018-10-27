@@ -21,9 +21,9 @@
               <h5 *ngIf="!venue.venue.online" style="font-style: italic; color:red"><strong>Hidden</strong></h5>
             </div>
             <div class="col-12 text-center">
-              <h5 *ngIf="venue.isvenueviewer">Viewer Permission</h5>
-              <h5 *ngIf="venue.isvenueeventplanner">Event Planner Permission</h5>
-              <h5 *ngIf="venue.isvenueadministrator">Administrator Permission</h5>
+              <h5 *ngIf="venue.isvenueviewer">Account Role: View Only</h5>
+              <h5 *ngIf="venue.isvenueeventplanner">Account Role: Event Planner</h5>
+              <h5 *ngIf="venue.isvenueadministrator">Account Role: Administrator</h5>
             </div>
           </div>
         </div>
