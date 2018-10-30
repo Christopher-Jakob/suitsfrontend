@@ -28,11 +28,11 @@ td{
   display: inline-block;
   &:first-child{
     padding-right: .5rem;
-    border-right: solid 1px gray;
+
   }
   &:not(:last-child){
     padding-right: .5rem;
-    border-right: solid 1px gray;
+   
   }
   &:last-child{
     border: none;
@@ -51,8 +51,7 @@ p {
 }
 
 .link-style{
-  color: gray;
-  text-decoration: underline $color-gray;
+  text-decoration: underline;
 }
 
 .checkboxdiv{

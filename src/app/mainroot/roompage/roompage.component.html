@@ -152,7 +152,7 @@
         <p *ngIf="!fullbuyoutroomactive && room.naturallightamenity" class="hasprop">Natural Light</p>
         <p *ngIf="!fullbuyoutroomactive && !room.naturallightamenity" class="nothasprop">Natural Light</p>
         <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutnaturallightamenity" class="hasprop">Natural Light</p>
-        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutnaturallightamenity" class="nothasprop">Natural Light</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutnaturallightamenity" class="nothasprop">Natural Light</p>
       </div>
       <div class="col-md-3 col-6">
         <p *ngIf="!fullbuyoutroomactive && room.wifiamenity" class="hasprop">WiFi</p>

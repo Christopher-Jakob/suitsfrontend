@@ -171,12 +171,12 @@
       Parking Options:
     </div>
     <p>
-      <span *ngIf="!venue.valetparking" class="span-style">Valet: Not Available</span>
+      <span *ngIf="!venue.valetparking" class="span-style">Valet: <span style="color: gray">Not Available</span></span>
       <span *ngIf="venue.valetparking == true" class="span-style">Valet: ${{venue.valetparkingamount}}</span>
-      <span *ngIf="venue.onsiteparking == true" class="span-style">Onsite Parking Available</span>
-      <span *ngIf="!venue.onsiteparking" class="span-style">Onsite Parking Not  Available</span>
+      <span *ngIf="venue.onsiteparking == true" class="span-style">Onsite: Available</span>
+      <span *ngIf="!venue.onsiteparking" class="span-style">Onsite: <span style="color: gray">Not Available</span></span>
       <span class="span-style">
-        <a [href]="spotherourl" target="_blank" class="link-style">Reserved Parking</a>
+        <a [href]="spotherourl" target="_blank">Reserved: <span class="link-style">View Spaces</span></a>
       </span>
     </p>
   </div>
