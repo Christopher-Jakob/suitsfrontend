@@ -79,6 +79,7 @@ $color-primary: rgb(83,139,197);
 }
 
 .card-container {
+  min-width: 20vw;
   backface-visibility: hidden;
   overflow: hidden;
   height: 25rem;
