@@ -1,70 +1,169 @@
 <div class="container">
   <div class="outerborder">
-    <h2 class="text-center">Partner With Us</h2>
-    <h4 class="text-center">Submit your venue to Suits
+    <h2 *ngIf="!signupcompelete" class="text-center">Partner With Us</h2>
+    <h4 *ngIf="!signupcompelete" class="text-center">Submit your venue to Suits
       <span class="STBlue">+</span> Tables</h4>
-    <div class="row justify-content-center">
+    <div *ngIf="!signupcompelete" class="row justify-content-center">
       <div class="col-md-10">
-        <form>
+        <form (ngSubmit)="createvenue(createvenueform)" #createvenueform="ngForm">
           <div class="form-group">
             <label for="inputVenueName" class="col-form-label">Venue Name:</label>
-            <input type="text" class="form-control" id="inputVenueName" required>
+            <input type="text"
+                   class="form-control"
+                   id="inputVenueName"
+                   name="inputVenueName"
+                   required
+                   ngModel>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="inputAddress" class="col-form-label">Address 1:</label>
-              <input type="text" class="form-control" id="inputAddress" required>
+              <label for="inputAddress1" class="col-form-label">Address 1:</label>
+              <input type="text"
+                     class="form-control"
+                     id="inputAddress1"
+                     name="inputAddress1"
+                     required
+                     ngModel>
             </div>
             <div class="form-group col-md-6">
               <label for="inputAddress2" class="col-form-label">Address 2:</label>
-              <input type="text" class="form-control" id="inputAddress2">
+              <input type="text"
+                     class="form-control"
+                     id="inputAddress2"
+                     name="inputAddress2"
+                     ngModel>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
               <label for="inputContactName" class="col-form-label">Contact Name:</label>
-              <input type="text" class="form-control" id="inputContactName" required>
+              <input type="text"
+                     class="form-control"
+                     id="inputContactName"
+                     name="inputContactName"
+                     ngModel
+                     required>
             </div>
             <div class="form-group col-md-6">
               <label for="inputPhone" class="col-form-label">Phone Number:</label>
-              <input type="number" class="form-control" id="inputPhone" required>
+              <input type="number"
+                     class="form-control"
+                     id="inputPhone"
+                     required
+                     name="inputPhone"
+                     ngModel>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6">
               <label for="inputJobTitle" class="col-form-label">Job Title:</label>
-              <input type="text" class="form-control" id="inputJobTitle">
+              <input type="text"
+                     class="form-control"
+                     id="inputJobTitle"
+                     name="inputJobTitle"
+                     ngModel>
             </div>
             <div class="form-group col-md-6">
               <label for="inputEmail" class="col-form-label">Contact Email:</label>
-              <input type="text" class="form-control" id="inputEmail" required>
+              <input type="text"
+                     class="form-control"
+                     id="inputEmail"
+                     required
+                     name="inputEmail"
+                     ngModel>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6">
               <label for="inputCity" class="col-form-label">City:</label>
-              <input type="text" class="form-control" id="inputCity" required>
+              <input type="text"
+                     class="form-control"
+                     name="inputCity"
+                     ngModel
+                     id="inputCity"
+                     required>
             </div>
             <div class="form-group col-md-4">
               <label for="inputState" class="col-form-label">State:</label>
-              <select id="inputState" class="form-control">Choose:</select>
+              <select id="inputState"
+                      class="form-control"
+                      name="inputState"
+                      required
+                      ngModel>
+                <option value="">Choose</option>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+              </select>
             </div>
             <div class="form-group col-md-2">
               <label for="inputZip" class="col-form-label">Zip:</label>
-              <input type="text" class="form-control" id="inputZip" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <label for="hearaboutus" class="col-form-label">How Did You Hear About Us?</label>
-              <input type="text" class="form-control" name="aboutus" id="hearaboutus" ngModel>
+              <input type="text"
+                     class="form-control"
+                     id="inputZip"
+                     required
+                     name="inputZip">
             </div>
           </div>
 
-          <button type="button" class="btn btn-primary">Sign Up</button>
+          <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
+      </div>
+    </div>
+    <div *ngIf="signupcompelete" class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <h1>Your Application Has Been Received, We Will Be In Touch!</h1>
+        </div>
       </div>
     </div>
   </div>

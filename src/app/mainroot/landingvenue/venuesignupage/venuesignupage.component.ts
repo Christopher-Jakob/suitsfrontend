@@ -20,17 +20,16 @@ export class VenuesignupageComponent implements OnInit {
 
   createvenue(form:NgForm){
     let payload = {
-      name: form.value.venuename,
-      streetaddress1: form.value.venueaddress1,
-      streetaddress2: form.value.venueaddress2,
-      city: form.value.city,
-      state: form.value.venuestateselect,
-      venuephone: form.value.venuephone,
-      venuecontactname: form.value.venuecontactname,
-      venuecontactjobtitle: form.value.venuejobtitle,
-      venuecontactemail: form.value.venueemail,
-      phonenumber: form.value.venuephone,
-      hearaboutus: form.value.hearaboutus
+      name: form.value.inputVenueName,
+      streetaddress1: form.value.inputAddress1,
+      streetaddress2: form.value.inputAddress2,
+      city: form.value.inputCity,
+      state: form.value.inputState,
+      venuephone: form.value.inputPhone,
+      venuecontactname: form.value.inputContactName,
+      venuecontactjobtitle: form.value.inputJobTitle,
+      venuecontactemail: form.value.inputEmail,
+      phonenumber: form.value.inputPhone
     };
 
     if(form.valid){
