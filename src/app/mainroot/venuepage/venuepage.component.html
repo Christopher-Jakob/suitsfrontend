@@ -20,9 +20,9 @@
       {{venue.name}}
     </div>
     <div class="SecHead">
-      <div *ngIf="venue.cuisine1 != null" id="Type" class="span-style">{{venue.cuisine1}}</div>
-      <div *ngIf="venue.cuisine2 != null" class="span-style"> &nbsp; {{venue.cuisine2}}</div>
-      <div *ngIf="venue.experientialtype != null" class="span-style"> &nbsp; {{venue.experientialtype}}</div>
+      <div *ngIf="venue.cuisine1 != null" id="Type" class="span-style rightborder">{{venue.cuisine1}}</div>
+      <div *ngIf="venue.cuisine2 != null" class="span-style rightborder"> &nbsp; {{venue.cuisine2}}</div>
+      <div *ngIf="venue.experientialtype != null" class="span-style rightborder"> &nbsp; {{venue.experientialtype}}</div>
       <div *ngIf="venue.pricerating == 1" class="span-style"> &nbsp; $30 and under</div>
       <div *ngIf="venue.pricerating == 2" class="span-style"> &nbsp;$31 to $51</div>
       <div *ngIf="venue.pricerating == 3" class="span-style"> &nbsp;$51 and over</div>

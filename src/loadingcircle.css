@@ -1,5 +1,6 @@
 .spinner-container {
   text-align: center;
+  margin-bottom: 40px;
 }
 
 .spinner {
@@ -8,8 +9,8 @@
   left: 50%;
   margin: -30px 0 0 -30px;
   display: inline-block;
-  height: 30px;
-  width: 30px;
+  height: 100px;
+  width: 100px;
   -webkit-animation: rotation .6s infinite linear;
   -moz-animation: rotation .6s infinite linear;
   -o-animation: rotation .6s infinite linear;

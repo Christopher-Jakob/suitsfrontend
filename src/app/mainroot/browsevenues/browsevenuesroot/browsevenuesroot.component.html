@@ -7,46 +7,31 @@
     <div class=" row d-flex justify-content-between m-3 firstline">
       <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
 
-        <div *ngIf="choicesload" class="spinner-container">
-          <div class="spinner"></div>
-        </div>
-
-        <ng-multiselect-dropdown *ngIf="!choicesload" [data]="neighborhoodchoices2" [settings]="neighborhooddropdownsettings" [(ngModel)]="neighborhoodmodel" [placeholder]="'Neighborhood'"  (ngModelChange)="applyfilters()"></ng-multiselect-dropdown>
+        <ng-multiselect-dropdown  [data]="neighborhoodchoices2" [settings]="neighborhooddropdownsettings" [(ngModel)]="neighborhoodmodel" [placeholder]="'Neighborhood'"  (ngModelChange)="applyfilters()"></ng-multiselect-dropdown>
 
       </div>
 
       <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
 
-        <div *ngIf="choicesload" class="spinner-container">
-          <div class="spinner"></div>
-        </div>
 
-        <ng-multiselect-dropdown *ngIf="!choicesload" [data]="venuetypechoices2" [(ngModel)]="venuetypemodel" [settings]="venuetypedropdownsettings" (ngModelChange)="applyfilters()"  [placeholder]="'Type'"></ng-multiselect-dropdown>
+        <ng-multiselect-dropdown [data]="venuetypechoices2" [(ngModel)]="venuetypemodel" [settings]="venuetypedropdownsettings" (ngModelChange)="applyfilters()"  [placeholder]="'Type'"></ng-multiselect-dropdown>
       </div>
 
       <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
 
-        <div *ngIf="choicesload" class="spinner-container">
-          <div class="spinner"></div>
-        </div>
 
-        <ng-multiselect-dropdown *ngIf="!choicesload" [data]="privacytypechoices2" [(ngModel)]="privacytypemodel" [settings]="privacydropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Privacy'"></ng-multiselect-dropdown>
+        <ng-multiselect-dropdown  [data]="privacytypechoices2" [(ngModel)]="privacytypemodel" [settings]="privacydropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Privacy'"></ng-multiselect-dropdown>
       </div>
 
     <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
 
-      <div *ngIf="choicesload" class="spinner-container">
-        <div class="spinner"></div>
-      </div>
 
-      <ng-multiselect-dropdown id="cuisinesselect" *ngIf="!choicesload" [data]="cuisinechoices" [(ngModel)]="cuisinemodel" [settings]="cuisinedropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Cuisines'"></ng-multiselect-dropdown>
+      <ng-multiselect-dropdown id="cuisinesselect"  [data]="cuisinechoices" [(ngModel)]="cuisinemodel" [settings]="cuisinedropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Cuisines'"></ng-multiselect-dropdown>
     </div>
 
     <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
-      <div *ngIf="choicesload" class="spinner-container">
-        <div class="spinner"></div>
-      </div>
-      <ng-multiselect-dropdown id="amenityselect" *ngIf="!choicesload" [data]="ammenitieschoices" [(ngModel)]="ammenitiesmodel" [settings]=" ammenitiesdropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Amenity'"></ng-multiselect-dropdown>
+
+      <ng-multiselect-dropdown id="amenityselect"  [data]="ammenitieschoices" [(ngModel)]="ammenitiesmodel" [settings]=" ammenitiesdropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Amenity'"></ng-multiselect-dropdown>
     </div>
 
     <form #capacityform="ngForm" class="col-lg-4 col-md-4 col-sm-6">
@@ -99,7 +84,7 @@
                  class=" form-control input-gray">
       </div>
       <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
-          <button id="searchbutton" type="submit" class=" btn btn-light-blue">Search</button>
+          <button id="searchbutton" type="submit" class="btn btn-light-blue">Search</button>
       </div>
     </div>
   </form>

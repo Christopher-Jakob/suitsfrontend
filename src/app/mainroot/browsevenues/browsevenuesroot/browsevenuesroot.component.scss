@@ -29,7 +29,8 @@ $bg-white: white;
 .acfbutton{
   margin-top: 1vh;
   width: 100%;
-  color: #00b3ee;
+  color: white;
+  background-color: rgb(68,147,192);
   border-color: #00b3ee;
 
 }
@@ -46,7 +47,8 @@ $bg-white: white;
 .btn-light-blue {
   border-radius: 5px;
   border: rgb(68,147,192) solid 1px;
-  color: rgb(68,147,192);
+  background-color: rgb(68,147,192);
+  color: white;
 }
 
 #amenityselect{

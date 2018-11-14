@@ -80,7 +80,9 @@ $color-primary: rgb(83,139,197);
   overflow: hidden;
   cursor: pointer;
   height: 25rem;
+
   border-radius: 5px;
+  box-shadow: 0 0.5rem 4rem rgba(0,0,0, 0.2);
   transition: all 0.2s;
 
   &:hover {
@@ -104,6 +106,7 @@ $color-primary: rgb(83,139,197);
 
   .card-container-information {
     padding-top: 1rem;
+    padding-left: 2px;
 
     .card-container-information__main {
       letter-spacing: 1px;
@@ -141,9 +144,14 @@ $color-primary: rgb(83,139,197);
 }
 
 #rfpsendselect{
-  border-color: #00b3ee;
-  color: #00b3ee;
+  background-color: rgb(68,147,192);
+  border-color: rgb(68,147,192);
+  color: white;
 
+}
+
+.rightborder{
+  border-right: solid black 1px;
 }
 
 td{

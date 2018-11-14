@@ -17,7 +17,7 @@ import {LandingpageDependancyService} from "../../../services/mainroot/landingpa
 export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private browsevenuedependancyservice: BrowseVenueDependancyService,  private landingpageservice: LandingpageDependancyService, private venueservice: VenueService, private browsevenuescommservice: BrowsevenuescomponentcommService, private cd: ChangeDetectorRef) { }
-  choicesload = true;
+
   selectedcity;
   filteredvenueslength;
   citypkreceivevar;
@@ -165,10 +165,10 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
     this.capacityform.reset();
     this.minspendform.reset();
     this.disablecapacityinput = true;
-    this.capacityfilterbuttonshow = false;
-    this.capacityformreset = '';
+    this.capacityformreset = null;
     this.applyfilters();
     this.searchform.reset();
+    this.capacityfilterbuttonshow = false;
 
   }
 
@@ -253,8 +253,9 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
 
   capacityfilterbuttonshow = false;
   showcapacityfilterbutton(){
-    this.capacityfilterbuttonshow = true;
-
+    if(this.capacityform.form.value.capacityselectinput != ''){
+      this.capacityfilterbuttonshow = true;
+    }
   }
 
   applyfilters(){
@@ -487,7 +488,6 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
                 this.experientialchoices = req.experientialtypes;
                 this.ammenitieschoices = req.amenities;
                 this.seatingtypeschoices = req.seatingoptions;
-                this.choicesload = false;
                 this.venueservice.browsevenues(this.selectedcity, null)
                   .subscribe(
                     (req: any)=>{
