@@ -1,7 +1,11 @@
 $color-gray: rgb(236,236,236);
 .Section {
   border-bottom: $color-gray solid 3px;
-  padding: 1rem 0;
+
+}
+
+.negmargin{
+  margin-top: -30px;
 }
 
 .FirstHead {
@@ -64,10 +68,6 @@ p {
   color: gray;
 }
 
-
-.venuename{
-  color: #00b3ee;
-}
 
 $color-primary: rgb(83,139,197);
 
@@ -154,8 +154,10 @@ $color-primary: rgb(83,139,197);
 }
 
 #rfpsendselect{
-  border-color: #00b3ee;
-  color: #00b3ee;
+  background-color: rgb(68,147,192);
+  border-color: rgb(68,147,192);
+  color: white;
+
 }
 
 .clickoverlay{
