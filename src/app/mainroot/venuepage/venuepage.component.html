@@ -26,8 +26,8 @@
       <div *ngIf="venue.pricerating == 1" class="span-style"> &nbsp; $30 and under</div>
       <div *ngIf="venue.pricerating == 2" class="span-style"> &nbsp;$31 to $51</div>
       <div *ngIf="venue.pricerating == 3" class="span-style"> &nbsp;$51 and over</div>
-      <form #rfpchoiceform="ngForm" class="float-right">
-        <select class="form-control" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
+      <form #rfpchoiceform="ngForm" class="float-right d-none d-md-block">
+        <select class="form-control rfpsendselect" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
                 id="rfpsendselect"
                 name="rfpsendselect"
                 [ngModel]="dropdownreset">
@@ -41,6 +41,24 @@
       {{venue.searchneighborhood}}
     </div>
   </div>
+
+  <div class="row d-xs-block d-md-none">
+    <div class="col-12">
+      <form #rfpchoiceform="ngForm">
+        <select class="form-control rfpsendselect" (change)="rfptoggle(rfpchoiceform, createProp, createSaved)"
+                id="rfpsendselects"
+                name="rfpsendselect"
+                [ngModel]="dropdownreset">
+          <option value="">Send RFP</option>
+          <option value="n">Create New RFP</option>
+          <option [disabled]="savedrfps.length < 1" value="s">Create From Saved</option>
+        </select>
+      </form>
+    </div>
+  </div>
+
+
+
 
   <div id="VenueDes" class="Section">
     <div class="SecHead">Description</div>
@@ -147,7 +165,7 @@
     </span>
   </div>
 
-  <div *ngIf="venue.cuisineimage_set.length > 2" id="foodcarousel" class="Section">
+  <div *ngIf="venue.cuisineimage_set.length > 2" id="foodcarousel" class="Section d-xs-none d-md-block">
     <span class="SecHead span-style__lg">
       Cuisine Images
     </span>

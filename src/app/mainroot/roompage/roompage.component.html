@@ -39,7 +39,7 @@
         <a style="text-decoration: underline" [routerLink]="['/venue',venue.name]">{{ venue.name }}</a>
       </div>
     </div>
-      <div class="col-6">
+      <div class="col-6 d-none d-md-block">
         <div class="float-right">
           <form #rfpchoiceform="ngForm">
             <select class="form-control" (ngModelChange)="rfptoggle(rfpchoiceform, createProp, createSaved)"
@@ -89,7 +89,9 @@
           </div>
         </div>
       </div>
+    </div>
   </div>
+
     <div class="row Section negmargin">
       <div *ngIf="!fullbuyoutroomactive && room.seatedcapacity != null" class="col-auto roommain"> {{ room.seatedcapacity }} Seated |
       </div>
@@ -105,6 +107,19 @@
       <br>
       <br>
     </div>
+
+  <div class="col-row d-xs-block d-md-none">
+    <form #rfpchoiceform="ngForm" class="col-12">
+      <select class="form-control" (ngModelChange)="rfptoggle(rfpchoiceform, createProp, createSaved)"
+              id="rfpsendselect"
+              name="rfpsendselect"
+              [ngModel]="dropdownreset">
+        <option value="">Send RFP</option>
+        <option value="n">Create New RFP</option>
+        <option [disabled]="savedrfps.length < 1" value="s">Create From Saved</option>
+      </select>
+    </form>
+  </div>
 
   <div id="RoomDes" class="Section">
     <div class="SecHead">Description</div>
