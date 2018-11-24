@@ -19,9 +19,14 @@ export class BrowsevenuesrootComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private browsevenuedependancyservice: BrowseVenueDependancyService,  private landingpageservice: LandingpageDependancyService, private venueservice: VenueService, private browsevenuescommservice: BrowsevenuescomponentcommService, private cd: ChangeDetectorRef) { }
 
   selectedcity;
+  showsmallfilter = false;
   filteredvenueslength;
   citypkreceivevar;
   citypk;
+
+  smallfiltertoggle(){
+    this.showsmallfilter = !this.showsmallfilter;
+  }
 
   // Settings configuration for neighborhood dropdown
   neighborhooddropdownsettings = {

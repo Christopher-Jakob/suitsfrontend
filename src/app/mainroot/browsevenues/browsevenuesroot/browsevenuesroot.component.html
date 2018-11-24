@@ -3,7 +3,92 @@
   fbq('track', 'ViewContent');
 </script>
 <div id="filter" class="d-flex flex-column justify-content-center py-5">
-  <div class="container">
+
+  <div *ngIf="!showsmallfilter" class="container d-xs-block d-md-none">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <button (click)="smallfiltertoggle()" class="btn btn-outline-primary">Show Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showsmallfilter" class="container">
+    <div class=" row d-flex justify-content-between m-3 firstline">
+      <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
+
+        <ng-multiselect-dropdown  [data]="neighborhoodchoices2" [settings]="neighborhooddropdownsettings" [(ngModel)]="neighborhoodmodel" [placeholder]="'Neighborhood'"  (ngModelChange)="applyfilters()"></ng-multiselect-dropdown>
+
+      </div>
+
+      <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
+
+
+        <ng-multiselect-dropdown [data]="venuetypechoices2" [(ngModel)]="venuetypemodel" [settings]="venuetypedropdownsettings" (ngModelChange)="applyfilters()"  [placeholder]="'Type'"></ng-multiselect-dropdown>
+      </div>
+
+      <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
+
+
+        <ng-multiselect-dropdown  [data]="privacytypechoices2" [(ngModel)]="privacytypemodel" [settings]="privacydropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Privacy'"></ng-multiselect-dropdown>
+      </div>
+
+      <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
+
+
+        <ng-multiselect-dropdown id="cuisinesselect"  [data]="cuisinechoices" [(ngModel)]="cuisinemodel" [settings]="cuisinedropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Cuisines'"></ng-multiselect-dropdown>
+      </div>
+
+      <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
+
+        <ng-multiselect-dropdown id="amenityselect"  [data]="ammenitieschoices" [(ngModel)]="ammenitiesmodel" [settings]=" ammenitiesdropdownsettings" (ngModelChange)="applyfilters()" [placeholder]="'Amenity'"></ng-multiselect-dropdown>
+      </div>
+
+      <form #capacityform="ngForm" class="col-lg-4 col-md-4 col-sm-6">
+        <div class="row capacityrow">
+          <div class="col-lg-6 col-md-7">
+            <select (ngModelChange)="enablecapinput()"
+                    id="seatingdropdown"
+                    name="capacityselectinput"
+                    class="form-control"
+                    [ngModel]="capacityformreset">
+              <option selected value="">Capacity</option>
+              <option value="seated">Seated</option>
+              <option value="standing">Standing</option>
+            </select>
+          </div>
+          <div class="col-lg-6 col-md-5">
+            <input type="text"
+                   (ngModelChange)="showcapacityfilterbutton()"
+                   [disabled]="disablecapacityinput"
+                   id="capacityamount"
+                   placeholder="Party Size"
+                   ngModel
+                   class="form-control"
+                   name="groupnumberinput">
+          </div>
+          <div *ngIf="capacityfilterbuttonshow" class="col-12">
+            <button class="acfbutton btn" (click)="applyfilters()">Apply Capacity Filter</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="showsmallfilter" class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <button (click)="smallfiltertoggle()" class="btn btn-outline-primary">Hide Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container d-none d-md-block">
     <div class=" row d-flex justify-content-between m-3 firstline">
       <div class="select-down col-lg-4 col-md-4 col-sm-6 py-2">
 
