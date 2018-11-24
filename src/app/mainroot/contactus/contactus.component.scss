@@ -2,47 +2,24 @@
   margin-top: 10vh;
 }
 
-.pannel{
-  position: relative;
-  height: 50vh;
-
+.top{
+  height: 45vh;
+  background-color: #00b3ee;
 }
 
-.top{
-  background-color: #00b3ee;
-  color: white;
+.topshim{
+  padding-top: 100px;
 }
 
 .middle{
-
+  height : 45vh;
 }
 
-.content{
-  position: absolute;
-  top: 40%;
-  left: 25%
+.bottom{
+  height: 45vh;
+  background-color: #00b3ee;
 }
 
-.middlecontent{
-  left: 36%;
-}
-
-.bottomcontent{
-  top: 85%;
-  left: 38%;
-
-
-}
-
- h3 a{
-  color: #00b3ee;
-}
-
-.bottompannel{
-  margin-bottom: 150px;
-}
-
-.applybutton{
-  margin-left: 10px;
-  margin-right: 10px;
+.button{
+  background-color: white;
 }
