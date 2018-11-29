@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="text-left">
+        <h2>Request Availability from **Venue Name**</h2>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <div class="text-left">
+        <h5>Your Event Details (Asterisk mandatory fields)</h5>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <input type="text"
+             id="eventname"
+             class="form-control"
+             name="eventname"
+             ngModel
+             required
+             placeholder="Please Name Your Event *">
+    </div>
+    <div class="col-6">
+      <input type="text"
+             id="purpose"
+             class="form-control"
+             name="purpose"
+             ngModel
+             required
+             placeholder="Purpose *">
+    </div>
+    <div class="col-6">
+      <input type="date"
+             id="date"
+             name="date"
+             class="form-control"
+             ngModel
+             required
+             placeholder="Date">
+    </div>
+    <div class="col-6">
+      <div class="col-6 d-inline-block">
+        <input type="time"
+               id="starttime"
+               name="starttime"
+               class="form-control"
+               ngModel
+               required>
+      </div>
+      <div class="col-6 d-inline-block">
+        <input type="time"
+               id="endtime"
+               name="endtime"
+               class="form-control"
+               ngModel
+               required>
+      </div>
+    </div>
+    <div class="col-6">
+      <input type="text"
+             id="count"
+             name="count"
+             class="form-control"
+             placeholder="Estimated # of Guests"
+             ngModel
+             required>
+    </div>
+    <div class="col-6">
+      <input type="text"
+             id="budget"
+             name="budget"
+             ngModel
+             class="form-control"
+             placeholder="Total Budget (with tax and gratuity">
+    </div>
+    <div class="col-12">
+      <textarea id="comments"
+                name="comments"
+                class="form-control"
+                ngModel
+                placeholder="Please add any additional information your host may use to best respond to your inquiry including date/time flexibility or other event needs.">
+
+      </textarea>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <div class="text-left">
+        <h2>Additional Requests (optional)</h2>
+      </div>
+      <div class="text-left pl-2">
+        <h5>Amenity Needs for Event</h5>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <input type="checkbox"
+             id="surroundsound"
+             name="surroundsound"
+             ngModel
+             class="form-check-input">
+      <label class="form-check-label">Surround Sound</label>
+    </div>
+    <div class="col-3">
+      <input type="checkbox"
+             id="microphone"
+             name="microphone"
+             ngModel
+             class="form-check-input">
+      <label class="form-check-label">Microphone</label>
+    </div>
+    <div class="col-3">
+      <input type="checkbox"
+             id="stage"
+             name="stage"
+             ngModel
+             class="form-check-input">
+      <label class="form-check-label">Stage</label>
+    </div>
+    <div class="col-3">
+      <input type="checkbox"
+             id="television"
+             name="television"
+             ngModel
+             class="form-check-input">
+      <label class="form-check-label">Television</label>
+    </div>
+  </div>
+</div>

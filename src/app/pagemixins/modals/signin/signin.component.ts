@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   @ViewChild('signinform') signinform: NgForm;
   signin(){
     const payload = {
-      email: this.signinform.form.value.email,
+      email: this.signinform.form.value.email.toLowerCase(),
       password: this.signinform.form.value.pwd,
       localstorage: this.signinform.form.value.remember
     };
@@ -40,7 +40,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   @ViewChild('resetpassword') resetpassword:NgForm;
   passwordreset(){
     const payload ={
-      email: this.resetpassword.form.value.forgotemail
+      email: this.resetpassword.form.value.forgotemail.toLowerCase()
     };
     this.forgotpasswordservice.forgotpassword(payload)
       .subscribe(

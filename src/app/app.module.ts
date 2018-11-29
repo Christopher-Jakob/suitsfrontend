@@ -89,6 +89,7 @@ import { CuisineshowphotosComponent } from './venueadmin/parentadminview/venuead
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { VenuefullbuyoutshowphotosComponent } from './venueadmin/parentadminview/venueadminparentview/venueadminroomroot/venueroomadminpage/venuefullbuyoutshowphotos/venuefullbuyoutshowphotos.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { RfpmakerComponent } from './mainroot/rfpmaker/rfpmaker.component';
 
 
 const appRoutes: Routes = [
@@ -110,6 +111,7 @@ const appRoutes: Routes = [
       {path: 'venue/:name/:room', canActivate: [IsNotVenueUserGuard], component: RoompageComponent},
       {path: 'preview/venue/:name', component: PreviewvenueComponent },
       {path: 'preview/venue/:name/:room', component: PreviewvenueroomComponent},
+      {path: 'rfpmaker', component: RfpmakerComponent},
       {path: 'dashboard/:permission/:pk', canActivate: [ClientSuitsAdminSuperUserGuard], component: ClientadminComponent,
         children:[
           {path: 'profile', component: ClientprofileComponent},
@@ -223,6 +225,7 @@ const appRoutes: Routes = [
     VenueonboardingComponent,
     CuisineshowphotosComponent,
     VenuefullbuyoutshowphotosComponent,
+    RfpmakerComponent,
   ],
   imports: [
     BrowserModule,
