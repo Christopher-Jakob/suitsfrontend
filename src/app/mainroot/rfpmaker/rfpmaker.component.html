@@ -14,122 +14,292 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <input type="text"
-             id="eventname"
-             class="form-control"
-             name="eventname"
-             ngModel
-             required
-             placeholder="Please Name Your Event *">
-    </div>
-    <div class="col-6">
-      <input type="text"
-             id="purpose"
-             class="form-control"
-             name="purpose"
-             ngModel
-             required
-             placeholder="Purpose *">
-    </div>
-    <div class="col-6">
-      <input type="date"
-             id="date"
-             name="date"
-             class="form-control"
-             ngModel
-             required
-             placeholder="Date">
-    </div>
-    <div class="col-6">
-      <div class="col-6 d-inline-block">
-        <input type="time"
-               id="starttime"
-               name="starttime"
+  <form (ngSubmit)="Submitform()">
+    <div class="row">
+      <div class="col-6">
+        <input type="text"
+               id="eventname"
                class="form-control"
+               name="eventname"
+               ngModel
+               required
+               placeholder="Please Name Your Event *">
+      </div>
+      <div class="col-6">
+        <input type="text"
+               id="purpose"
+               class="form-control"
+               name="purpose"
+               ngModel
+               required
+               placeholder="Purpose *">
+      </div>
+      <div class="col-6">
+        <input type="date"
+               id="date"
+               name="date"
+               class="form-control"
+               ngModel
+               required
+               placeholder="Date">
+      </div>
+      <div class="col-6">
+        <div class="col-6 d-inline-block">
+          <input type="time"
+                 id="starttime"
+                 name="starttime"
+                 class="form-control"
+                 ngModel
+                 required>
+        </div>
+        <div class="col-6 d-inline-block">
+          <input type="time"
+                 id="endtime"
+                 name="endtime"
+                 class="form-control"
+                 ngModel
+                 required>
+        </div>
+      </div>
+      <div class="col-6">
+        <input type="text"
+               id="count"
+               name="count"
+               class="form-control"
+               placeholder="Estimated # of Guests"
                ngModel
                required>
       </div>
-      <div class="col-6 d-inline-block">
-        <input type="time"
-               id="endtime"
-               name="endtime"
-               class="form-control"
+      <div class="col-6">
+        <input type="text"
+               id="budget"
+               name="budget"
                ngModel
-               required>
+               class="form-control"
+               placeholder="Total Budget (with tax and gratuity">
       </div>
-    </div>
-    <div class="col-6">
-      <input type="text"
-             id="count"
-             name="count"
-             class="form-control"
-             placeholder="Estimated # of Guests"
-             ngModel
-             required>
-    </div>
-    <div class="col-6">
-      <input type="text"
-             id="budget"
-             name="budget"
-             ngModel
-             class="form-control"
-             placeholder="Total Budget (with tax and gratuity">
-    </div>
-    <div class="col-12">
-      <textarea id="comments"
-                name="comments"
-                class="form-control"
-                ngModel
-                placeholder="Please add any additional information your host may use to best respond to your inquiry including date/time flexibility or other event needs.">
+      <div class="col-12">
+        <textarea id="comments"
+                  name="comments"
+                  class="form-control"
+                  ngModel
+                  placeholder="Please add any additional information your host may use to best respond to your inquiry including date/time flexibility or other event needs.">
 
-      </textarea>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-12">
-      <div class="text-left">
-        <h2>Additional Requests (optional)</h2>
-      </div>
-      <div class="text-left pl-2">
-        <h5>Amenity Needs for Event</h5>
+        </textarea>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-3">
-      <input type="checkbox"
-             id="surroundsound"
-             name="surroundsound"
-             ngModel
-             class="form-check-input">
-      <label class="form-check-label">Surround Sound</label>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-left">
+          <h2>Additional Requests (optional)</h2>
+        </div>
+        <div class="text-left pl-2">
+          <h5>Amenity Needs for Event</h5>
+        </div>
+      </div>
     </div>
-    <div class="col-3">
-      <input type="checkbox"
-             id="microphone"
-             name="microphone"
-             ngModel
-             class="form-check-input">
-      <label class="form-check-label">Microphone</label>
+    <div class="row">
+      <div class="col-3">
+        <input type="checkbox"
+               id="surroundsound"
+               name="surroundsound"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Surround Sound</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="microphone"
+               name="microphone"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Microphone</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="stage"
+               name="stage"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Stage</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="television"
+               name="television"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Television</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="screenprojector"
+               name="screenprojector"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Screen + Projector</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="naturallight"
+               name="naturallight"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Natural Light</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="wifi"
+               name="wifi"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">WiFi</label>
+
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="wheelchair"
+               name="wheelchair"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Wheelchair Accessible</label>
+      </div>
+      <div class="col-12">
+        <div class="text-left pl-2 pt-2">
+          <h5>Table Seating Request</h5>
+        </div>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="cocktail"
+               name="cocktail"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Cocktail / Standing</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="classroom"
+               name="classroom"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Classroom</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="ushape"
+               name="ushape"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">U-Shape</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="banquet"
+               name="banquet"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Banquet / Rounds</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="boardroom"
+               name="boardroom"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Boardroom</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="hallow"
+               name="hallow"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Hallow Square</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="theater"
+               name="theater"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Theater</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="herringbone"
+               name="herringbon"
+               ngMdodel
+               class="form-check-input">
+        <label class="form-check-label">Herringbone</label>
+      </div>
+      <div class="col-12">
+        <div class="text-left pl-2 pt-2">
+          <h5>Menu Style Perference</h5>
+        </div>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="indiv"
+               name="indiv"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Individually Plated</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="family"
+               name="family"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Family Style</label>
+
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="familystyle"
+               name="familystyle"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Family Style</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="buffet"
+               name="buffet"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Buffet / Stations</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="passed"
+               name="passed"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Passed Hors D'Oeuvres</label>
+      </div>
+      <div class="col-3">
+        <input type="checkbox"
+               id="other"
+               name="other"
+               ngModel
+               class="form-check-input">
+        <label class="form-check-label">Other</label>
+      </div>
+      <div class="col-6">
+        <input type="text"
+               id="othertext"
+               name="othertext"
+               ngModel
+               class="form-control">
+      </div>
+      <div class="col-12">
+        <div class="text-right">
+          <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </div>
+      </div>
     </div>
-    <div class="col-3">
-      <input type="checkbox"
-             id="stage"
-             name="stage"
-             ngModel
-             class="form-check-input">
-      <label class="form-check-label">Stage</label>
-    </div>
-    <div class="col-3">
-      <input type="checkbox"
-             id="television"
-             name="television"
-             ngModel
-             class="form-check-input">
-      <label class="form-check-label">Television</label>
-    </div>
-  </div>
+  </form>
 </div>
