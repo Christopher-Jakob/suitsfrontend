@@ -45,7 +45,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     "slidesToScroll": 1,
     "arrows": false,
     "pauseOnDotsHover": true,
-    "autoplay": true,
+    "autoplay": false,
     "dots": true,
     "centerMode": true,
   };

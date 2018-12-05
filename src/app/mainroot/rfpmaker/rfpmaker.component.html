@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-  <form (ngSubmit)="Submitform()">
+  <form (ngSubmit)="submitform()" #rfpform='ngForm'>
     <div class="row">
       <div class="col-6">
         <input type="text"
@@ -229,8 +229,8 @@
       <div class="col-3">
         <input type="checkbox"
                id="herringbone"
-               name="herringbon"
-               ngMdodel
+               name="herringbone"
+               ngModel
                class="form-check-input">
         <label class="form-check-label">Herringbone</label>
       </div>
