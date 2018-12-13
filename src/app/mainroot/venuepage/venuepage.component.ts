@@ -45,7 +45,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
     "slidesToScroll": 1,
     "arrows": false,
     "pauseOnDotsHover": true,
-    "autoplay": true,
+    "autoplay": false,
     "dots": true,
     "centerMode": true,
   };
@@ -334,6 +334,7 @@ export class VenuepageComponent implements OnInit, OnDestroy {
   // determine which rfp to send
 
   rfptoggle(form:NgForm, createnew, createsaved){
+    console.log('testing the site');
     if(form.value.rfpsendselect === 'n'){
       this.createpropopen(createnew);
       this.dropdownreset = 'n';
