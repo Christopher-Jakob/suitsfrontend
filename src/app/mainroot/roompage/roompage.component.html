@@ -152,7 +152,7 @@
         <p *ngIf="!fullbuyoutroomactive && room.televisionamenity" class="hasprop">Television</p>
         <p *ngIf="!fullbuyoutroomactive && !room.televisionamenity" class="nothasprop">Television</p>
         <p *ngIf="fullbuyoutroomactive && venue.fullbuyouttelevisionamenity" class="hasprop">Television</p>
-        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyouttelevisionamenity" class="hasprop">Television</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyouttelevisionamenity" class="nothasprop">Television</p>
       </div>
       <div class="col-md-3 col-6">
         <p *ngIf="!fullbuyoutroomactive && room.screenprojectoramenity" class="hasprop">Screen + Projector</p>
@@ -227,6 +227,10 @@
         <p *ngIf="!fullbuyoutroomactive && !room.hallowsquareseatingoption" class="nothasprop">Hallow Square</p>
         <p *ngIf="fullbuyoutroomactive && venue.fullbuyouthallowsquareseatingoption" class="hasprop">Hallow Square</p>
         <p *ngIf="fullbuyoutroomactive && !venue.fullbuyouthallowsquareseatingoption" class="nothasprop">Hallow Square</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <p *ngIf="fullbuyoutroomactive && venue.fullbuyoutoutdoorseatingamenity" class="hasprop">Outdoor Seating</p>
+        <p *ngIf="fullbuyoutroomactive && !venue.fullbuyoutoutdoorseatingamenity" class="nothasprop">Outdoor Seating</p>
       </div>
       <div *ngIf="!fullbuyoutroomactive" class="col-md-3 col-6">
         <p *ngIf="room.privatecoatcheck" class="hasprop">Private Coat Check</p>
